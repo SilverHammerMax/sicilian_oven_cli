@@ -27,9 +27,9 @@ use lazy_static::lazy_static;
 use std::collections::HashMap;
 
 lazy_static! {
-    pub static ref CITIES: HashMap<&'static str, City> = HashMap::from([").expect("Failed to Write to File");
+    pub static ref CITIES: HashMap<&'static str, City> = HashMap::from([\n").expect("Failed to Write to File");
     for city in cities {
-        cities_output.write(format!("(\"{}\", City::new(\"{}\", &[", city.code, city.city_name).as_bytes()).expect("Failed to Write to File");
+        cities_output.write(format!("\t\t(\"{}\", City::new(\"{}\", &[", city.code, city.city_name).as_bytes()).expect("Failed to Write to File");
         for (code, distance) in city.connected_cities {
             cities_output.write(format!("(\"{}\", {}),", code, distance).as_bytes()).expect("Failed to Write to File");
         }

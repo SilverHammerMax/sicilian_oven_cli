@@ -1,0 +1,86 @@
+[
+    {
+        "code": "RAG",
+        "city_name": "Ragusa",
+        "connected_cities": [["MDR", 33], ["MOD", 11], ["COM", 8], ["GIA", 17]],
+        "refuel": true
+    },
+    {
+        "code": "COM",
+        "city_name": "Comiso",
+        "connected_cities": [["RAG", 8], ["VIT", 8]],
+        "refuel": false
+    },
+    {
+        "code": "VIT",
+        "city_name": "Vittoria",
+        "connected_cities": [["COM", 8], ["GLA", 15]],
+        "refuel": false
+    },
+    {
+        "code": "MDR",
+        "city_name": "Marina di Ragusa",
+        "connected_cities": [["RAG", 33], ["POZ", 31]],
+        "refuel": false
+    },
+    {
+        "code": "POZ",
+        "city_name": "Pozzallo",
+        "connected_cities": [["MDR", 31], ["MOD", 30], ["NTO", 41], ["CAP", 40]],
+        "refuel": false
+    },
+    {
+        "code": "MOD",
+        "city_name": "Modica",
+        "connected_cities": [["RAG", 11], ["POZ", 30], ["NTO", 41], ["CAP", 40]],
+        "refuel": false
+    },
+    {
+        "code": "CAP",
+        "city_name": "Capo Passero",
+        "connected_cities": [["POZ", 40], ["NTO", 36], ["MOD", 40]],
+        "refuel": false
+    },
+    {
+        "code": "NTO",
+        "city_name": "Noto Marioa",
+        "connected_cities": [["SIR", 31], ["CAP", 36], ["MOD", 41], ["POZ", 41]],
+        "refuel": false
+    },
+    {
+        "code": "SIR",
+        "city_name": "Siracusa",
+        "connected_cities": [["NTO", 31], ["FLO", 14], ["AUG", 21]],
+        "refuel": true
+    },
+    {
+        "code": "AUG",
+        "city_name": "Augusta",
+        "connected_cities": [["SIR", 21], ["LEN", 24]],
+        "refuel": false
+    },
+    {
+        "code": "LEN",
+        "city_name": "Lentini",
+        "connected_cities": [["CAT", 31], ["AUG", 24]],
+        "refuel": false
+    },
+    {
+        "code": "FLO",
+        "city_name": "Floridia",
+        "connected_cities": [["SIR", 14], ["PAL", 18]],
+        "refuel": false
+    },
+    {
+        "code": "PAL",
+        "city_name": "Palazzolo Accreide",
+        "connected_cities": [["GIA", 12], ["FLO", 18], ["CAL", 48]],
+        "refuel": false
+    },
+    {
+        "code": "GIA",
+        "city_name": "Giarratana",
+        "connected_cities": [["RAG", 17], ["PAL", 12]],
+        "refuel": false
+    }
+]

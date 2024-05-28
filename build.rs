@@ -18,6 +18,7 @@ fn main() {
 }
 
 fn generate_cities() {
+    println!("cargo::rerun-if-changed=build.rs");
     println!("cargo::rerun-if-changed=data/cities.json");
     let cities_file = File::open("data/cities.json").expect("Cities File not Found!");
     let cities_buffer = BufReader::new(cities_file);

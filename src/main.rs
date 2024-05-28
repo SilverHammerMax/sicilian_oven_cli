@@ -27,12 +27,12 @@ fn main() {
 fn challenge_engine(challenge: challenge::Challenge, medals: &mut HashMap<challenge::Challenge, medal::Medal>) {
     let mut car = challenge.get_car();
     helper_functions::challenge_prompt(&challenge);
-    println!("Do you accept this challenge? [Y/n]");
-    let mut input = Default::default();
-    let _ = std::io::stdin().read_line(&mut input);
-    match input.trim().to_lowercase().as_str() {
-        "n" => return,
-        _ => (),
+    let selection = dialoguer::Confirm::new()
+        .with_prompt("Do you accept this challenge?")
+        .interact()
+        .expect("Prompt Failed");
+    if !selection {
+        return;
     }
     let mut missing_cities = challenge.get_cities();
     let start_city = challenge

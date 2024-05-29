@@ -12,6 +12,7 @@ impl RoadTypes {
             RoadTypes::Asphalt => 1.0,
             RoadTypes::Cobblestone => 4.0 / 3.0,
             RoadTypes::Gravel => 2.0,
+            RoadTypes::Ferry => 0.0
         }
     }
 }

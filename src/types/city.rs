@@ -1,13 +1,20 @@
+pub enum RoadTypes {
+    Highway,
+    Asphalt,
+    Cobblestone,
+    Gravel
+}
+
 pub struct City {
     city_name: &'static str,
-    connected_cities: &'static [(&'static str, i32)],
+    connected_cities: &'static [(&'static str, i32, RoadTypes)],
     refuel: bool,
 }
 
 impl City {
     pub const fn new(
         city_name: &'static str,
-        connected_cities: &'static [(&'static str, i32)],
+        connected_cities: &'static [(&'static str, i32, RoadTypes)],
         refuel: bool,
     ) -> City {
         City {
@@ -21,7 +28,7 @@ impl City {
         self.city_name
     }
 
-    pub fn get_cities(&self) -> &'static [(&'static str, i32)] {
+    pub fn get_cities(&self) -> &'static [(&'static str, i32, RoadTypes)] {
         self.connected_cities
     }
 

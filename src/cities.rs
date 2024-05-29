@@ -1,4 +1,4 @@
-use crate::types::city::City;
+use crate::types::city::{City, RoadTypes};
 use lazy_static::lazy_static;
 use std::collections::HashMap;
 
@@ -8,7 +8,7 @@ lazy_static! {
             "RAG",
             City::new(
                 "Ragusa",
-                &[("MDR", 33), ("MOD", 11), ("COM", 8), ("GIA", 17)],
+                &[("MDR", 33, RoadTypes::Asphalt), ("MOD", 11, RoadTypes::Asphalt), ("COM", 8, RoadTypes::Cobblestone), ("GIA", 17, RoadTypes::Gravel)],
                 true
             )
         ),

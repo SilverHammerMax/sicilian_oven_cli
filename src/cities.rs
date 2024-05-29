@@ -127,7 +127,7 @@ lazy_static! {
         ),
         (
             "MES",
-            City::new("Messina", &[("TAM", 37), ("MIL", 16), ("CAT", 92)], true)
+            City::new("Messina", &[("TAM", 37), ("MIL", 16), ("CAT", 92), ("RCA", 13)], true)
         ),
         (
             "SOL",

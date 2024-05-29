@@ -7,7 +7,8 @@ pub fn choose_car() -> car::Car {
     for car in car::CarType::iter() {
         car_names.push(format!("{}", car.get_name()));
     }
-    let selection = dialoguer::Select::new()
+    car_names.pop();
+        let selection = dialoguer::Select::new()
         .with_prompt("Pick your car")
         .items(&car_names)
         .interact()
@@ -110,10 +111,10 @@ pub fn challenge_prompt(challenge: &challenge::Challenge) {
 
     println!();
 
-    println!(
-        "You are using the {}.",
-        challenge.get_car().get_car_type().get_name()
-    );
+    match challenge.get_car() {
+        Some(car) => println!("You are using the {}.", car.get_car_type().get_name()),
+        None => println!("You can use whatever car you prefer.")
+    }
 
     println!();
     if challenge != &challenge::Challenge::FreePlay {

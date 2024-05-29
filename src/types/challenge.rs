@@ -21,13 +21,13 @@ impl Challenge {
             Challenge::FreePlay => "Free Play",
         }
     }
-    pub fn get_car(&self) -> car::Car {
+    pub fn get_car(&self) -> Option<car::Car> {
         match self {
-            Challenge::RagusanRide => car::Car::new(car::CarType::Lancia),
-            Challenge::BigCarBigCities => car::Car::new(car::CarType::Ferrari),
-            Challenge::ARideAroundMountEtna => car::Car::new(car::CarType::Maserati),
-            Challenge::TheGodfather => car::Car::new(car::CarType::ModifiedLancia),
-            Challenge::FreePlay => crate::helper_functions::choose_car(),
+            Challenge::RagusanRide => Some(car::Car::new(car::CarType::Lancia)),
+            Challenge::BigCarBigCities => Some(car::Car::new(car::CarType::Ferrari)),
+            Challenge::ARideAroundMountEtna => Some(car::Car::new(car::CarType::Maserati)),
+            Challenge::TheGodfather => Some(car::Car::new(car::CarType::ModifiedLancia)),
+            Challenge::FreePlay => None,
         }
     }
 

@@ -25,7 +25,6 @@ fn main() {
 }
 
 fn challenge_engine(challenge: challenge::Challenge, medals: &mut HashMap<challenge::Challenge, medal::Medal>) {
-    let mut car = challenge.get_car();
     helper_functions::challenge_prompt(&challenge);
     let selection = dialoguer::Confirm::new()
         .with_prompt("Do you accept this challenge?")
@@ -34,6 +33,7 @@ fn challenge_engine(challenge: challenge::Challenge, medals: &mut HashMap<challe
     if !selection {
         return;
     }
+    let mut car = challenge.get_car().unwrap_or_else(|| helper_functions::choose_car());
     let mut missing_cities = challenge.get_cities();
     let start_city = challenge
         .get_starting_city()

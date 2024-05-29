@@ -441,5 +441,24 @@ lazy_static! {
             )
         ),
         ("SEL", City::new("Selinunte", &[("MAR", 15)], false))
+        
+        //Calabria starts here
+        
+        ("RCA", City::new("Reggio Calabria", &[("MEL", 20), ("SCL", 14), ("MES", 13)], true))
+        ("SCL", City::new("Scilla", &[("RCA", 14), ("PMI", 22)], false))
+        ("PMI", City::new("Palmi", &[("SCL", 22), ("DNV", 11), ("GIT", 17)], false))
+        ("GIT", City::new("Gioia Tauro", &[("PMI", 17), ("CIT", 19), ("TRO", 27)], false))
+        ("CIT", City::new("Cittanova", &[("GIT", 19), ("SID", 14), ("DIN", 18)], false))
+        ("SID", City::new("Siderno", &[("CIT", 14), ("BOV", 9), ("CAU", 29)], false))
+        ("BOV", City::new("Bovalino", &[("SID", 9), ("AFR", 12), ("DNV", 21)], false))
+        ("DNF", City::new("Delianuova", &[("PMI", 11), ("BOV", 21)], false))
+        ("AFR", City::new("Africo", &[("BOV", 12), ("MEL", 43)], false))
+        ("MEL", City::new("Melito", &[("RCA", 20), ("AFR", 43)], false)
+        ("TRO", City::new("Tropea", &[("VVA", 17)("GIT", 27)], false))
+        ("VVA", City::new("Vibo Valentia", &[("TRO", 17), ("PIZ", 12), ("DIN", 20), ("SOV", 38)], true))
+        ("PIZ", City::new("Pizzo", &[("VVA", 12)], false))
+        ("DIN", City::new("Dinami", &[("VVA", 20), ("CIT",18)], false))
+        ("CAU", City::new("Caulonia", &[("SID", 29), ("SOV", 35)], false))
+        ("SOV", City::new("Soverato", &[("CAU", 35), ("SOV", 38)], false))
     ]);
 }

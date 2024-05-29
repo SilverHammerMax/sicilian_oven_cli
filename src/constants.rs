@@ -4,21 +4,7 @@ use std::collections::HashMap;
 pub const MAJOR_CITIES: [&str; 9] = [
     "MES", "CAT", "SIR", "RAG", "AGR", "CTN", "ENN", "PMO", "TRA",
 ];
-pub const DANGEROUS_PATHS: [(&str, &str); 12] = [
-    ("RAG", "GIA"),
-    ("MDR", "POZ"),
-    ("PAL", "GIA"),
-    ("CAL", "GER"),
-    ("GER", "PAT"),
-    ("PET", "NIC"),
-    ("NIC", "ENN"),
-    ("CRL", "RAN"),
-    ("ADR", "RAN"),
-    ("RIB", "COR"),
-    ("PAR", "COR"),
-    ("MAR", "SEL"),
-];
-pub const HIGHWAYS: [(&str, &str); 2] = [("MIL", "TMI"), ("MES", "CAT")];
+
 lazy_static! {
     pub static ref MEDAL_CUTOFFS: HashMap<&'static crate::types::challenge::Challenge, [i32; 4]> =
         HashMap::from([

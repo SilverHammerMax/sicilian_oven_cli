@@ -5,6 +5,17 @@ pub enum RoadTypes {
     Gravel
 }
 
+impl RoadTypes {
+    pub fn time_multiplier(&self) -> f64 {
+        match self {
+            RoadTypes::Highway => 0.5,
+            RoadTypes::Asphalt => 1.0,
+            RoadTypes::Cobblestone => 4.0 / 3.0,
+            RoadTypes::Gravel => 2.0,
+        }
+    }
+}
+
 pub struct City {
     city_name: &'static str,
     connected_cities: &'static [(&'static str, i32, RoadTypes)],

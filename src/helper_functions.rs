@@ -58,16 +58,6 @@ pub fn choose_major_city() -> &'static str {
     constants::MAJOR_CITIES[selection]
 }
 
-pub fn time_multiplier(current_city: &str, next_city: &str) -> f64 {
-    if constants::DANGEROUS_PATHS.contains(&(current_city, next_city)) || constants::DANGEROUS_PATHS.contains(&(next_city, current_city)) {
-        return 2.0
-    }
-    if constants::HIGHWAYS.contains(&(current_city, next_city)) || constants::HIGHWAYS.contains(&(next_city, current_city)) {
-        return 0.5
-    }
-    1.0
-}
-
 pub fn challenge_prompt(challenge: &challenge::Challenge) {
     println!(
         "\nWelcome to {}! In this challenge, you will attempt to reach the cities of:\n",

@@ -76,7 +76,7 @@ fn challenge_engine(challenge: challenge::Challenge, medals: &mut HashMap<challe
             println!();
         }
         let mut options: Vec<String> = Vec::new();
-        for (code, distance) in city_reference.get_cities() {
+        for (code, distance, _) in city_reference.get_cities() {
             let option = format!("Go to {}, {} km", cities::CITIES.get(code).expect("Invalid City Code").get_name(), distance);
             options.push(option);
         }
@@ -91,12 +91,12 @@ fn challenge_engine(challenge: challenge::Challenge, medals: &mut HashMap<challe
             .interact()
             .expect("Prompt Failed");
 
-        let next_city_code;
+        let next_city;
         if selection < city_reference.get_cities().len() {
-            next_city_code = city_reference.get_cities().get(selection).expect("Out of Range").0;
+            next_city = city_reference.get_cities().get(selection).expect("Out of Range");
             car.travel();
-            time += city_reference.get_cities().get(selection).expect("Out of Range").1 as f64 * 60.0 * helper_functions::time_multiplier(city_code, next_city_code) / car.get_car_type().get_horsepower();
-            city_code = next_city_code;
+            time += next_city.1 as f64 * 60.0 * next_city.2.time_multiplier() / car.get_car_type().get_horsepower();
+            city_code = next_city.0;
         } else if selection == city_reference.get_cities().len() {
             break;
         } else if city_reference.can_refuel() && selection == city_reference.get_cities().len() + 1 {

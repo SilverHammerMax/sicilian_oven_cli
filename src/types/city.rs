@@ -2,7 +2,8 @@ pub enum RoadTypes {
     Highway,
     Asphalt,
     Cobblestone,
-    Gravel
+    Gravel,
+    Ferry
 }
 
 impl RoadTypes {

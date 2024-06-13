@@ -90,7 +90,7 @@ impl Challenge {
             Challenge::ARideAroundMountEtna => match time {
                 0.0..=290.0 => Medal::Author,
                 0.0..=310.0 => Medal::Gold,
-                0.0..=335.0=> Medal::Silver,
+                0.0..=335.0 => Medal::Silver,
                 0.0..=395.0 => Medal::Bronze,
                 _ => Medal::None,
             },

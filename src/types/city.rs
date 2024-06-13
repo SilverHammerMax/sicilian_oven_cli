@@ -1,17 +1,45 @@
+pub enum RoadTypes {
+    Highway,
+    Asphalt,
+    Cobblestone,
+    Gravel,
+    Ferry,
+}
+
+impl RoadTypes {
+    pub fn time_multiplier(&self) -> f64 {
+        match self {
+            RoadTypes::Highway => 0.5,
+            RoadTypes::Asphalt => 1.0,
+            RoadTypes::Cobblestone => 4.0 / 3.0,
+            RoadTypes::Gravel => 2.0,
+            RoadTypes::Ferry => 0.0,
+        }
+    }
+}
+
+pub enum Region {
+    Sicily,
+    Calabria,
+}
+
 pub struct City {
     city_name: &'static str,
-    connected_cities: &'static [(&'static str, i32)],
+    region: Region,
+    connected_cities: &'static [(&'static str, i32, RoadTypes)],
     refuel: bool,
 }
 
 impl City {
     pub const fn new(
         city_name: &'static str,
-        connected_cities: &'static [(&'static str, i32)],
+        region: Region,
+        connected_cities: &'static [(&'static str, i32, RoadTypes)],
         refuel: bool,
     ) -> City {
         City {
             city_name,
+            region,
             connected_cities,
             refuel,
         }
@@ -21,7 +49,11 @@ impl City {
         self.city_name
     }
 
-    pub fn get_cities(&self) -> &'static [(&'static str, i32)] {
+    pub fn get_region(&self) -> &Region {
+        &self.region
+    }
+
+    pub fn get_cities(&self) -> &'static [(&'static str, i32, RoadTypes)] {
         self.connected_cities
     }
 

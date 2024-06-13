@@ -8,7 +8,7 @@ pub fn choose_car() -> car::Car {
         car_names.push(format!("{}", car.get_name()));
     }
     car_names.pop();
-        let selection = dialoguer::Select::new()
+    let selection = dialoguer::Select::new()
         .with_prompt("Pick your car")
         .items(&car_names)
         .interact()
@@ -19,14 +19,20 @@ pub fn choose_car() -> car::Car {
         1 => car::Car::new(car::CarType::Maserati),
         2 => car::Car::new(car::CarType::Ferrari),
         3 => car::Car::new(car::CarType::Fiat),
-        _ => panic!("Fix Added Car!")
+        _ => panic!("Fix Added Car!"),
     }
 }
 
-pub fn choose_challenge(medals: &HashMap<challenge::Challenge, medal::Medal>) -> challenge::Challenge {
+pub fn choose_challenge(
+    medals: &HashMap<challenge::Challenge, medal::Medal>,
+) -> challenge::Challenge {
     let mut challenge_names = Vec::new();
     for challenge in challenge::Challenge::iter() {
-        challenge_names.push(format!("{} {}", challenge.get_name(), medals.get(&challenge).expect("Challenge Not Found")));
+        challenge_names.push(format!(
+            "{} {}",
+            challenge.get_name(),
+            medals.get(&challenge).expect("Challenge Not Found")
+        ));
     }
     let selection = dialoguer::Select::new()
         .with_prompt("Please Select a Challenge")
@@ -40,14 +46,19 @@ pub fn choose_challenge(medals: &HashMap<challenge::Challenge, medal::Medal>) ->
         2 => challenge::Challenge::ARideAroundMountEtna,
         3 => challenge::Challenge::TheGodfather,
         4 => challenge::Challenge::FreePlay,
-        _ => panic!("Fix Added Challenge!")
+        _ => panic!("Fix Added Challenge!"),
     }
 }
 
 pub fn choose_major_city() -> &'static str {
     let mut major_names = Vec::new();
     for code in constants::MAJOR_CITIES {
-        major_names.push(cities::CITIES.get(code).expect("Invalid City Code").get_name());
+        major_names.push(
+            cities::CITIES
+                .get(code)
+                .expect("Invalid City Code")
+                .get_name(),
+        );
     }
     let selection = dialoguer::Select::new()
         .with_prompt("What major city would you like to start in?")
@@ -56,16 +67,6 @@ pub fn choose_major_city() -> &'static str {
         .expect("Prompt Failed");
 
     constants::MAJOR_CITIES[selection]
-}
-
-pub fn time_multiplier(current_city: &str, next_city: &str) -> f64 {
-    if constants::DANGEROUS_PATHS.contains(&(current_city, next_city)) || constants::DANGEROUS_PATHS.contains(&(next_city, current_city)) {
-        return 2.0
-    }
-    if constants::HIGHWAYS.contains(&(current_city, next_city)) || constants::HIGHWAYS.contains(&(next_city, current_city)) {
-        return 0.5
-    }
-    1.0
 }
 
 pub fn challenge_prompt(challenge: &challenge::Challenge) {
@@ -113,7 +114,7 @@ pub fn challenge_prompt(challenge: &challenge::Challenge) {
 
     match challenge.get_car() {
         Some(car) => println!("You are using the {}.", car.get_car_type().get_name()),
-        None => println!("You can use whatever car you prefer.")
+        None => println!("You can use whatever car you prefer."),
     }
 
     println!();

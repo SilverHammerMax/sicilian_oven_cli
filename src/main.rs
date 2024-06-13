@@ -1,8 +1,8 @@
 #![deny(clippy::unwrap_used, clippy::expect_used)]
 #![allow(clippy::match_overlapping_arm)]
 
-use std::collections::HashMap;
 use crate::types::*;
+use std::collections::HashMap;
 
 mod cities;
 mod constants;
@@ -13,9 +13,12 @@ fn main() {
     let mut medals: HashMap<challenge::Challenge, medal::Medal> = HashMap::from([
         (challenge::Challenge::RagusanRide, medal::Medal::None),
         (challenge::Challenge::BigCarBigCities, medal::Medal::None),
-        (challenge::Challenge::ARideAroundMountEtna, medal::Medal::None),
+        (
+            challenge::Challenge::ARideAroundMountEtna,
+            medal::Medal::None,
+        ),
         (challenge::Challenge::TheGodfather, medal::Medal::None),
-        (challenge::Challenge::FreePlay, medal::Medal::None)
+        (challenge::Challenge::FreePlay, medal::Medal::None),
     ]);
     loop {
         println!("Welcome to the game!");
@@ -24,7 +27,10 @@ fn main() {
     }
 }
 
-fn challenge_engine(challenge: challenge::Challenge, medals: &mut HashMap<challenge::Challenge, medal::Medal>) {
+fn challenge_engine(
+    challenge: challenge::Challenge,
+    medals: &mut HashMap<challenge::Challenge, medal::Medal>,
+) {
     helper_functions::challenge_prompt(&challenge);
     let selection = dialoguer::Confirm::new()
         .with_prompt("Do you accept this challenge?")
@@ -33,7 +39,9 @@ fn challenge_engine(challenge: challenge::Challenge, medals: &mut HashMap<challe
     if !selection {
         return;
     }
-    let mut car = challenge.get_car().unwrap_or_else(|| helper_functions::choose_car());
+    let mut car = challenge
+        .get_car()
+        .unwrap_or_else(|| helper_functions::choose_car());
     let mut missing_cities = challenge.get_cities();
     let start_city = challenge
         .get_starting_city()
@@ -76,8 +84,15 @@ fn challenge_engine(challenge: challenge::Challenge, medals: &mut HashMap<challe
             println!();
         }
         let mut options: Vec<String> = Vec::new();
-        for (code, distance) in city_reference.get_cities() {
-            let option = format!("Go to {}, {} km", cities::CITIES.get(code).expect("Invalid City Code").get_name(), distance);
+        for (code, distance, _) in city_reference.get_cities() {
+            let option = format!(
+                "Go to {}, {} km",
+                cities::CITIES
+                    .get(code)
+                    .expect("Invalid City Code")
+                    .get_name(),
+                distance
+            );
             options.push(option);
         }
         options.push("Submit your challenge or return to main menu".to_string());
@@ -91,15 +106,20 @@ fn challenge_engine(challenge: challenge::Challenge, medals: &mut HashMap<challe
             .interact()
             .expect("Prompt Failed");
 
-        let next_city_code;
+        let next_city;
         if selection < city_reference.get_cities().len() {
-            next_city_code = city_reference.get_cities().get(selection).expect("Out of Range").0;
+            next_city = city_reference
+                .get_cities()
+                .get(selection)
+                .expect("Out of Range");
             car.travel();
-            time += city_reference.get_cities().get(selection).expect("Out of Range").1 as f64 * 60.0 * helper_functions::time_multiplier(city_code, next_city_code) / car.get_car_type().get_horsepower();
-            city_code = next_city_code;
+            time += next_city.1 as f64 * 60.0 * next_city.2.time_multiplier()
+                / car.get_car_type().get_horsepower();
+            city_code = next_city.0;
         } else if selection == city_reference.get_cities().len() {
             break;
-        } else if city_reference.can_refuel() && selection == city_reference.get_cities().len() + 1 {
+        } else if city_reference.can_refuel() && selection == city_reference.get_cities().len() + 1
+        {
             car.refuel();
             path.pop();
         }
@@ -111,10 +131,20 @@ fn challenge_engine(challenge: challenge::Challenge, medals: &mut HashMap<challe
 
     println!();
     if challenge != challenge::Challenge::FreePlay {
-        if missing_cities.is_empty() && (Some(city_code) == challenge.get_ending_city() || challenge.get_ending_city() == None) {
-            println!("Congratulations! You've completed the {} challenge!", challenge.get_name());
+        if missing_cities.is_empty()
+            && (Some(city_code) == challenge.get_ending_city()
+                || challenge.get_ending_city() == None)
+        {
+            println!(
+                "Congratulations! You've completed the {} challenge!",
+                challenge.get_name()
+            );
             println!();
-            println!("You completed it in {} hour(s) and {} minute(s)!", (time / 60.0) as i32, (time % 60.0) as i32);
+            println!(
+                "You completed it in {} hour(s) and {} minute(s)!",
+                (time / 60.0) as i32,
+                (time % 60.0) as i32
+            );
             println!();
             match challenge.get_medal(time) {
                 medal::Medal::Author => println!("This is an incredible time! You've won the author medal!"),

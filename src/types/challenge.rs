@@ -2,6 +2,13 @@ use crate::types::medal::Medal;
 use crate::types::*;
 use strum;
 
+#[derive(PartialEq, Eq)]
+pub enum Location {
+    City(&'static str),
+    Region(city::Region),
+    Any
+}
+
 #[derive(strum::EnumIter, PartialEq, Eq, Hash, Copy, Clone)]
 pub enum Challenge {
     RagusanRide,
@@ -38,7 +45,7 @@ impl Challenge {
                 "AUG", "LEN",
             ],
             Challenge::BigCarBigCities => vec![
-                "RAG", "SIR", "CAT", "ENN", "CAL", "PMO", "TRA", "MES", "AGR",
+                "RAG", "SIR", "CAT", "ENN", "CTN", "PMO", "TRA", "MES", "AGR",
             ],
             Challenge::ARideAroundMountEtna => vec![
                 "CAT", "GER", "PAT", "ADR", "RAN", "CRL", "PTI", "BAR", "MIL", "MES", "RIP", "TAM",
@@ -51,23 +58,23 @@ impl Challenge {
         }
     }
 
-    pub fn get_starting_city(&self) -> Option<&str> {
+    pub fn get_starting_city(&self) -> Location {
         match self {
-            Challenge::RagusanRide => Some("RAG"),
-            Challenge::BigCarBigCities => None,
-            Challenge::ARideAroundMountEtna => Some("CAT"),
-            Challenge::TheGodfather => Some("COR"),
-            Challenge::FreePlay => None,
+            Challenge::RagusanRide => Location::City("RAG"),
+            Challenge::BigCarBigCities => Location::Region(city::Region::Sicily),
+            Challenge::ARideAroundMountEtna => Location::City("CAT"),
+            Challenge::TheGodfather => Location::City("COR"),
+            Challenge::FreePlay => Location::Any,
         }
     }
 
-    pub fn get_ending_city(&self) -> Option<&str> {
+    pub fn get_ending_city(&self) -> Location {
         match self {
-            Challenge::RagusanRide => Some("RAG"),
-            Challenge::BigCarBigCities => None,
-            Challenge::ARideAroundMountEtna => Some("CAT"),
-            Challenge::TheGodfather => Some("COR"),
-            Challenge::FreePlay => None,
+            Challenge::RagusanRide => Location::City("RAG"),
+            Challenge::BigCarBigCities => Location::Region(city::Region::Sicily),
+            Challenge::ARideAroundMountEtna => Location::City("CAT"),
+            Challenge::TheGodfather => Location::City("COR"),
+            Challenge::FreePlay => Location::Any,
         }
     }
 

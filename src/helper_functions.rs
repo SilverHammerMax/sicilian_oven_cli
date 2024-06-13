@@ -50,13 +50,13 @@ pub fn choose_challenge(
     }
 }
 
-pub fn choose_major_city(region: &city::Region) -> &'static str {
+pub fn choose_major_city(region: Option<&city::Region>) -> &'static str {
     let mut major_cities = Vec::new();
     for code in constants::MAJOR_CITIES.iter() {
         major_cities.push(cities::CITIES.get(code).expect("Invalid City Code"));
     }
 
-    major_cities.retain(|x| x.get_region() == region);
+    major_cities.retain(|x| Some(x.get_region()) == region || region == None);
     let major_names: Vec<String> = major_cities.iter().map(|x| x.get_name().to_owned()).collect();
 
     let selection = dialoguer::Select::new()
@@ -88,25 +88,27 @@ pub fn challenge_prompt(challenge: &challenge::Challenge) {
     let end_city = challenge.get_ending_city();
 
     match start_city {
-        Some(code) => println!(
+        challenge::Location::City(code) => println!(
             "You will start in {}.",
             cities::CITIES
                 .get(code)
                 .expect("Invalid City Code")
                 .get_name()
         ),
-        None => println!("You can start in whatever major city you prefer."),
+        challenge::Location::Region(region) => println!("You may start in any major city in {}.", region.get_name()),
+        challenge::Location::Any => println!("You can start in whatever major city you prefer."),
     }
 
     match end_city {
-        Some(code) => println!(
+        challenge::Location::City(code) => println!(
             "You will start in {}.",
             cities::CITIES
                 .get(code)
                 .expect("Invalid City Code")
                 .get_name()
         ),
-        None => println!("You can start in whatever major city you prefer."),
+        challenge::Location::Region(region) => println!("You may start in any major city in {}.", region.get_name()),
+        challenge::Location::Any => println!("You can start in whatever major city you prefer."),
     }
 
     println!();

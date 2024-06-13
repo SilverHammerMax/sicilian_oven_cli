@@ -43,9 +43,11 @@ fn challenge_engine(
         .get_car()
         .unwrap_or_else(|| helper_functions::choose_car());
     let mut missing_cities = challenge.get_cities();
-    let start_city = challenge
-        .get_starting_city()
-        .unwrap_or_else(|| helper_functions::choose_major_city(&city::Region::Sicily));
+    let start_city = match challenge.get_starting_city() {
+        challenge::Location::City(code) => code,
+        challenge::Location::Region(region) => helper_functions::choose_major_city(Some(&region)),
+        challenge::Location::Any => helper_functions::choose_major_city(None)
+    };
     let mut city_code = start_city;
     let mut path = vec![];
     let mut time = 0.0;
@@ -132,8 +134,8 @@ fn challenge_engine(
     println!();
     if challenge != challenge::Challenge::FreePlay {
         if missing_cities.is_empty()
-            && (Some(city_code) == challenge.get_ending_city()
-                || challenge.get_ending_city() == None)
+            && (challenge::Location::City(city_code) == challenge.get_ending_city() || challenge::Location::Region(cities::CITIES.get(city_code).expect("Invalid City Code").get_region().clone()) == challenge.get_ending_city()
+                || challenge.get_ending_city() == challenge::Location::Any)
         {
             println!(
                 "Congratulations! You've completed the {} challenge!",

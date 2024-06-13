@@ -18,10 +18,19 @@ impl RoadTypes {
     }
 }
 
-#[derive(PartialEq, Eq)]
+#[derive(PartialEq, Eq, Clone)]
 pub enum Region {
     Sicily,
     Calabria,
+}
+
+impl Region {
+    pub fn get_name(&self) -> &str {
+        match self {
+            Region::Sicily => "Sicily",
+            Region::Calabria => "Calabria",
+        }
+    }
 }
 
 pub struct City {

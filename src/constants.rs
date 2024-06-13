@@ -1,8 +1,8 @@
 use lazy_static::lazy_static;
 use std::collections::HashMap;
 
-pub const MAJOR_CITIES: [&str; 9] = [
-    "MES", "CAT", "SIR", "RAG", "AGR", "CTN", "ENN", "PMO", "TRA",
+pub const MAJOR_CITIES: [&str; 14] = [
+    "MES", "CAT", "SIR", "RAG", "AGR", "CTN", "ENN", "PMO", "TRA", "RCA", "VVA", "CNZ", "CRO", "COS"
 ];
 
 lazy_static! {

@@ -50,16 +50,15 @@ pub fn choose_challenge(
     }
 }
 
-pub fn choose_major_city() -> &'static str {
-    let mut major_names = Vec::new();
-    for code in constants::MAJOR_CITIES {
-        major_names.push(
-            cities::CITIES
-                .get(code)
-                .expect("Invalid City Code")
-                .get_name(),
-        );
+pub fn choose_major_city(region: &city::Region) -> &'static str {
+    let mut major_cities = Vec::new();
+    for code in constants::MAJOR_CITIES.iter() {
+        major_cities.push(cities::CITIES.get(code).expect("Invalid City Code"));
     }
+
+    major_cities.retain(|x| x.get_region() == region);
+    let major_names: Vec<String> = major_cities.iter().map(|x| x.get_name().to_owned()).collect();
+
     let selection = dialoguer::Select::new()
         .with_prompt("What major city would you like to start in?")
         .items(&major_names)

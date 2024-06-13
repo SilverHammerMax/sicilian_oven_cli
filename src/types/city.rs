@@ -18,6 +18,7 @@ impl RoadTypes {
     }
 }
 
+#[derive(PartialEq, Eq)]
 pub enum Region {
     Sicily,
     Calabria,

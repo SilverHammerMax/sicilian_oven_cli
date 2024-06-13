@@ -45,7 +45,7 @@ fn challenge_engine(
     let mut missing_cities = challenge.get_cities();
     let start_city = challenge
         .get_starting_city()
-        .unwrap_or_else(|| helper_functions::choose_major_city());
+        .unwrap_or_else(|| helper_functions::choose_major_city(&city::Region::Sicily));
     let mut city_code = start_city;
     let mut path = vec![];
     let mut time = 0.0;

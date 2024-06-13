@@ -14,7 +14,7 @@ lazy_static! {
                     ("MDR", 33, RoadTypes::Asphalt),
                     ("MOD", 11, RoadTypes::Asphalt),
                     ("COM", 8, RoadTypes::Cobblestone),
-                    ("GIA", 17, RoadTypes::Gravel)
+                    ("GIA", 17, RoadTypes::Unpaved)
                 ],
                 true
             )
@@ -50,7 +50,7 @@ lazy_static! {
                 Region::Sicily,
                 &[
                     ("RAG", 33, RoadTypes::Asphalt),
-                    ("POZ", 31, RoadTypes::Gravel)
+                    ("POZ", 31, RoadTypes::Unpaved)
                 ],
                 false
             )
@@ -61,7 +61,7 @@ lazy_static! {
                 "Pozzallo",
                 Region::Sicily,
                 &[
-                    ("MDR", 31, RoadTypes::Gravel),
+                    ("MDR", 31, RoadTypes::Unpaved),
                     ("MOD", 30, RoadTypes::Asphalt),
                     ("NTO", 41, RoadTypes::Asphalt),
                     ("CAP", 40, RoadTypes::Asphalt)
@@ -165,7 +165,7 @@ lazy_static! {
                 "Palazzolo Acreide",
                 Region::Sicily,
                 &[
-                    ("GIA", 12, RoadTypes::Gravel),
+                    ("GIA", 12, RoadTypes::Unpaved),
                     ("FLO", 18, RoadTypes::Cobblestone),
                     ("CAL", 48, RoadTypes::Cobblestone)
                 ],
@@ -178,8 +178,8 @@ lazy_static! {
                 "Giarratana",
                 Region::Sicily,
                 &[
-                    ("RAG", 17, RoadTypes::Gravel),
-                    ("PAL", 12, RoadTypes::Gravel)
+                    ("RAG", 17, RoadTypes::Unpaved),
+                    ("PAL", 12, RoadTypes::Unpaved)
                 ],
                 false
             )
@@ -205,7 +205,7 @@ lazy_static! {
                 Region::Sicily,
                 &[
                     ("GLA", 37, RoadTypes::Asphalt),
-                    ("GER", 48, RoadTypes::Gravel),
+                    ("GER", 48, RoadTypes::Unpaved),
                     ("PAL", 48, RoadTypes::Cobblestone),
                     ("ENN", 50, RoadTypes::Cobblestone)
                 ],
@@ -218,8 +218,8 @@ lazy_static! {
                 "Gerbini",
                 Region::Sicily,
                 &[
-                    ("PAT", 10, RoadTypes::Gravel),
-                    ("CAL", 48, RoadTypes::Gravel)
+                    ("PAT", 10, RoadTypes::Unpaved),
+                    ("CAL", 48, RoadTypes::Unpaved)
                 ],
                 false
             )
@@ -232,7 +232,7 @@ lazy_static! {
                 &[
                     ("CAT", 11, RoadTypes::Cobblestone),
                     ("ADR", 9, RoadTypes::Cobblestone),
-                    ("GER", 10, RoadTypes::Gravel)
+                    ("GER", 10, RoadTypes::Unpaved)
                 ],
                 false
             )
@@ -362,7 +362,7 @@ lazy_static! {
                     ("CEF", 60, RoadTypes::Asphalt),
                     ("CAS", 8, RoadTypes::Cobblestone),
                     ("TMI", 61, RoadTypes::Asphalt),
-                    ("NIC", 18, RoadTypes::Gravel)
+                    ("NIC", 18, RoadTypes::Unpaved)
                 ],
                 false
             )
@@ -373,8 +373,8 @@ lazy_static! {
                 "Nicosia",
                 Region::Sicily,
                 &[
-                    ("PET", 18, RoadTypes::Gravel),
-                    ("ENN", 29, RoadTypes::Gravel)
+                    ("PET", 18, RoadTypes::Unpaved),
+                    ("ENN", 29, RoadTypes::Unpaved)
                 ],
                 false
             )
@@ -436,7 +436,7 @@ lazy_static! {
                 "Castoreale",
                 Region::Sicily,
                 &[
-                    ("RAN", 33, RoadTypes::Gravel),
+                    ("RAN", 33, RoadTypes::Unpaved),
                     ("PTI", 18, RoadTypes::Asphalt),
                     ("BAR", 14, RoadTypes::Asphalt)
                 ],
@@ -449,8 +449,8 @@ lazy_static! {
                 "Randanzzo",
                 Region::Sicily,
                 &[
-                    ("ADR", 48, RoadTypes::Gravel),
-                    ("CRL", 33, RoadTypes::Gravel)
+                    ("ADR", 48, RoadTypes::Unpaved),
+                    ("CRL", 33, RoadTypes::Unpaved)
                 ],
                 false
             )
@@ -465,7 +465,7 @@ lazy_static! {
                     ("CAL", 50, RoadTypes::Cobblestone),
                     ("GLA", 76, RoadTypes::Cobblestone),
                     ("CTN", 24, RoadTypes::Asphalt),
-                    ("NIC", 25, RoadTypes::Gravel)
+                    ("NIC", 25, RoadTypes::Unpaved)
                 ],
                 true
             )
@@ -477,7 +477,7 @@ lazy_static! {
                 Region::Sicily,
                 &[
                     ("PAT", 9, RoadTypes::Cobblestone),
-                    ("RAN", 48, RoadTypes::Gravel),
+                    ("RAN", 48, RoadTypes::Unpaved),
                     ("ENN", 28, RoadTypes::Cobblestone)
                 ],
                 false
@@ -569,7 +569,7 @@ lazy_static! {
                 Region::Sicily,
                 &[
                     ("AGR", 36, RoadTypes::Cobblestone),
-                    ("COR", 39, RoadTypes::Gravel)
+                    ("COR", 39, RoadTypes::Unpaved)
                 ],
                 false
             )
@@ -581,8 +581,8 @@ lazy_static! {
                 Region::Sicily,
                 &[
                     ("MIS", 40, RoadTypes::Cobblestone),
-                    ("RIB", 39, RoadTypes::Gravel),
-                    ("PAR", 63, RoadTypes::Gravel)
+                    ("RIB", 39, RoadTypes::Unpaved),
+                    ("PAR", 63, RoadTypes::Unpaved)
                 ],
                 false
             )
@@ -666,7 +666,7 @@ lazy_static! {
                 "Partanna",
                 Region::Sicily,
                 &[
-                    ("COR", 63, RoadTypes::Gravel),
+                    ("COR", 63, RoadTypes::Unpaved),
                     ("ALC", 41, RoadTypes::Cobblestone),
                     ("CVR", 30, RoadTypes::Cobblestone),
                     ("SAL", 26, RoadTypes::Cobblestone),
@@ -840,7 +840,7 @@ lazy_static! {
                     ("MEN", 21, RoadTypes::Asphalt),
                     ("CVR", 29, RoadTypes::Asphalt),
                     ("MDV", 42, RoadTypes::Asphalt),
-                    ("SEL", 15, RoadTypes::Gravel)
+                    ("SEL", 15, RoadTypes::Unpaved)
                 ],
                 false
             )
@@ -850,7 +850,7 @@ lazy_static! {
             City::new(
                 "Selinunte",
                 Region::Sicily,
-                &[("MAR", 15, RoadTypes::Gravel)],
+                &[("MAR", 15, RoadTypes::Unpaved)],
                 false
             )
         ),
@@ -886,7 +886,7 @@ lazy_static! {
                 Region::Calabria,
                 &[
                     ("SCL", 22, RoadTypes::Asphalt),
-                    ("DNV", 11, RoadTypes::Gravel),
+                    ("DNV", 11, RoadTypes::Unpaved),
                     ("GIT", 17, RoadTypes::Asphalt)
                 ],
                 false
@@ -913,7 +913,7 @@ lazy_static! {
                 &[
                     ("GIT", 19, RoadTypes::Cobblestone),
                     ("SID", 14, RoadTypes::Cobblestone),
-                    ("DIN", 18, RoadTypes::Gravel)
+                    ("DIN", 18, RoadTypes::Unpaved)
                 ],
                 false
             )
@@ -939,7 +939,7 @@ lazy_static! {
                 &[
                     ("SID", 9, RoadTypes::Asphalt),
                     ("AFR", 12, RoadTypes::Asphalt),
-                    ("DNV", 21, RoadTypes::Gravel)
+                    ("DNV", 21, RoadTypes::Unpaved)
                 ],
                 false
             )
@@ -950,8 +950,8 @@ lazy_static! {
                 "Delianuova",
                 Region::Calabria,
                 &[
-                    ("PMI", 11, RoadTypes::Gravel),
-                    ("BOV", 21, RoadTypes::Gravel)
+                    ("PMI", 11, RoadTypes::Unpaved),
+                    ("BOV", 21, RoadTypes::Unpaved)
                 ],
                 false
             )
@@ -1000,7 +1000,7 @@ lazy_static! {
                 &[
                     ("TRO", 17, RoadTypes::Asphalt),
                     ("PIZ", 12, RoadTypes::Asphalt),
-                    ("DIN", 20, RoadTypes::Gravel),
+                    ("DIN", 20, RoadTypes::Unpaved),
                     ("SOV", 38, RoadTypes::Cobblestone)
                 ],
                 true
@@ -1024,8 +1024,8 @@ lazy_static! {
                 "Dinami",
                 Region::Calabria,
                 &[
-                    ("VVA", 20, RoadTypes::Gravel),
-                    ("CIT", 18, RoadTypes::Gravel)
+                    ("VVA", 20, RoadTypes::Unpaved),
+                    ("CIT", 18, RoadTypes::Unpaved)
                 ],
                 false
             )
@@ -1158,7 +1158,7 @@ lazy_static! {
                     ("CRO", 13, RoadTypes::Asphalt),
                     ("CNZ", 31, RoadTypes::Asphalt),
                     ("STR", 16, RoadTypes::Asphalt),
-                    ("CTE", 19, RoadTypes::Gravel)
+                    ("CTE", 19, RoadTypes::Unpaved)
                 ],
                 false
             )
@@ -1171,7 +1171,7 @@ lazy_static! {
                 &[
                     ("ROS", 15, RoadTypes::Asphalt),
                     ("STR", 27, RoadTypes::Cobblestone),
-                    ("ACR", 16, RoadTypes::Gravel)
+                    ("ACR", 16, RoadTypes::Unpaved)
                 ],
                 false
             )
@@ -1182,8 +1182,8 @@ lazy_static! {
                 "Cotronei",
                 Region::Calabria,
                 &[
-                    ("CUT", 19, RoadTypes::Gravel),
-                    ("ROG", 22, RoadTypes::Gravel)
+                    ("CUT", 19, RoadTypes::Unpaved),
+                    ("ROG", 22, RoadTypes::Unpaved)
                 ],
                 false
             )
@@ -1194,7 +1194,7 @@ lazy_static! {
                 "Rogliano",
                 Region::Calabria,
                 &[
-                    ("CTE", 22, RoadTypes::Gravel),
+                    ("CTE", 22, RoadTypes::Unpaved),
                     ("COS", 17, RoadTypes::Cobblestone)
                 ],
                 false
@@ -1206,8 +1206,8 @@ lazy_static! {
                 "Acri",
                 Region::Calabria,
                 &[
-                    ("LBC", 16, RoadTypes::Gravel),
-                    ("COS", 28, RoadTypes::Gravel)
+                    ("LBC", 16, RoadTypes::Unpaved),
+                    ("COS", 28, RoadTypes::Unpaved)
                 ],
                 false
             )
@@ -1220,8 +1220,8 @@ lazy_static! {
                 &[
                     ("GRI", 18, RoadTypes::Asphalt),
                     ("ROG", 17, RoadTypes::Cobblestone),
-                    ("ACR", 28, RoadTypes::Gravel),
-                    ("PAO", 17, RoadTypes::Gravel),
+                    ("ACR", 28, RoadTypes::Unpaved),
+                    ("PAO", 17, RoadTypes::Unpaved),
                     ("ALT", 32, RoadTypes::Cobblestone),
                     ("ROS", 38, RoadTypes::Cobblestone)
                 ],
@@ -1261,7 +1261,7 @@ lazy_static! {
                 &[
                     ("FAL", 47, RoadTypes::Highway),
                     ("SCA", 46, RoadTypes::Highway),
-                    ("COS", 17, RoadTypes::Gravel)
+                    ("COS", 17, RoadTypes::Unpaved)
                 ],
                 false
             )
@@ -1281,8 +1281,8 @@ lazy_static! {
                 "Castrovillari",
                 Region::Calabria,
                 &[
-                    ("SCA", 31, RoadTypes::Gravel),
-                    ("ALT", 19, RoadTypes::Gravel),
+                    ("SCA", 31, RoadTypes::Unpaved),
+                    ("ALT", 19, RoadTypes::Unpaved),
                     ("ORI", 26, RoadTypes::Cobblestone)
                 ],
                 false
@@ -1320,7 +1320,7 @@ lazy_static! {
                 &[
                     ("ROS", 17, RoadTypes::Asphalt),
                     ("RTO", 27, RoadTypes::Asphalt),
-                    ("ALT", 23, RoadTypes::Gravel)
+                    ("ALT", 23, RoadTypes::Unpaved)
                 ],
                 false
             )
@@ -1332,8 +1332,8 @@ lazy_static! {
                 Region::Calabria,
                 &[
                     ("COS", 32, RoadTypes::Cobblestone),
-                    ("SIB", 23, RoadTypes::Gravel),
-                    ("CVL", 19, RoadTypes::Gravel)
+                    ("SIB", 23, RoadTypes::Unpaved),
+                    ("CVL", 19, RoadTypes::Unpaved)
                 ],
                 false
             )

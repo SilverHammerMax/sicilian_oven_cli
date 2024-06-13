@@ -2,7 +2,7 @@ pub enum RoadTypes {
     Highway,
     Asphalt,
     Cobblestone,
-    Gravel,
+    Unpaved,
     Ferry,
 }
 
@@ -12,7 +12,7 @@ impl RoadTypes {
             RoadTypes::Highway => 0.5,
             RoadTypes::Asphalt => 1.0,
             RoadTypes::Cobblestone => 4.0 / 3.0,
-            RoadTypes::Gravel => 2.0,
+            RoadTypes::Unpaved => 2.0,
             RoadTypes::Ferry => 0.0,
         }
     }

@@ -3,7 +3,7 @@ pub enum RoadTypes {
     Asphalt,
     Cobblestone,
     Gravel,
-    Ferry
+    Ferry,
 }
 
 impl RoadTypes {
@@ -13,13 +13,19 @@ impl RoadTypes {
             RoadTypes::Asphalt => 1.0,
             RoadTypes::Cobblestone => 4.0 / 3.0,
             RoadTypes::Gravel => 2.0,
-            RoadTypes::Ferry => 0.0
+            RoadTypes::Ferry => 0.0,
         }
     }
 }
 
+pub enum Region {
+    Sicily,
+    Calabria,
+}
+
 pub struct City {
     city_name: &'static str,
+    region: Region,
     connected_cities: &'static [(&'static str, i32, RoadTypes)],
     refuel: bool,
 }
@@ -27,11 +33,13 @@ pub struct City {
 impl City {
     pub const fn new(
         city_name: &'static str,
+        region: Region,
         connected_cities: &'static [(&'static str, i32, RoadTypes)],
         refuel: bool,
     ) -> City {
         City {
             city_name,
+            region,
             connected_cities,
             refuel,
         }
@@ -39,6 +47,10 @@ impl City {
 
     pub fn get_name(&self) -> &str {
         self.city_name
+    }
+
+    pub fn get_region(&self) -> &Region {
+        &self.region
     }
 
     pub fn get_cities(&self) -> &'static [(&'static str, i32, RoadTypes)] {

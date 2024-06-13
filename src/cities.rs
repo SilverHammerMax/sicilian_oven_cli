@@ -1,3 +1,4 @@
+use crate::types::city::Region;
 use crate::types::city::{City, RoadTypes};
 use lazy_static::lazy_static;
 use std::collections::HashMap;
@@ -8,23 +9,25 @@ lazy_static! {
             "RAG",
             City::new(
                 "Ragusa",
+                Region::Sicily,
                 &[("MDR", 33, RoadTypes::Asphalt), ("MOD", 11, RoadTypes::Asphalt), ("COM", 8, RoadTypes::Cobblestone), ("GIA", 17, RoadTypes::Gravel)],
                 true
             )
         ),
-        ("COM", City::new("Comiso", &[("RAG", 8, RoadTypes::Cobblestone), ("VIT", 8, RoadTypes::Cobblestone)], false)),
+        ("COM", City::new("Comiso", Region::Sicily, &[("RAG", 8, RoadTypes::Cobblestone), ("VIT", 8, RoadTypes::Cobblestone)], false)),
         (
             "VIT",
-            City::new("Vittoria", &[("COM", 8, RoadTypes::Asphalt), ("GLA", 15, RoadTypes::Asphalt)], false)
+            City::new("Vittoria", Region::Sicily, &[("COM", 8, RoadTypes::Asphalt), ("GLA", 15, RoadTypes::Asphalt)], false)
         ),
         (
             "MDR",
-            City::new("Marina di Ragusa", &[("RAG", 33, RoadTypes::Asphalt), ("POZ", 31, RoadTypes::Gravel)], false)
+            City::new("Marina di Ragusa", Region::Sicily, &[("RAG", 33, RoadTypes::Asphalt), ("POZ", 31, RoadTypes::Gravel)], false)
         ),
         (
             "POZ",
             City::new(
                 "Pozzallo",
+                Region::Sicily,
                 &[("MDR", 31, RoadTypes::Gravel), ("MOD", 30, RoadTypes::Asphalt), ("NTO", 41, RoadTypes::Asphalt), ("CAP", 40, RoadTypes::Asphalt)],
                 false
             )
@@ -33,6 +36,7 @@ lazy_static! {
             "MOD",
             City::new(
                 "Modica",
+                Region::Sicily,
                 &[("RAG", 11, RoadTypes::Asphalt), ("POZ", 30, RoadTypes::Asphalt), ("NTO", 41, RoadTypes::Asphalt), ("CAP", 40, RoadTypes::Asphalt)],
                 false
             )
@@ -41,6 +45,7 @@ lazy_static! {
             "CAP",
             City::new(
                 "Capo Passero",
+                Region::Sicily,
                 &[("POZ", 40, RoadTypes::Asphalt), ("NTO", 36, RoadTypes::Asphalt), ("MOD", 40, RoadTypes::Asphalt)],
                 false
             )
@@ -49,42 +54,45 @@ lazy_static! {
             "NTO",
             City::new(
                 "Noto Marioa",
+                Region::Sicily,
                 &[("SIR", 31, RoadTypes::Asphalt), ("CAP", 36, RoadTypes::Asphalt), ("MOD", 41, RoadTypes::Asphalt), ("POZ", 41, RoadTypes::Asphalt)],
                 false
             )
         ),
         (
             "SIR",
-            City::new("Siracusa", &[("NTO", 31, RoadTypes::Asphalt), ("FLO", 14, RoadTypes::Cobblestone), ("AUG", 21, RoadTypes::Asphalt)], true)
+            City::new("Siracusa", Region::Sicily, &[("NTO", 31, RoadTypes::Asphalt), ("FLO", 14, RoadTypes::Cobblestone), ("AUG", 21, RoadTypes::Asphalt)], true)
         ),
         (
             "AUG",
-            City::new("Augusta", &[("SIR", 21, RoadTypes::Asphalt), ("LEN", 24, RoadTypes::Asphalt)], false)
+            City::new("Augusta", Region::Sicily, &[("SIR", 21, RoadTypes::Asphalt), ("LEN", 24, RoadTypes::Asphalt)], false)
         ),
         (
             "LEN",
-            City::new("Lentini", &[("CAT", 31, RoadTypes::Asphalt), ("AUG", 24, RoadTypes::Asphalt)], false)
+            City::new("Lentini", Region::Sicily, &[("CAT", 31, RoadTypes::Asphalt), ("AUG", 24, RoadTypes::Asphalt)], false)
         ),
         (
             "FLO",
-            City::new("Floridia", &[("SIR", 14, RoadTypes::Cobblestone), ("PAL", 18, RoadTypes::Cobblestone)], false)
+            City::new("Floridia", Region::Sicily, &[("SIR", 14, RoadTypes::Cobblestone), ("PAL", 18, RoadTypes::Cobblestone)], false)
         ),
         (
             "PAL",
             City::new(
                 "Palazzolo Acreide",
+                Region::Sicily,
                 &[("GIA", 12, RoadTypes::Gravel), ("FLO", 18, RoadTypes::Cobblestone), ("CAL", 48, RoadTypes::Cobblestone)],
                 false
             )
         ),
         (
             "GIA",
-            City::new("Giarratana", &[("RAG", 17, RoadTypes::Gravel), ("PAL", 12, RoadTypes::Gravel)], false)
+            City::new("Giarratana", Region::Sicily, &[("RAG", 17, RoadTypes::Gravel), ("PAL", 12, RoadTypes::Gravel)], false)
         ),
         (
             "GLA",
             City::new(
                 "Gela",
+                Region::Sicily,
                 &[("VIT", 15, RoadTypes::Asphalt), ("CAL", 37, RoadTypes::Cobblestone), ("ENN", 76, RoadTypes::Cobblestone), ("LIC", 28, RoadTypes::Asphalt)],
                 false
             )
@@ -93,50 +101,53 @@ lazy_static! {
             "CAL",
             City::new(
                 "Caltagirone",
+                Region::Sicily,
                 &[("GLA", 37, RoadTypes::Asphalt), ("GER", 48, RoadTypes::Gravel), ("PAL", 48, RoadTypes::Cobblestone), ("ENN", 50, RoadTypes::Cobblestone)],
                 false
             )
         ),
         (
             "GER",
-            City::new("Gerbini", &[("PAT", 10, RoadTypes::Gravel), ("CAL", 48, RoadTypes::Gravel)], false)
+            City::new("Gerbini", Region::Sicily, &[("PAT", 10, RoadTypes::Gravel), ("CAL", 48, RoadTypes::Gravel)], false)
         ),
         (
             "PAT",
-            City::new("Paterno", &[("CAT", 11, RoadTypes::Cobblestone), ("ADR", 9, RoadTypes::Cobblestone), ("GER", 10, RoadTypes::Gravel)], false)
+            City::new("Paterno", Region::Sicily, &[("CAT", 11, RoadTypes::Cobblestone), ("ADR", 9, RoadTypes::Cobblestone), ("GER", 10, RoadTypes::Gravel)], false)
         ),
         (
             "CAT",
             City::new(
                 "Catania",
+                Region::Sicily,
                 &[("LEN", 31, RoadTypes::Asphalt), ("ACI", 18, RoadTypes::Asphalt), ("PAT", 11, RoadTypes::Asphalt), ("MES", 92, RoadTypes::Highway)],
                 true
             )
         ),
         (
             "ACI",
-            City::new("Acireale", &[("CAT", 18, RoadTypes::Asphalt), ("RIP", 15, RoadTypes::Asphalt)], false)
+            City::new("Acireale", Region::Sicily, &[("CAT", 18, RoadTypes::Asphalt), ("RIP", 15, RoadTypes::Asphalt)], false)
         ),
         (
             "RIP",
-            City::new("Riposte", &[("TAM", 12, RoadTypes::Asphalt), ("ACI", 15, RoadTypes::Asphalt)], false)
+            City::new("Riposte", Region::Sicily, &[("TAM", 12, RoadTypes::Asphalt), ("ACI", 15, RoadTypes::Asphalt)], false)
         ),
         (
             "TAM",
-            City::new("Tambrina", &[("RIP", 12, RoadTypes::Asphalt), ("MES", 37, RoadTypes::Asphalt)], false)
+            City::new("Tambrina", Region::Sicily, &[("RIP", 12, RoadTypes::Asphalt), ("MES", 37, RoadTypes::Asphalt)], false)
         ),
         (
             "MES",
-            City::new("Messina", &[("TAM", 37, RoadTypes::Asphalt), ("MIL", 16, RoadTypes::Asphalt), ("CAT", 92, RoadTypes::Highway), ("RCA", 13, RoadTypes::Ferry)], true)
+            City::new("Messina", Region::Sicily, &[("TAM", 37, RoadTypes::Asphalt), ("MIL", 16, RoadTypes::Asphalt), ("CAT", 92, RoadTypes::Highway), ("RCA", 13, RoadTypes::Ferry)], true)
         ),
         (
             "SOL",
-            City::new("Solunto", &[("TMI", 12, RoadTypes::Asphalt), ("PMO", 16, RoadTypes::Asphalt)], false)
+            City::new("Solunto", Region::Sicily, &[("TMI", 12, RoadTypes::Asphalt), ("PMO", 16, RoadTypes::Asphalt)], false)
         ),
         (
             "TMI",
             City::new(
                 "Termini Imerese",
+                Region::Sicily,
                 &[("SOL", 12, RoadTypes::Asphalt), ("MIL", 170, RoadTypes::Highway), ("CEF", 54, RoadTypes::Asphalt), ("PET", 61, RoadTypes::Asphalt)],
                 false
             )
@@ -145,62 +156,67 @@ lazy_static! {
             "CEF",
             City::new(
                 "Cefalu",
+                Region::Sicily,
                 &[("PET", 60, RoadTypes::Asphalt), ("CAS", 7, RoadTypes::Cobblestone), ("TMI", 54, RoadTypes::Asphalt), ("CAR", 39, RoadTypes::Asphalt)],
                 false
             )
         ),
         (
             "CAS",
-            City::new("Castelbuono", &[("PET", 8, RoadTypes::Cobblestone), ("CEF", 7, RoadTypes::Cobblestone)], false)
+            City::new("Castelbuono", Region::Sicily, &[("PET", 8, RoadTypes::Cobblestone), ("CEF", 7, RoadTypes::Cobblestone)], false)
         ),
         (
             "PET",
             City::new(
                 "Petralia Sottana",
+                Region::Sicily,
                 &[("CEF", 60, RoadTypes::Asphalt), ("CAS", 8, RoadTypes::Cobblestone), ("TMI", 61, RoadTypes::Asphalt), ("NIC", 18, RoadTypes::Gravel)],
                 false
             )
         ),
         (
             "NIC",
-            City::new("Nicosia", &[("PET", 18, RoadTypes::Gravel), ("ENN", 29, RoadTypes::Gravel)], false)
+            City::new("Nicosia", Region::Sicily, &[("PET", 18, RoadTypes::Gravel), ("ENN", 29, RoadTypes::Gravel)], false)
         ),
         (
             "CAR",
-            City::new("Caronia", &[("CEF", 39, RoadTypes::Asphalt), ("PTI", 22, RoadTypes::Asphalt)], false)
+            City::new("Caronia", Region::Sicily, &[("CEF", 39, RoadTypes::Asphalt), ("PTI", 22, RoadTypes::Asphalt)], false)
         ),
         (
             "PTI",
-            City::new("Patti", &[("CAR", 22, RoadTypes::Asphalt), ("CRL", 18, RoadTypes::Asphalt), ("BAR", 17, RoadTypes::Asphalt)], false)
+            City::new("Patti", Region::Sicily, &[("CAR", 22, RoadTypes::Asphalt), ("CRL", 18, RoadTypes::Asphalt), ("BAR", 17, RoadTypes::Asphalt)], false)
         ),
         (
             "BAR",
             City::new(
                 "Barcelona Pozo di Goto",
+                Region::Sicily,
                 &[("MIL", 19, RoadTypes::Asphalt), ("CRL", 14, RoadTypes::Asphalt), ("PTI", 17, RoadTypes::Asphalt)],
                 false
             )
         ),
         (
             "MIL",
-            City::new("Milazzo", &[("BAR", 19, RoadTypes::Asphalt), ("MES", 16, RoadTypes::Asphalt), ("TMI", 170, RoadTypes::Highway)], false)
+            City::new("Milazzo", Region::Sicily, &[("BAR", 19, RoadTypes::Asphalt), ("MES", 16, RoadTypes::Asphalt), ("TMI", 170, RoadTypes::Highway)], false)
         ),
         (
             "CRL",
             City::new(
                 "Castoreale",
+                    Region::Sicily,
                 &[("RAN", 33, RoadTypes::Gravel), ("PTI", 18, RoadTypes::Asphalt), ("BAR", 14, RoadTypes::Asphalt)],
                 false
             )
         ),
         (
             "RAN",
-            City::new("Randanzzo", &[("ADR", 48, RoadTypes::Gravel), ("CRL", 33, RoadTypes::Gravel)], false)
+            City::new("Randanzzo", Region::Sicily, &[("ADR", 48, RoadTypes::Gravel), ("CRL", 33, RoadTypes::Gravel)], false)
         ),
         (
             "ENN",
             City::new(
                 "Enna",
+                Region::Sicily,
                 &[
                     ("ADR", 28, RoadTypes::Cobblestone),
                     ("CAL", 50, RoadTypes::Cobblestone),
@@ -213,12 +229,13 @@ lazy_static! {
         ),
         (
             "ADR",
-            City::new("Adrano", &[("PAT", 9, RoadTypes::Cobblestone), ("RAN", 48, RoadTypes::Gravel), ("ENN", 28, RoadTypes::Cobblestone)], false)
+            City::new("Adrano", Region::Sicily, &[("PAT", 9, RoadTypes::Cobblestone), ("RAN", 48, RoadTypes::Gravel), ("ENN", 28, RoadTypes::Cobblestone)], false)
         ),
         (
             "LIC",
             City::new(
                 "Licata",
+                Region::Sicily,
                 &[("GLA", 34, RoadTypes::Asphalt), ("CTN", 54, RoadTypes::Asphalt), ("CAN", 34, RoadTypes::Asphalt), ("AGR", 54, RoadTypes::Asphalt)],
                 false
             )
@@ -227,46 +244,49 @@ lazy_static! {
             "CTN",
             City::new(
                 "Caltanissetta",
+                Region::Sicily,
                 &[("ENN", 24, RoadTypes::Asphalt), ("LIC", 54, RoadTypes::Asphalt), ("CAN", 34, RoadTypes::Asphalt), ("MIS", 93, RoadTypes::Cobblestone)],
                 true
             )
         ),
         (
             "CAN",
-            City::new("Canicatti", &[("AGR", 28, RoadTypes::Asphalt), ("CTN", 34, RoadTypes::Asphalt), ("LIC", 34, RoadTypes::Asphalt)], false)
+            City::new("Canicatti", Region::Sicily, &[("AGR", 28, RoadTypes::Asphalt), ("CTN", 34, RoadTypes::Asphalt), ("LIC", 34, RoadTypes::Asphalt)], false)
         ),
         (
             "AGR",
             City::new(
                 "Agrigento",
+                Region::Sicily,
                 &[("CAN", 28, RoadTypes::Asphalt), ("LIC", 54, RoadTypes::Asphalt), ("POR", 14, RoadTypes::Asphalt), ("RIB", 36, RoadTypes::Cobblestone)],
                 true
             )
         ),
         (
             "POR",
-            City::new("Porto Empedocle", &[("AGR", 14, RoadTypes::Asphalt), ("SCI", 35, RoadTypes::Asphalt)], false)
+            City::new("Porto Empedocle", Region::Sicily, &[("AGR", 14, RoadTypes::Asphalt), ("SCI", 35, RoadTypes::Asphalt)], false)
         ),
         (
             "SCI",
-            City::new("Sciacca", &[("MEN", 23, RoadTypes::Asphalt), ("POR", 35, RoadTypes::Asphalt)], false)
+            City::new("Sciacca", Region::Sicily, &[("MEN", 23, RoadTypes::Asphalt), ("POR", 35, RoadTypes::Asphalt)], false)
         ),
         (
             "RIB",
-            City::new("Ribera", &[("AGR", 36, RoadTypes::Cobblestone), ("COR", 39, RoadTypes::Gravel)], false)
+            City::new("Ribera", Region::Sicily, &[("AGR", 36, RoadTypes::Cobblestone), ("COR", 39, RoadTypes::Gravel)], false)
         ),
         (
             "COR",
-            City::new("Corleone", &[("MIS", 40, RoadTypes::Cobblestone), ("RIB", 39, RoadTypes::Gravel), ("PAR", 63, RoadTypes::Gravel)], false)
+            City::new("Corleone", Region::Sicily, &[("MIS", 40, RoadTypes::Cobblestone), ("RIB", 39, RoadTypes::Gravel), ("PAR", 63, RoadTypes::Gravel)], false)
         ),
         (
             "MIS",
-            City::new("Misilmeri", &[("CTN", 93, RoadTypes::Cobblestone), ("PMO", 21, RoadTypes::Cobblestone), ("COR", 40, RoadTypes::Cobblestone)], false)
+            City::new("Misilmeri", Region::Sicily, &[("CTN", 93, RoadTypes::Cobblestone), ("PMO", 21, RoadTypes::Cobblestone), ("COR", 40, RoadTypes::Cobblestone)], false)
         ),
         (
             "PMO",
             City::new(
                 "Palermo",
+                Region::Sicily,
                 &[
                     ("SOL", 16, RoadTypes::Asphalt),
                     ("MIS", 21, RoadTypes::Cobblestone),
@@ -279,16 +299,17 @@ lazy_static! {
         ),
         (
             "MON",
-            City::new("Monreale", &[("PMO", 18, RoadTypes::Asphalt), ("ALC", 28, RoadTypes::Asphalt), ("MND", 50, RoadTypes::Asphalt)], false)
+            City::new("Monreale", Region::Sicily, &[("PMO", 18, RoadTypes::Asphalt), ("ALC", 28, RoadTypes::Asphalt), ("MND", 50, RoadTypes::Asphalt)], false)
         ),
         (
             "MND",
-            City::new("Mondello", &[("PMO", 14, RoadTypes::Asphalt), ("ALC", 39, RoadTypes::Asphalt), ("MON", 50, RoadTypes::Asphalt)], false)
+            City::new("Mondello", Region::Sicily, &[("PMO", 14, RoadTypes::Asphalt), ("ALC", 39, RoadTypes::Asphalt), ("MON", 50, RoadTypes::Asphalt)], false)
         ),
         (
             "ALC",
             City::new(
                 "Alcamo",
+                Region::Sicily,
                 &[
                     ("PMO", 46, RoadTypes::Asphalt),
                     ("MON", 28, RoadTypes::Asphalt),
@@ -307,6 +328,7 @@ lazy_static! {
             "PAR",
             City::new(
                 "Partanna",
+                Region::Sicily,
                 &[
                     ("COR", 63, RoadTypes::Gravel),
                     ("ALC", 41, RoadTypes::Cobblestone),
@@ -322,6 +344,7 @@ lazy_static! {
             "SAL",
             City::new(
                 "Salemi",
+                Region::Sicily,
                 &[
                     ("CVR", 33, RoadTypes::Cobblestone),
                     ("PAR", 26, RoadTypes::Cobblestone),
@@ -336,6 +359,7 @@ lazy_static! {
             "CFI",
             City::new(
                 "Caltafimi",
+                Region::Sicily,
                 &[
                     ("SEG", 14, RoadTypes::Cobblestone),
                     ("ALC", 20, RoadTypes::Cobblestone),
@@ -350,6 +374,7 @@ lazy_static! {
             "SEG",
             City::new(
                 "Segesta",
+                Region::Sicily,
                 &[
                     ("TRA", 25, RoadTypes::Cobblestone),
                     ("CFI", 14, RoadTypes::Cobblestone),
@@ -363,20 +388,21 @@ lazy_static! {
         ),
         (
             "TRA",
-            City::new("Trapani", &[("MRS", 38, RoadTypes::Asphalt), ("SEG", 25, RoadTypes::Cobblestone), ("ERI", 15, RoadTypes::Asphalt)], true)
+            City::new("Trapani", Region::Sicily, &[("MRS", 38, RoadTypes::Asphalt), ("SEG", 25, RoadTypes::Cobblestone), ("ERI", 15, RoadTypes::Asphalt)], true)
         ),
         (
             "ERI",
-            City::new("Erice", &[("TRA", 15, RoadTypes::Asphalt), ("CSV", 23, RoadTypes::Asphalt), ("CST", 22, RoadTypes::Asphalt)], false)
+            City::new("Erice", Region::Sicily, &[("TRA", 15, RoadTypes::Asphalt), ("CSV", 23, RoadTypes::Asphalt), ("CST", 22, RoadTypes::Asphalt)], false)
         ),
         (
             "CSV",
-            City::new("Capo San  Vito", &[("ERI", 23, RoadTypes::Asphalt), ("CST", 19, RoadTypes::Asphalt)], false)
+            City::new("Capo San  Vito", Region::Sicily, &[("ERI", 23, RoadTypes::Asphalt), ("CST", 19, RoadTypes::Asphalt)], false)
         ),
         (
             "CST",
             City::new(
                 "Castallammare",
+                Region::Sicily,
                 &[
                     ("ERI", 22, RoadTypes::Asphalt),
                     ("CSV", 19, RoadTypes::Asphalt),
@@ -387,12 +413,13 @@ lazy_static! {
         ),
         (
             "MRS",
-            City::new("Marsala", &[("TRA", 38, RoadTypes::Asphalt), ("MDV", 19, RoadTypes::Asphalt)], false)
+            City::new("Marsala", Region::Sicily, &[("TRA", 38, RoadTypes::Asphalt), ("MDV", 19, RoadTypes::Asphalt)], false)
         ),
         (
             "CVR",
             City::new(
                 "Castelvetrano",
+                Region::Sicily,
                 &[
                     ("MDV", 28, RoadTypes::Asphalt),
                     ("MAR", 29, RoadTypes::Asphalt),
@@ -410,6 +437,7 @@ lazy_static! {
             "MDV",
             City::new(
                 "Mazara del Vallo",
+                Region::Sicily,
                 &[("CVR", 28, RoadTypes::Asphalt), ("MRS", 42, RoadTypes::Asphalt), ("MEN", 51, RoadTypes::Asphalt), ("MAR", 42, RoadTypes::Asphalt)],
                 false
             )
@@ -418,6 +446,7 @@ lazy_static! {
             "MEN",
             City::new(
                 "Menfi",
+                Region::Sicily,
                 &[("SCI", 23, RoadTypes::Asphalt), ("CVR", 31, RoadTypes::Asphalt), ("MDV", 51, RoadTypes::Asphalt), ("MAR", 21, RoadTypes::Asphalt)],
                 false
             )
@@ -426,53 +455,52 @@ lazy_static! {
             "MAR",
             City::new(
                 "Marinella",
+                Region::Sicily,
                 &[("MEN", 21, RoadTypes::Asphalt), ("CVR", 29, RoadTypes::Asphalt), ("MDV", 42, RoadTypes::Asphalt), ("SEL", 15, RoadTypes::Gravel)],
                 false
             )
         ),
-        ("SEL", City::new("Selinunte", &[("MAR", 15, RoadTypes::Gravel)], false)),
+        ("SEL", City::new("Selinunte", Region::Sicily, &[("MAR", 15, RoadTypes::Gravel)], false)),
 
         //Calabria starts here
 
-        ("RCA", City::new("Reggio Calabria", &[("MEL", 20, RoadTypes::Asphalt), ("SCL", 14, RoadTypes::Asphalt), ("MES", 13, RoadTypes::Ferry)], true)),
-        ("SCL", City::new("Scilla", &[("RCA", 14, RoadTypes::Asphalt), ("PMI", 22, RoadTypes::Asphalt)], false)),
-        ("PMI", City::new("Palmi", &[("SCL", 22, RoadTypes::Asphalt), ("DNV", 11, RoadTypes::Gravel), ("GIT", 17, RoadTypes::Asphalt)], false)),
-        ("GIT", City::new("Gioia Tauro", &[("PMI", 17, RoadTypes::Asphalt), ("CIT", 19, RoadTypes::Cobblestone), ("TRO", 27, RoadTypes::Asphalt)], false)),
-        ("CIT", City::new("Cittanova", &[("GIT", 19, RoadTypes::Cobblestone), ("SID", 14, RoadTypes::Cobblestone), ("DIN", 18, RoadTypes::Gravel)], false)),
-        ("SID", City::new("Siderno", &[("CIT", 14, RoadTypes::Cobblestone), ("BOV", 9, RoadTypes::Asphalt), ("CAU", 29, RoadTypes::Asphalt)], false)),
-        ("BOV", City::new("Bovalino", &[("SID", 9, RoadTypes::Asphalt), ("AFR", 12, RoadTypes::Asphalt), ("DNV", 21, RoadTypes::Gravel)], false)),
-        ("DNF", City::new("Delianuova", &[("PMI", 11, RoadTypes::Gravel), ("BOV", 21, RoadTypes::Gravel)], false)),
-        ("AFR", City::new("Africo", &[("BOV", 12, RoadTypes::Asphalt), ("MEL", 43, RoadTypes::Asphalt)], false)),
-        ("MEL", City::new("Melito", &[("RCA", 20, RoadTypes::Asphalt), ("AFR", 43, RoadTypes::Asphalt)], false)),
-        ("TRO", City::new("Tropea", &[("VVA", 17, RoadTypes::Asphalt), ("GIT", 27, RoadTypes::Asphalt)], false)),
-        ("VVA", City::new("Vibo Valentia", &[("TRO", 17, RoadTypes::Asphalt), ("PIZ", 12, RoadTypes::Asphalt), ("DIN", 20, RoadTypes::Gravel), ("SOV", 38, RoadTypes::Cobblestone)], true)),
-        ("PIZ", City::new("Pizzo", &[("VVA", 12, RoadTypes::Asphalt), ("CUR", 12, RoadTypes::Asphalt)], false)),
-        ("DIN", City::new("Dinami", &[("VVA", 20, RoadTypes::Gravel), ("CIT",18, RoadTypes::Gravel)], false)),
-        ("CAU", City::new("Caulonia", &[("SID", 29, RoadTypes::Asphalt), ("SOV", 35, RoadTypes::Asphalt)], false)),
-        ("SOV", City::new("Soveranto", &[("CAU", 35, RoadTypes::Asphalt), ("VVA", 38, RoadTypes::Cobblestone), ("CUR", 17, RoadTypes::Asphalt), ("CNZ", 21, RoadTypes::Asphalt)], false)),
-
-        ("CUR", City::new("Curinga", &[("PIZ", 12, RoadTypes::Asphalt), ("SOV", 17, RoadTypes::Asphalt), ("FAL", 19, RoadTypes::Asphalt), ("CNZ", 21, RoadTypes::Asphalt)], false)),
-        ("CNZ", City::new("Catanzaro", &[("SOV", 21, RoadTypes::Asphalt), ("CUR", 21, RoadTypes::Asphalt), ("BOT", 20, RoadTypes::Highway), ("CUT", 31, RoadTypes::Asphalt)], true)),
-        ("BOT", City::new("Botricello", &[("CNZ", 20, RoadTypes::Highway), ("CRO", 25, RoadTypes::Highway)], false)),
-        ("CRO", City::new("Crotone", &[("BOT", 25, RoadTypes::Highway), ("CUT", 13, RoadTypes::Asphalt), ("CMA", 31, RoadTypes::Highway)], true)),
-        ("CMA", City::new("Ciro Marina", &[("CRO", 31, RoadTypes::Highway), ("ROS", 41, RoadTypes::Highway), ("STR", 8, RoadTypes::Asphalt)], false)),
-        ("ROS", City::new("Rossano", &[("CMA", 41, RoadTypes::Highway), ("LBC", 15, RoadTypes::Asphalt), ("COS", 38, RoadTypes::Cobblestone), ("SIB", 17, RoadTypes::Asphalt)], false)),
-        ("STR", City::new("Strongoli", &[("CMA", 8, RoadTypes::Asphalt), ("LBC", 27, RoadTypes::Cobblestone), ("CUT", 16, RoadTypes::Cobblestone)], false)),
-        ("CUT", City::new("Cutro", &[("CRO", 13, RoadTypes::Asphalt), ("CNZ", 31, RoadTypes::Asphalt), ("STR", 16, RoadTypes::Asphalt), ("CTE", 19, RoadTypes::Gravel)], false)),
-        ("LBC", City::new("Longobucco", &[("ROS", 15, RoadTypes::Asphalt), ("STR", 27, RoadTypes::Cobblestone), ("ACR", 16, RoadTypes::Gravel)], false)),
-        ("CTE", City::new("Cotronei", &[("CUT", 19, RoadTypes::Gravel), ("ROG", 22, RoadTypes::Gravel)], false)),
-        ("ROG", City::new("Rogliano", &[("CTE", 22, RoadTypes:: Gravel), ("COS", 17, RoadTypes::Cobblestone)], false)),
-        ("ACR", City::new("Acri", &[("LBC", 16, RoadTypes::Gravel), ("COS", 28, RoadTypes::Gravel)], false)),
-        ("COS", City::new("Cosenza", &[("GRI", 18, RoadTypes::Asphalt), ("ROG", 17, RoadTypes::Cobblestone), ("ACR", 28, RoadTypes::Gravel), ("PAO", 17, RoadTypes::Gravel), ("ALT", 32, RoadTypes::Cobblestone), ("ROS", 38, RoadTypes::Cobblestone)], true)),
-        ("GRI", City::new("Grimaldi", &[("COS", 18, RoadTypes::Asphalt), ("FAL", 22, RoadTypes::Asphalt)], false)),
-        ("FAL", City::new("Falerna", &[("CUR", 19, RoadTypes::Asphalt), ("GRI", 22, RoadTypes::Asphalt), ("PAO", 47, RoadTypes::Highway)], false)),
-        ("PAO", City::new("Paolo", &[("FAL", 47, RoadTypes::Highway), ("SCA", 46, RoadTypes::Highway), ("COS", 17, RoadTypes::Gravel)], false)),
-        ("SCA", City::new("Scalea", &[("PAO", 46, RoadTypes::Highway)], false)),
-
-        ("CVL", City::new("Castrovillari", &[("SCA", 31, RoadTypes::Gravel), ("ALT", 19, RoadTypes::Gravel), ("ORI", 26, RoadTypes::Cobblestone)], false)),
-        ("ORI", City::new("Oriolo", &[("RTO", 14, RoadTypes::Cobblestone), ("CVL", 26, RoadTypes::Cobblestone)], false)),
-        ("RTO", City::new("Roseto", &[("ORI", 14, RoadTypes::Cobblestone), ("SIB", 27, RoadTypes::Asphalt)], false)),
-        ("SIB", City::new("Sibari", &[("ROS", 17, RoadTypes::Asphalt), ("RTO", 27, RoadTypes::Asphalt), ("ALT", 23, RoadTypes::Gravel)], false)),
-        ("ALT", City::new("Altomonte", &[("COS", 32, RoadTypes::Cobblestone), ("SIB", 23, RoadTypes::Gravel), ("CVL", 19, RoadTypes::Gravel)], false))
+        ("RCA", City::new("Reggio Calabria", Region::Calabria, &[("MEL", 20, RoadTypes::Asphalt), ("SCL", 14, RoadTypes::Asphalt), ("MES", 13, RoadTypes::Ferry)], true)),
+        ("SCL", City::new("Scilla", Region::Calabria, &[("RCA", 14, RoadTypes::Asphalt), ("PMI", 22, RoadTypes::Asphalt)], false)),
+        ("PMI", City::new("Palmi", Region::Calabria, &[("SCL", 22, RoadTypes::Asphalt), ("DNV", 11, RoadTypes::Gravel), ("GIT", 17, RoadTypes::Asphalt)], false)),
+        ("GIT", City::new("Gioia Tauro", Region::Calabria, &[("PMI", 17, RoadTypes::Asphalt), ("CIT", 19, RoadTypes::Cobblestone), ("TRO", 27, RoadTypes::Asphalt)], false)),
+        ("CIT", City::new("Cittanova", Region::Calabria, &[("GIT", 19, RoadTypes::Cobblestone), ("SID", 14, RoadTypes::Cobblestone), ("DIN", 18, RoadTypes::Gravel)], false)),
+        ("SID", City::new("Siderno", Region::Calabria, &[("CIT", 14, RoadTypes::Cobblestone), ("BOV", 9, RoadTypes::Asphalt), ("CAU", 29, RoadTypes::Asphalt)], false)),
+        ("BOV", City::new("Bovalino", Region::Calabria, &[("SID", 9, RoadTypes::Asphalt), ("AFR", 12, RoadTypes::Asphalt), ("DNV", 21, RoadTypes::Gravel)], false)),
+        ("DNV", City::new("Delianuova", Region::Calabria, &[("PMI", 11, RoadTypes::Gravel), ("BOV", 21, RoadTypes::Gravel)], false)),
+        ("AFR", City::new("Africo", Region::Calabria, &[("BOV", 12, RoadTypes::Asphalt), ("MEL", 43, RoadTypes::Asphalt)], false)),
+        ("MEL", City::new("Melito", Region::Calabria, &[("RCA", 20, RoadTypes::Asphalt), ("AFR", 43, RoadTypes::Asphalt)], false)),
+        ("TRO", City::new("Tropea", Region::Calabria, &[("VVA", 17, RoadTypes::Asphalt), ("GIT", 27, RoadTypes::Asphalt)], false)),
+        ("VVA", City::new("Vibo Valentia", Region::Calabria, &[("TRO", 17, RoadTypes::Asphalt), ("PIZ", 12, RoadTypes::Asphalt), ("DIN", 20, RoadTypes::Gravel), ("SOV", 38, RoadTypes::Cobblestone)], true)),
+        ("PIZ", City::new("Pizzo", Region::Calabria, &[("VVA", 12, RoadTypes::Asphalt), ("CUR", 12, RoadTypes::Asphalt)], false)),
+        ("DIN", City::new("Dinami", Region::Calabria, &[("VVA", 20, RoadTypes::Gravel), ("CIT",18, RoadTypes::Gravel)], false)),
+        ("CAU", City::new("Caulonia", Region::Calabria, &[("SID", 29, RoadTypes::Asphalt), ("SOV", 35, RoadTypes::Asphalt)], false)),
+        ("SOV", City::new("Soveranto", Region::Calabria, &[("CAU", 35, RoadTypes::Asphalt), ("VVA", 38, RoadTypes::Cobblestone), ("CUR", 17, RoadTypes::Asphalt), ("CNZ", 21, RoadTypes::Asphalt)], false)),
+        ("CUR", City::new("Curinga", Region::Calabria, &[("PIZ", 12, RoadTypes::Asphalt), ("SOV", 17, RoadTypes::Asphalt), ("FAL", 19, RoadTypes::Asphalt), ("CNZ", 21, RoadTypes::Asphalt)], false)),
+        ("CNZ", City::new("Catanzaro", Region::Calabria, &[("SOV", 21, RoadTypes::Asphalt), ("CUR", 21, RoadTypes::Asphalt), ("BOT", 20, RoadTypes::Highway), ("CUT", 31, RoadTypes::Asphalt)], true)),
+        ("BOT", City::new("Botricello", Region::Calabria, &[("CNZ", 20, RoadTypes::Highway), ("CRO", 25, RoadTypes::Highway)], false)),
+        ("CRO", City::new("Crotone", Region::Calabria, &[("BOT", 25, RoadTypes::Highway), ("CUT", 13, RoadTypes::Asphalt), ("CMA", 31, RoadTypes::Highway)], true)),
+        ("CMA", City::new("Ciro Marina", Region::Calabria, &[("CRO", 31, RoadTypes::Highway), ("ROS", 41, RoadTypes::Highway), ("STR", 8, RoadTypes::Asphalt)], false)),
+        ("ROS", City::new("Rossano", Region::Calabria, &[("CMA", 41, RoadTypes::Highway), ("LBC", 15, RoadTypes::Asphalt), ("COS", 38, RoadTypes::Cobblestone), ("SIB", 17, RoadTypes::Asphalt)], false)),
+        ("STR", City::new("Strongoli", Region::Calabria, &[("CMA", 8, RoadTypes::Asphalt), ("LBC", 27, RoadTypes::Cobblestone), ("CUT", 16, RoadTypes::Cobblestone)], false)),
+        ("CUT", City::new("Cutro", Region::Calabria, &[("CRO", 13, RoadTypes::Asphalt), ("CNZ", 31, RoadTypes::Asphalt), ("STR", 16, RoadTypes::Asphalt), ("CTE", 19, RoadTypes::Gravel)], false)),
+        ("LBC", City::new("Longobucco", Region::Calabria, &[("ROS", 15, RoadTypes::Asphalt), ("STR", 27, RoadTypes::Cobblestone), ("ACR", 16, RoadTypes::Gravel)], false)),
+        ("CTE", City::new("Cotronei", Region::Calabria, &[("CUT", 19, RoadTypes::Gravel), ("ROG", 22, RoadTypes::Gravel)], false)),
+        ("ROG", City::new("Rogliano", Region::Calabria, &[("CTE", 22, RoadTypes:: Gravel), ("COS", 17, RoadTypes::Cobblestone)], false)),
+        ("ACR", City::new("Acri", Region::Calabria, &[("LBC", 16, RoadTypes::Gravel), ("COS", 28, RoadTypes::Gravel)], false)),
+        ("COS", City::new("Cosenza", Region::Calabria, &[("GRI", 18, RoadTypes::Asphalt), ("ROG", 17, RoadTypes::Cobblestone), ("ACR", 28, RoadTypes::Gravel), ("PAO", 17, RoadTypes::Gravel), ("ALT", 32, RoadTypes::Cobblestone), ("ROS", 38, RoadTypes::Cobblestone)], true)),
+        ("GRI", City::new("Grimaldi", Region::Calabria, &[("COS", 18, RoadTypes::Asphalt), ("FAL", 22, RoadTypes::Asphalt)], false)),
+        ("FAL", City::new("Falerna", Region::Calabria, &[("CUR", 19, RoadTypes::Asphalt), ("GRI", 22, RoadTypes::Asphalt), ("PAO", 47, RoadTypes::Highway)], false)),
+        ("PAO", City::new("Paolo", Region::Calabria, &[("FAL", 47, RoadTypes::Highway), ("SCA", 46, RoadTypes::Highway), ("COS", 17, RoadTypes::Gravel)], false)),
+        ("SCA", City::new("Scalea", Region::Calabria, &[("PAO", 46, RoadTypes::Highway)], false)),
+        ("CVL", City::new("Castrovillari", Region::Calabria, &[("SCA", 31, RoadTypes::Gravel), ("ALT", 19, RoadTypes::Gravel), ("ORI", 26, RoadTypes::Cobblestone)], false)),
+        ("ORI", City::new("Oriolo", Region::Calabria, &[("RTO", 14, RoadTypes::Cobblestone), ("CVL", 26, RoadTypes::Cobblestone)], false)),
+        ("RTO", City::new("Roseto", Region::Calabria, &[("ORI", 14, RoadTypes::Cobblestone), ("SIB", 27, RoadTypes::Asphalt)], false)),
+        ("SIB", City::new("Sibari", Region::Calabria, &[("ROS", 17, RoadTypes::Asphalt), ("RTO", 27, RoadTypes::Asphalt), ("ALT", 23, RoadTypes::Gravel)], false)),
+        ("ALT", City::new("Altomonte", Region::Calabria, &[("COS", 32, RoadTypes::Cobblestone), ("SIB", 23, RoadTypes::Gravel), ("CVL", 19, RoadTypes::Gravel)], false))
     ]);
 }

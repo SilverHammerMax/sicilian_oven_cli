@@ -1,4 +1,4 @@
-#![deny(clippy::unwrap_used, clippy::expect_used)]
+#![deny(clippy::unwrap_used)]
 #![allow(clippy::match_overlapping_arm)]
 
 use crate::cities::CITIES;
@@ -19,7 +19,7 @@ fn main() {
 }
 
 fn challenge_engine(challenge: &mut Challenge) {
-    helper_functions::challenge_prompt(&challenge);
+    helper_functions::challenge_prompt(challenge);
     let selection = dialoguer::Confirm::new()
         .with_prompt("Do you accept this challenge?")
         .interact()
@@ -29,11 +29,11 @@ fn challenge_engine(challenge: &mut Challenge) {
     }
     let mut car = challenge
         .get_car()
-        .unwrap_or_else(|| helper_functions::choose_car());
+        .unwrap_or_else(helper_functions::choose_car);
     let mut missing_cities = challenge.get_cities().to_vec();
     let start_city = match challenge.get_start_city() {
         challenge::Location::City(code) => code,
-        challenge::Location::Region(region) => helper_functions::choose_major_city(Some(&region)),
+        challenge::Location::Region(region) => helper_functions::choose_major_city(Some(region)),
         challenge::Location::Any => helper_functions::choose_major_city(None),
     };
     let mut city_code = start_city;
@@ -63,7 +63,7 @@ fn challenge_engine(challenge: &mut Challenge) {
         );
         println!();
 
-        if path.len() > 0 {
+        if !path.is_empty() {
             println!(
                 "Your current list of missing cities is: {:?}",
                 missing_cities

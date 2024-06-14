@@ -5,7 +5,7 @@ use strum::IntoEnumIterator;
 pub fn choose_car() -> car::Car {
     let mut car_names = Vec::new();
     for car in car::CarType::iter() {
-        car_names.push(format!("{}", car.get_name()));
+        car_names.push(car.get_name().to_string());
     }
     car_names.pop();
     let selection = dialoguer::Select::new()
@@ -47,7 +47,7 @@ pub fn choose_major_city(region: Option<&city::Region>) -> &'static str {
         major_cities.push(cities::CITIES.get(code).expect("Invalid City Code"));
     }
 
-    major_cities.retain(|x| Some(x.get_region()) == region || region == None);
+    major_cities.retain(|x| Some(x.get_region()) == region || region.is_none());
     let major_names: Vec<String> = major_cities
         .iter()
         .map(|x| x.get_name().to_owned())

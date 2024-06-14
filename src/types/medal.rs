@@ -1,6 +1,6 @@
 use std::fmt::{Display, Formatter};
 
-#[derive(Debug)]
+#[derive(Clone)]
 pub enum Medal {
     None,
     Bronze,

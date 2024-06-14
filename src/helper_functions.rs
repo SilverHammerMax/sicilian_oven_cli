@@ -23,15 +23,13 @@ pub fn choose_car() -> car::Car {
     }
 }
 
-pub fn choose_challenge(
-    medals: &HashMap<challenge::Challenge, medal::Medal>,
-) -> challenge::Challenge {
+pub fn choose_challenge() -> Challenge {
     let mut challenge_names = Vec::new();
-    for challenge in challenge::Challenge::iter() {
+    for challenge in challenge::CHALLENGES {
         challenge_names.push(format!(
             "{} {}",
             challenge.get_name(),
-            medals.get(&challenge).expect("Challenge Not Found")
+            challenge.get_medal()
         ));
     }
     let selection = dialoguer::Select::new()
@@ -40,14 +38,7 @@ pub fn choose_challenge(
         .interact()
         .expect("Prompt Failed");
 
-    match selection {
-        0 => challenge::Challenge::RagusanRide,
-        1 => challenge::Challenge::BigCarBigCities,
-        2 => challenge::Challenge::ARideAroundMountEtna,
-        3 => challenge::Challenge::TheGodfather,
-        4 => challenge::Challenge::FreePlay,
-        _ => panic!("Fix Added Challenge!"),
-    }
+    challenge::CHALLENGES[selection].clone()
 }
 
 pub fn choose_major_city(region: Option<&city::Region>) -> &'static str {
@@ -84,8 +75,8 @@ pub fn challenge_prompt(challenge: &challenge::Challenge) {
     }
     println!();
 
-    let start_city = challenge.get_starting_city();
-    let end_city = challenge.get_ending_city();
+    let start_city = challenge.get_start_city();
+    let end_city = challenge.get_end_city();
 
     match start_city {
         challenge::Location::City(code) => println!(
@@ -101,7 +92,7 @@ pub fn challenge_prompt(challenge: &challenge::Challenge) {
 
     match end_city {
         challenge::Location::City(code) => println!(
-            "You will start in {}.",
+            "You will end in {}.",
             cities::CITIES
                 .get(code)
                 .expect("Invalid City Code")
@@ -119,19 +110,11 @@ pub fn challenge_prompt(challenge: &challenge::Challenge) {
     }
 
     println!();
-    if challenge != &challenge::Challenge::FreePlay {
-        let author_medal = constants::MEDAL_CUTOFFS
-            .get(&challenge)
-            .expect("Invalid Challenge")[0];
-        let gold_medal = constants::MEDAL_CUTOFFS
-            .get(&challenge)
-            .expect("Invalid Challenge")[1];
-        let silver_medal = constants::MEDAL_CUTOFFS
-            .get(&challenge)
-            .expect("Invalid Challenge")[2];
-        let bronze_medal = constants::MEDAL_CUTOFFS
-            .get(&challenge)
-            .expect("Invalid Challenge")[3];
+    if challenge.get_name() != "Free Play" {
+        let author_medal = challenge.get_medal_cutoff(0);
+        let gold_medal = challenge.get_medal_cutoff(1);
+        let silver_medal = challenge.get_medal_cutoff(2);
+        let bronze_medal = challenge.get_medal_cutoff(3);
 
         println!(
             "Author: {} hours, {} minutes",

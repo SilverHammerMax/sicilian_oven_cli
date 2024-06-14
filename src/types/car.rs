@@ -1,6 +1,6 @@
 use strum;
 
-#[derive(strum::EnumIter)]
+#[derive(Clone, strum::EnumIter)]
 pub enum CarType {
     Lancia,
     Maserati,
@@ -9,6 +9,7 @@ pub enum CarType {
     ModifiedLancia,
 }
 
+#[derive(Clone)]
 pub struct Car {
     car_type: CarType,
     fuel_level: f64,
@@ -25,7 +26,7 @@ impl CarType {
         }
     }
 
-    pub fn get_tank_size(&self) -> f64 {
+    pub const fn get_tank_size(&self) -> f64 {
         match self {
             CarType::Lancia => 26.0,
             CarType::Maserati => 34.0,
@@ -57,7 +58,7 @@ impl CarType {
 }
 
 impl Car {
-    pub fn new(car_type: CarType) -> Car {
+    pub const fn new(car_type: CarType) -> Car {
         Car {
             fuel_level: car_type.get_tank_size(),
             car_type,

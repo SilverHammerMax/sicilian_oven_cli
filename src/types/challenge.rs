@@ -1,114 +1,72 @@
-use crate::types::medal::Medal;
 use crate::types::*;
-use strum;
 
-#[derive(PartialEq, Eq)]
+#[derive(PartialEq, Eq, Clone)]
 pub enum Location {
     City(&'static str),
     Region(city::Region),
     Any
 }
 
-#[derive(strum::EnumIter, PartialEq, Eq, Hash, Copy, Clone)]
-pub enum Challenge {
-    RagusanRide,
-    BigCarBigCities,
-    ARideAroundMountEtna,
-    TheGodfather,
-    FreePlay,
+#[derive(Clone)]
+pub struct Challenge {
+    name: &'static str,
+    car: Option<car::Car>,
+    cities: &'static [&'static str],
+    start_city: Location,
+    end_city: Location,
+    medal_cutoffs: [i32; 4],
+    medal: medal::Medal,
 }
 
+pub const CHALLENGES: [Challenge; 1] = [
+    Challenge::new("Ragusan Ride", Some(car::Car::new(car::CarType::Lancia)), &[
+        "RAG", "COM", "VIT", "MDR", "MOD", "POZ", "CAP", "NTO", "SIR", "GIA", "PAL", "FLO",
+        "AUG", "LEN",
+    ], Location::City("RAG"), Location::City("RAG"), [205, 220, 270, 330])
+];
+
 impl Challenge {
+    pub const fn new(name: &'static str, car: Option<car::Car>, cities: &'static [&'static str], start_city: Location, end_city: Location, medal_cutoffs: [i32; 4]) -> Challenge {
+        Challenge {
+            name,
+            car,
+            cities,
+            start_city,
+            end_city,
+            medal_cutoffs,
+            medal: medal::Medal::None,
+        }
+    }
+
     pub fn get_name(&self) -> &str {
-        match self {
-            Challenge::RagusanRide => "Ragusan Ride",
-            Challenge::BigCarBigCities => "Big Car, Big Cities",
-            Challenge::ARideAroundMountEtna => "A Ride Around Mount Etna",
-            Challenge::TheGodfather => "The Godfather",
-            Challenge::FreePlay => "Free Play",
-        }
+        self.name
     }
+
     pub fn get_car(&self) -> Option<car::Car> {
-        match self {
-            Challenge::RagusanRide => Some(car::Car::new(car::CarType::Lancia)),
-            Challenge::BigCarBigCities => Some(car::Car::new(car::CarType::Ferrari)),
-            Challenge::ARideAroundMountEtna => Some(car::Car::new(car::CarType::Maserati)),
-            Challenge::TheGodfather => Some(car::Car::new(car::CarType::ModifiedLancia)),
-            Challenge::FreePlay => None,
-        }
+        self.car.clone()
     }
 
-    pub fn get_cities(&self) -> Vec<&str> {
-        match self {
-            Challenge::RagusanRide => vec![
-                "RAG", "COM", "VIT", "MDR", "MOD", "POZ", "CAP", "NTO", "SIR", "GIA", "PAL", "FLO",
-                "AUG", "LEN",
-            ],
-            Challenge::BigCarBigCities => vec![
-                "RAG", "SIR", "CAT", "ENN", "CTN", "PMO", "TRA", "MES", "AGR",
-            ],
-            Challenge::ARideAroundMountEtna => vec![
-                "CAT", "GER", "PAT", "ADR", "RAN", "CRL", "PTI", "BAR", "MIL", "MES", "RIP", "TAM",
-                "ACI", "LEN", "NIC", "ENN",
-            ],
-            Challenge::TheGodfather => vec![
-                "COR", "SEL", "MAR", "CST", "PAR", "MEN", "SCI", "POR", "AGR", "RIB", "CAN", "LIC",
-            ],
-            Challenge::FreePlay => vec![],
-        }
+    pub fn get_cities(&self) -> &[&str] {
+        self.cities
     }
 
-    pub fn get_starting_city(&self) -> Location {
-        match self {
-            Challenge::RagusanRide => Location::City("RAG"),
-            Challenge::BigCarBigCities => Location::Region(city::Region::Sicily),
-            Challenge::ARideAroundMountEtna => Location::City("CAT"),
-            Challenge::TheGodfather => Location::City("COR"),
-            Challenge::FreePlay => Location::Any,
-        }
+    pub fn get_start_city(&self) -> &Location {
+        &self.start_city
     }
 
-    pub fn get_ending_city(&self) -> Location {
-        match self {
-            Challenge::RagusanRide => Location::City("RAG"),
-            Challenge::BigCarBigCities => Location::Region(city::Region::Sicily),
-            Challenge::ARideAroundMountEtna => Location::City("CAT"),
-            Challenge::TheGodfather => Location::City("COR"),
-            Challenge::FreePlay => Location::Any,
-        }
+    pub fn get_end_city(&self) -> &Location {
+        &self.end_city
     }
 
-    pub fn get_medal(&self, time: f64) -> Medal {
-        match self {
-            Challenge::RagusanRide => match time {
-                0.0..=205.0 => Medal::Author,
-                0.0..=220.0 => Medal::Gold,
-                0.0..=270.0 => Medal::Silver,
-                0.0..=330.0 => Medal::Bronze,
-                _ => Medal::None,
-            },
-            Challenge::BigCarBigCities => match time {
-                0.0..=310.0 => Medal::Author,
-                0.0..=325.0 => Medal::Gold,
-                0.0..=375.0 => Medal::Silver,
-                0.0..=475.0 => Medal::Bronze,
-                _ => Medal::None,
-            },
-            Challenge::ARideAroundMountEtna => match time {
-                0.0..=290.0 => Medal::Author,
-                0.0..=310.0 => Medal::Gold,
-                0.0..=335.0 => Medal::Silver,
-                0.0..=395.0 => Medal::Bronze,
-                _ => Medal::None,
-            },
-            Challenge::TheGodfather => match time {
-                0.0..=305.0 => Medal::Author,
-                0.0..=325.0 => Medal::Gold,
-                0.0..=370.0 => Medal::Silver,
-                0.0..=450.0 => Medal::Bronze,
-                _ => Medal::None,
-            },
-            Challenge::FreePlay => Medal::None,
-        }
+    pub fn get_medal_cutoff(&self, index: usize) -> i32 {
+        self.medal_cutoffs[index]
+    }
+
+    pub fn get_medal(&self) -> &medal::Medal {
+        &self.medal
+    }
+
+    pub fn set_medal(&mut self, medal: medal::Medal) {
+        self.medal = medal;
     }
 }

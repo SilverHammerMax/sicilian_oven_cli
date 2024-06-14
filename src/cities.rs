@@ -1348,7 +1348,10 @@ lazy_static! {
             City::new(
                 "Scalea",
                 Region::Calabria,
-                &[("PAO", 46, RoadTypes::Highway)],
+                &[
+                    ("PAO", 46, RoadTypes::Highway),
+                    ("MRA", 13, RoadTypes::Asphalt)
+                ],
                 false
             )
         ),
@@ -1411,6 +1414,153 @@ lazy_static! {
                     ("COS", 32, RoadTypes::Cobblestone),
                     ("SIB", 23, RoadTypes::Unpaved),
                     ("CVL", 19, RoadTypes::Unpaved)
+                ],
+                false
+            )
+        ),
+        (
+            "MRA",
+            City::new(
+                "Maratea",
+                Region::Basilicata,
+                &[
+                    ("SCA", 13, RoadTypes::Asphalt),
+                    ("LAU", 17, RoadTypes::Asphalt)
+                ],
+                false
+            )
+        ),
+                (
+            "LAU",
+            City::new(
+                "Lauri",
+                Region::Basilicata,
+                &[
+                    ("MRA", 17, RoadTypes::Asphalt),
+                    ("TUR", 30, RoadTypes::Cobblestone),
+                    ("ORI", 30, RoadTypes::Cobblestone),
+                    ("ALI", 26, RoadTypes::Cobblestone),
+                    ("BRI", 54, RoadTypes::Unpaved)
+                ],
+                false
+            )
+        ),
+        (
+            "ALI",
+            City::new(
+                "Aliano",
+                Region::Basilicata,
+                &[
+                    ("BRI", 42, RoadTypes::Unpaved),
+                    ("FER", 15, RoadTypes::Cobblestone),
+                    ("TUR", 16, RoadTypes::Cobblestone),
+                    ("LAU", 26, RoadTypes::Cobblestone)
+                ],
+                false
+            )
+        ),
+        (
+            "FER",
+            City::new(
+                "Fernandina",
+                Region::Basilicata,
+                &[
+                    ("MAT", 19, RoadTypes::Asphalt),
+                    ("POT", 27, RoadTypes::Cobblestone),
+                    ("PIS", 16, RoadTypes::Asphalt),
+                    ("ALI", 15, RoadTypes::Cobblestone)
+                ],
+                false
+            )
+        ),
+        (
+            "MAT",
+            City::new(
+                "Matera",
+                Region::Basilicata,
+                &[
+                    ("POT", 36, RoadTypes::Highway),
+                    ("MET", 61, RoadTypes::Asphalt),
+                    ("FER", 27, RoadTypes::Asphalt)
+                ],
+                true
+            )
+        ),
+        (
+            "MET",
+            City::new(
+                "Metaponto",
+                Region::Basilicata,
+                &[
+                    ("MAT", 61, RoadTypes::Asphalt),
+                    ("PIS", 11, RoadTypes::Asphalt),
+                    ("POL", 21, RoadTypes::Asphalt)
+                ],
+                false
+            )
+        ),
+        (
+            "PIS",
+            City::new(
+                "Pisticci",
+                Region::Basilicata,
+                &[
+                    ("FER", 16, RoadTypes::Asphalt),
+                    ("MET", 11, RoadTypes::Asphalt),
+                    ("TUR", 17, RoadTypes::Asphalt)
+                ],
+                false
+            )
+        ),
+        (
+            "POL",
+            City::new(
+                "Policoro",
+                Region::Basilicata,
+                &[
+                    ("MET", 21, RoadTypes::Asphalt),
+                    ("ROS", 22, RoadTypes::Asphalt),
+                    ("TUR", 15, RoadTypes::Cobblestone)
+                ],
+                false
+            )
+        ),
+        (
+            "POT",
+            City::new(
+                "Potenza",
+                Region::Basilicata,
+                &[
+                    ("MAT", 36, RoadTypes::Highway),
+                    ("FER", 27, RoadTypes::Cobblestone),
+                    ("MFI", 25, RoadTypes::Cobblestone),
+                    ("BRI", 25, RoadTypes::Unpaved)
+                ],
+                true
+            )
+        ),
+        (
+            "BRI",
+            City::new(
+                "Brienza",
+                Region::Basilicata,
+                &[
+                    ("POT", 25, RoadTypes::Unpaved),
+                    ("MFI", 25, RoadTypes::Unpaved),
+                    ("ALI", 42, RoadTypes::Unpaved),
+                    ("LAU", 54, RoadTypes::Unpaved)
+                ],
+                false
+            )
+        ),
+        (
+            "MFI",
+            City::new(
+                "Melfi",
+                Region::Basilicata,
+                &[
+                    ("POT", 25, RoadTypes::Cobblestone),
+                    ("BRI", 25, RoadTypes::Unpaved)
                 ],
                 false
             )

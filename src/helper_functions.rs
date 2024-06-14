@@ -43,7 +43,7 @@ pub fn choose_challenge() -> Challenge {
 
 pub fn choose_major_city(region: Option<&city::Region>) -> &'static str {
     let mut major_cities = Vec::new();
-    for code in constants::MAJOR_CITIES.iter() {
+    for code in constants::MAJOR_CITIES {
         major_cities.push(cities::CITIES.get(code).expect("Invalid City Code"));
     }
 

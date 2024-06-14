@@ -1,6 +1,7 @@
 #![deny(clippy::unwrap_used, clippy::expect_used)]
 #![allow(clippy::match_overlapping_arm)]
 
+use crate::cities::CITIES;
 use crate::types::challenge::Challenge;
 use crate::types::*;
 
@@ -54,13 +55,13 @@ fn challenge_engine(challenge: &mut Challenge) {
         println!();
         println!("Your fuel is {}.", car.get_fuel_level() as i32);
         println!();
-        println!("Your path has been: {:?}", path);
+        println!("Your path has been: {:?}", path.iter().map(|x| CITIES.get(x).expect("Invalid City Code").get_name()).collect::<Vec<_>>());
         println!();
 
         if path.len() > 0 {
             println!(
                 "Your current list of missing cities is: {:?}",
-                missing_cities
+                missing_cities.iter().map(|x| CITIES.get(x).expect("Invalid City Code").get_name()).collect::<Vec<_>>()
             );
         } else {
             println!("Your challenge is complete!");

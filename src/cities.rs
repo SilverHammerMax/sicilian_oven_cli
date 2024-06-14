@@ -863,9 +863,7 @@ lazy_static! {
             City::new(
                 "Favignana",
                 Region::Sicily,
-                &[
-                    ("TRA", 22, RoadTypes::Ferry)
-                ],
+                &[("TRA", 22, RoadTypes::Ferry)],
                 false
             )
         ),
@@ -874,9 +872,7 @@ lazy_static! {
             City::new(
                 "Tracino",
                 Region::Sicily,
-                &[
-                    ("PAN", 9, RoadTypes::Cobblestone)
-                ],
+                &[("PAN", 9, RoadTypes::Cobblestone)],
                 false
             )
         ),
@@ -897,10 +893,7 @@ lazy_static! {
             City::new(
                 "Ustica",
                 Region::Sicily,
-                &[
-                    ("CSV", 63, RoadTypes::Ferry),
-                    ("MAL", 78, RoadTypes::Ferry)
-                ],
+                &[("CSV", 63, RoadTypes::Ferry), ("MAL", 78, RoadTypes::Ferry)],
                 false
             )
         ),
@@ -909,10 +902,7 @@ lazy_static! {
             City::new(
                 "Malfa",
                 Region::Sicily,
-                &[
-                    ("UST", 78, RoadTypes::Ferry),
-                    ("LIP", 9, RoadTypes::Ferry)
-                ],
+                &[("UST", 78, RoadTypes::Ferry), ("LIP", 9, RoadTypes::Ferry)],
                 false
             )
         ),
@@ -1442,9 +1432,7 @@ lazy_static! {
             City::new(
                 "Ischia",
                 Region::Campania,
-                &[
-                    ("NAP", 20, RoadTypes::Ferry)
-                ],
+                &[("NAP", 20, RoadTypes::Ferry)],
                 false
             )
         ),

@@ -27,7 +27,7 @@ pub enum Region {
     Campania,
     Molise,
     Abruzzo,
-    Lazio
+    Lazio,
 }
 
 impl Region {
@@ -40,7 +40,7 @@ impl Region {
             Region::Campania => "Campania",
             Region::Molise => "Molise",
             Region::Abruzzo => "Abruzzo",
-            Region::Lazio => "Lazio"
+            Region::Lazio => "Lazio",
         }
     }
 }

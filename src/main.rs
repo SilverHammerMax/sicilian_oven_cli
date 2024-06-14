@@ -55,13 +55,21 @@ fn challenge_engine(challenge: &mut Challenge) {
         println!();
         println!("Your fuel is {}.", car.get_fuel_level() as i32);
         println!();
-        println!("Your path has been: {:?}", path.iter().map(|x| CITIES.get(x).expect("Invalid City Code").get_name()).collect::<Vec<_>>());
+        println!(
+            "Your path has been: {:?}",
+            path.iter()
+                .map(|x| CITIES.get(x).expect("Invalid City Code").get_name())
+                .collect::<Vec<_>>()
+        );
         println!();
 
         if path.len() > 0 {
             println!(
                 "Your current list of missing cities is: {:?}",
-                missing_cities.iter().map(|x| CITIES.get(x).expect("Invalid City Code").get_name()).collect::<Vec<_>>()
+                missing_cities
+                    .iter()
+                    .map(|x| CITIES.get(x).expect("Invalid City Code").get_name())
+                    .collect::<Vec<_>>()
             );
         } else {
             println!("Your challenge is complete!");

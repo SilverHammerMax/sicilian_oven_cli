@@ -4,7 +4,7 @@ use crate::types::*;
 pub enum Location {
     City(&'static str),
     Region(city::Region),
-    Any
+    Any,
 }
 
 #[derive(Clone)]
@@ -18,15 +18,15 @@ pub struct Challenge {
     medal: medal::Medal,
 }
 
-pub const CHALLENGES: [Challenge; 1] = [
-    Challenge::new("Ragusan Ride", Some(car::Car::new(car::CarType::Lancia)), &[
-        "RAG", "COM", "VIT", "MDR", "MOD", "POZ", "CAP", "NTO", "SIR", "GIA", "PAL", "FLO",
-        "AUG", "LEN",
-    ], Location::City("RAG"), Location::City("RAG"), [205, 220, 270, 330])
-];
-
 impl Challenge {
-    pub const fn new(name: &'static str, car: Option<car::Car>, cities: &'static [&'static str], start_city: Location, end_city: Location, medal_cutoffs: [i32; 4]) -> Challenge {
+    pub const fn new(
+        name: &'static str,
+        car: Option<car::Car>,
+        cities: &'static [&'static str],
+        start_city: Location,
+        end_city: Location,
+        medal_cutoffs: [i32; 4],
+    ) -> Challenge {
         Challenge {
             name,
             car,

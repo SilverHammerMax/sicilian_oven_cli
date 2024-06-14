@@ -25,7 +25,7 @@ pub fn choose_car() -> car::Car {
 
 pub fn choose_challenge() -> Challenge {
     let mut challenge_names = Vec::new();
-    for challenge in challenge::CHALLENGES {
+    for challenge in constants::CHALLENGES {
         challenge_names.push(format!(
             "{} {}",
             challenge.get_name(),
@@ -38,7 +38,7 @@ pub fn choose_challenge() -> Challenge {
         .interact()
         .expect("Prompt Failed");
 
-    challenge::CHALLENGES[selection].clone()
+    constants::CHALLENGES[selection].clone()
 }
 
 pub fn choose_major_city(region: Option<&city::Region>) -> &'static str {
@@ -48,7 +48,10 @@ pub fn choose_major_city(region: Option<&city::Region>) -> &'static str {
     }
 
     major_cities.retain(|x| Some(x.get_region()) == region || region == None);
-    let major_names: Vec<String> = major_cities.iter().map(|x| x.get_name().to_owned()).collect();
+    let major_names: Vec<String> = major_cities
+        .iter()
+        .map(|x| x.get_name().to_owned())
+        .collect();
 
     let selection = dialoguer::Select::new()
         .with_prompt("What major city would you like to start in?")
@@ -86,7 +89,9 @@ pub fn challenge_prompt(challenge: &challenge::Challenge) {
                 .expect("Invalid City Code")
                 .get_name()
         ),
-        challenge::Location::Region(region) => println!("You may start in any major city in {}.", region.get_name()),
+        challenge::Location::Region(region) => {
+            println!("You may start in any major city in {}.", region.get_name())
+        }
         challenge::Location::Any => println!("You can start in whatever major city you prefer."),
     }
 
@@ -98,7 +103,9 @@ pub fn challenge_prompt(challenge: &challenge::Challenge) {
                 .expect("Invalid City Code")
                 .get_name()
         ),
-        challenge::Location::Region(region) => println!("You may start in any major city in {}.", region.get_name()),
+        challenge::Location::Region(region) => {
+            println!("You may start in any major city in {}.", region.get_name())
+        }
         challenge::Location::Any => println!("You can start in whatever major city you prefer."),
     }
 

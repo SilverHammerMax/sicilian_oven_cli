@@ -425,7 +425,8 @@ lazy_static! {
                 &[
                     ("BAR", 19, RoadTypes::Asphalt),
                     ("MES", 16, RoadTypes::Asphalt),
-                    ("TMI", 170, RoadTypes::Highway)
+                    ("TMI", 170, RoadTypes::Highway),
+                    ("LIP", 44, RoadTypes::Ferry)
                 ],
                 false
             )
@@ -730,7 +731,9 @@ lazy_static! {
                 &[
                     ("MRS", 38, RoadTypes::Asphalt),
                     ("SEG", 25, RoadTypes::Cobblestone),
-                    ("ERI", 15, RoadTypes::Asphalt)
+                    ("ERI", 15, RoadTypes::Asphalt),
+                    ("PAN", 110, RoadTypes::Ferry),
+                    ("FAV", 22, RoadTypes::Ferry)
                 ],
                 true
             )
@@ -755,7 +758,8 @@ lazy_static! {
                 Region::Sicily,
                 &[
                     ("ERI", 23, RoadTypes::Asphalt),
-                    ("CST", 19, RoadTypes::Asphalt)
+                    ("CST", 19, RoadTypes::Asphalt),
+                    ("UST", 63, RoadTypes::Ferry)
                 ],
                 false
             )
@@ -851,6 +855,89 @@ lazy_static! {
                 "Selinunte",
                 Region::Sicily,
                 &[("MAR", 15, RoadTypes::Unpaved)],
+                false
+            )
+        ),
+        (
+            "FAV",
+            City::new(
+                "Favignana",
+                Region::Sicily,
+                &[
+                    ("TRA", 22, RoadTypes::Ferry)
+                ],
+                false
+            )
+        ),
+        (
+            "TRC",
+            City::new(
+                "Tracino",
+                Region::Sicily,
+                &[
+                    ("PAN", 9, RoadTypes::Cobblestone)
+                ],
+                false
+            )
+        ),
+        (
+            "PAN",
+            City::new(
+                "Pantelleria",
+                Region::Sicily,
+                &[
+                    ("TRC", 9, RoadTypes::Cobblestone),
+                    ("TRA", 110, RoadTypes::Ferry)
+                ],
+                false
+            )
+        ),
+        (
+            "UST",
+            City::new(
+                "Ustica",
+                Region::Sicily,
+                &[
+                    ("CSV", 63, RoadTypes::Ferry),
+                    ("MAL", 78, RoadTypes::Ferry)
+                ],
+                false
+            )
+        ),
+        (
+            "MAL",
+            City::new(
+                "Malfa",
+                Region::Sicily,
+                &[
+                    ("UST", 78, RoadTypes::Ferry),
+                    ("LIP", 9, RoadTypes::Ferry)
+                ],
+                false
+            )
+        ),
+        (
+            "LIP",
+            City::new(
+                "Lipari",
+                Region::Sicily,
+                &[
+                    ("MAL", 9, RoadTypes::Ferry),
+                    ("SRO", 31, RoadTypes::Ferry),
+                    ("MIL", 44, RoadTypes::Ferry)
+                ],
+                false
+            )
+        ),
+        (
+            "SRO",
+            City::new(
+                "Stromboli",
+                Region::Sicily,
+                &[
+                    ("LIP", 31, RoadTypes::Ferry),
+                    ("NAP", 160, RoadTypes::Ferry)
+                ],
                 false
             )
         ),
@@ -1337,6 +1424,29 @@ lazy_static! {
                 ],
                 false
             )
-        )
+        ),
+        (
+            "NAP",
+            City::new(
+                "Napoli",
+                Region::Campania,
+                &[
+                    ("SRO", 160, RoadTypes::Ferry),
+                    ("ISC", 20, RoadTypes::Ferry)
+                ],
+                true
+            )
+        ),
+        (
+            "ISC",
+            City::new(
+                "Ischia",
+                Region::Campania,
+                &[
+                    ("NAP", 20, RoadTypes::Ferry)
+                ],
+                false
+            )
+        ),
     ]);
 }

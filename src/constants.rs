@@ -1,9 +1,8 @@
 use crate::types::car;
 use crate::types::challenge::{Challenge, Location};
 
-pub const MAJOR_CITIES: [&str; 14] = [
-    "MES", "CAT", "SIR", "RAG", "AGR", "CTN", "ENN", "PMO", "TRA", "RCA", "VVA", "CNZ", "CRO",
-    "COS",
+pub const MAJOR_CITIES: [&str; 15] = [
+    "MES", "CAT", "SIR", "RAG", "AGR", "CTN", "ENN", "PMO", "TRA", "RCA", "VVA", "CNZ", "CRO", "COS", "NAP"
 ];
 
 pub const CHALLENGES: [Challenge; 1] = [Challenge::new(

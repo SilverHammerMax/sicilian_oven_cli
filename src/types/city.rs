@@ -22,6 +22,12 @@ impl RoadTypes {
 pub enum Region {
     Sicily,
     Calabria,
+    Basilicata,
+    Apulia,
+    Campania,
+    Molise,
+    Abruzzo,
+    Lazio
 }
 
 impl Region {
@@ -29,6 +35,12 @@ impl Region {
         match self {
             Region::Sicily => "Sicily",
             Region::Calabria => "Calabria",
+            Region::Basilicata => "Basilicata",
+            Region::Apulia => "Apulia",
+            Region::Campania => "Campania",
+            Region::Molise => "Molise",
+            Region::Abruzzo => "Abruzzo",
+            Region::Lazio => "Lazio"
         }
     }
 }

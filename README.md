@@ -5,12 +5,12 @@ can play against your friends or preset challenges, as well as just playing agai
 
 In this guide, we will cover the following 6 chapters:
 
-1. The Map
-2. Basic Gameplay
-3. Challenges
-4. Car Building
-5. Repairing, Refuelling, and Road Types
-6. Player vs. Player
+1. [The Map](#the-map)
+2. [Basic Gameplay](#basic-gameplay)
+3. [Challenges](#challenges)
+4. [Car Building](#car-building)
+5. [Repairing, Refuelling, and Road Types](#repairing-refuelling-and-road-types)
+6. [Player vs. Player](#player-vs-player)
 
 ## The Map
 

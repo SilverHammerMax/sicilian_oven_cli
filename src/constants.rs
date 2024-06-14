@@ -5,7 +5,7 @@ pub const MAJOR_CITIES: [&str; 15] = [
     "COS", "NAP",
 ];
 
-pub const CHALLENGES: [challenge::Challenge; 3] = [
+pub const CHALLENGES: [challenge::Challenge; 4] = [
     challenge::Challenge::new(
         "Ragusan Ride",
         Some(car::Car::new(car::CarType::Lancia)),
@@ -37,5 +37,15 @@ pub const CHALLENGES: [challenge::Challenge; 3] = [
         challenge::Location::City("CAT"),
         challenge::Location::City("CAT"),
         [290, 310, 335, 395],
+    ),
+    challenge::Challenge::new(
+        "The Godfather",
+        Some(car::Car::new(car::CarType::ModifiedLancia)),
+        &[
+            "COR", "SEL", "MAR", "CST", "PAR", "MEN", "SCI", "POR", "AGR", "RIB", "CAN", "LIC",
+        ],
+        challenge::Location::City("COR"),
+        challenge::Location::City("COR"),
+        [305, 325, 370, 395],
     ),
 ];

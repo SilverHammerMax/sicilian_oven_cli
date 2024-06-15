@@ -2,24 +2,14 @@ use crate::types::*;
 use crate::*;
 
 pub fn choose_car() -> car::car::Car {
-    let mut car_names = Vec::new();
-    for car in car::CarType::iter() {
-        car_names.push(car.get_name().to_string());
-    }
-    car_names.pop();
+    let car_names = constants::CARS.iter().map(|car| car.name()).collect::<Vec<_>>();
     let selection = dialoguer::Select::new()
         .with_prompt("Pick your car")
         .items(&car_names)
         .interact()
         .expect("Prompt Failed");
 
-    match selection {
-        0 => car::car::Car::new(car::CarType::Lancia),
-        1 => car::car::Car::new(car::CarType::Maserati),
-        2 => car::car::Car::new(car::CarType::Ferrari),
-        3 => car::car::Car::new(car::CarType::Fiat),
-        _ => panic!("Fix Added Car!"),
-    }
+    constants::CARS[selection]
 }
 
 pub fn choose_challenge() -> challenge::Challenge {
@@ -111,7 +101,7 @@ pub fn challenge_prompt(challenge: &challenge::Challenge) {
     println!();
 
     match challenge.get_car() {
-        Some(car) => println!("You are using the {}.", car.get_car_type().get_name()),
+        Some(car) => println!("You are using the {}.", car.name()),
         None => println!("You can use whatever car you prefer."),
     }
 

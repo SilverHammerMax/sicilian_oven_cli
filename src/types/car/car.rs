@@ -29,6 +29,27 @@ impl Car {
             reliability: 1.0,
         }
     }
+
+    pub fn name(&self) -> &str {
+        self.name
+    }
+
+    pub fn tires(&self) -> &car::tire::Tire {
+        &self.tires
+    }
+
+    pub fn engine(&self) -> &car::engine::Engine {
+        &self.engine
+    }
+
+    pub fn gearbox(&self) -> &car::gearbox::Gearbox {
+        &self.gearbox
+    }
+
+    pub fn chassis(&self) -> &car::chassis::Chassis {
+        &self.chassis
+    }
+
     pub fn brake_horsepower(&self) -> f64 {
         self.gearbox.brake_horsepower() + self.engine.brake_horsepower()
     }

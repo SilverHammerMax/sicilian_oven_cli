@@ -29,6 +29,7 @@ fn challenge_engine(challenge: &mut challenge::Challenge) {
     let mut car = challenge
         .get_car()
         .unwrap_or_else(helper_functions::choose_car);
+    car.refuel();
     let mut missing_cities = challenge.get_cities().to_vec();
     let start_city = match challenge.get_start_city() {
         challenge::Location::City(code) => code,
@@ -76,7 +77,7 @@ fn challenge_engine(challenge: &mut challenge::Challenge) {
 
         println!();
 
-        if car.get_fuel() - 3.0 * car.get_car_type().get_mileage() < 0.0 {
+        if car.get_fuel() - 3.0 * car.engine().fuel_usage() < 0.0 {
             println!("WARNING: LOW FUEL");
             println!();
         }
@@ -110,8 +111,7 @@ fn challenge_engine(challenge: &mut challenge::Challenge) {
                 .get(selection)
                 .expect("Out of Range");
             car.travel();
-            time += next_city.1 as f64 * 60.0 * next_city.2.time_multiplier()
-                / car.get_car_type().get_horsepower();
+            time += car.calculate_travel_time(&next_city.2, next_city.1);
             city_code = next_city.0;
         } else if selection == city_reference.get_cities().len() {
             break;

@@ -82,11 +82,16 @@ impl Car {
         self.fuel = self.chassis.tank_size();
     }
 
+    pub fn repair(&mut self) {
+        self.reliability = 1.0;
+    }
+
     pub fn calculate_travel_time(&self, road: &city::RoadTypes, distance: i32) -> f64 {
         distance as f64 / self.calculate_speed(road)
     }
 
     pub fn travel(&mut self) {
         self.fuel -= self.engine.fuel_usage();
+        self.reliability -= self.gearbox().deterioration();
     }
 }

@@ -54,6 +54,7 @@ fn challenge_engine(challenge: &mut challenge::Challenge) {
         );
         println!();
         println!("Your fuel is {}.", car.get_fuel() as i32);
+        println!("Your reliability is {:.2}.", car.reliability());
         println!();
         println!(
             "Your path has been: {:?}",
@@ -79,8 +80,11 @@ fn challenge_engine(challenge: &mut challenge::Challenge) {
 
         if car.get_fuel() - 3.0 * car.engine().fuel_usage() < 0.0 {
             println!("WARNING: LOW FUEL");
-            println!();
         }
+        if car.reliability() < 0.2 {
+            println!("WARNING: CAR NEARLY DETERIORATED");
+        }
+        println!();
         let mut options: Vec<String> = Vec::new();
         for (code, distance, _) in city_reference.get_cities() {
             let option = format!(
@@ -96,6 +100,7 @@ fn challenge_engine(challenge: &mut challenge::Challenge) {
         options.push("Submit your challenge or return to main menu".to_string());
         if city_reference.can_refuel() {
             options.push("Refuel".to_string());
+            options.push("Repair".to_string());
         }
 
         let selection = dialoguer::Select::new()
@@ -119,9 +124,16 @@ fn challenge_engine(challenge: &mut challenge::Challenge) {
         {
             car.refuel();
             path.pop();
+        } else if city_reference.can_refuel() && selection == city_reference.get_cities().len() + 2 {
+            car.repair();
+            path.pop();
         }
         if car.get_fuel() <= 0.0 {
             println!("Ran out of fuel! Sorry, game over :(");
+            break;
+        }
+        if car.reliability() <= 0.0 {
+            println!("Car too deteriorated! Sorry, game over :(");
             break;
         }
     }

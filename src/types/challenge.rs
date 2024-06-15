@@ -43,7 +43,7 @@ impl Challenge {
     }
 
     pub fn get_car(&self) -> Option<car::car::Car> {
-        self.car.clone()
+        self.car
     }
 
     pub fn get_cities(&self) -> &[&str] {

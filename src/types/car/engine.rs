@@ -1,4 +1,4 @@
-#[derive(Default)]
+#[derive(Default, Clone)]
 pub enum Engine {
     #[default]
     EngineOne,

@@ -1,5 +1,6 @@
 use crate::types::*;
 
+#[derive(Clone)]
 pub struct Car {
     name: String,
     tires: car::tire::Tire,
@@ -90,6 +91,14 @@ impl Car {
             city::RoadTypes::Ferry => 0.0,
         };
         base_speed * multiplier
+    }
+
+    pub fn get_fuel(&self) -> f64 {
+        self.fuel
+    }
+
+    pub fn refuel(&mut self) {
+        self.fuel = self.chassis.tank_size();
     }
 
     pub fn calculate_travel_time(&self, road: &city::RoadTypes, distance: i32) -> f64 {

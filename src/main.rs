@@ -2,7 +2,6 @@
 #![allow(clippy::match_overlapping_arm)]
 
 use crate::cities::CITIES;
-use crate::types::challenge::Challenge;
 use crate::types::*;
 
 mod cities;
@@ -18,7 +17,7 @@ fn main() {
     }
 }
 
-fn challenge_engine(challenge: &mut Challenge) {
+fn challenge_engine(challenge: &mut challenge::Challenge) {
     helper_functions::challenge_prompt(challenge);
     let selection = dialoguer::Confirm::new()
         .with_prompt("Do you accept this challenge?")

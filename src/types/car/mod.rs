@@ -1,4 +1,4 @@
-mod car;
+pub(crate) mod car;
 mod chassis;
 mod engine;
 mod gearbox;

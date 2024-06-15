@@ -2,7 +2,7 @@ use crate::types::*;
 use crate::*;
 use strum::IntoEnumIterator;
 
-pub fn choose_car() -> car::Car {
+pub fn choose_car() -> car::car::Car {
     let mut car_names = Vec::new();
     for car in car::CarType::iter() {
         car_names.push(car.get_name().to_string());
@@ -15,15 +15,15 @@ pub fn choose_car() -> car::Car {
         .expect("Prompt Failed");
 
     match selection {
-        0 => car::Car::new(car::CarType::Lancia),
-        1 => car::Car::new(car::CarType::Maserati),
-        2 => car::Car::new(car::CarType::Ferrari),
-        3 => car::Car::new(car::CarType::Fiat),
+        0 => car::car::Car::new(car::CarType::Lancia),
+        1 => car::car::Car::new(car::CarType::Maserati),
+        2 => car::car::Car::new(car::CarType::Ferrari),
+        3 => car::car::Car::new(car::CarType::Fiat),
         _ => panic!("Fix Added Car!"),
     }
 }
 
-pub fn choose_challenge() -> Challenge {
+pub fn choose_challenge() -> challenge::Challenge {
     let mut challenge_names = Vec::new();
     for challenge in constants::CHALLENGES {
         challenge_names.push(format!(

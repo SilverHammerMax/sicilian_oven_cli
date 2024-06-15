@@ -8,7 +8,7 @@ pub const MAJOR_CITIES: [&str; 15] = [
 pub const CHALLENGES: [challenge::Challenge; 5] = [
     challenge::Challenge::new(
         "Ragusan Ride",
-        Some(car::Car::new(car::CarType::Lancia)),
+        Some(car::car::Car::new(car::CarType::Lancia)),
         &[
             "RAG", "COM", "VIT", "MDR", "MOD", "POZ", "CAP", "NTO", "SIR", "GIA", "PAL", "FLO",
             "AUG", "LEN",
@@ -19,7 +19,7 @@ pub const CHALLENGES: [challenge::Challenge; 5] = [
     ),
     challenge::Challenge::new(
         "Big Car, Big Cities",
-        Some(car::Car::new(car::CarType::Ferrari)),
+        Some(car::car::Car::new(car::CarType::Ferrari)),
         &[
             "RAG", "SIR", "CAT", "ENN", "CTN", "PMO", "TRA", "MES", "AGR",
         ],
@@ -29,7 +29,7 @@ pub const CHALLENGES: [challenge::Challenge; 5] = [
     ),
     challenge::Challenge::new(
         "A Ride Around Mt. Etna",
-        Some(car::Car::new(car::CarType::Maserati)),
+        Some(car::car::Car::new(car::CarType::Maserati)),
         &[
             "CAT", "GER", "PAT", "ADR", "RAN", "CRL", "PTI", "BAR", "MIL", "MES", "RIP", "TAM",
             "ACI", "LEN", "NIC", "ENN",
@@ -40,7 +40,7 @@ pub const CHALLENGES: [challenge::Challenge; 5] = [
     ),
     challenge::Challenge::new(
         "The Godfather",
-        Some(car::Car::new(car::CarType::ModifiedLancia)),
+        Some(car::car::Car::new(car::CarType::ModifiedLancia)),
         &[
             "COR", "SEL", "MAR", "CST", "PAR", "MEN", "SCI", "POR", "AGR", "RIB", "CAN", "LIC",
         ],

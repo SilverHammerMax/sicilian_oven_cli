@@ -28,4 +28,14 @@ impl Gearbox {
             Gearbox::GearboxFive => 0.035,
         }
     }
+
+    pub fn gearbox_type(&self) -> &str {
+        match self {
+            Gearbox::GearboxOne => "4S",
+            Gearbox::GearboxTwo => "4S",
+            Gearbox::GearboxThree => "5S",
+            Gearbox::GearboxFour => "6S",
+            Gearbox::GearboxFive => "6S",
+        }
+    }
 }

@@ -1,4 +1,4 @@
-#[derive(Default, Clone)]
+#[derive(Default, Clone, Copy)]
 pub enum Gearbox {
     #[default]
     GearboxOne,
@@ -14,7 +14,7 @@ impl Gearbox {
             Gearbox::GearboxOne => 0.0,
             Gearbox::GearboxTwo => 10.0,
             Gearbox::GearboxThree => 20.0,
-            Gearbox:: GearboxFour => 30.0,
+            Gearbox::GearboxFour => 30.0,
             Gearbox::GearboxFive => 45.0,
         }
     }

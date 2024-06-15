@@ -1,4 +1,4 @@
-#[derive(Default, Clone)]
+#[derive(Default, Clone, Copy)]
 pub enum Chassis {
     #[default]
     ChassisOne,

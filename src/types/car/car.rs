@@ -1,8 +1,8 @@
 use crate::types::*;
 
-#[derive(Clone)]
+#[derive(Clone, Copy)]
 pub struct Car {
-    name: String,
+    name: &'static str,
     tires: car::tire::Tire,
     engine: car::engine::Engine,
     gearbox: car::gearbox::Gearbox,
@@ -12,7 +12,13 @@ pub struct Car {
 }
 
 impl Car {
-    pub const fn new(name: String, tires: car::tire::Tire, engine: car::engine::Engine, gearbox: car::gearbox::Gearbox, chassis: car::chassis::Chassis) -> Car {
+    pub const fn new(
+        name: &'static str,
+        tires: car::tire::Tire,
+        engine: car::engine::Engine,
+        gearbox: car::gearbox::Gearbox,
+        chassis: car::chassis::Chassis,
+    ) -> Car {
         Car {
             name,
             tires,

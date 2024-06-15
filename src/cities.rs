@@ -1550,7 +1550,8 @@ lazy_static! {
                     ("POT", 25, RoadTypes::Unpaved),
                     ("MFI", 25, RoadTypes::Unpaved),
                     ("ALI", 42, RoadTypes::Unpaved),
-                    ("LAU", 54, RoadTypes::Unpaved)
+                    ("LAU", 54, RoadTypes::Unpaved),
+                    ("POL", 19, RoadTypes::Unpaved)
                 ],
                 false
             )
@@ -1562,7 +1563,8 @@ lazy_static! {
                 Region::Basilicata,
                 &[
                     ("POT", 25, RoadTypes::Cobblestone),
-                    ("BRI", 25, RoadTypes::Unpaved)
+                    ("BRI", 25, RoadTypes::Unpaved),
+                    ("LIO", 25, RoadTypes::Unpaved)
                 ],
                 false
             )
@@ -1587,6 +1589,10 @@ lazy_static! {
                 "Napoli",
                 Region::Campania,
                 &[
+                    ("SRN", 31, RoadTypes::Highway),
+                    ("NOL", 11, RoadTypes::Asphalt),
+                    ("VAR", 17, RoadTypes::Asphalt),
+                    ("CTA", 12, RoadTypes::Asphalt),
                     ("SRO", 160, RoadTypes::Ferry),
                     ("ISC", 20, RoadTypes::Ferry)
                 ],
@@ -1602,5 +1608,303 @@ lazy_static! {
                 false
             )
         ),
+        (
+            "SAP",
+            City::new(
+                "Sapri",
+                Region::Campania,
+                &[
+                    ("MRA", 15, RoadTypes::Asphalt),
+                    ("CAM", 13, RoadTypes::Asphalt),
+                    ("PAD", 25, RoadTypes::Cobblestone)
+                ],
+                true
+            )
+        ),
+        (
+            "CAM",
+            City::new(
+                "Camerota",
+                Region::Campania,
+                &[
+                    ("SAP", 13, RoadTypes::Asphalt),
+                    ("ASC", 16, RoadTypes::Asphalt)
+                ],
+                false
+            )
+        ),
+        (
+            "ASC",
+            City::new(
+                "Ascea",
+                Region::Campania,
+                &[
+                    ("CAM", 16, RoadTypes::Asphalt),
+                    ("AGP", 20, RoadTypes::Asphalt)
+                ],
+                false
+            )
+        ),
+        (
+            "PAD",
+            City::new(
+                "Padula",
+                Region::Campania,
+                &[
+                    ("SAP", 25, RoadTypes::Cobblestone),
+                    ("AGP", 26, RoadTypes::Unpaved),
+                    ("POA", 16, RoadTypes::Cobblestone)
+                ],
+                false
+            )
+        ),
+        (
+            "POA",
+            City::new(
+                "Polla",
+                Region::Campania,
+                &[
+                    ("PAD", 16, RoadTypes::Cobblestone),
+                    ("BAT", 24, RoadTypes::Cobblestone),
+                    ("CON", 12, RoadTypes::Cobblestone),
+                    ("BRI", 19, RoadTypes::Cobblestone)
+                ],
+                false
+            )
+        ),
+        (
+            "BAT",
+            City::new(
+                "Battipaglia",
+                Region::Campania,
+                &[
+                    ("SRN", 11, RoadTypes::Asphalt),
+                    ("AGP", 21, RoadTypes::Asphalt),
+                    ("POL", 24, RoadTypes::Unpaved)
+                ],
+                false
+            )
+        ),
+        (
+            "AGP",
+            City::new(
+                "Agropolis",
+                Region::Campania,
+                &[
+                    ("BAT", 21, RoadTypes::Asphalt),
+                    ("PAD", 26, RoadTypes::Unpaved),
+                    ("ASC", 20, RoadTypes::Asphalt)
+                ],
+                false
+            )
+        ),
+        (
+            "SOR",
+            City::new(
+                "Sorrento",
+                Region::Campania,
+                &[
+                    ("SRN", 24, RoadTypes::Asphalt),
+                ],
+                false
+            )
+        ),
+        (
+            "SRN",
+            City::new(
+                "Salerno",
+                Region::Campania,
+                &[
+                    ("NAP", 31, RoadTypes::Highway),
+                    ("AVE", 17, RoadTypes::Highway),
+                    ("SOR", 24, RoadTypes::Asphalt),
+                    ("CON", 23, RoadTypes::Asphalt)
+                ],
+                true
+            )
+        ),
+        (
+            "CON",
+            City::new(
+                "Contursi",
+                Region::Campania,
+                &[
+                    ("SAL", 23, RoadTypes::Asphalt),
+                    ("POL", 12, RoadTypes::Cobblestone),
+                    ("LIO", 22, RoadTypes::Asphalt)
+                ],
+                false
+            )
+        ),
+        (
+            "NOL",
+            City::new(
+                "Nola",
+                Region::Campania,
+                &[
+                    ("NAP", 11, RoadTypes::Asphalt),
+                    ("AVE", 22, RoadTypes::Cobblestone)
+                ],
+                false
+            )
+        ),
+        (
+            "AVE",
+            City::new(
+                "Avellino",
+                Region::Campania,
+                &[
+                    ("SRN", 17, RoadTypes::Highway),
+                    ("BEN", 24, RoadTypes::Highway),
+                    ("NOL", 22, RoadTypes::Cobblestone)
+                ],
+                true
+            )
+        ),
+        (
+            "VAR",
+            City::new(
+                "Varcaturo",
+                Region::Campania,
+                &[
+                    ("NAP", 17, RoadTypes::Asphalt),
+                    ("MDG", 27, RoadTypes::Asphalt)
+                ],
+                false
+            )
+        ),
+        (
+            "MDG",
+            City::new(
+                "Mondragone",
+                Region::Campania,
+                &[
+                    ("VAR", 27, RoadTypes::Asphalt),
+                    ("TEA", 16, RoadTypes::Asphalt)
+                ],
+                false
+            )
+        ),
+        (
+            "TEA",
+            City::new(
+                "Teano",
+                Region::Campania,
+                &[
+                    ("MDG", 16, RoadTypes::Asphalt),
+                    ("CTA", 25, RoadTypes::Asphalt),
+                    ("ALF", 15, RoadTypes::Asphalt)
+                ],
+                false
+            )
+        ),
+        (
+            "ALF",
+            City::new(
+                "Alife",
+                Region::Campania,
+                &[
+                    ("BEN", 30, RoadTypes::Asphalt),
+                    ("TEA", 15, RoadTypes::Asphalt),
+                    ("CTA", 26, RoadTypes::Asphalt),
+                    ("CIR", 32, RoadTypes::Cobblestone)
+                ],
+                false
+            )
+        ),
+        (
+            "CTA",
+            City::new(
+                "Caserta",
+                Region::Campania,
+                &[
+                    ("NAP", 12, RoadTypes::Asphalt),
+                    ("BBA", 31, RoadTypes::Unpaved),
+                    ("TEA", 25, RoadTypes::Asphalt),
+                    ("ALF", 26, RoadTypes::Cobblestone)
+                ],
+                false
+            )
+        ),
+        (
+            "BBA",
+            City::new(
+                "Barba",
+                Region::Campania,
+                &[
+                    ("BEN", 7, RoadTypes::Unpaved),
+                    ("CTA", 31, RoadTypes::Unpaved)
+                ],
+                false
+            )
+        ),
+        (
+            "LIO",
+            City::new(
+                "Lioni",
+                Region::Campania,
+                &[
+                    ("BEN", 28, RoadTypes::Asphalt),
+                    ("CON", 22, RoadTypes::Asphalt),
+                    ("CGO", 10, RoadTypes::Unpaved),
+                    ("MFI", 25, RoadTypes::Unpaved)
+                ],
+                false
+            )
+        ),
+        (
+            "BEN",
+            City::new(
+                "Benevento",
+                Region::Campania,
+                &[
+                    ("AVE", 24, RoadTypes::Highway),
+                    ("BBA", 7, RoadTypes::Unpaved),
+                    ("LIO", 28, RoadTypes::Asphalt),
+                    ("ALF", 30, RoadTypes::Asphalt),
+                    ("CIR", 12, RoadTypes::Cobblestone),
+                    ("ROM", 12, RoadTypes::Cobblestone)
+                ],
+                true
+            )
+        ),
+        (
+            "CIR",
+            City::new(
+                "Circello",
+                Region::Campania,
+                &[
+                    ("BEN", 12, RoadTypes::Cobblestone),
+                    ("ROM", 8, RoadTypes::Cobblestone),
+                    ("ALF", 32, RoadTypes::Cobblestone)
+                ],
+                false
+            )
+        ),
+        (
+            "ROM",
+            City::new(
+                "Romiti",
+                Region::Campania,
+                &[
+                    ("BEN", 12, RoadTypes::Cobblestone),
+                    ("CIR", 8, RoadTypes::Cobblestone),
+                    ("CGO", 25, RoadTypes::Cobblestone)
+                ],
+                false
+            )
+        ),
+        (
+            "CGO",
+            City::new(
+                "Calaggoi",
+                Region::Campania,
+                &[
+                    ("LIO", 10, RoadTypes::Cobblestone),
+                    ("ROM", 25, RoadTypes::Cobblestone)
+                ],
+                false
+            )
+        )
     ]);
 }

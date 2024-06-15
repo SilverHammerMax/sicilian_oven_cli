@@ -79,4 +79,24 @@ impl Car {
     pub fn reliability(&self) -> f64 {
         self.reliability
     }
+
+    pub fn calculate_speed(&self, road: &city::RoadTypes) -> f64 {
+        let base_speed = 100.0 * self.reliability() * self.brake_horsepower() / self.weight();
+        let multiplier = match road {
+            city::RoadTypes::Highway => 2.0 * self.tires.agc(),
+            city::RoadTypes::Asphalt => self.tires.agc(),
+            city::RoadTypes::Cobblestone => 3.0 / 4.0 * self.tires.ggc(),
+            city::RoadTypes::Unpaved => 0.5 * self.tires.ggc(),
+            city::RoadTypes::Ferry => 0.0,
+        };
+        base_speed * multiplier
+    }
+
+    pub fn calculate_travel_time(&self, road: &city::RoadTypes, distance: i32) -> f64 {
+        distance as f64 / self.calculate_speed(road)
+    }
+
+    pub fn travel(&mut self) {
+        self.fuel -= self.engine.fuel_usage();
+    }
 }

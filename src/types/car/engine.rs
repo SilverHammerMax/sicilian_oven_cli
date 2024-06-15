@@ -28,4 +28,24 @@ impl Engine {
             Engine::EngineFive => 432.0,
         }
     }
+
+    pub fn fuel_usage(&self) -> f64 {
+        match self {
+            Engine::EngineOne => 2.4,
+            Engine::EngineTwo => 3.2,
+            Engine::EngineThree => 3.8,
+            Engine::EngineFour => 4.6,
+            Engine::EngineFive => 5.2,
+        }
+    }
+
+    pub fn engine_type(&self) -> &str {
+        match self {
+            Engine::EngineOne => "I6",
+            Engine::EngineTwo => "V6",
+            Engine::EngineThree => "V8",
+            Engine::EngineFour => "V10",
+            Engine::EngineFive => "V12",
+        }
+    }
 }

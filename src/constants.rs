@@ -1,11 +1,11 @@
 use crate::types::*;
 
-pub const MAJOR_CITIES: [&str; 15] = [
+pub const MAJOR_CITIES: [&str; 17] = [
     "MES", "CAT", "SIR", "RAG", "AGR", "CTN", "ENN", "PMO", "TRA", "RCA", "VVA", "CNZ", "CRO",
-    "COS", "NAP",
+    "COS", "POT", "MAT", "NAP"
 ];
 
-pub const CHALLENGES: [challenge::Challenge; 5] = [
+pub const CHALLENGES: [challenge::Challenge; 7] = [
     challenge::Challenge::new(
         "Ragusan Ride",
         Some(car::Car::new(car::CarType::Lancia)),
@@ -47,6 +47,26 @@ pub const CHALLENGES: [challenge::Challenge; 5] = [
         challenge::Location::City("COR"),
         challenge::Location::City("COR"),
         [305, 325, 370, 395],
+    ),
+    challenge::Challenge::new(
+        "Harbormaster",
+        None,
+        &[
+            "ISC", "STR", "LIP", "MAL", "FAV", "PAN", "TRC"
+        ],
+        challenge::Location::Any,
+        challenge::Location::Any,
+        [0, 0, 0, 0],
+    ),
+    challenge::Challenge::new(
+        "A Calabrian Rally",
+        Some(car::Car::new(car::CarType::Fiat)),
+        &[
+            "ACR", "COT", "ORI", "DIN", "DEL"
+        ],
+        challenge::Location::City("CNZ"),
+        challenge::Location::Any,
+        [0, 0, 0, 0],
     ),
     challenge::Challenge::new(
         "Free Play",

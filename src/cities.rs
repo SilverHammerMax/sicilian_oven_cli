@@ -1375,7 +1375,9 @@ lazy_static! {
                 Region::Calabria,
                 &[
                     ("RTO", 14, RoadTypes::Cobblestone),
-                    ("CVL", 26, RoadTypes::Cobblestone)
+                    ("CVL", 26, RoadTypes::Cobblestone),
+                    ("LAU", 30, RoadTypes::Cobblestone),
+                    ("TUR", 15, RoadTypes::Cobblestone)
                 ],
                 false
             )
@@ -1561,6 +1563,20 @@ lazy_static! {
                 &[
                     ("POT", 25, RoadTypes::Cobblestone),
                     ("BRI", 25, RoadTypes::Unpaved)
+                ],
+                false
+            )
+        ),
+        (
+            "TUR",
+            City::new(
+                "Tursi",
+                Region::Basilicata,
+                &[
+                    ("ORI", 15, RoadTypes::Cobblestone),
+                    ("LAU", 30, RoadTypes::Cobblestone),
+                    ("POL", 15, RoadTypes::Cobblestone),
+                    ("PIS", 17, RoadTypes::Asphalt)
                 ],
                 false
             )

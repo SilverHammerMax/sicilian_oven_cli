@@ -1,6 +1,5 @@
 use crate::types::*;
 use crate::*;
-use strum::IntoEnumIterator;
 
 pub fn choose_car() -> car::car::Car {
     let mut car_names = Vec::new();

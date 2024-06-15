@@ -1,5 +1,5 @@
 pub(crate) mod car;
-mod chassis;
-mod engine;
-mod gearbox;
-mod tire;
+pub(crate) mod chassis;
+pub(crate) mod engine;
+pub(crate) mod gearbox;
+pub(crate) mod tire;

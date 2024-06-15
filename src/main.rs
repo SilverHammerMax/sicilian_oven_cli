@@ -52,7 +52,7 @@ fn challenge_engine(challenge: &mut challenge::Challenge) {
             (time % 60.0) as i32
         );
         println!();
-        println!("Your fuel is {}.", car.get_fuel_level() as i32);
+        println!("Your fuel is {}.", car.get_fuel() as i32);
         println!();
         println!(
             "Your path has been: {:?}",
@@ -76,7 +76,7 @@ fn challenge_engine(challenge: &mut challenge::Challenge) {
 
         println!();
 
-        if car.get_fuel_level() - 3.0 * car.get_car_type().get_mileage() < 0.0 {
+        if car.get_fuel() - 3.0 * car.get_car_type().get_mileage() < 0.0 {
             println!("WARNING: LOW FUEL");
             println!();
         }
@@ -120,7 +120,7 @@ fn challenge_engine(challenge: &mut challenge::Challenge) {
             car.refuel();
             path.pop();
         }
-        if car.get_fuel_level() <= 0.0 {
+        if car.get_fuel() <= 0.0 {
             println!("Ran out of fuel! Sorry, game over :(");
             break;
         }

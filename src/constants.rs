@@ -1,3 +1,4 @@
+use std::string::ToString;
 use crate::types::*;
 
 pub const MAJOR_CITIES: [&str; 15] = [
@@ -56,4 +57,14 @@ pub const CHALLENGES: [challenge::Challenge; 5] = [
         challenge::Location::Any,
         [0, 0, 0, 0],
     ),
+];
+
+pub const CARS: [car::car::Car; 1] = [
+    car::car::CarBuilder::new()
+        .name("Il Comandante".to_string())
+        .chassis(car::chassis::Chassis::ChassisThree)
+        .engine(car::engine::Engine::EngineOne)
+        .gearbox(car::gearbox::Gearbox::GearboxThree)
+        .tires(car::tire::Tire::TireFour)
+        .build()
 ];

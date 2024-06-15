@@ -1,31 +1,31 @@
 #[derive(Default, Clone, Copy)]
 pub enum Chassis {
     #[default]
-    ChassisOne,
-    ChassisTwo,
-    ChassisThree,
-    ChassisFour,
-    ChassisFive,
+    One,
+    Two,
+    Three,
+    Four,
+    Five,
 }
 
 impl Chassis {
     pub fn weight(&self) -> f64 {
         match self {
-            Chassis::ChassisOne => 705.0,
-            Chassis::ChassisTwo => 778.0,
-            Chassis::ChassisThree => 861.0,
-            Chassis::ChassisFour => 914.0,
-            Chassis::ChassisFive => 996.0,
+            Chassis::One => 705.0,
+            Chassis::Two => 778.0,
+            Chassis::Three => 861.0,
+            Chassis::Four => 914.0,
+            Chassis::Five => 996.0,
         }
     }
 
     pub fn tank_size(&self) -> f64 {
         match self {
-            Chassis::ChassisOne => 33.6,
-            Chassis::ChassisTwo => 37.0,
-            Chassis::ChassisThree => 41.0,
-            Chassis::ChassisFour => 43.5,
-            Chassis::ChassisFive => 47.4,
+            Chassis::One => 33.6,
+            Chassis::Two => 37.0,
+            Chassis::Three => 41.0,
+            Chassis::Four => 43.5,
+            Chassis::Five => 47.4,
         }
     }
 }

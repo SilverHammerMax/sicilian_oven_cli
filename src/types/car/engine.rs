@@ -9,7 +9,7 @@ pub enum Engine {
 }
 
 impl Engine {
-    pub fn get_brake_horsepower(&self) -> f64 {
+    pub fn brake_horsepower(&self) -> f64 {
         match self {
             Engine::EngineOne => 112.0,
             Engine::EngineTwo => 200.0,
@@ -19,7 +19,7 @@ impl Engine {
         }
     }
 
-    pub fn get_weight(&self) -> f64 {
+    pub fn weight(&self) -> f64 {
         match self {
             Engine::EngineOne => 235.0,
             Engine::EngineTwo => 357.0,

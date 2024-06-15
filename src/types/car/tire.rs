@@ -9,7 +9,7 @@ pub enum Tire {
 }
 
 impl Tire {
-    pub fn get_agc(&self) -> f64 {
+    pub fn agc(&self) -> f64 {
         match self {
             Tire::TireOne => 1.0,
             Tire::TireTwo => 4.0,
@@ -19,7 +19,7 @@ impl Tire {
         }
     }
 
-    pub fn get_ggc(&self) -> f64 {
+    pub fn ggc(&self) -> f64 {
         match self {
             Tire::TireOne => 10.0,
             Tire::TireTwo => 8.0,

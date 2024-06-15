@@ -65,6 +65,6 @@ impl CarBuilder {
 
 impl Car {
     pub fn brake_horsepower(&self) -> f64 {
-        self.gearbox.brake_horsepower() + self.engine.get_brake_horsepower()
+        self.gearbox.brake_horsepower() + self.engine.brake_horsepower()
     }
 }

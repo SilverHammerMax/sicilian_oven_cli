@@ -60,11 +60,5 @@ pub const CHALLENGES: [challenge::Challenge; 5] = [
 ];
 
 pub const CARS: [car::car::Car; 1] = [
-    car::car::CarBuilder::new()
-        .name("Il Comandante".to_string())
-        .chassis(car::chassis::Chassis::ChassisThree)
-        .engine(car::engine::Engine::EngineOne)
-        .gearbox(car::gearbox::Gearbox::GearboxThree)
-        .tires(car::tire::Tire::TireFour)
-        .build()
+    car::car::Car::new("Il Comandante".to_string(), car::tire::Tire::TireFour, car::engine::Engine::EngineOne, car::gearbox::Gearbox::GearboxThree, car::chassis::Chassis::ChassisThree),
 ];

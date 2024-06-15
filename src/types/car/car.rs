@@ -1,18 +1,21 @@
+use crate::types::*;
+
 pub struct Car {
     name: String,
-    tires: super::tire::Tire,
-    engine: super::engine::Engine,
-    gearbox: super::gearbox::Gearbox,
-    chassis: super::chassis::Chassis,
+    tires: car::tire::Tire,
+    engine: car::engine::Engine,
+    gearbox: car::gearbox::Gearbox,
+    chassis: car::chassis::Chassis,
     fuel: f64,
+    reliability: f64,
 }
 
 pub struct CarBuilder {
     name: Option<String>,
-    tires: Option<super::tire::Tire>,
-    engine: Option<super::engine::Engine>,
-    gearbox: Option<super::gearbox::Gearbox>,
-    chassis: Option<super::chassis::Chassis>,
+    tires: Option<car::tire::Tire>,
+    engine: Option<car::engine::Engine>,
+    gearbox: Option<car::gearbox::Gearbox>,
+    chassis: Option<car::chassis::Chassis>,
 }
 
 impl CarBuilder {
@@ -31,22 +34,22 @@ impl CarBuilder {
         self
     }
 
-    pub fn tires(&mut self, tires: super::tire::Tire) -> &mut CarBuilder {
+    pub fn tires(&mut self, tires: car::tire::Tire) -> &mut CarBuilder {
         self.tires = Some(tires);
         self
     }
 
-    pub fn engine(&mut self, engine: super::engine::Engine) -> &mut CarBuilder {
+    pub fn engine(&mut self, engine: car::engine::Engine) -> &mut CarBuilder {
         self.engine = Some(engine);
         self
     }
 
-    pub fn gearbox(&mut self, gearbox: super::gearbox::Gearbox) -> &mut CarBuilder {
+    pub fn gearbox(&mut self, gearbox: car::gearbox::Gearbox) -> &mut CarBuilder {
         self.gearbox = Some(gearbox);
         self
     }
 
-    pub fn chassis(&mut self, chassis: super::chassis::Chassis) -> &mut CarBuilder {
+    pub fn chassis(&mut self, chassis: car::chassis::Chassis) -> &mut CarBuilder {
         self.chassis = Some(chassis);
         self
     }
@@ -59,6 +62,7 @@ impl CarBuilder {
             gearbox: self.gearbox.unwrap_or_default(),
             chassis: self.chassis.unwrap_or_default(),
             fuel: 0.0,
+            reliability: 1.0,
         }
     }
 }
@@ -70,5 +74,9 @@ impl Car {
 
     pub fn weight(&self) -> f64 {
         self.engine.weight() + self.chassis.weight()
+    }
+
+    pub fn reliability(&self) -> f64 {
+        self.reliability
     }
 }

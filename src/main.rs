@@ -124,7 +124,8 @@ fn challenge_engine(challenge: &mut challenge::Challenge) {
         {
             car.refuel();
             path.pop();
-        } else if city_reference.can_refuel() && selection == city_reference.get_cities().len() + 2 {
+        } else if city_reference.can_refuel() && selection == city_reference.get_cities().len() + 2
+        {
             car.repair();
             path.pop();
         }

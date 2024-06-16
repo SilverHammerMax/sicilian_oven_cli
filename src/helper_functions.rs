@@ -2,7 +2,10 @@ use crate::types::*;
 use crate::*;
 
 pub fn choose_car() -> car::car::Car {
-    let car_names = constants::CARS.iter().map(|car| car.name()).collect::<Vec<_>>();
+    let car_names = constants::CARS
+        .iter()
+        .map(|car| car.name())
+        .collect::<Vec<_>>();
     let selection = dialoguer::Select::new()
         .with_prompt("Pick your car")
         .items(&car_names)
@@ -101,7 +104,13 @@ pub fn challenge_prompt(challenge: &challenge::Challenge) {
     println!();
 
     match challenge.get_car() {
-        Some(car) => println!("You are using the {} with a {}L {} engine and a {} gearbox.", car.name(), car.engine().fuel_usage(), car.engine().engine_type(), car.gearbox().gearbox_type()),
+        Some(car) => println!(
+            "You are using the {} with a {}L {} engine and a {} gearbox.",
+            car.name(),
+            car.engine().fuel_usage(),
+            car.engine().engine_type(),
+            car.gearbox().gearbox_type()
+        ),
         None => println!("You can use whatever car you prefer."),
     }
 

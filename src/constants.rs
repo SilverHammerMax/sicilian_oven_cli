@@ -60,7 +60,7 @@ pub const CHALLENGES: [challenge::Challenge; 7] = [
     ),
     challenge::Challenge::new(
         "A Calabrian Rally",
-        Some(car::Car::new(car::CarType::Fiat)),
+        Some(CARS[1]),
         &[
             "ACR", "COT", "ORI", "DIN", "DEL"
         ],

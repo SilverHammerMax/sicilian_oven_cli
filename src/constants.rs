@@ -58,33 +58,33 @@ pub const CHALLENGES: [challenge::Challenge; 5] = [
     ),
 ];
 
-pub const CARS: [car::car::Car; 4] = [
-    car::car::Car::new(
+pub const CARS: [car_parts::car::Car; 4] = [
+    car_parts::car::Car::new(
         "Il Comandante",
-        car::tire::Tire::Four,
-        car::engine::Engine::One,
-        car::gearbox::Gearbox::Three,
-        car::chassis::Chassis::Three,
+        car_parts::tire::Tire::Four,
+        car_parts::engine::Engine::One,
+        car_parts::gearbox::Gearbox::Three,
+        car_parts::chassis::Chassis::Three,
     ),
-    car::car::Car::new(
+    car_parts::car::Car::new(
         "Il Grande",
-        car::tire::Tire::Three,
-        car::engine::Engine::Five,
-        car::gearbox::Gearbox::Four,
-        car::chassis::Chassis::Five,
+        car_parts::tire::Tire::Three,
+        car_parts::engine::Engine::Five,
+        car_parts::gearbox::Gearbox::Four,
+        car_parts::chassis::Chassis::Five,
     ),
-    car::car::Car::new(
+    car_parts::car::Car::new(
         "Il Capo",
-        car::tire::Tire::Two,
-        car::engine::Engine::Two,
-        car::gearbox::Gearbox::Two,
-        car::chassis::Chassis::One,
+        car_parts::tire::Tire::Two,
+        car_parts::engine::Engine::Two,
+        car_parts::gearbox::Gearbox::Two,
+        car_parts::chassis::Chassis::One,
     ),
-    car::car::Car::new(
+    car_parts::car::Car::new(
         "Il Generalissimo",
-        car::tire::Tire::Four,
-        car::engine::Engine::Three,
-        car::gearbox::Gearbox::One,
-        car::chassis::Chassis::Two,
+        car_parts::tire::Tire::Four,
+        car_parts::engine::Engine::Three,
+        car_parts::gearbox::Gearbox::One,
+        car_parts::chassis::Chassis::Two,
     ),
 ];

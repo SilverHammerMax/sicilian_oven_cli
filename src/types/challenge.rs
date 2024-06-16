@@ -10,7 +10,7 @@ pub enum Location {
 #[derive(Clone)]
 pub struct Challenge {
     name: &'static str,
-    car: Option<car::car::Car>,
+    car: Option<car_parts::car::Car>,
     cities: &'static [&'static str],
     start_city: Location,
     end_city: Location,
@@ -21,7 +21,7 @@ pub struct Challenge {
 impl Challenge {
     pub const fn new(
         name: &'static str,
-        car: Option<car::car::Car>,
+        car: Option<car_parts::car::Car>,
         cities: &'static [&'static str],
         start_city: Location,
         end_city: Location,
@@ -42,7 +42,7 @@ impl Challenge {
         self.name
     }
 
-    pub fn get_car(&self) -> Option<car::car::Car> {
+    pub fn get_car(&self) -> Option<car_parts::car::Car> {
         self.car
     }
 

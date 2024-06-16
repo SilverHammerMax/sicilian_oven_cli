@@ -3,10 +3,10 @@ use crate::types::*;
 #[derive(Clone, Copy)]
 pub struct Car {
     name: &'static str,
-    tires: car::tire::Tire,
-    engine: car::engine::Engine,
-    gearbox: car::gearbox::Gearbox,
-    chassis: car::chassis::Chassis,
+    tires: car_parts::tire::Tire,
+    engine: car_parts::engine::Engine,
+    gearbox: car_parts::gearbox::Gearbox,
+    chassis: car_parts::chassis::Chassis,
     fuel: f64,
     reliability: f64,
 }
@@ -14,10 +14,10 @@ pub struct Car {
 impl Car {
     pub const fn new(
         name: &'static str,
-        tires: car::tire::Tire,
-        engine: car::engine::Engine,
-        gearbox: car::gearbox::Gearbox,
-        chassis: car::chassis::Chassis,
+        tires: car_parts::tire::Tire,
+        engine: car_parts::engine::Engine,
+        gearbox: car_parts::gearbox::Gearbox,
+        chassis: car_parts::chassis::Chassis,
     ) -> Car {
         Car {
             name,
@@ -34,19 +34,19 @@ impl Car {
         self.name
     }
 
-    pub fn tires(&self) -> &car::tire::Tire {
+    pub fn tires(&self) -> &car_parts::tire::Tire {
         &self.tires
     }
 
-    pub fn engine(&self) -> &car::engine::Engine {
+    pub fn engine(&self) -> &car_parts::engine::Engine {
         &self.engine
     }
 
-    pub fn gearbox(&self) -> &car::gearbox::Gearbox {
+    pub fn gearbox(&self) -> &car_parts::gearbox::Gearbox {
         &self.gearbox
     }
 
-    pub fn chassis(&self) -> &car::chassis::Chassis {
+    pub fn chassis(&self) -> &car_parts::chassis::Chassis {
         &self.chassis
     }
 
@@ -80,12 +80,12 @@ impl Car {
 
     pub fn refuel(&mut self, mut time: f64) {
         self.fuel = self.chassis.tank_size();
-        time += (10.0 + 1.5 * (self.chassis().tank_size() - self.get_fuel()));
+        time += 10.0 + 1.5 * (self.chassis().tank_size() - self.get_fuel());
     }
 
     pub fn repair(&mut self, mut time: f64) {
         self.reliability = 1.0;
-        time += (145.0 - self.reliability * 100.0);
+        time += 145.0 - self.reliability * 100.0;
     }
 
     pub fn calculate_travel_time(&self, road: &city::RoadTypes, distance: i32) -> f64 {

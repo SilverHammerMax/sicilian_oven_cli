@@ -1,7 +1,7 @@
 use crate::types::*;
 use crate::*;
 
-pub fn choose_car() -> car::car::Car {
+pub fn choose_car() -> car_parts::car::Car {
     let car_names = constants::CARS
         .iter()
         .map(|car| car.name())

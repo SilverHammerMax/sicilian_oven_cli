@@ -1,6 +1,8 @@
 #![deny(clippy::unwrap_used)]
 #![allow(clippy::match_overlapping_arm)]
 
+use rand::prelude::*;
+
 use crate::cities::CITIES;
 use crate::types::*;
 
@@ -12,7 +14,17 @@ mod types;
 fn main() {
     loop {
         println!("Welcome to the game!");
-        let mut challenge = helper_functions::choose_challenge();
+        let options = vec!["Challenges", "Random Cities"];
+        let selection = dialoguer::Select::new()
+            .with_prompt("What would you like to play?")
+            .items(&options)
+            .interact()
+            .expect("Prompt Failed");
+        let mut challenge = match selection {
+            0 => helper_functions::choose_challenge(),
+            1 => todo!(),
+            _ => panic!("Fix New Options!")
+        };
         challenge_engine(&mut challenge);
     }
 }

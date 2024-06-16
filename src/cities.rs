@@ -1,10 +1,10 @@
 use crate::types::city::Region;
 use crate::types::city::{City, RoadTypes};
 use lazy_static::lazy_static;
-use std::collections::HashMap;
+use std::collections::BTreeMap;
 
 lazy_static! {
-    pub static ref CITIES: HashMap<&'static str, City> = HashMap::from([
+    pub static ref CITIES: BTreeMap<&'static str, City> = BTreeMap::from([
         (
             "RAG",
             City::new(

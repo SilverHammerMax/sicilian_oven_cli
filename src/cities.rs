@@ -1889,7 +1889,8 @@ lazy_static! {
                 &[
                     ("BEN", 12, RoadTypes::Cobblestone),
                     ("CIR", 8, RoadTypes::Cobblestone),
-                    ("CGO", 25, RoadTypes::Cobblestone)
+                    ("CGO", 25, RoadTypes::Cobblestone),
+                    ("LUC", 22, RoadTypes::Asphalt)
                 ],
                 false
             )
@@ -1901,7 +1902,219 @@ lazy_static! {
                 Region::Campania,
                 &[
                     ("LIO", 10, RoadTypes::Cobblestone),
-                    ("ROM", 25, RoadTypes::Cobblestone)
+                    ("ROM", 25, RoadTypes::Cobblestone),
+                    ("CNC", 22, RoadTypes::Asphalt)
+                ],
+                false
+            )
+        ),
+        (
+            "LUC",
+            City::new(
+                "Lucera",
+                Region::Apulia,
+                &[
+                    ("FOG", 20, RoadTypes::Asphalt),
+                    ("ROM", 22, RoadTypes::Asphalt),
+                    ("TOI", 13, RoadTypes::Cobblestone),
+                    ("SSV", 14, RoadTypes::Cobblestone)
+                ],
+                false
+            )
+        ),
+        (
+            "TOI",
+            City::new(
+                "Troia",
+                Region::Apulia,
+                &[
+                    ("LUC", 13, RoadTypes::Cobblestone),
+                    ("CNC", 17, RoadTypes::Cobblestone)
+                ],
+                false
+            )
+        ),
+        (
+            "CNC",
+            City::new(
+                "Catenaccio",
+                Region::Apulia,
+                &[
+                    ("TOI", 17, RoadTypes::Cobblestone),
+                    ("CGO", 22, RoadTypes::Asphalt),
+                    ("CGN", 19, RoadTypes::Cobblestone)
+                ],
+                false
+            )
+        ),
+        (
+            "CGN",
+            City::new(
+                "Cerignola",
+                Region::Apulia,
+                &[
+                    ("FOG", 32, RoadTypes::Cobblestone),
+                    ("BRL", 16, RoadTypes::Asphalt),
+                    ("AND", 15, RoadTypes::Cobblestone),
+                    ("CNC", 19, RoadTypes::Cobblestone)
+                ],
+                false
+            )
+        ),
+        (
+            "BRL",
+            City::new(
+                "Barletta",
+                Region::Apulia,
+                &[
+                    ("CGN", 16, RoadTypes::Asphalt),
+                    ("TNI", 14, RoadTypes::Asphalt),
+                    ("AND", 12, RoadTypes::Asphalt),
+                    ("ZAP", 21, RoadTypes::Asphalt)
+                ],
+                true
+            )
+        ),
+        (
+            "FOG",
+            City::new(
+                "Foggia",
+                Region::Apulia,
+                &[
+                    ("LUC", 20, RoadTypes::Asphalt),
+                    ("ZAP", 28, RoadTypes::Asphalt),
+                    ("CGN", 32, RoadTypes::Cobblestone),
+                    ("APV", 8, RoadTypes::Cobblestone)
+                ],
+                true
+            )
+        ),
+        (
+            "ZAP",
+            City::new(
+                "Zapponeta",
+                Region::Apulia,
+                &[
+                    ("BRL", 21, RoadTypes::Asphalt),
+                    ("FOG", 28, RoadTypes::Asphalt),
+                    ("MFR", 19, RoadTypes::Asphalt)
+                ],
+                false
+            )
+        ),
+        (
+            "APV",
+            City::new(
+                "Arpinova",
+                Region::Apulia,
+                &[
+                    ("FOG", 8, RoadTypes::Cobblestone),
+                    ("MFR", 17, RoadTypes::Cobblestone)
+                ],
+                false
+            )
+        ),
+        (
+            "MFR",
+            City::new(
+                "Manfredonia",
+                Region::Apulia,
+                &[
+                    ("ZAP", 19, RoadTypes::Asphalt),
+                    ("APV", 17, RoadTypes::Cobblestone),
+                    ("MTT", 14, RoadTypes::Asphalt),
+                    ("CPI", 20, RoadTypes::Unpaved),
+                    ("VIE", 24, RoadTypes::Cobblestone)
+                ],
+                false
+            )
+        ),
+        (
+            "MTT",
+            City::new(
+                "Mattina",
+                Region::Apulia,
+                &[
+                    ("MFR", 14, RoadTypes::Asphalt),
+                    ("VIE", 12, RoadTypes::Asphalt)
+                ],
+                false
+            )
+        ),
+        (
+            "VIE",
+            City::new(
+                "Vieste",
+                Region::Apulia,
+                &[
+                    ("MTT", 12, RoadTypes::Asphalt),
+                    ("MFR", 24, RoadTypes::Cobblestone),
+                    ("PCH", 11, RoadTypes::Asphalt),
+                    ("CPI", 25, RoadTypes::Cobblestone)
+                ],
+                false
+            )
+        ),
+        (
+            "PCH",
+            City::new(
+                "Peschici",
+                Region::Apulia,
+                &[
+                    ("VIE", 11, RoadTypes::Asphalt),
+                    ("CPI", 18, RoadTypes::Asphalt)
+                ],
+                false
+            )
+        ),
+        (
+            "CPI",
+            City::new(
+                "Carpino",
+                Region::Apulia,
+                &[
+                    ("MFR", 20, RoadTypes::Unpaved),
+                    ("VIE", 25, RoadTypes::Cobblestone),
+                    ("PCH", 18, RoadTypes::Asphalt),
+                    ("SSV", 21, RoadTypes::Unpaved),
+                    ("CEU", 28, RoadTypes::Asphalt)
+                ],
+                false
+            )
+        ),
+        (
+            "SSV",
+            City::new(
+                "San Severo",
+                Region::Apulia,
+                &[
+                    ("LUC", 14, RoadTypes::Cobblestone),
+                    ("CEU", 18, RoadTypes::Asphalt),
+                    ("CPI", 21, RoadTypes::Cobblestone)
+                ],
+                false
+            )
+        ),
+        (
+            "CEU",
+            City::new(
+                "Chieuti",
+                Region::Apulia,
+                &[
+                    ("SSV", 18, RoadTypes::Asphalt),
+                    ("CPI", 28, RoadTypes::Asphalt),
+                    ("LES", 13, RoadTypes::Asphalt)
+                ],
+                false
+            )
+        ),
+        (
+            "LES",
+            City::new(
+                "",
+                Region::Apulia,
+                &[
+                    ("CEU", 13, RoadTypes::Asphalt),
                 ],
                 false
             )

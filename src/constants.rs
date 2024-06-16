@@ -1,8 +1,8 @@
 use crate::types::*;
 
-pub const MAJOR_CITIES: [&str; 17] = [
+pub const MAJOR_CITIES: [&str; 23] = [
     "MES", "CAT", "SIR", "RAG", "AGR", "CTN", "ENN", "PMO", "TRA", "RCA", "VVA", "CNZ", "CRO",
-    "COS", "POT", "MAT", "NAP"
+    "COS", "POT", "MAT", "NAP", "BEN", "SRN", "SAP", "AVE", "FOG", "BRL"
 ];
 
 pub const CHALLENGES: [challenge::Challenge; 7] = [

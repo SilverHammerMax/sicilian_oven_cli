@@ -101,7 +101,7 @@ pub fn challenge_prompt(challenge: &challenge::Challenge) {
     println!();
 
     match challenge.get_car() {
-        Some(car) => println!("You are using the {}.", car.name()),
+        Some(car) => println!("You are using the {} with a {}L {} engine and a {} gearbox.", car.name(), car.engine().fuel_usage(), car.engine().engine_type(), car.gearbox().gearbox_type()),
         None => println!("You can use whatever car you prefer."),
     }
 

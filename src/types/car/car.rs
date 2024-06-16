@@ -71,7 +71,7 @@ impl Car {
             city::RoadTypes::Unpaved => 0.5 * self.tires.ggc(),
             city::RoadTypes::Ferry => 0.0,
         };
-        base_speed * multiplier
+        base_speed * multiplier / 60.0
     }
 
     pub fn get_fuel(&self) -> f64 {

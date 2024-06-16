@@ -1,8 +1,6 @@
 #![deny(clippy::unwrap_used)]
 #![allow(clippy::match_overlapping_arm)]
 
-use rand::prelude::*;
-
 use crate::cities::CITIES;
 use crate::types::*;
 
@@ -22,7 +20,7 @@ fn main() {
             .expect("Prompt Failed");
         let mut challenge = match selection {
             0 => helper_functions::choose_challenge(),
-            1 => todo!(),
+            1 => todo!("WIP!"),
             _ => panic!("Fix New Options!")
         };
         challenge_engine(&mut challenge);

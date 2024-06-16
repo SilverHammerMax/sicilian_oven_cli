@@ -17,7 +17,7 @@ pub fn choose_car() -> car_parts::car::Car {
 
 pub fn choose_challenge() -> challenge::Challenge {
     let mut challenge_names = Vec::new();
-    for challenge in constants::CHALLENGES {
+    for challenge in challenge::initialize_challenges() {
         challenge_names.push(format!(
             "{} {}",
             challenge.get_name(),
@@ -30,7 +30,7 @@ pub fn choose_challenge() -> challenge::Challenge {
         .interact()
         .expect("Prompt Failed");
 
-    constants::CHALLENGES[selection].clone()
+    challenge::initialize_challenges()[selection].clone()
 }
 
 pub fn choose_major_city(region: Option<&city::Region>) -> &'static str {

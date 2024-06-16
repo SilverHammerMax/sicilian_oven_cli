@@ -11,7 +11,7 @@ pub enum Location {
 pub struct Challenge {
     name: &'static str,
     car: Option<car_parts::car::Car>,
-    cities: &'static [&'static str],
+    cities: Vec<&'static str>,
     start_city: Location,
     end_city: Location,
     medal_cutoffs: [i32; 4],
@@ -19,10 +19,10 @@ pub struct Challenge {
 }
 
 impl Challenge {
-    pub const fn new(
+    pub fn new(
         name: &'static str,
         car: Option<car_parts::car::Car>,
-        cities: &'static [&'static str],
+        cities: Vec<&'static str>,
         start_city: Location,
         end_city: Location,
         medal_cutoffs: [i32; 4],
@@ -47,7 +47,7 @@ impl Challenge {
     }
 
     pub fn get_cities(&self) -> &[&str] {
-        self.cities
+        self.cities.as_slice()
     }
 
     pub fn get_start_city(&self) -> &Location {
@@ -69,4 +69,79 @@ impl Challenge {
     pub fn set_medal(&mut self, medal: medal::Medal) {
         self.medal = medal;
     }
+}
+
+pub fn initialize_challenges() -> Vec<Challenge> {
+    vec![
+        Challenge::new(
+            "Ragusan Ride",
+            Some(crate::constants::CARS[3]),
+            vec![
+                "RAG", "COM", "VIT", "MDR", "MOD", "POZ", "CAP", "NTO", "SIR", "GIA", "PAL", "FLO",
+                "AUG", "LEN",
+            ],
+            Location::City("RAG"),
+            Location::City("RAG"),
+            [205, 220, 270, 330],
+        ),
+        Challenge::new(
+            "Big Car, Big Cities",
+            Some(crate::constants::CARS[0]),
+            vec![
+                "RAG", "SIR", "CAT", "ENN", "CTN", "PMO", "TRA", "MES", "AGR",
+            ],
+            Location::Region(city::Region::Sicily),
+            Location::Region(city::Region::Sicily),
+            [310, 325, 375, 475],
+        ),
+        Challenge::new(
+            "A Ride Around Mt. Etna",
+            Some(crate::constants::CARS[2]),
+            vec![
+                "CAT", "GER", "PAT", "ADR", "RAN", "CRL", "PTI", "BAR", "MIL", "MES", "RIP", "TAM",
+                "ACI", "LEN", "NIC", "ENN",
+            ],
+            Location::City("CAT"),
+            Location::City("CAT"),
+            [290, 310, 335, 395],
+        ),
+        Challenge::new(
+            "The Godfather",
+            Some(crate::constants::CARS[3]),
+            vec![
+                "COR", "SEL", "MAR", "CST", "PAR", "MEN", "SCI", "POR", "AGR", "RIB", "CAN", "LIC",
+            ],
+            Location::City("COR"),
+            Location::City("COR"),
+            [305, 325, 370, 395],
+        ),
+        Challenge::new(
+            "Harbormaster",
+            None,
+            vec![
+                "ISC", "STR", "LIP", "MAL", "FAV", "PAN", "TRC"
+            ],
+            Location::Any,
+            Location::Any,
+            [0, 0, 0, 0],
+        ),
+        Challenge::new(
+            "A Calabrian Rally",
+            Some(crate::constants::CARS[1]),
+            vec![
+                "ACR", "COT", "ORI", "DIN", "DEL"
+            ],
+            Location::City("CNZ"),
+            Location::Any,
+            [0, 0, 0, 0],
+        ),
+        Challenge::new(
+            "Free Play",
+            None,
+            vec![],
+            Location::Any,
+            Location::Any,
+            [0, 0, 0, 0],
+        ),
+    ]
 }

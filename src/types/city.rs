@@ -6,18 +6,6 @@ pub enum RoadTypes {
     Ferry,
 }
 
-impl RoadTypes {
-    pub fn time_multiplier(&self) -> f64 {
-        match self {
-            RoadTypes::Highway => 0.5,
-            RoadTypes::Asphalt => 1.0,
-            RoadTypes::Cobblestone => 4.0 / 3.0,
-            RoadTypes::Unpaved => 2.0,
-            RoadTypes::Ferry => 0.0,
-        }
-    }
-}
-
 #[derive(PartialEq, Eq, Clone)]
 pub enum Region {
     Sicily,

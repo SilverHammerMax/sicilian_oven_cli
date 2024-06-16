@@ -8,7 +8,7 @@ pub const MAJOR_CITIES: [&str; 23] = [
 pub const CHALLENGES: [challenge::Challenge; 7] = [
     challenge::Challenge::new(
         "Ragusan Ride",
-        Some(car::Car::new(car::CarType::Lancia)),
+        Some(CARS[3]),
         &[
             "RAG", "COM", "VIT", "MDR", "MOD", "POZ", "CAP", "NTO", "SIR", "GIA", "PAL", "FLO",
             "AUG", "LEN",
@@ -19,7 +19,7 @@ pub const CHALLENGES: [challenge::Challenge; 7] = [
     ),
     challenge::Challenge::new(
         "Big Car, Big Cities",
-        Some(car::Car::new(car::CarType::Ferrari)),
+        Some(CARS[0]),
         &[
             "RAG", "SIR", "CAT", "ENN", "CTN", "PMO", "TRA", "MES", "AGR",
         ],
@@ -29,7 +29,7 @@ pub const CHALLENGES: [challenge::Challenge; 7] = [
     ),
     challenge::Challenge::new(
         "A Ride Around Mt. Etna",
-        Some(car::Car::new(car::CarType::Maserati)),
+        Some(CARS[2]),
         &[
             "CAT", "GER", "PAT", "ADR", "RAN", "CRL", "PTI", "BAR", "MIL", "MES", "RIP", "TAM",
             "ACI", "LEN", "NIC", "ENN",
@@ -40,7 +40,7 @@ pub const CHALLENGES: [challenge::Challenge; 7] = [
     ),
     challenge::Challenge::new(
         "The Godfather",
-        Some(car::Car::new(car::CarType::ModifiedLancia)),
+        Some(CARS[3]),
         &[
             "COR", "SEL", "MAR", "CST", "PAR", "MEN", "SCI", "POR", "AGR", "RIB", "CAN", "LIC",
         ],
@@ -75,5 +75,36 @@ pub const CHALLENGES: [challenge::Challenge; 7] = [
         challenge::Location::Any,
         challenge::Location::Any,
         [0, 0, 0, 0],
+    ),
+];
+
+pub const CARS: [car_parts::car::Car; 4] = [
+    car_parts::car::Car::new(
+        "Il Comandante",
+        car_parts::tire::Tire::Four,
+        car_parts::engine::Engine::One,
+        car_parts::gearbox::Gearbox::Three,
+        car_parts::chassis::Chassis::Three,
+    ),
+    car_parts::car::Car::new(
+        "Il Grande",
+        car_parts::tire::Tire::Three,
+        car_parts::engine::Engine::Five,
+        car_parts::gearbox::Gearbox::Four,
+        car_parts::chassis::Chassis::Five,
+    ),
+    car_parts::car::Car::new(
+        "Il Capo",
+        car_parts::tire::Tire::Two,
+        car_parts::engine::Engine::Two,
+        car_parts::gearbox::Gearbox::Two,
+        car_parts::chassis::Chassis::One,
+    ),
+    car_parts::car::Car::new(
+        "Il Generalissimo",
+        car_parts::tire::Tire::Four,
+        car_parts::engine::Engine::Three,
+        car_parts::gearbox::Gearbox::One,
+        car_parts::chassis::Chassis::Two,
     ),
 ];

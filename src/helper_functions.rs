@@ -1,29 +1,21 @@
 use crate::types::*;
 use crate::*;
-use strum::IntoEnumIterator;
 
-pub fn choose_car() -> car::Car {
-    let mut car_names = Vec::new();
-    for car in car::CarType::iter() {
-        car_names.push(car.get_name().to_string());
-    }
-    car_names.pop();
+pub fn choose_car() -> car_parts::car::Car {
+    let car_names = constants::CARS
+        .iter()
+        .map(|car| car.name())
+        .collect::<Vec<_>>();
     let selection = dialoguer::Select::new()
         .with_prompt("Pick your car")
         .items(&car_names)
         .interact()
         .expect("Prompt Failed");
 
-    match selection {
-        0 => car::Car::new(car::CarType::Lancia),
-        1 => car::Car::new(car::CarType::Maserati),
-        2 => car::Car::new(car::CarType::Ferrari),
-        3 => car::Car::new(car::CarType::Fiat),
-        _ => panic!("Fix Added Car!"),
-    }
+    constants::CARS[selection]
 }
 
-pub fn choose_challenge() -> Challenge {
+pub fn choose_challenge() -> challenge::Challenge {
     let mut challenge_names = Vec::new();
     for challenge in constants::CHALLENGES {
         challenge_names.push(format!(
@@ -43,7 +35,7 @@ pub fn choose_challenge() -> Challenge {
 
 pub fn choose_major_city(region: Option<&city::Region>) -> &'static str {
     let mut major_cities = Vec::new();
-    for code in constants::MAJOR_CITIES.iter() {
+    for code in constants::MAJOR_CITIES {
         major_cities.push(cities::CITIES.get(code).expect("Invalid City Code"));
     }
 
@@ -112,7 +104,13 @@ pub fn challenge_prompt(challenge: &challenge::Challenge) {
     println!();
 
     match challenge.get_car() {
-        Some(car) => println!("You are using the {}.", car.get_car_type().get_name()),
+        Some(car) => println!(
+            "You are using the {} with a {}L {} engine and a {} gearbox.",
+            car.name(),
+            car.engine().fuel_usage(),
+            car.engine().engine_type(),
+            car.gearbox().gearbox_type()
+        ),
         None => println!("You can use whatever car you prefer."),
     }
 

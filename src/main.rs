@@ -2,7 +2,6 @@
 #![allow(clippy::match_overlapping_arm)]
 
 use crate::cities::CITIES;
-use crate::types::challenge::Challenge;
 use crate::types::*;
 
 mod cities;
@@ -18,7 +17,7 @@ fn main() {
     }
 }
 
-fn challenge_engine(challenge: &mut Challenge) {
+fn challenge_engine(challenge: &mut challenge::Challenge) {
     helper_functions::challenge_prompt(challenge);
     let selection = dialoguer::Confirm::new()
         .with_prompt("Do you accept this challenge?")
@@ -30,6 +29,7 @@ fn challenge_engine(challenge: &mut Challenge) {
     let mut car = challenge
         .get_car()
         .unwrap_or_else(helper_functions::choose_car);
+    car.refuel(0.0);
     let mut missing_cities = challenge.get_cities().to_vec();
     let start_city = match challenge.get_start_city() {
         challenge::Location::City(code) => code,
@@ -53,7 +53,11 @@ fn challenge_engine(challenge: &mut Challenge) {
             (time % 60.0) as i32
         );
         println!();
-        println!("Your fuel is {}.", car.get_fuel_level() as i32);
+        println!("Your fuel is {}.", car.get_fuel() as i32);
+        println!(
+            "Your reliability is {}%.",
+            (car.reliability() * 100.0) as i32
+        );
         println!();
         println!(
             "Your path has been: {:?}",
@@ -77,10 +81,13 @@ fn challenge_engine(challenge: &mut Challenge) {
 
         println!();
 
-        if car.get_fuel_level() - 3.0 * car.get_car_type().get_mileage() < 0.0 {
+        if car.get_fuel() - 3.0 * car.engine().fuel_usage() < 0.0 {
             println!("WARNING: LOW FUEL");
-            println!();
         }
+        if car.reliability() < 0.2 {
+            println!("WARNING: CAR NEARLY DETERIORATED");
+        }
+        println!();
         let mut options: Vec<String> = Vec::new();
         for (code, distance, _) in city_reference.get_cities() {
             let option = format!(
@@ -96,6 +103,7 @@ fn challenge_engine(challenge: &mut Challenge) {
         options.push("Submit your challenge or return to main menu".to_string());
         if city_reference.can_refuel() {
             options.push("Refuel".to_string());
+            options.push("Repair".to_string());
         }
 
         let selection = dialoguer::Select::new()
@@ -111,18 +119,25 @@ fn challenge_engine(challenge: &mut Challenge) {
                 .get(selection)
                 .expect("Out of Range");
             car.travel();
-            time += next_city.1 as f64 * 60.0 * next_city.2.time_multiplier()
-                / car.get_car_type().get_horsepower();
+            time += car.calculate_travel_time(&next_city.2, next_city.1);
             city_code = next_city.0;
         } else if selection == city_reference.get_cities().len() {
             break;
         } else if city_reference.can_refuel() && selection == city_reference.get_cities().len() + 1
         {
-            car.refuel();
+            car.refuel(time);
+            path.pop();
+        } else if city_reference.can_refuel() && selection == city_reference.get_cities().len() + 2
+        {
+            car.repair(time);
             path.pop();
         }
-        if car.get_fuel_level() <= 0.0 {
+        if car.get_fuel() <= 0.0 {
             println!("Ran out of fuel! Sorry, game over :(");
+            break;
+        }
+        if car.reliability() <= 0.0 {
+            println!("Car too deteriorated! Sorry, game over :(");
             break;
         }
     }

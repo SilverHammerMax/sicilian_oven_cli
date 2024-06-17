@@ -72,10 +72,11 @@ impl Challenge {
 }
 
 pub fn initialize_challenges() -> Vec<Challenge> {
+    let cars = car_parts::car::initialize_cars();
     vec![
         Challenge::new(
             "Ragusan Ride",
-            Some(crate::constants::CARS[3]),
+            Some(cars[3]),
             vec![
                 "RAG", "COM", "VIT", "MDR", "MOD", "POZ", "CAP", "NTO", "SIR", "GIA", "PAL", "FLO",
                 "AUG", "LEN",
@@ -86,7 +87,7 @@ pub fn initialize_challenges() -> Vec<Challenge> {
         ),
         Challenge::new(
             "Big Car, Big Cities",
-            Some(crate::constants::CARS[0]),
+            Some(cars[0]),
             vec![
                 "RAG", "SIR", "CAT", "ENN", "CTN", "PMO", "TRA", "MES", "AGR",
             ],
@@ -96,7 +97,7 @@ pub fn initialize_challenges() -> Vec<Challenge> {
         ),
         Challenge::new(
             "A Ride Around Mt. Etna",
-            Some(crate::constants::CARS[2]),
+            Some(cars[2]),
             vec![
                 "CAT", "GER", "PAT", "ADR", "RAN", "CRL", "PTI", "BAR", "MIL", "MES", "RIP", "TAM",
                 "ACI", "LEN", "NIC", "ENN",
@@ -107,7 +108,7 @@ pub fn initialize_challenges() -> Vec<Challenge> {
         ),
         Challenge::new(
             "The Godfather",
-            Some(crate::constants::CARS[3]),
+            Some(cars[3]),
             vec![
                 "COR", "SEL", "MAR", "CST", "PAR", "MEN", "SCI", "POR", "AGR", "RIB", "CAN", "LIC",
             ],
@@ -127,7 +128,7 @@ pub fn initialize_challenges() -> Vec<Challenge> {
         ),
         Challenge::new(
             "A Calabrian Rally",
-            Some(crate::constants::CARS[1]),
+            Some(cars[1]),
             vec![
                 "ACR", "COT", "ORI", "DIN", "DEL"
             ],

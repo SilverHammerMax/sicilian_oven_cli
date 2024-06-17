@@ -2,7 +2,8 @@ use crate::types::*;
 use crate::*;
 
 pub fn choose_car() -> car_parts::car::Car {
-    let car_names = constants::CARS
+    let cars = car_parts::car::initialize_cars();
+    let car_names = cars
         .iter()
         .map(|car| car.name())
         .collect::<Vec<_>>();
@@ -12,7 +13,7 @@ pub fn choose_car() -> car_parts::car::Car {
         .interact()
         .expect("Prompt Failed");
 
-    constants::CARS[selection]
+    car_parts::car::initialize_cars()[selection]
 }
 
 pub fn choose_challenge() -> challenge::Challenge {

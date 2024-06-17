@@ -12,7 +12,7 @@ pub struct Car {
 }
 
 impl Car {
-    pub const fn new(
+    pub fn new(
         name: &'static str,
         tires: car_parts::tire::Tire,
         engine: car_parts::engine::Engine,
@@ -96,4 +96,37 @@ impl Car {
         self.fuel -= self.engine.fuel_usage();
         self.reliability -= self.gearbox().deterioration();
     }
+}
+
+pub fn initialize_cars() -> Vec<Car> {
+    vec![
+        Car::new(
+            "Il Commandante",
+            car_parts::tire::Tire::Four,
+            car_parts::engine::Engine::One,
+            car_parts::gearbox::Gearbox::Three,
+            car_parts::chassis::Chassis::Three,
+        ),
+        Car::new(
+            "Il Grande",
+            car_parts::tire::Tire::Three,
+            car_parts::engine::Engine::Five,
+            car_parts::gearbox::Gearbox::Four,
+            car_parts::chassis::Chassis::Five,
+        ),
+        Car::new(
+            "Il Capo",
+            car_parts::tire::Tire::Two,
+            car_parts::engine::Engine::Two,
+            car_parts::gearbox::Gearbox::Two,
+            car_parts::chassis::Chassis::One,
+        ),
+        Car::new(
+            "Il Generalissimo",
+            car_parts::tire::Tire::Four,
+            car_parts::engine::Engine::Three,
+            car_parts::gearbox::Gearbox::One,
+            car_parts::chassis::Chassis::Two,
+        ),
+    ]
 }

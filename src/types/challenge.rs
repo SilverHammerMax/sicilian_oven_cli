@@ -151,11 +151,11 @@ pub fn initialize_challenges() -> Vec<Challenge> {
     ]
 }
 
-pub fn random_challenge(count: usize) -> Challenge {
+pub fn random_challenge(count: usize, seed: &str) -> Challenge {
     if count > crate::cities::CITIES.len() {
         panic!("Too Many Cities!");
     }
-    let mut rng: Pcg64 = Seeder::from("seed_test").make_rng();
+    let mut rng: Pcg64 = Seeder::from(seed).make_rng();
     let cities = crate::cities::CITIES.keys().map(|code| *code).choose_multiple(&mut rng, count);
     Challenge::new("Random Cities", None, cities, Location::Any, Location::Any, [0, 0, 0, 0])
 }

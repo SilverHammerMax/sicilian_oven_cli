@@ -55,6 +55,21 @@ pub fn choose_major_city(region: Option<&city::Region>) -> &'static str {
     city::major_cities()[selection]
 }
 
+pub fn selection_prompt() -> challenge::Challenge {
+    let options = vec!["Challenges", "Random Cities"];
+    let selection = dialoguer::Select::new()
+        .with_prompt("What would you like to play?")
+        .items(&options)
+        .interact()
+        .expect("Prompt Failed");
+    let mut challenge = match selection {
+        0 => choose_challenge(),
+        1 => challenge::random_challenge(5, "seed"),
+        _ => panic!("Fix New Options!")
+    };
+    challenge
+}
+
 pub fn challenge_prompt(challenge: &challenge::Challenge) {
     println!(
         "\nWelcome to {}! In this challenge, you will attempt to reach the cities of:\n",

@@ -11,17 +11,7 @@ mod types;
 fn main() {
     loop {
         println!("Welcome to the game!");
-        let options = vec!["Challenges", "Random Cities"];
-        let selection = dialoguer::Select::new()
-            .with_prompt("What would you like to play?")
-            .items(&options)
-            .interact()
-            .expect("Prompt Failed");
-        let mut challenge = match selection {
-            0 => helper_functions::choose_challenge(),
-            1 => challenge::random_challenge(5),
-            _ => panic!("Fix New Options!")
-        };
+        let mut challenge = helper_functions::selection_prompt();
         challenge_engine(&mut challenge);
     }
 }

@@ -3,20 +3,25 @@
 Welcome to Italy: The Game. This game is an extension of the traveling salesman's problem: you will be given a set numer of cities, and you will have to find the quickest path through them. You 
 can play against your friends or preset challenges, as well as just playing against yourself. This game takes place in the South of Italy, and a map is attached to guide you around.
 
-In this guide, we will cover the following 6 chapters:
+In this guide, we will cover the following 7 chapters:
 
-1. [The Map](#the-map)
-2. [Basic Gameplay](#basic-gameplay)
-3. [Challenges](#challenges)
-4. [Car Building](#car-building)
-5. [Repairing, Refuelling, and Road Types](#repairing-refuelling-and-road-types)
-6. [Player vs. Player](#player-vs-player)
+1. [Basic Overview](#basic-overview)
+2. [The Map](#the-map)
+3. [Basic Gameplay](#basic-gameplay)
+4. [Challenges](#challenges)
+5. [Car Building](#car-building)
+6. [Repairing, Refuelling, and Road Types](#repairing-refuelling-and-road-types)
+7. [Player vs. Player](#player-vs-player)
+
+## Basic Overview
+
+
 
 ## The Map
 
 Before discussing anything else, it's important to discuss the map:
 
-### max please insert the map here because i am stupid and don't know how <3
+### maxwell please insert the map here because i am stupid and don't know how <3
 
 The map covers 8 regions of Italy, with cities and routes placed across the entirety of the map. There are two very important distinctions to make with the map when you're using it:
 

@@ -19,7 +19,7 @@ fn main() {
             .expect("Prompt Failed");
         let mut challenge = match selection {
             0 => helper_functions::choose_challenge(),
-            1 => todo!("WIP!"),
+            1 => challenge::random_challenge(5),
             _ => panic!("Fix New Options!")
         };
         challenge_engine(&mut challenge);

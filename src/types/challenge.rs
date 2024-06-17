@@ -1,3 +1,7 @@
+use rand;
+use rand::prelude::*;
+use rand_pcg::Pcg64;
+use rand_seeder::Seeder;
 use crate::types::*;
 
 #[derive(PartialEq, Eq, Clone)]
@@ -145,4 +149,13 @@ pub fn initialize_challenges() -> Vec<Challenge> {
             [0, 0, 0, 0],
         ),
     ]
+}
+
+pub fn random_challenge(count: usize) -> Challenge {
+    if count > crate::cities::CITIES.len() {
+        panic!("Too Many Cities!");
+    }
+    let mut rng: Pcg64 = Seeder::from("seed_test").make_rng();
+    let cities = crate::cities::CITIES.keys().map(|code| *code).choose_multiple(&mut rng, count);
+    Challenge::new("Random Cities", None, cities, Location::Any, Location::Any, [0, 0, 0, 0])
 }

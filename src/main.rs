@@ -39,7 +39,7 @@ fn challenge_engine(challenge: &mut challenge::Challenge) {
     let mut car = challenge
         .get_car()
         .unwrap_or_else(helper_functions::choose_car);
-    car.refuel(0.0);
+    car.refuel(&mut 0.0);
     let mut missing_cities = challenge.get_cities().to_vec();
     let start_city = match challenge.get_start_city() {
         challenge::Location::City(code) => code,
@@ -135,11 +135,11 @@ fn challenge_engine(challenge: &mut challenge::Challenge) {
             break;
         } else if city_reference.can_refuel() && selection == city_reference.get_cities().len() + 1
         {
-            car.refuel(time);
+            car.refuel(&mut time);
             path.pop();
         } else if city_reference.can_refuel() && selection == city_reference.get_cities().len() + 2
         {
-            car.repair(time);
+            car.repair(&mut time);
             path.pop();
         }
         if car.get_fuel() <= 0.0 {

@@ -78,14 +78,14 @@ impl Car {
         self.fuel
     }
 
-    pub fn refuel(&mut self, mut time: f64) {
+    pub fn refuel(&mut self, time: &mut f64) {
         self.fuel = self.chassis.tank_size();
-        time += 10.0 + 1.5 * (self.chassis().tank_size() - self.get_fuel());
+        *time += 10.0 + 1.5 * (self.chassis().tank_size() - self.get_fuel());
     }
 
-    pub fn repair(&mut self, mut time: f64) {
+    pub fn repair(&mut self, time: &mut f64) {
         self.reliability = 1.0;
-        time += 145.0 - self.reliability * 100.0;
+        *time += 145.0 - self.reliability * 100.0;
     }
 
     pub fn calculate_travel_time(&self, road: &city::RoadTypes, distance: i32) -> f64 {

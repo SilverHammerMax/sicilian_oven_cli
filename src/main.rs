@@ -5,7 +5,6 @@ use crate::cities::CITIES;
 use crate::types::*;
 
 mod cities;
-mod constants;
 mod helper_functions;
 mod types;
 
@@ -111,7 +110,7 @@ fn challenge_engine(challenge: &mut challenge::Challenge) {
             options.push(option);
         }
         options.push("Submit your challenge or return to main menu".to_string());
-        if city_reference.can_refuel() {
+        if city_reference.is_major() {
             options.push("Refuel".to_string());
             options.push("Repair".to_string());
         }
@@ -133,11 +132,11 @@ fn challenge_engine(challenge: &mut challenge::Challenge) {
             city_code = next_city.0;
         } else if selection == city_reference.get_cities().len() {
             break;
-        } else if city_reference.can_refuel() && selection == city_reference.get_cities().len() + 1
+        } else if city_reference.is_major() && selection == city_reference.get_cities().len() + 1
         {
             car.refuel(&mut time);
             path.pop();
-        } else if city_reference.can_refuel() && selection == city_reference.get_cities().len() + 2
+        } else if city_reference.is_major() && selection == city_reference.get_cities().len() + 2
         {
             car.repair(&mut time);
             path.pop();

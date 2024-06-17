@@ -36,7 +36,7 @@ pub fn choose_challenge() -> challenge::Challenge {
 
 pub fn choose_major_city(region: Option<&city::Region>) -> &'static str {
     let mut major_cities = Vec::new();
-    for code in constants::MAJOR_CITIES {
+    for code in city::major_cities() {
         major_cities.push(cities::CITIES.get(code).expect("Invalid City Code"));
     }
 
@@ -52,7 +52,7 @@ pub fn choose_major_city(region: Option<&city::Region>) -> &'static str {
         .interact()
         .expect("Prompt Failed");
 
-    constants::MAJOR_CITIES[selection]
+    city::major_cities()[selection]
 }
 
 pub fn challenge_prompt(challenge: &challenge::Challenge) {

@@ -67,7 +67,11 @@ impl City {
         self.connected_cities
     }
 
-    pub fn can_refuel(&self) -> bool {
+    pub fn is_major(&self) -> bool {
         self.refuel
     }
+}
+
+pub fn major_cities() -> Vec<&'static str> {
+    crate::cities::CITIES.iter().filter(|(code, city)| city.is_major()).map(|(code, city)| *code).collect()
 }

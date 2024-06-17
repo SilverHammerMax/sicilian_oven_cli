@@ -64,7 +64,7 @@ pub fn selection_prompt() -> challenge::Challenge {
         .expect("Prompt Failed");
     let mut challenge = match selection {
         0 => choose_challenge(),
-        1 => challenge::random_challenge(5, "seed"),
+        1 => challenge::random_challenge(),
         _ => panic!("Fix New Options!")
     };
     challenge

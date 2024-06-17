@@ -151,11 +151,28 @@ pub fn initialize_challenges() -> Vec<Challenge> {
     ]
 }
 
-pub fn random_challenge(count: usize, seed: &str) -> Challenge {
+pub fn random_challenge() -> Challenge {
+    let count: usize = dialoguer::Input::new()
+        .with_prompt("How many cities would you like to go to?")
+        .with_initial_text("5")
+        .interact_text()
+        .expect("Prompt Failed");
+
+    let mut seed: String = dialoguer::Input::new()
+        .with_prompt("What seed would you like to use (Leave blank for a random seed)?")
+        .allow_empty(true)
+        .interact_text()
+        .expect("Prompt Failed");
+
+    let seed = match seed.as_str() {
+        "" => thread_rng().sample_iter(&rand::distributions::Alphanumeric).take(20).map(char::from).collect(),
+        _ => seed
+    };
+
     if count > crate::cities::CITIES.len() {
         panic!("Too Many Cities!");
     }
-    let mut rng: Pcg64 = Seeder::from(seed).make_rng();
+    let mut rng: Pcg64 = Seeder::from(seed.to_owned() + count.to_string().as_str()).make_rng();
     let cities = crate::cities::CITIES.keys().map(|code| *code).choose_multiple(&mut rng, count);
     Challenge::new("Random Cities", None, cities, Location::Any, Location::Any, [0, 0, 0, 0])
 }

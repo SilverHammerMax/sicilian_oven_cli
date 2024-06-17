@@ -77,10 +77,15 @@ pub fn challenge_prompt(challenge: &challenge::Challenge) {
     );
     for city in challenge.get_cities() {
         println!(
-            "- {}",
+            "- {} ({})",
             cities::CITIES
                 .get(city)
                 .expect("Invalid City Code")
+                .get_name(),
+            cities::CITIES
+                .get(city)
+                .expect("Invalid City Code")
+                .get_region()
                 .get_name()
         );
     }

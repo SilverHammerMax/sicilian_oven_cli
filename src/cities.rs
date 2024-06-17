@@ -2,7 +2,6 @@ use crate::types::city::Region;
 use crate::types::city::{City, RoadTypes};
 use lazy_static::lazy_static;
 use std::collections::BTreeMap;
-use crate::types::city::Region::Campania;
 
 lazy_static! {
     pub static ref CITIES: BTreeMap<&'static str, City> = BTreeMap::from([
@@ -1798,7 +1797,8 @@ lazy_static! {
                 &[
                     ("MDG", 16, RoadTypes::Asphalt),
                     ("CTA", 25, RoadTypes::Asphalt),
-                    ("ALF", 15, RoadTypes::Asphalt)
+                    ("ALF", 15, RoadTypes::Asphalt),
+                    ("VEN", 14, RoadTypes::Unpaved)
                 ],
                 false
             )
@@ -1880,6 +1880,7 @@ lazy_static! {
                 Region::Campania,
                 &[
                     ("BEN", 12, RoadTypes::Cobblestone),
+                    ("CMP", 34, RoadTypes::Cobblestone),
                     ("ROM", 8, RoadTypes::Cobblestone),
                     ("ALF", 32, RoadTypes::Cobblestone)
                 ],
@@ -1920,6 +1921,7 @@ lazy_static! {
                 Region::Apulia,
                 &[
                     ("FOG", 20, RoadTypes::Asphalt),
+                    ("CMP", 40, RoadTypes::Asphalt),
                     ("ROM", 22, RoadTypes::Asphalt),
                     ("TOI", 13, RoadTypes::Cobblestone),
                     ("SSV", 14, RoadTypes::Cobblestone)
@@ -2108,7 +2110,9 @@ lazy_static! {
                 &[
                     ("SSV", 18, RoadTypes::Asphalt),
                     ("CPI", 28, RoadTypes::Asphalt),
-                    ("LES", 13, RoadTypes::Asphalt)
+                    ("LES", 13, RoadTypes::Asphalt),
+                    ("LAR", 15, RoadTypes::Asphalt),
+                    ("TRM", 23, RoadTypes::Asphalt)
                 ],
                 false
             )
@@ -2495,5 +2499,116 @@ lazy_static! {
                 false
             )
         ),
+        (
+            "VEN",
+            City::new(
+                "Venafro",
+                Region::Molise,
+                &[
+                    ("TEA", 15, RoadTypes::Unpaved)
+                ],
+                false
+            )
+        ),
+        (
+            "ISE",
+            City::new(
+                "Isernia",
+                Region::Molise,
+                &[
+                    ("ORA", 22, RoadTypes::Unpaved)
+                ],
+                false
+            )
+        ),
+        (
+            "AGN",
+            City::new(
+                "Agnone",
+                Region::Molise,
+                &[
+                    ("ORA", 26, RoadTypes::Unpaved),
+                    ("LCI", 37, RoadTypes::Cobblestone)
+                ],
+                false
+            )
+        ),
+        (
+            "ORA",
+            City::new(
+                "Oratina",
+                Region::Molise,
+                &[
+                    ("CMP", 8, RoadTypes::Asphalt),
+                    ("AGN", 26, RoadTypes::Unpaved),
+                    ("ISE", 22, RoadTypes::Unpaved)
+                ],
+                false
+            )
+        ),
+        (
+            "CMP",
+            City::new(
+                "Campobasso",
+                Region::Molise,
+                &[
+                    ("ORA", 8, RoadTypes::Asphalt),
+                    ("LCI", 13, RoadTypes::Asphalt),
+                    ("LUC", 40, RoadTypes::Asphalt),
+                    ("CIR", 34, RoadTypes::Cobblestone)
+                ],
+                true
+            )
+        ),
+        (
+            "LCI",
+            City::new(
+                "Lucito",
+                Region::Molise,
+                &[
+                    ("CMP", 13, RoadTypes::Asphalt),
+                    ("AGN", 37, RoadTypes::Cobblestone),
+                    ("LAR", 12, RoadTypes::Cobblestone)
+                ],
+                false
+            )
+        ),
+        (
+            "LAR",
+            City::new(
+                "Larino",
+                Region::Molise,
+                &[
+                    ("LCI", 12, RoadTypes::Cobblestone),
+                    ("PTA", 11, RoadTypes::Cobblestone),
+                    ("CHI", 15, RoadTypes::Asphalt)
+                ],
+                false
+            )
+        ),
+        (
+            "TRM",
+            City::new(
+                "Termoli",
+                Region::Molise,
+                &[
+                    ("CHI", 23, RoadTypes::Asphalt),
+                    ("PTA", 11, RoadTypes::Cobblestone)
+                ],
+                false
+            )
+        ),
+        (
+            "PTA",
+            City::new(
+                "Palata",
+                Region::Molise,
+                &[
+                    ("TRM", 11, RoadTypes::Cobblestone),
+                    ("LAR", 11, RoadTypes::Cobblestone)
+                ],
+                false
+            )
+        )
     ]);
 }

@@ -201,7 +201,7 @@ play against a friend. Each person will be prompted two questions, and should re
 2. What seed would you like to use (Leave blank for a random seed)
 
 The first option will give a certain amount of cities that both you and your opponent have to reach, while the second option will ensure that both
-you and your opponent are given the same randomly selected cities (provided you submit the same seed number). Each player can then select either a
+you and your opponent are given the same randomly selected cities (provided you submit the same seed). Each player can then select either a
 generic car or a custom-built car and begin racing. The winner is judged by whoever sets the faster time.
 
 Unless if both players set a rule against it, you can both start and end at any city. When you begin, you will be given a list of all the major cities

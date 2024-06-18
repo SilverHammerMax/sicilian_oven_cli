@@ -20,7 +20,7 @@ In this guide, we will cover the following 6 chapters:
 
 Before discussing anything else, it's important to discuss the map:
 
-### maxwell please insert the map here because i am stupid and don't know how <3
+![map](assets/mapofitaly.png)
 
 The map covers 8 regions of Italy, with cities and routes placed across the entirety of the map. There are two very important distinctions to make with the map when you're using it:
 

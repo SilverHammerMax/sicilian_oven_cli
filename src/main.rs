@@ -28,7 +28,6 @@ fn challenge_engine(challenge: &mut challenge::Challenge) {
     let mut car = challenge
         .get_car()
         .unwrap_or_else(helper_functions::choose_car);
-    car.refuel(&mut 0.0);
     let mut missing_cities = challenge.get_cities().to_vec();
     let start_city = match challenge.get_start_city() {
         challenge::Location::City(code) => code,
@@ -52,7 +51,7 @@ fn challenge_engine(challenge: &mut challenge::Challenge) {
             (time % 60.0) as i32
         );
         println!();
-        println!("Your fuel is {}.", car.get_fuel() as i32);
+        println!("Your fuel is {}L.", car.fuel() as i32);
         println!(
             "Your reliability is {}%.",
             (car.reliability() * 100.0) as i32
@@ -80,7 +79,7 @@ fn challenge_engine(challenge: &mut challenge::Challenge) {
 
         println!();
 
-        if car.get_fuel() - 3.0 * car.engine().fuel_usage() < 0.0 {
+        if car.fuel() - 3.0 * car.engine().fuel_usage() <= 0.0 {
             println!("WARNING: LOW FUEL");
         }
         if car.reliability() < 0.2 {
@@ -131,7 +130,7 @@ fn challenge_engine(challenge: &mut challenge::Challenge) {
             car.repair(&mut time);
             path.pop();
         }
-        if car.get_fuel() <= 0.0 {
+        if car.fuel() <= 0.0 {
             println!("Ran out of fuel! Sorry, game over :(");
             break;
         }

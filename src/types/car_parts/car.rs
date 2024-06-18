@@ -25,7 +25,7 @@ impl Car {
             engine,
             gearbox,
             chassis,
-            fuel: 0.0,
+            fuel: chassis.tank_size(),
             reliability: 1.0,
         }
     }
@@ -74,13 +74,13 @@ impl Car {
         base_speed * multiplier / 60.0
     }
 
-    pub fn get_fuel(&self) -> f64 {
+    pub fn fuel(&self) -> f64 {
         self.fuel
     }
 
     pub fn refuel(&mut self, time: &mut f64) {
         self.fuel = self.chassis.tank_size();
-        *time += 10.0 + 1.5 * (self.chassis().tank_size() - self.get_fuel());
+        *time += 10.0 + 1.5 * (self.chassis().tank_size() - self.fuel());
     }
 
     pub fn repair(&mut self, time: &mut f64) {

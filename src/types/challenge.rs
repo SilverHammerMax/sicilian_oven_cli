@@ -134,7 +134,7 @@ pub fn initialize_challenges() -> Vec<Challenge> {
             "A Calabrian Rally",
             Some(cars[1]),
             vec![
-                "ACR", "COT", "ORI", "DIN", "DEL"
+                "ACR", "CTE", "ORI", "DIN", "DEL"
             ],
             Location::City("CNZ"),
             Location::Any,

@@ -21,7 +21,7 @@ pub fn choose_challenge() -> challenge::Challenge {
     for challenge in challenge::initialize_challenges() {
         challenge_names.push(format!(
             "{} {}",
-            challenge.get_name(),
+            challenge.name(),
             challenge.get_medal()
         ));
     }
@@ -73,9 +73,9 @@ pub fn selection_prompt() -> challenge::Challenge {
 pub fn challenge_prompt(challenge: &challenge::Challenge) {
     println!(
         "\nWelcome to {}! In this challenge, you will attempt to reach the cities of:\n",
-        challenge.get_name()
+        challenge.name()
     );
-    for city in challenge.get_cities() {
+    for city in challenge.cities() {
         println!(
             "- {} ({})",
             cities::CITIES
@@ -91,7 +91,7 @@ pub fn challenge_prompt(challenge: &challenge::Challenge) {
     }
     println!();
 
-    let start_city = challenge.get_start_city();
+    let start_city = challenge.start_city();
     let end_city = challenge.get_end_city();
 
     match start_city {
@@ -124,7 +124,7 @@ pub fn challenge_prompt(challenge: &challenge::Challenge) {
 
     println!();
 
-    match challenge.get_car() {
+    match challenge.car() {
         Some(car) => println!(
             "You are using the {} with a {}L {} engine and a {} gearbox.",
             car.name(),
@@ -136,11 +136,11 @@ pub fn challenge_prompt(challenge: &challenge::Challenge) {
     }
 
     println!();
-    if challenge.get_name() != "Free Play" {
-        let author_medal = challenge.get_medal_cutoff(0);
-        let gold_medal = challenge.get_medal_cutoff(1);
-        let silver_medal = challenge.get_medal_cutoff(2);
-        let bronze_medal = challenge.get_medal_cutoff(3);
+    if challenge.name() != "Free Play" {
+        let author_medal = challenge.medal_cutoffs()[0];
+        let gold_medal = challenge.medal_cutoffs()[1];
+        let silver_medal = challenge.medal_cutoffs()[2];
+        let bronze_medal = challenge.medal_cutoffs()[3];
 
         println!(
             "Author: {} hours, {} minutes",

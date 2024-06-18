@@ -42,19 +42,19 @@ impl Challenge {
         }
     }
 
-    pub fn get_name(&self) -> &str {
+    pub fn name(&self) -> &str {
         self.name
     }
 
-    pub fn get_car(&self) -> Option<car_parts::car::Car> {
+    pub fn car(&self) -> Option<car_parts::car::Car> {
         self.car
     }
 
-    pub fn get_cities(&self) -> &[&str] {
+    pub fn cities(&self) -> &[&str] {
         self.cities.as_slice()
     }
 
-    pub fn get_start_city(&self) -> &Location {
+    pub fn start_city(&self) -> &Location {
         &self.start_city
     }
 
@@ -62,8 +62,8 @@ impl Challenge {
         &self.end_city
     }
 
-    pub fn get_medal_cutoff(&self, index: usize) -> i32 {
-        self.medal_cutoffs[index]
+    pub fn medal_cutoffs(&self) -> [i32; 4] {
+        self.medal_cutoffs
     }
 
     pub fn get_medal(&self) -> &medal::Medal {

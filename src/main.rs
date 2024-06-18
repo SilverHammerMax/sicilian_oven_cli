@@ -26,10 +26,10 @@ fn challenge_engine(challenge: &mut challenge::Challenge) {
         return;
     }
     let mut car = challenge
-        .get_car()
+        .car()
         .unwrap_or_else(helper_functions::choose_car);
-    let mut missing_cities = challenge.get_cities().to_vec();
-    let start_city = match challenge.get_start_city() {
+    let mut missing_cities = challenge.cities().to_vec();
+    let start_city = match challenge.start_city() {
         challenge::Location::City(code) => code,
         challenge::Location::Region(region) => helper_functions::choose_major_city(Some(region)),
         challenge::Location::Any => helper_functions::choose_major_city(None),
@@ -141,7 +141,7 @@ fn challenge_engine(challenge: &mut challenge::Challenge) {
     }
 
     println!();
-    if challenge.get_name() != "Free Play" {
+    if challenge.name() != "Free Play" {
         if missing_cities.is_empty()
             && (&challenge::Location::City(city_code) == challenge.get_end_city()
                 || &challenge::Location::Region(
@@ -155,7 +155,7 @@ fn challenge_engine(challenge: &mut challenge::Challenge) {
         {
             println!(
                 "Congratulations! You've completed the {} challenge!",
-                challenge.get_name()
+                challenge.name()
             );
             println!();
             println!(
@@ -164,10 +164,10 @@ fn challenge_engine(challenge: &mut challenge::Challenge) {
                 (time % 60.0) as i32
             );
             println!();
-            let author_cutoff = challenge.get_medal_cutoff(0) as f64;
-            let gold_cutoff = challenge.get_medal_cutoff(1) as f64;
-            let silver_cutoff = challenge.get_medal_cutoff(2) as f64;
-            let bronze_cutoff = challenge.get_medal_cutoff(3) as f64;
+            let author_cutoff = challenge.medal_cutoffs()[0] as f64;
+            let gold_cutoff = challenge.medal_cutoffs()[1] as f64;
+            let silver_cutoff = challenge.medal_cutoffs()[2] as f64;
+            let bronze_cutoff = challenge.medal_cutoffs()[3] as f64;
 
             if time <= author_cutoff {
                 challenge.set_medal(medal::Medal::Author);

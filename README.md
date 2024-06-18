@@ -3,7 +3,7 @@
 Welcome to Italy: The Game. This game is an extension of the traveling salesman's problem: you will be given a set numer of cities, and you will have to find the quickest path through them. You 
 can play against your friends or preset challenges, as well as just playing against yourself. This game takes place in the South of Italy, and a map is attached to guide you around.
 
-In this guide, we will cover the following 7 chapters:
+In this guide, we will cover the following 6 chapters:
 
 1. [Basic Overview](#basic-overview)
 2. [The Map](#the-map)
@@ -79,12 +79,12 @@ cities you need to travel to.
 
 Finally, the sixth part of the menu offers you options. You must select one to continue. You will have, at most, four different kinds of options:
 
-1. An option to travel to another city. This option will list the city and the distance to that city. You can use the map to check where that city is, whether or not you would like to go to that city, and what
+1. An option to travel to another city. This option will list the city and the distance to that city. You can use the map to check where that city is, whether you would like to go to that city, and what
    kind of road connects the city you're currently at and your target city.
 2. An option to "Submit your challenge or return to main menu". By selecting this option, you are either submitting your [challenge](#challenges) or returning to the main menu. Make absolutely sure your challenge is complete
    before clicking this button: there is no way to go back.
-3. An option to refuel. This option will only be available at major cities, and it will allow you to [refuel your car.
-4. An option to repair your car. This option will also only be available at major cities, and it will allow you to [repair your car](#repairing-refuelling-and-road-types).
+3. An option to refuel. This option will only be available at major cities, and it will allow you to [refuel your car](#refuelling).
+4. An option to repair your car. This option will also only be available at major cities, and it will allow you to [repair your car](#repairing).
 
 There may also occasionally be a part of the menu that gives you a warning for low fuel. This warning will intuitively only appear when you are low on fuel. There may also be a text that tells you that
 your challenge is complete, although this would only come up during challenge mode. This is your signal to select the "submit your challenge" dialogue option.

@@ -155,6 +155,13 @@ pub fn random_challenge() -> Challenge {
     let count: usize = dialoguer::Input::new()
         .with_prompt("How many cities would you like to go to?")
         .with_initial_text("5")
+        .validate_with(|input: &usize| -> Result<(), &str> {
+            if *input > 0 {
+                Ok(())
+            } else {
+                Err("Too Few Cities")
+            }
+        })
         .interact_text()
         .expect("Prompt Failed");
 

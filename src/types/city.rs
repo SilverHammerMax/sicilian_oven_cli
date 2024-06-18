@@ -72,6 +72,6 @@ impl City {
     }
 }
 
-pub fn major_cities() -> Vec<&'static str> {
-    crate::cities::CITIES.iter().filter(|(code, city)| city.is_major()).map(|(code, city)| *code).collect()
+pub fn major_cities(region: Option<&Region>) -> Vec<&'static str> {
+    crate::cities::CITIES.iter().filter(|(code, city)| city.is_major() && (region.is_none() || Some(city.get_region()) == region)).map(|(code, city)| *code).collect()
 }

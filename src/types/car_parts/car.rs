@@ -91,14 +91,19 @@ impl Car {
 
     pub fn calculate_travel_time(&self, road: &city::RoadTypes, distance: i32) -> f64 {
         match road {
-            RoadTypes::Ferry => 0.0,
+            RoadTypes::Ferry => 15.0 + 2.5 * distance as f64,
             _ => distance as f64 / self.calculate_speed(road)
         }
     }
 
-    pub fn travel(&mut self) {
-        self.fuel -= self.engine.fuel_usage();
-        self.reliability -= self.gearbox().deterioration();
+    pub fn travel(&mut self, road: &RoadTypes) {
+        match road {
+            &RoadTypes::Ferry => (),
+            _ => {
+                self.fuel -= self.engine.fuel_usage();
+                self.reliability -= self.gearbox().deterioration();
+            }
+        }
     }
 }
 

@@ -116,7 +116,7 @@ fn challenge_engine(challenge: &mut challenge::Challenge) {
                 .get_cities()
                 .get(selection)
                 .expect("Out of Range");
-            car.travel();
+            car.travel(&next_city.2);
             time += car.calculate_travel_time(&next_city.2, next_city.1);
             city_code = next_city.0;
         } else if selection == city_reference.get_cities().len() {

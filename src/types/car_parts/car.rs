@@ -1,4 +1,5 @@
 use crate::types::*;
+use crate::types::city::RoadTypes;
 
 #[derive(Clone, Copy)]
 pub struct Car {
@@ -89,7 +90,10 @@ impl Car {
     }
 
     pub fn calculate_travel_time(&self, road: &city::RoadTypes, distance: i32) -> f64 {
-        distance as f64 / self.calculate_speed(road)
+        match road {
+            RoadTypes::Ferry => 0.0,
+            _ => distance as f64 / self.calculate_speed(road)
+        }
     }
 
     pub fn travel(&mut self) {

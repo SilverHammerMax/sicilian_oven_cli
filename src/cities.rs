@@ -2188,7 +2188,7 @@ lazy_static! {
                 Region::Apulia,
                 &[
                     ("BAR", 11, RoadTypes::Asphalt),
-                    ("MFF", 15, RoadTypes::Asphalt),
+                    ("MLF", 15, RoadTypes::Asphalt),
                     ("CRR", 21, RoadTypes::Cobblestone),
                     ("AMU", 26, RoadTypes::Unpaved),
                     ("CIC", 37, RoadTypes::Cobblestone)

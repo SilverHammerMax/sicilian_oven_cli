@@ -767,7 +767,7 @@ lazy_static! {
         (
             "CST",
             City::new(
-                "Castallammare",
+                "Castellammare",
                 Region::Sicily,
                 &[
                     ("ERI", 22, RoadTypes::Asphalt),
@@ -1524,7 +1524,7 @@ lazy_static! {
                 Region::Basilicata,
                 &[
                     ("MET", 21, RoadTypes::Asphalt),
-                    ("ROS", 22, RoadTypes::Asphalt),
+                    ("RTO", 22, RoadTypes::Asphalt),
                     ("TUR", 15, RoadTypes::Cobblestone)
                 ],
                 false

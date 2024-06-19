@@ -1,3 +1,5 @@
+use std::fmt::{Display, Formatter};
+
 pub enum RoadTypes {
     Highway,
     Asphalt,
@@ -18,21 +20,20 @@ pub enum Region {
     Lazio,
 }
 
-impl Region {
-    pub fn get_name(&self) -> &str {
+impl Display for Region {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         match self {
-            Region::Sicily => "Sicily",
-            Region::Calabria => "Calabria",
-            Region::Basilicata => "Basilicata",
-            Region::Apulia => "Apulia",
-            Region::Campania => "Campania",
-            Region::Molise => "Molise",
-            Region::Abruzzo => "Abruzzo",
-            Region::Lazio => "Lazio",
+            Region::Sicily => write!(f, "Sicily"),
+            Region::Calabria => write!(f, "Calabria"),
+            Region::Basilicata => write!(f, "Basilicata"),
+            Region::Apulia => write!(f, "Apulia"),
+            Region::Campania => write!(f, "Campania"),
+            Region::Molise => write!(f, "Molise"),
+            Region::Abruzzo => write!(f, "Abruzzo"),
+            Region::Lazio => write!(f, "Lazio"),
         }
     }
 }
-
 pub struct City {
     city_name: &'static str,
     region: Region,

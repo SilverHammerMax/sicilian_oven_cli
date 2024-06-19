@@ -35,7 +35,7 @@ pub fn choose_challenge() -> challenge::Challenge {
 }
 
 pub fn choose_major_city(region: Option<&city::Region>) -> &'static str {
-    let major_cities: Vec<&str> = city::major_cities(region).iter().map(|code| cities::CITIES.get(code).expect("Invalid City Code").get_name()).collect();
+    let major_cities: Vec<String>  = city::major_cities(region).iter().map(|code| format!("{} ({})", cities::CITIES.get(code).expect("Invalid City Code").get_name(), cities::CITIES.get(code).expect("Invalid City Code").get_region())).collect();
 
     let selection = dialoguer::Select::new()
         .with_prompt("What major city would you like to start in?")
@@ -77,7 +77,6 @@ pub fn challenge_prompt(challenge: &challenge::Challenge) {
                 .get(city)
                 .expect("Invalid City Code")
                 .get_region()
-                .get_name()
         );
     }
     println!();
@@ -94,7 +93,7 @@ pub fn challenge_prompt(challenge: &challenge::Challenge) {
                 .get_name()
         ),
         challenge::Location::Region(region) => {
-            println!("You may start in any major city in {}.", region.get_name())
+            println!("You may start in any major city in {}.", region)
         }
         challenge::Location::Any => println!("You can start in whatever major city you prefer."),
     }
@@ -108,7 +107,7 @@ pub fn challenge_prompt(challenge: &challenge::Challenge) {
                 .get_name()
         ),
         challenge::Location::Region(region) => {
-            println!("You may start in any major city in {}.", region.get_name())
+            println!("You may start in any major city in {}.", region)
         }
         challenge::Location::Any => println!("You can start in whatever major city you prefer."),
     }

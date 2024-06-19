@@ -14,6 +14,10 @@ In this guide, we will cover the following 6 chapters:
 
 ## Basic Overview
 
+The goal of the game is to travel to all the cities indicated by the game mode you're playing as quickly as possible. The smaller the time, the better. There are multiple different game-provided cars
+you can use, and you can also build your own car. Each car has a set of attributes which will determine its speed, fuel usage, and reliability. There are also different kinds of roads where certain cars
+will perform better. Essentially, the entire game is an exercise in managing the fuel and condition of your car while plotting the fastest route between a given set of cities.
+
 
 
 ## The Map

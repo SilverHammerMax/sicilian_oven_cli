@@ -51,7 +51,7 @@ fn challenge_engine(challenge: &mut challenge::Challenge) {
             (time % 60.0) as i32
         );
         println!();
-        println!("Your fuel is {}L.", car.fuel() as i32);
+        println!("Your fuel is {}L.", car.fuel() as f32);
         println!(
             "Your reliability is {}%.",
             (car.reliability() * 100.0) as i32

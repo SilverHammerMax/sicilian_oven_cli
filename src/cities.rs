@@ -1554,7 +1554,7 @@ lazy_static! {
                     ("MFI", 25, RoadTypes::Unpaved),
                     ("ALI", 42, RoadTypes::Unpaved),
                     ("LAU", 54, RoadTypes::Unpaved),
-                    ("POL", 19, RoadTypes::Unpaved)
+                    ("POA", 19, RoadTypes::Unpaved)
                 ],
                 false
             )
@@ -1733,7 +1733,7 @@ lazy_static! {
                 "Contursi",
                 Region::Campania,
                 &[
-                    ("SAL", 23, RoadTypes::Asphalt),
+                    ("SRN", 23, RoadTypes::Asphalt),
                     ("POL", 12, RoadTypes::Cobblestone),
                     ("LIO", 22, RoadTypes::Asphalt)
                 ],

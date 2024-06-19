@@ -12,10 +12,10 @@ impl Gearbox {
     pub fn brake_horsepower(&self) -> f64 {
         match self {
             Gearbox::One => 0.0,
-            Gearbox::Two => 10.0,
-            Gearbox::Three => 20.0,
-            Gearbox::Four => 30.0,
-            Gearbox::Five => 45.0,
+            Gearbox::Two => 40.0,
+            Gearbox::Three => 80.0,
+            Gearbox::Four => 120.0,
+            Gearbox::Five => 220.0,
         }
     }
 

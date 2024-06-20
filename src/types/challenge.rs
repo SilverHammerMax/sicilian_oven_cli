@@ -152,20 +152,20 @@ pub fn initialize_challenges() -> Vec<Challenge> {
 }
 
 pub fn random_challenge() -> Challenge {
-    let count: usize = dialoguer::Input::new()
+    let count= dialoguer::Input::new()
         .with_prompt("How many cities would you like to go to?")
         .with_initial_text("5")
-        .validate_with(|input: &usize| -> Result<(), &str> {
-            if *input == 0 {
+        .validate_with(|input: &i32 | -> Result<(), &str> {
+            if *input <= 0 {
                 return Err("Too Few Cities")
             }
-            if *input > crate::cities::CITIES.len() {
+            if *input > crate::cities::CITIES.len() as i32 {
                 return Err("Too Many Cities")
             }
             Ok(())
         })
         .interact_text()
-        .expect("Prompt Failed");
+        .expect("Prompt Failed") as usize;
 
     let mut seed: String = dialoguer::Input::new()
         .with_prompt("What seed would you like to use (Leave blank for a random seed)?")
@@ -178,9 +178,6 @@ pub fn random_challenge() -> Challenge {
         _ => seed
     };
 
-    if count > crate::cities::CITIES.len() {
-        panic!("Too Many Cities!");
-    }
     let mut rng: Pcg64 = Seeder::from(seed.to_owned() + count.to_string().as_str()).make_rng();
     let cities = crate::cities::CITIES.keys().map(|code| *code).choose_multiple(&mut rng, count);
     Challenge::new("Random Cities", None, cities, Location::Any, Location::Any, [0, 0, 0, 0])

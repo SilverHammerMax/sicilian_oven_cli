@@ -76,7 +76,7 @@ impl Challenge {
 }
 
 pub fn initialize_challenges() -> Vec<Challenge> {
-    let cars = car_parts::car::initialize_cars();
+    let cars = car_parts::car::Car::initialize();
     vec![
         Challenge::new(
             "Ragusan Ride",

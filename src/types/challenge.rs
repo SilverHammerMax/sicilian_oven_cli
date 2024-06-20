@@ -156,7 +156,7 @@ pub fn random_challenge() -> Challenge {
         .with_prompt("How many cities would you like to go to?")
         .with_initial_text("5")
         .validate_with(|input: &usize| -> Result<(), &str> {
-            if *input < 0 {
+            if *input == 0 {
                 return Err("Too Few Cities")
             }
             if *input > crate::cities::CITIES.len() {

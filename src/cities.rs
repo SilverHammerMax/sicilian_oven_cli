@@ -2155,7 +2155,7 @@ lazy_static! {
             )
         ),
         (
-            "CTO",
+            "CRR",
             City::new(
                 "Corrato",
                 Region::Apulia,

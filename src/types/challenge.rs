@@ -18,7 +18,7 @@ pub struct Challenge {
     cities: Vec<&'static str>,
     start_city: Location,
     end_city: Location,
-    medal_cutoffs: [i32; 4],
+    medal_cutoffs: Option<[i32; 4]>,
     medal: medal::Medal,
 }
 
@@ -29,7 +29,7 @@ impl Challenge {
         cities: Vec<&'static str>,
         start_city: Location,
         end_city: Location,
-        medal_cutoffs: [i32; 4],
+        medal_cutoffs: Option<[i32; 4]>,
     ) -> Challenge {
         Challenge {
             name,
@@ -62,7 +62,7 @@ impl Challenge {
         &self.end_city
     }
 
-    pub fn medal_cutoffs(&self) -> [i32; 4] {
+    pub fn medal_cutoffs(&self) -> Option<[i32; 4]> {
         self.medal_cutoffs
     }
 
@@ -87,7 +87,7 @@ pub fn initialize_challenges() -> Vec<Challenge> {
             ],
             Location::City("RAG"),
             Location::City("RAG"),
-            [205, 220, 270, 330],
+            Some([205, 220, 270, 330]),
         ),
         Challenge::new(
             "Big Car, Big Cities",
@@ -97,7 +97,7 @@ pub fn initialize_challenges() -> Vec<Challenge> {
             ],
             Location::Region(city::Region::Sicily),
             Location::Region(city::Region::Sicily),
-            [310, 325, 375, 475],
+            Some([310, 325, 375, 475]),
         ),
         Challenge::new(
             "A Ride Around Mt. Etna",
@@ -108,7 +108,7 @@ pub fn initialize_challenges() -> Vec<Challenge> {
             ],
             Location::City("CAT"),
             Location::City("CAT"),
-            [290, 310, 335, 395],
+            Some([290, 310, 335, 395]),
         ),
         Challenge::new(
             "The Godfather",
@@ -118,7 +118,7 @@ pub fn initialize_challenges() -> Vec<Challenge> {
             ],
             Location::City("COR"),
             Location::City("COR"),
-            [305, 325, 370, 395],
+            Some([305, 325, 370, 395]),
         ),
         Challenge::new(
             "Harbormaster",
@@ -128,7 +128,7 @@ pub fn initialize_challenges() -> Vec<Challenge> {
             ],
             Location::Any,
             Location::Any,
-            [0, 0, 0, 0],
+            Some([0, 0, 0, 0]),
         ),
         Challenge::new(
             "A Calabrian Rally",
@@ -138,7 +138,7 @@ pub fn initialize_challenges() -> Vec<Challenge> {
             ],
             Location::City("CNZ"),
             Location::Any,
-            [0, 0, 0, 0],
+            Some([0, 0, 0, 0]),
         ),
         Challenge::new(
             "Free Play",
@@ -146,7 +146,7 @@ pub fn initialize_challenges() -> Vec<Challenge> {
             vec![],
             Location::Any,
             Location::Any,
-            [0, 0, 0, 0],
+            None,
         ),
     ]
 }
@@ -174,11 +174,11 @@ pub fn random_challenge() -> Challenge {
         .expect("Prompt Failed");
 
     let seed = match seed.as_str() {
-        "" => thread_rng().sample_iter(&rand::distributions::Alphanumeric).take(20).map(char::from).collect(),
+        "" => thread_rng().sample_iter(&rand::distributions::Alphanumeric).take(256).map(char::from).collect(),
         _ => seed
     };
 
-    let mut rng: Pcg64 = Seeder::from(seed.to_owned() + count.to_string().as_str()).make_rng();
+    let mut rng: Pcg64 = Seeder::from(seed.to_owned() + &count.to_string()).make_rng();
     let cities = crate::cities::CITIES.keys().map(|code| *code).choose_multiple(&mut rng, count);
-    Challenge::new("Random Cities", None, cities, Location::Any, Location::Any, [0, 0, 0, 0])
+    Challenge::new("Random Cities", None, cities, Location::Any, Location::Any, None)
 }

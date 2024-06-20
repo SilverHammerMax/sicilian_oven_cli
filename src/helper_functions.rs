@@ -126,11 +126,11 @@ pub fn challenge_prompt(challenge: &challenge::Challenge) {
     }
 
     println!();
-    if challenge.name() != "Free Play" {
-        let author_medal = challenge.medal_cutoffs()[0];
-        let gold_medal = challenge.medal_cutoffs()[1];
-        let silver_medal = challenge.medal_cutoffs()[2];
-        let bronze_medal = challenge.medal_cutoffs()[3];
+    if challenge.medal_cutoffs().is_some()  {
+        let author_medal = challenge.medal_cutoffs().unwrap()[0];
+        let gold_medal = challenge.medal_cutoffs().unwrap()[1];
+        let silver_medal = challenge.medal_cutoffs().unwrap()[2];
+        let bronze_medal = challenge.medal_cutoffs().unwrap()[3];
 
         println!(
             "Author: {} hours, {} minutes",

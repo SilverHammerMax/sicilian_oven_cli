@@ -141,33 +141,33 @@ fn challenge_engine(challenge: &mut challenge::Challenge) {
     }
 
     println!();
-    if challenge.name() != "Free Play" {
-        if missing_cities.is_empty()
-            && (&challenge::Location::City(city_code) == challenge.get_end_city()
-                || &challenge::Location::Region(
-                    cities::CITIES
-                        .get(city_code)
-                        .expect("Invalid City Code")
-                        .get_region()
-                        .clone(),
-                ) == challenge.get_end_city()
-                || challenge.get_end_city() == &challenge::Location::Any)
-        {
-            println!(
-                "Congratulations! You've completed the {} challenge!",
-                challenge.name()
-            );
-            println!();
-            println!(
-                "You completed it in {} hour(s) and {} minute(s)!",
-                (time / 60.0) as i32,
-                (time % 60.0) as i32
-            );
-            println!();
-            let author_cutoff = challenge.medal_cutoffs()[0] as f64;
-            let gold_cutoff = challenge.medal_cutoffs()[1] as f64;
-            let silver_cutoff = challenge.medal_cutoffs()[2] as f64;
-            let bronze_cutoff = challenge.medal_cutoffs()[3] as f64;
+    if missing_cities.is_empty()
+        && (&challenge::Location::City(city_code) == challenge.get_end_city()
+        || &challenge::Location::Region(
+        cities::CITIES
+            .get(city_code)
+            .expect("Invalid City Code")
+            .get_region()
+            .clone(),
+    ) == challenge.get_end_city()
+        || challenge.get_end_city() == &challenge::Location::Any)
+    {
+        println!(
+            "Congratulations! You've completed the {} challenge!",
+            challenge.name()
+        );
+        println!();
+        println!(
+            "You completed it in {} hour(s) and {} minute(s)!",
+            (time / 60.0) as i32,
+            (time % 60.0) as i32
+        );
+        println!();
+        if challenge.medal_cutoffs().is_some() {
+            let author_cutoff = challenge.medal_cutoffs().unwrap()[0] as f64;
+            let gold_cutoff = challenge.medal_cutoffs().unwrap()[1] as f64;
+            let silver_cutoff = challenge.medal_cutoffs().unwrap()[2] as f64;
+            let bronze_cutoff = challenge.medal_cutoffs().unwrap()[3] as f64;
 
             if time <= author_cutoff {
                 challenge.set_medal(medal::Medal::Author);
@@ -186,8 +186,8 @@ fn challenge_engine(challenge: &mut challenge::Challenge) {
                 medal::Medal::Bronze => println!("You're getting there! You've won the bronze medal!"),
                 medal::Medal::None => println!("You're getting there, but that time unfortunately wasn't fast enough to win a medal. Please try again!")
             }
-        } else {
-            println!("Sorry, you were unsuccessful. Better luck next time!");
         }
+    } else {
+        println!("Sorry, you were unsuccessful. Better luck next time!");
     }
 }

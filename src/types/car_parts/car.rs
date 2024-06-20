@@ -1,5 +1,4 @@
 use crate::types::*;
-use crate::types::city::RoadTypes;
 
 #[derive(Clone, Copy)]
 pub struct Car {
@@ -91,14 +90,14 @@ impl Car {
 
     pub fn calculate_travel_time(&self, road: &city::RoadTypes, distance: i32) -> f64 {
         match road {
-            RoadTypes::Ferry => 15.0 + 2.5 * distance as f64,
+            city::RoadTypes::Ferry => 15.0 + 2.5 * distance as f64,
             _ => distance as f64 / self.calculate_speed(road)
         }
     }
 
-    pub fn travel(&mut self, road: &RoadTypes) {
+    pub fn travel(&mut self, road: &city::RoadTypes) {
         match road {
-            &RoadTypes::Ferry => (),
+            &city::RoadTypes::Ferry => (),
             _ => {
                 self.fuel -= self.engine.fuel_usage();
                 self.reliability -= self.gearbox().deterioration();
@@ -138,4 +137,61 @@ pub fn initialize_cars() -> Vec<Car> {
             car_parts::chassis::Chassis::Two,
         ),
     ]
+}
+
+pub struct CarBuilder {
+    name: Option<&'static str>,
+    tires: Option<car_parts::tire::Tire>,
+    engine: Option<car_parts::engine::Engine>,
+    gearbox: Option<car_parts::gearbox::Gearbox>,
+    chassis: Option<car_parts::chassis::Chassis>,
+}
+
+impl CarBuilder {
+    pub fn new() -> Self {
+        Self {
+            name: None,
+            tires: None,
+            engine: None,
+            gearbox: None,
+            chassis: None,
+        }
+    }
+
+    pub fn name(mut self, name: &'static str) -> Self {
+        self.name = Some(name);
+        self
+    }
+
+    pub fn tires(mut self, tires: car_parts::tire::Tire) -> Self {
+        self.tires = Some(tires);
+        self
+    }
+
+    pub fn engine(mut self, engine: car_parts::engine::Engine) -> Self {
+        self.engine = Some(engine);
+        self
+    }
+
+    pub fn gearbox(mut self, gearbox: car_parts::gearbox::Gearbox) -> Self {
+        self.gearbox = Some(gearbox);
+        self
+    }
+
+    pub fn chassis(mut self, chassis: car_parts::chassis::Chassis) -> Self {
+        self.chassis = Some(chassis);
+        self
+    }
+
+    pub fn build(&self) -> Car {
+        Car {
+            name: self.name.unwrap(),
+            tires: self.tires.unwrap_or_default(),
+            engine: self.engine.unwrap_or_default(),
+            gearbox: self.gearbox.unwrap_or_default(),
+            chassis: self.chassis.unwrap_or_default(),
+            fuel: self.chassis.unwrap_or_default().tank_size(),
+            reliability: 1.0,
+        }
+    }
 }

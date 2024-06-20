@@ -12,24 +12,6 @@ pub struct Car {
 }
 
 impl Car {
-    pub fn new(
-        name: &'static str,
-        tires: car_parts::tire::Tire,
-        engine: car_parts::engine::Engine,
-        gearbox: car_parts::gearbox::Gearbox,
-        chassis: car_parts::chassis::Chassis,
-    ) -> Car {
-        Car {
-            name,
-            tires,
-            engine,
-            gearbox,
-            chassis,
-            fuel: chassis.tank_size(),
-            reliability: 1.0,
-        }
-    }
-
     pub fn name(&self) -> &str {
         self.name
     }
@@ -104,39 +86,39 @@ impl Car {
             }
         }
     }
-}
 
-pub fn initialize_cars() -> Vec<Car> {
-    vec![
-        Car::new(
-            "Il Commandante",
-            car_parts::tire::Tire::Four,
-            car_parts::engine::Engine::One,
-            car_parts::gearbox::Gearbox::Three,
-            car_parts::chassis::Chassis::Three,
-        ),
-        Car::new(
-            "Il Grande",
-            car_parts::tire::Tire::Three,
-            car_parts::engine::Engine::Five,
-            car_parts::gearbox::Gearbox::Four,
-            car_parts::chassis::Chassis::Five,
-        ),
-        Car::new(
-            "Il Capo",
-            car_parts::tire::Tire::Two,
-            car_parts::engine::Engine::Two,
-            car_parts::gearbox::Gearbox::Two,
-            car_parts::chassis::Chassis::One,
-        ),
-        Car::new(
-            "Il Generalissimo",
-            car_parts::tire::Tire::Four,
-            car_parts::engine::Engine::Three,
-            car_parts::gearbox::Gearbox::One,
-            car_parts::chassis::Chassis::Two,
-        ),
-    ]
+    pub fn initialize() -> Vec<Car> {
+        vec![
+            CarBuilder::new()
+                .name("Il Comandante")
+                .tires(car_parts::tire::Tire::Four)
+                .engine(car_parts::engine::Engine::One)
+                .gearbox(car_parts::gearbox::Gearbox::Three)
+                .chassis(car_parts::chassis::Chassis::Three)
+                .build(),
+            CarBuilder::new()
+                .name("Il Grande")
+                .tires(car_parts::tire::Tire::Three)
+                .engine(car_parts::engine::Engine::Five)
+                .gearbox(car_parts::gearbox::Gearbox::Four)
+                .chassis(car_parts::chassis::Chassis::Five)
+                .build(),
+            CarBuilder::new()
+                .name("Il Capo")
+                .tires(car_parts::tire::Tire::Two)
+                .engine(car_parts::engine::Engine::Two)
+                .gearbox(car_parts::gearbox::Gearbox::Two)
+                .chassis(car_parts::chassis::Chassis::One)
+                .build(),
+            CarBuilder::new()
+                .name("Il Generalissimo")
+                .tires(car_parts::tire::Tire::Four)
+                .engine(car_parts::engine::Engine::Three)
+                .gearbox(car_parts::gearbox::Gearbox::One)
+                .chassis(car_parts::chassis::Chassis::Four)
+                .build(),
+        ]
+    }
 }
 
 pub struct CarBuilder {

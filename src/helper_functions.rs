@@ -13,7 +13,7 @@ pub fn choose_car() -> car_parts::car::Car {
         .interact()
         .expect("Prompt Failed");
 
-    car_parts::car::Car::initialize()[selection]
+    cars[selection].clone()
 }
 
 pub fn choose_challenge() -> challenge::Challenge {

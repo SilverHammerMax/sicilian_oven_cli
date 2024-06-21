@@ -1,8 +1,8 @@
 use crate::types::*;
 
-#[derive(Clone, Copy)]
+#[derive(Clone)]
 pub struct Car {
-    name: &'static str,
+    name: String,
     tires: car_parts::tire::Tire,
     engine: car_parts::engine::Engine,
     gearbox: car_parts::gearbox::Gearbox,
@@ -13,7 +13,7 @@ pub struct Car {
 
 impl Car {
     pub fn name(&self) -> &str {
-        self.name
+        &self.name
     }
 
     pub fn tires(&self) -> &car_parts::tire::Tire {
@@ -90,28 +90,28 @@ impl Car {
     pub fn initialize() -> Vec<Car> {
         vec![
             CarBuilder::new()
-                .name("Il Comandante")
+                .name("Il Comandante".to_string())
                 .tires(car_parts::tire::Tire::Four)
                 .engine(car_parts::engine::Engine::One)
                 .gearbox(car_parts::gearbox::Gearbox::Three)
                 .chassis(car_parts::chassis::Chassis::Three)
                 .build(),
             CarBuilder::new()
-                .name("Il Grande")
+                .name("Il Grande".to_string())
                 .tires(car_parts::tire::Tire::Three)
                 .engine(car_parts::engine::Engine::Five)
                 .gearbox(car_parts::gearbox::Gearbox::Four)
                 .chassis(car_parts::chassis::Chassis::Five)
                 .build(),
             CarBuilder::new()
-                .name("Il Capo")
+                .name("Il Capo".to_string())
                 .tires(car_parts::tire::Tire::Two)
                 .engine(car_parts::engine::Engine::Two)
                 .gearbox(car_parts::gearbox::Gearbox::Two)
                 .chassis(car_parts::chassis::Chassis::One)
                 .build(),
             CarBuilder::new()
-                .name("Il Generalissimo")
+                .name("Il Generalissimo".to_string())
                 .tires(car_parts::tire::Tire::Four)
                 .engine(car_parts::engine::Engine::Three)
                 .gearbox(car_parts::gearbox::Gearbox::One)
@@ -122,7 +122,7 @@ impl Car {
 }
 
 pub struct CarBuilder {
-    name: Option<&'static str>,
+    name: Option<String>,
     tires: Option<car_parts::tire::Tire>,
     engine: Option<car_parts::engine::Engine>,
     gearbox: Option<car_parts::gearbox::Gearbox>,
@@ -140,7 +140,7 @@ impl CarBuilder {
         }
     }
 
-    pub fn name(mut self, name: &'static str) -> Self {
+    pub fn name(mut self, name: String) -> Self {
         self.name = Some(name);
         self
     }
@@ -165,9 +165,9 @@ impl CarBuilder {
         self
     }
 
-    pub fn build(&self) -> Car {
+    pub fn build(self) -> Car {
         Car {
-            name: self.name.unwrap(),
+            name: self.name.unwrap_or_default(),
             tires: self.tires.unwrap_or_default(),
             engine: self.engine.unwrap_or_default(),
             gearbox: self.gearbox.unwrap_or_default(),

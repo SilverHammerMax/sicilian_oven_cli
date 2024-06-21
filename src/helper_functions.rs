@@ -53,12 +53,11 @@ pub fn selection_prompt() -> challenge::Challenge {
         .items(&options)
         .interact()
         .expect("Prompt Failed");
-    let mut challenge = match selection {
+    match selection {
         0 => choose_challenge(),
         1 => challenge::random_challenge(),
         _ => panic!("Fix New Options!")
-    };
-    challenge
+    }
 }
 
 pub fn challenge_prompt(challenge: &challenge::Challenge) {

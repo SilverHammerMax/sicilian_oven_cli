@@ -167,7 +167,7 @@ pub fn random_challenge() -> Challenge {
         .interact_text()
         .expect("Prompt Failed") as usize;
 
-    let mut seed: String = dialoguer::Input::new()
+    let seed: String = dialoguer::Input::new()
         .with_prompt("What seed would you like to use (Leave blank for a random seed)?")
         .allow_empty(true)
         .interact_text()
@@ -179,6 +179,6 @@ pub fn random_challenge() -> Challenge {
     };
 
     let mut rng: Pcg64 = Seeder::from(seed.to_owned() + &count.to_string()).make_rng();
-    let cities = crate::cities::CITIES.keys().map(|code| *code).choose_multiple(&mut rng, count);
+    let cities = crate::cities::CITIES.keys().cloned().choose_multiple(&mut rng, count);
     Challenge::new("Random Cities", None, cities, Location::Any, Location::Any, None)
 }

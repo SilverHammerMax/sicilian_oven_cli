@@ -1,6 +1,6 @@
-use std::fmt::{Display, Formatter};
-use crate::types::*;
 use crate::types::city::RoadTypes;
+use crate::types::*;
+use std::fmt::{Display, Formatter};
 
 #[derive(Clone, Copy)]
 pub struct Car {
@@ -99,7 +99,7 @@ impl Car {
     pub fn calculate_travel_time(&self, road: &city::RoadTypes, distance: i32) -> f64 {
         match road {
             RoadTypes::Ferry => 15.0 + 2.5 * distance as f64,
-            _ => distance as f64 / self.calculate_speed(road)
+            _ => distance as f64 / self.calculate_speed(road),
         }
     }
 

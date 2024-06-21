@@ -1434,7 +1434,7 @@ lazy_static! {
                 false
             )
         ),
-                (
+        (
             "LAU",
             City::new(
                 "Lauri",
@@ -1708,9 +1708,7 @@ lazy_static! {
             City::new(
                 "Sorrento",
                 Region::Campania,
-                &[
-                    ("SRN", 24, RoadTypes::Asphalt),
-                ],
+                &[("SRN", 24, RoadTypes::Asphalt),],
                 false
             )
         ),
@@ -2123,9 +2121,7 @@ lazy_static! {
             City::new(
                 "Lesina",
                 Region::Apulia,
-                &[
-                    ("CEU", 13, RoadTypes::Asphalt),
-                ],
+                &[("CEU", 13, RoadTypes::Asphalt),],
                 false
             )
         ),
@@ -2505,9 +2501,7 @@ lazy_static! {
             City::new(
                 "Venafro",
                 Region::Molise,
-                &[
-                    ("TEA", 15, RoadTypes::Unpaved)
-                ],
+                &[("TEA", 15, RoadTypes::Unpaved)],
                 false
             )
         ),
@@ -2516,9 +2510,7 @@ lazy_static! {
             City::new(
                 "Isernia",
                 Region::Molise,
-                &[
-                    ("ORA", 22, RoadTypes::Unpaved)
-                ],
+                &[("ORA", 22, RoadTypes::Unpaved)],
                 false
             )
         ),

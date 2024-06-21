@@ -18,29 +18,27 @@ fn main() {
 
 fn challenge_engine(challenge: &mut challenge::Challenge) {
     helper_functions::challenge_prompt(challenge);
-    let selection = dialoguer::Confirm::new()
+    match dialoguer::Confirm::new()
         .with_prompt("Do you accept this challenge?")
         .interact()
-        .expect("Prompt Failed");
-    if !selection {
-        return;
+        .expect("Prompt Failed")
+    {
+        false => return,
+        true => (),
     }
-    let mut car = challenge
-        .car()
-        .unwrap_or_else(helper_functions::choose_car);
+    let mut car = challenge.car().unwrap_or_else(helper_functions::choose_car);
     let mut missing_cities = challenge.cities().to_vec();
-    let start_city = match challenge.start_city() {
+    let mut city_code = match challenge.start_city() {
         challenge::Location::City(code) => code,
         challenge::Location::Region(region) => helper_functions::choose_major_city(Some(region)),
         challenge::Location::Any => helper_functions::choose_major_city(None),
     };
-    let mut city_code = start_city;
     let mut path = vec![];
     let mut time = 0.0;
     loop {
         let city_reference = cities::CITIES.get(city_code).expect("Invalid City Code");
         path.push(city_code);
-        missing_cities.retain(|x| *x != city_code);
+        missing_cities.retain(|code| *code != city_code);
 
         println!();
         println!("Welcome to {}!", city_reference);
@@ -52,15 +50,12 @@ fn challenge_engine(challenge: &mut challenge::Challenge) {
         );
         println!();
         println!("Your fuel is {:.1}L.", car.fuel());
-        println!(
-            "Your reliability is {:.1}%.",
-            (car.reliability() * 100.0)
-        );
+        println!("Your reliability is {:.1}%.", (car.reliability() * 100.0));
         println!();
         println!(
             "Your path has been: {:?}",
             path.iter()
-                .map(|x| CITIES.get(x).expect("Invalid City Code").get_name())
+                .map(|code| CITIES.get(code).expect("Invalid City Code").get_name())
                 .collect::<Vec<_>>()
         );
         println!();
@@ -70,7 +65,7 @@ fn challenge_engine(challenge: &mut challenge::Challenge) {
                 "Your current list of missing cities is: {:?}",
                 missing_cities
                     .iter()
-                    .map(|x| CITIES.get(x).expect("Invalid City Code").get_name())
+                    .map(|code| CITIES.get(code).expect("Invalid City Code").get_name())
                     .collect::<Vec<_>>()
             );
         } else {
@@ -90,9 +85,7 @@ fn challenge_engine(challenge: &mut challenge::Challenge) {
         for (code, distance, _) in city_reference.get_cities() {
             let option = format!(
                 "Go to {}, {} km",
-                cities::CITIES
-                    .get(code)
-                    .expect("Invalid City Code"),
+                cities::CITIES.get(code).expect("Invalid City Code"),
                 distance
             );
             options.push(option);
@@ -120,12 +113,10 @@ fn challenge_engine(challenge: &mut challenge::Challenge) {
             city_code = next_city.0;
         } else if selection == city_reference.get_cities().len() {
             break;
-        } else if city_reference.is_major() && selection == city_reference.get_cities().len() + 1
-        {
+        } else if city_reference.is_major() && selection == city_reference.get_cities().len() + 1 {
             car.refuel(&mut time);
             path.pop();
-        } else if city_reference.is_major() && selection == city_reference.get_cities().len() + 2
-        {
+        } else if city_reference.is_major() && selection == city_reference.get_cities().len() + 2 {
             car.repair(&mut time);
             path.pop();
         }
@@ -142,14 +133,14 @@ fn challenge_engine(challenge: &mut challenge::Challenge) {
     println!();
     if missing_cities.is_empty()
         && (&challenge::Location::City(city_code) == challenge.get_end_city()
-        || &challenge::Location::Region(
-        cities::CITIES
-            .get(city_code)
-            .expect("Invalid City Code")
-            .get_region()
-            .clone(),
-    ) == challenge.get_end_city()
-        || challenge.get_end_city() == &challenge::Location::Any)
+            || &challenge::Location::Region(
+                cities::CITIES
+                    .get(city_code)
+                    .expect("Invalid City Code")
+                    .get_region()
+                    .clone(),
+            ) == challenge.get_end_city()
+            || challenge.get_end_city() == &challenge::Location::Any)
     {
         println!(
             "Congratulations! You've completed the {} challenge!",
@@ -162,11 +153,11 @@ fn challenge_engine(challenge: &mut challenge::Challenge) {
             (time % 60.0) as i32
         );
         println!();
-        if challenge.medal_cutoffs().is_some() {
-            let author_cutoff = challenge.medal_cutoffs().unwrap()[0] as f64;
-            let gold_cutoff = challenge.medal_cutoffs().unwrap()[1] as f64;
-            let silver_cutoff = challenge.medal_cutoffs().unwrap()[2] as f64;
-            let bronze_cutoff = challenge.medal_cutoffs().unwrap()[3] as f64;
+        if let Some(cutoffs) = challenge.medal_cutoffs() {
+            let author_cutoff = cutoffs[0] as f64;
+            let gold_cutoff = cutoffs[1] as f64;
+            let silver_cutoff = cutoffs[2] as f64;
+            let bronze_cutoff = cutoffs[3] as f64;
 
             if time <= author_cutoff {
                 challenge.set_medal(medal::Medal::Author);

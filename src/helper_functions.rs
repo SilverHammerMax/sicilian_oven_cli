@@ -3,10 +3,7 @@ use crate::*;
 
 pub fn choose_car() -> car_parts::car::Car {
     let cars = car_parts::car::initialize_cars();
-    let car_names = cars
-        .iter()
-        .map(|car| car.name())
-        .collect::<Vec<_>>();
+    let car_names = cars.iter().map(|car| car.name()).collect::<Vec<_>>();
     let selection = dialoguer::Select::new()
         .with_prompt("Pick your car")
         .items(&car_names)
@@ -19,11 +16,7 @@ pub fn choose_car() -> car_parts::car::Car {
 pub fn choose_challenge() -> challenge::Challenge {
     let mut challenge_names = Vec::new();
     for challenge in challenge::initialize_challenges() {
-        challenge_names.push(format!(
-            "{} {}",
-            challenge,
-            challenge.get_medal()
-        ));
+        challenge_names.push(format!("{}", challenge));
     }
     let selection = dialoguer::Select::new()
         .with_prompt("Please Select a Challenge")
@@ -35,7 +28,22 @@ pub fn choose_challenge() -> challenge::Challenge {
 }
 
 pub fn choose_major_city(region: Option<&city::Region>) -> &'static str {
-    let major_cities: Vec<String>  = city::major_cities(region).iter().map(|code| format!("{} ({})", cities::CITIES.get(code).expect("Invalid City Code").get_name(), cities::CITIES.get(code).expect("Invalid City Code").get_region())).collect();
+    let major_cities: Vec<String> = city::major_cities(region)
+        .iter()
+        .map(|code| {
+            format!(
+                "{} ({})",
+                cities::CITIES
+                    .get(code)
+                    .expect("Invalid City Code")
+                    .get_name(),
+                cities::CITIES
+                    .get(code)
+                    .expect("Invalid City Code")
+                    .get_region()
+            )
+        })
+        .collect();
 
     let selection = dialoguer::Select::new()
         .with_prompt("What major city would you like to start in?")
@@ -56,7 +64,7 @@ pub fn selection_prompt() -> challenge::Challenge {
     match selection {
         0 => choose_challenge(),
         1 => challenge::random_challenge(),
-        _ => panic!("Fix New Options!")
+        _ => panic!("Fix New Options!"),
     }
 }
 
@@ -125,7 +133,7 @@ pub fn challenge_prompt(challenge: &challenge::Challenge) {
     }
 
     println!();
-    if challenge.medal_cutoffs().is_some()  {
+    if challenge.medal_cutoffs().is_some() {
         let author_medal = challenge.medal_cutoffs().unwrap()[0];
         let gold_medal = challenge.medal_cutoffs().unwrap()[1];
         let silver_medal = challenge.medal_cutoffs().unwrap()[2];

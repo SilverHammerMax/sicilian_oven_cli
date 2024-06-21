@@ -1,3 +1,4 @@
+use std::fmt::{Display, Formatter};
 use rand;
 use rand::prelude::*;
 use rand_pcg::Pcg64;
@@ -20,6 +21,12 @@ pub struct Challenge {
     end_city: Location,
     medal_cutoffs: Option<[i32; 4]>,
     medal: medal::Medal,
+}
+
+impl Display for Challenge {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{} {}", self.name, self.medal)
+    }
 }
 
 impl Challenge {

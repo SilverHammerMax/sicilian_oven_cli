@@ -21,7 +21,7 @@ pub fn choose_challenge() -> challenge::Challenge {
     for challenge in challenge::initialize_challenges() {
         challenge_names.push(format!(
             "{} {}",
-            challenge.name(),
+            challenge,
             challenge.get_medal()
         ));
     }
@@ -116,7 +116,7 @@ pub fn challenge_prompt(challenge: &challenge::Challenge) {
     match challenge.car() {
         Some(car) => println!(
             "You are using the {} with a {}L {} engine and a {} gearbox.",
-            car.name(),
+            car,
             car.engine().fuel_usage(),
             car.engine().engine_type(),
             car.gearbox().gearbox_type()

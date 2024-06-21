@@ -1390,7 +1390,8 @@ lazy_static! {
                 Region::Calabria,
                 &[
                     ("ORI", 14, RoadTypes::Cobblestone),
-                    ("SIB", 27, RoadTypes::Asphalt)
+                    ("SIB", 27, RoadTypes::Asphalt),
+                    ("POL", 21, RoadTypes::Asphalt),
                 ],
                 false
             )

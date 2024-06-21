@@ -43,7 +43,7 @@ fn challenge_engine(challenge: &mut challenge::Challenge) {
         missing_cities.retain(|x| *x != city_code);
 
         println!();
-        println!("Welcome to {}!", city_reference.get_name());
+        println!("Welcome to {}!", city_reference);
         println!();
         println!(
             "Your current time is {} hour(s) and {} minute(s)!",
@@ -92,8 +92,7 @@ fn challenge_engine(challenge: &mut challenge::Challenge) {
                 "Go to {}, {} km",
                 cities::CITIES
                     .get(code)
-                    .expect("Invalid City Code")
-                    .get_name(),
+                    .expect("Invalid City Code"),
                 distance
             );
             options.push(option);
@@ -154,7 +153,7 @@ fn challenge_engine(challenge: &mut challenge::Challenge) {
     {
         println!(
             "Congratulations! You've completed the {} challenge!",
-            challenge.name()
+            challenge
         );
         println!();
         println!(

@@ -1,3 +1,4 @@
+use std::fmt::{Display, Formatter};
 use crate::types::*;
 
 #[derive(Clone)]
@@ -9,6 +10,12 @@ pub struct Car {
     chassis: car_parts::chassis::Chassis,
     fuel: f64,
     reliability: f64,
+}
+
+impl Display for Car {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.name)
+    }
 }
 
 impl Car {

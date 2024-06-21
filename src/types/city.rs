@@ -34,11 +34,18 @@ impl Display for Region {
         }
     }
 }
+
 pub struct City {
     city_name: &'static str,
     region: Region,
     connected_cities: &'static [(&'static str, i32, RoadTypes)],
     refuel: bool,
+}
+
+impl Display for City {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{} ({})", self.city_name, self.region)
+    }
 }
 
 impl City {

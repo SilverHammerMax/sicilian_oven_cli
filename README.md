@@ -150,13 +150,13 @@ of your condition every turn. The following are the gearbox options:
 The chassis is the biggest factor in determining the weight of your car. The main tradeoff in picking a chassis is between weight and fuel storage. The bigger the chassis, the more it weighs,
 but the more fuel you can store. The following are the chassis options:
 
-| Manufacturer | Name | Weight | Fuel Tank |
-| :---: | :---: |:------:|:---------:|
-| Stellare | Focaccia | 705KG  |   33.6L   |
-| Veloce | Ciabatta | 778KG  |    37L    |
-| Ardente | Baguette | 861KG  |    41L    |
-| Solare | Panettone | 914KG  |   43.5L   |
-| Fiorente | Wonder Bread | 996KG  |   47.4L   |
+| Manufacturer |   Name    | Weight | Fuel Tank |
+| :---: |:---------:|:------:|:---------:|
+| Stellare | Ciabatta  | 705KG  |   33.6L   |
+| Veloce | Panettone | 778KG  |    37L    |
+| Ardente |  Rosetta  | 861KG  |    41L    |
+| Solare | Focaccia  | 914KG  |   43.5L   |
+| Fiorente |  Filone   | 996KG  |   47.4L   |
 
 ### Tires
 

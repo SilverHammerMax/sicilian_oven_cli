@@ -3,10 +3,7 @@ use crate::*;
 
 pub fn choose_car() -> car_parts::car::Car {
     let cars = car_parts::car::Car::initialize();
-    let car_names = cars
-        .iter()
-        .map(|car| car.name())
-        .collect::<Vec<_>>();
+    let car_names = cars.iter().map(|car| car.name()).collect::<Vec<_>>();
     let selection = dialoguer::Select::new()
         .with_prompt("Pick your car")
         .items(&car_names)
@@ -19,11 +16,7 @@ pub fn choose_car() -> car_parts::car::Car {
 pub fn choose_challenge() -> challenge::Challenge {
     let mut challenge_names = Vec::new();
     for challenge in challenge::initialize_challenges() {
-        challenge_names.push(format!(
-            "{} {}",
-            challenge,
-            challenge.get_medal()
-        ));
+        challenge_names.push(format!("{} {}", challenge, challenge.get_medal()));
     }
     let selection = dialoguer::Select::new()
         .with_prompt("Please Select a Challenge")
@@ -35,7 +28,22 @@ pub fn choose_challenge() -> challenge::Challenge {
 }
 
 pub fn choose_major_city(region: Option<&city::Region>) -> &'static str {
-    let major_cities: Vec<String>  = city::major_cities(region).iter().map(|code| format!("{} ({})", cities::CITIES.get(code).expect("Invalid City Code").get_name(), cities::CITIES.get(code).expect("Invalid City Code").get_region())).collect();
+    let major_cities: Vec<String> = city::major_cities(region)
+        .iter()
+        .map(|code| {
+            format!(
+                "{} ({})",
+                cities::CITIES
+                    .get(code)
+                    .expect("Invalid City Code")
+                    .get_name(),
+                cities::CITIES
+                    .get(code)
+                    .expect("Invalid City Code")
+                    .get_region()
+            )
+        })
+        .collect();
 
     let selection = dialoguer::Select::new()
         .with_prompt("What major city would you like to start in?")
@@ -47,17 +55,22 @@ pub fn choose_major_city(region: Option<&city::Region>) -> &'static str {
 }
 
 pub fn selection_prompt() -> challenge::Challenge {
-    let options = vec!["Challenges", "Random Cities"];
-    let selection = dialoguer::Select::new()
-        .with_prompt("What would you like to play?")
-        .items(&options)
-        .interact()
-        .expect("Prompt Failed");
-    match selection {
-        0 => choose_challenge(),
-        1 => challenge::random_challenge(),
-        _ => panic!("Fix New Options!")
+    let mut challenge = None;
+    while challenge.is_none() {
+        let options = vec!["Challenges", "Random Cities", "Build Car"];
+        let selection = dialoguer::Select::new()
+            .with_prompt("What would you like to play?")
+            .items(&options)
+            .interact()
+            .expect("Prompt Failed");
+        match selection {
+            0 => challenge = Some(choose_challenge()),
+            1 => challenge = Some(challenge::random_challenge()),
+            2 => car_parts::car::car_build_prompt(),
+            _ => panic!("Fix New Options!"),
+        }
     }
+    challenge.unwrap()
 }
 
 pub fn challenge_prompt(challenge: &challenge::Challenge) {
@@ -125,7 +138,7 @@ pub fn challenge_prompt(challenge: &challenge::Challenge) {
     }
 
     println!();
-    if challenge.medal_cutoffs().is_some()  {
+    if challenge.medal_cutoffs().is_some() {
         let author_medal = challenge.medal_cutoffs().unwrap()[0];
         let gold_medal = challenge.medal_cutoffs().unwrap()[1];
         let silver_medal = challenge.medal_cutoffs().unwrap()[2];

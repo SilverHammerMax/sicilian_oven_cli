@@ -1,4 +1,7 @@
-#[derive(Default, Clone, Copy)]
+use std::fmt::{Display, Formatter};
+use strum;
+
+#[derive(Default, Clone, Copy, strum::EnumIter)]
 pub enum Tire {
     #[default]
     One,
@@ -6,6 +9,18 @@ pub enum Tire {
     Three,
     Four,
     Five,
+}
+
+impl Display for Tire {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Tire::One => write!(f, "Stellare Volpe"),
+            Tire::Two => write!(f, "Veloce Orso"),
+            Tire::Three => write!(f, "Ardente Lupo"),
+            Tire::Four => write!(f, "Solare Cavallo"),
+            Tire::Five => write!(f, "Fiorente Roadrunner"),
+        }
+    }
 }
 
 impl Tire {

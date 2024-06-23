@@ -1,9 +1,9 @@
-use std::fmt::{Display, Formatter};
+use crate::types::*;
 use rand;
 use rand::prelude::*;
 use rand_pcg::Pcg64;
 use rand_seeder::Seeder;
-use crate::types::*;
+use std::fmt::{Display, Formatter};
 
 #[derive(PartialEq, Eq, Clone)]
 pub enum Location {
@@ -130,9 +130,7 @@ pub fn initialize_challenges() -> Vec<Challenge> {
         Challenge::new(
             "Harbormaster",
             None,
-            vec![
-                "ISC", "STR", "LIP", "MAL", "FAV", "PAN", "TRC"
-            ],
+            vec!["ISC", "STR", "LIP", "MAL", "FAV", "PAN", "TRC"],
             Location::Any,
             Location::Any,
             Some([0, 0, 0, 0]),
@@ -140,9 +138,7 @@ pub fn initialize_challenges() -> Vec<Challenge> {
         Challenge::new(
             "A Calabrian Rally",
             Some(cars[1].clone()),
-            vec![
-                "ACR", "CTE", "ORI", "DIN", "DNV"
-            ],
+            vec!["ACR", "CTE", "ORI", "DIN", "DNV"],
             Location::City("CNZ"),
             Location::Any,
             Some([0, 0, 0, 0]),
@@ -159,15 +155,15 @@ pub fn initialize_challenges() -> Vec<Challenge> {
 }
 
 pub fn random_challenge() -> Challenge {
-    let count= dialoguer::Input::new()
+    let count = dialoguer::Input::new()
         .with_prompt("How many cities would you like to go to?")
         .with_initial_text("5")
-        .validate_with(|input: &i32 | -> Result<(), &str> {
+        .validate_with(|input: &i32| -> Result<(), &str> {
             if *input <= 0 {
-                return Err("Too Few Cities")
+                return Err("Too Few Cities");
             }
             if *input > crate::cities::CITIES.len() as i32 {
-                return Err("Too Many Cities")
+                return Err("Too Many Cities");
             }
             Ok(())
         })
@@ -181,11 +177,25 @@ pub fn random_challenge() -> Challenge {
         .expect("Prompt Failed");
 
     let seed = match seed.as_str() {
-        "" => thread_rng().sample_iter(&rand::distributions::Alphanumeric).take(256).map(char::from).collect(),
-        _ => seed
+        "" => thread_rng()
+            .sample_iter(&rand::distributions::Alphanumeric)
+            .take(256)
+            .map(char::from)
+            .collect(),
+        _ => seed,
     };
 
     let mut rng: Pcg64 = Seeder::from(seed.to_owned() + &count.to_string()).make_rng();
-    let cities = crate::cities::CITIES.keys().cloned().choose_multiple(&mut rng, count);
-    Challenge::new("Random Cities", None, cities, Location::Any, Location::Any, None)
+    let cities = crate::cities::CITIES
+        .keys()
+        .cloned()
+        .choose_multiple(&mut rng, count);
+    Challenge::new(
+        "Random Cities",
+        None,
+        cities,
+        Location::Any,
+        Location::Any,
+        None,
+    )
 }

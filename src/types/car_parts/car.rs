@@ -1,5 +1,6 @@
-use std::fmt::{Display, Formatter};
 use crate::types::*;
+use std::fmt::{Display, Formatter};
+use strum::IntoEnumIterator;
 
 #[derive(Clone)]
 pub struct Car {
@@ -80,7 +81,7 @@ impl Car {
     pub fn calculate_travel_time(&self, road: &city::RoadTypes, distance: i32) -> f64 {
         match road {
             city::RoadTypes::Ferry => 15.0 + 2.5 * distance as f64,
-            _ => distance as f64 / self.calculate_speed(road)
+            _ => distance as f64 / self.calculate_speed(road),
         }
     }
 
@@ -181,6 +182,40 @@ impl CarBuilder {
             chassis: self.chassis.unwrap_or_default(),
             fuel: self.chassis.unwrap_or_default().tank_size(),
             reliability: 1.0,
+        }
+    }
+}
+
+pub fn car_build_prompt() {
+    let mut car = CarBuilder::new();
+    loop {
+        let options = vec!["Name", "Tires", "Engine", "Gearbox", "Chassis", "Build!"];
+
+        let selection = dialoguer::Select::new()
+            .with_prompt("What would you like to modify?")
+            .items(&options)
+            .interact()
+            .expect("Prompt Failed");
+
+        match selection {
+            0 => {
+                car = car.name(
+                    dialoguer::Input::new()
+                        .with_prompt("Enter the Car's Name")
+                        .interact_text()
+                        .expect("Prompt Failed"),
+                );
+            }
+            1 => {
+                let options: Vec<car_parts::tire::Tire> = car_parts::tire::Tire::iter().collect();
+                let selection = dialoguer::Select::new()
+                    .with_prompt("Please Select your Tires")
+                    .items(&options)
+                    .interact()
+                    .expect("Prompt Failed");
+                car = car.tires(options[selection]);
+            }
+            _ => panic!("Not Yet Implemented!"),
         }
     }
 }

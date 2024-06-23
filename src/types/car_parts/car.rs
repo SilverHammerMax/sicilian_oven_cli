@@ -215,6 +215,16 @@ pub fn car_build_prompt() {
                     .expect("Prompt Failed");
                 car = car.tires(options[selection]);
             }
+            2 => {
+                let options: Vec<car_parts::engine::Engine> =
+                    car_parts::engine::Engine::iter().collect();
+                let selection = dialoguer::Select::new()
+                    .with_prompt("Please Select your Engine")
+                    .items(&options)
+                    .interact()
+                    .expect("Prompt Failed");
+                car = car.engine(options[selection]);
+            }
             _ => panic!("Not Yet Implemented!"),
         }
     }

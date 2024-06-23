@@ -1,4 +1,7 @@
-#[derive(Default, Clone, Copy)]
+use std::fmt::{Display, Formatter};
+use strum;
+
+#[derive(Default, Clone, Copy, strum::EnumIter)]
 pub enum Engine {
     #[default]
     One,
@@ -6,6 +9,18 @@ pub enum Engine {
     Three,
     Four,
     Five,
+}
+
+impl Display for Engine {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Engine::One => write!(f, "Stellare Rigatoni"),
+            Engine::Two => write!(f, "Veloce Penne"),
+            Engine::Three => write!(f, "Ardente Bowtie"),
+            Engine::Four => write!(f, "Solare Bucatini"),
+            Engine::Five => write!(f, "Fiorente Lasagna"),
+        }
+    }
 }
 
 impl Engine {

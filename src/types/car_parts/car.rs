@@ -186,7 +186,7 @@ impl CarBuilder {
     }
 }
 
-pub fn car_build_prompt() {
+pub fn car_build_prompt() -> Car {
     let mut car = CarBuilder::new();
     loop {
         let options = vec!["Name", "Tires", "Engine", "Gearbox", "Chassis", "Build!"];
@@ -224,6 +224,29 @@ pub fn car_build_prompt() {
                     .interact()
                     .expect("Prompt Failed");
                 car = car.engine(options[selection]);
+            }
+            3 => {
+                let options: Vec<car_parts::gearbox::Gearbox> =
+                    car_parts::gearbox::Gearbox::iter().collect();
+                let selection = dialoguer::Select::new()
+                    .with_prompt("Please Select your Gearbox")
+                    .items(&options)
+                    .interact()
+                    .expect("Prompt Failed");
+                car = car.gearbox(options[selection]);
+            }
+            4 => {
+                let options: Vec<car_parts::chassis::Chassis> =
+                    car_parts::chassis::Chassis::iter().collect();
+                let selection = dialoguer::Select::new()
+                    .with_prompt("Please Select your Chassis")
+                    .items(&options)
+                    .interact()
+                    .expect("Prompt Failed");
+                car = car.chassis(options[selection]);
+            }
+            5 => {
+                return car.build();
             }
             _ => panic!("Not Yet Implemented!"),
         }

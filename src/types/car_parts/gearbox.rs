@@ -1,4 +1,7 @@
-#[derive(Default, Clone, Copy)]
+use std::fmt::{Display, Formatter};
+use strum;
+
+#[derive(Default, Clone, Copy, strum::EnumIter)]
 pub enum Gearbox {
     #[default]
     One,
@@ -6,6 +9,18 @@ pub enum Gearbox {
     Three,
     Four,
     Five,
+}
+
+impl Display for Gearbox {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Gearbox::One => write!(f, "Stellare Provolone"),
+            Gearbox::Two => write!(f, "Veloce Mozzarella"),
+            Gearbox::Three => write!(f, "Ardente Gorgonzola"),
+            Gearbox::Four => write!(f, "Solare Cheddar"),
+            Gearbox::Five => write!(f, "Fiorente Parmesan"),
+        }
+    }
 }
 
 impl Gearbox {

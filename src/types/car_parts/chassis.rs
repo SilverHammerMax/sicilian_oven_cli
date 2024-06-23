@@ -1,4 +1,7 @@
-#[derive(Default, Clone, Copy)]
+use std::fmt::{Display, Formatter};
+use strum;
+
+#[derive(Default, Clone, Copy, strum::EnumIter)]
 pub enum Chassis {
     #[default]
     One,
@@ -6,6 +9,18 @@ pub enum Chassis {
     Three,
     Four,
     Five,
+}
+
+impl Display for Chassis {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Chassis::One => write!(f, "Stellare Ciabatta"),
+            Chassis::Two => write!(f, "Veloce Panettone"),
+            Chassis::Three => write!(f, "Ardente Rosetta"),
+            Chassis::Four => write!(f, "Solare Focaccia"),
+            Chassis::Five => write!(f, "Fiorente Filone"),
+        }
+    }
 }
 
 impl Chassis {

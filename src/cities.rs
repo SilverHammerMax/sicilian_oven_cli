@@ -868,7 +868,7 @@ lazy_static! {
             )
         ),
         (
-            "TRC",
+            "TRN",
             City::new(
                 "Tracino",
                 Region::Sicily,
@@ -882,7 +882,7 @@ lazy_static! {
                 "Pantelleria",
                 Region::Sicily,
                 &[
-                    ("TRC", 9, RoadTypes::Cobblestone),
+                    ("TRN", 9, RoadTypes::Cobblestone),
                     ("TRA", 110, RoadTypes::Ferry)
                 ],
                 false

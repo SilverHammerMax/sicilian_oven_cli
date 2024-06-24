@@ -18,7 +18,12 @@ impl Display for Tire {
             Tire::Two => write!(f, "Veloce Orso ({} AGC, {} GGC)", self.agc(), self.ggc()),
             Tire::Three => write!(f, "Ardente Lupo ({} AGC, {} GGC)", self.agc(), self.ggc()),
             Tire::Four => write!(f, "Solare Cavallo ({} AGC, {} GGC)", self.agc(), self.ggc()),
-            Tire::Five => write!(f, "Fiorente Roadrunner ({} AGC, {} GGC)", self.agc(), self.ggc()),
+            Tire::Five => write!(
+                f,
+                "Fiorente Roadrunner ({} AGC, {} GGC)",
+                self.agc(),
+                self.ggc()
+            ),
         }
     }
 }

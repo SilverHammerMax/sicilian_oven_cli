@@ -188,7 +188,14 @@ impl CarBuilder {
 
 pub fn car_build_prompt() -> Car {
     let mut car = CarBuilder::new();
-    let mut main_options = vec!["Name".to_string(), "Tires".to_string(), "Engine".to_string(), "Gearbox".to_string(), "Chassis".to_string(), "Build!".to_string()];
+    let mut main_options = vec![
+        "Name".to_string(),
+        "Tires".to_string(),
+        "Engine".to_string(),
+        "Gearbox".to_string(),
+        "Chassis".to_string(),
+        "Build!".to_string(),
+    ];
     loop {
         let selection = dialoguer::Select::new()
             .with_prompt("What would you like to modify?")
@@ -200,6 +207,7 @@ pub fn car_build_prompt() -> Car {
             0 => {
                 let name: String = dialoguer::Input::new()
                     .with_prompt("Enter the Car's Name")
+                    .with_initial_text("Car")
                     .interact_text()
                     .expect("Prompt Failed");
                 main_options[0] = format!("Name ({})", name);

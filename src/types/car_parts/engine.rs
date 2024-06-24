@@ -14,11 +14,41 @@ pub enum Engine {
 impl Display for Engine {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         match self {
-            Engine::One => write!(f, "Stellare Rigatoni ({} kg, {} L, {} BHP)", self.weight(), self.fuel_usage(), self.brake_horsepower()),
-            Engine::Two => write!(f, "Veloce Penne ({} kg, {} L, {} BHP)", self.weight(), self.fuel_usage(), self.brake_horsepower()),
-            Engine::Three => write!(f, "Ardente Bowtie ({} kg, {} L, {} BHP)", self.weight(), self.fuel_usage(), self.brake_horsepower()),
-            Engine::Four => write!(f, "Solare Bucatini ({} kg, {} L, {} BHP)", self.weight(), self.fuel_usage(), self.brake_horsepower()),
-            Engine::Five => write!(f, "Fiorente Lasagna ({} kg, {} L, {} BHP)", self.weight(), self.fuel_usage(), self.brake_horsepower()),
+            Engine::One => write!(
+                f,
+                "Stellare Rigatoni ({} kg, {} L, {} BHP)",
+                self.weight(),
+                self.fuel_usage(),
+                self.brake_horsepower()
+            ),
+            Engine::Two => write!(
+                f,
+                "Veloce Penne ({} kg, {} L, {} BHP)",
+                self.weight(),
+                self.fuel_usage(),
+                self.brake_horsepower()
+            ),
+            Engine::Three => write!(
+                f,
+                "Ardente Bowtie ({} kg, {} L, {} BHP)",
+                self.weight(),
+                self.fuel_usage(),
+                self.brake_horsepower()
+            ),
+            Engine::Four => write!(
+                f,
+                "Solare Bucatini ({} kg, {} L, {} BHP)",
+                self.weight(),
+                self.fuel_usage(),
+                self.brake_horsepower()
+            ),
+            Engine::Five => write!(
+                f,
+                "Fiorente Lasagna ({} kg, {} L, {} BHP)",
+                self.weight(),
+                self.fuel_usage(),
+                self.brake_horsepower()
+            ),
         }
     }
 }

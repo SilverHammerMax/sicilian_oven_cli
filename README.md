@@ -108,6 +108,70 @@ Some challenges may not have a set city to start at, in which case you'll be pro
 
 ## Car Building
 
+There are 4 parts to every car, and each part has an effect on how the car performs: the engine, the chassis, the gearbox, and the tires. Car Speed is impacted by four variables: Weight,
+Horsepower, Condition, and Tire Grip. Each part has an effect on at least one of these variables, while some also have an effect of fuel storage or usage. The following section details
+what all the parts do and what gain or loss to a given variable they might offer. To see how the car's speed using these variables is calculated, please refer to the [Road Types](#road-types)
+section.
+
+It's important to note that every part has five options, with each option being provided by a different in-universe company. For example, the Stellare company will always provide the smallest engine, smallest chassis,
+weakest (but most reliable!) gearbox, and tires that significantly prefer unpaved roads than paved.
+
+### Engine
+
+The engine is, naturally, an important part of the car. The main tradeoff in picking an engine is between fuel mileage and horsepower. The amount of liters next to the engine name is its capacity,
+and therefore how much fuel it will use per turn. A 5.2L engine will use 5.2 liters of fuel per turn while a 2.4L engine will only use 2.4 liters. Meanwhile, the horsepower is a big deciding
+factor in how fast a car can go. Each engine also has a weight figure, but the Horsepower-to-Weight ratio continually increases the stronger the engine gets. The following are the engine options:
+
+| Manufacturer | Name | Engine Size | Horsepower | Weight |
+| :---: | :---: | :---: | :---: |:------:|
+| Stellare | Rigatoni | 2.4L | 112HP | 235KG  |
+| Veloce | Penne | 3.2L | 200HP | 357KG  |
+| Ardente | Bowtie | 3.8L | 220HP | 372KG |
+| Solare | Bucatini | 4.6L | 276HP | 406KG |
+| Fiorente | Lasagna | 5.2L | 320HP | 432KG |
+
+### Gearbox
+
+The gearbox is the most important part of the car when it comes to the condition and reliability. The main tradeoff in picking a gearbox is between reliability and horsepower. There are
+gearboxes who will result in very large horsepower gains, but will also result in much lower reliability. For example, one kind of gearbox will add 220HP to your car, but will take away 3.5%
+of your condition every turn. The following are the gearbox options:
+
+
+| Manufacturer | Name | Horsepower Boost | Reliability |
+| :---: | :---: |:----------------:|:------------:|
+| Stellare | Provolone | +0HP | -1% |
+| Veloce | Mozzarella | +40HP | -1.5% |
+| Ardente | Gorgonzola | +80HP | -2% |
+| Solare | Cheddar | +120HP | -2.5% |
+| Fiorente | Parmesan | +220HP | -3.5% |
+
+### Chassis
+
+The chassis is the biggest factor in determining the weight of your car. The main tradeoff in picking a chassis is between weight and fuel storage. The bigger the chassis, the more it weighs,
+but the more fuel you can store. The following are the chassis options:
+
+| Manufacturer |   Name    | Weight | Fuel Tank |
+| :---: |:---------:|:------:|:---------:|
+| Stellare | Ciabatta  | 705KG  |   33.6L   |
+| Veloce | Panettone | 778KG  |    37L    |
+| Ardente |  Rosetta  | 861KG  |    41L    |
+| Solare | Focaccia  | 914KG  |   43.5L   |
+| Fiorente |  Filone   | 996KG  |   47.4L   |
+
+### Tires
+
+The tires are the part which will give you life or give you death on a given surface. The main tradeoff in picking a tire is between your performance on paved and unpaved roads. The
+more GGC (Gravel Grip Coefficient) you have, the better you'll perform on unpaved roads. The more AGC (Asphalt Grip Coefficient) you have, the better you'll perform on paved roads. The
+following are the chassis options:
+
+| Manufacturer | Name | AGC | GGC |
+| :---: | :---: |:---:|:---:|
+| Stellare | Fox | 1 | 10 |
+| Veloce | Boar | 4 | 8 |
+| Ardente | Wolf | 6 | 6 |
+| Solare | Horse | 8 | 4 |
+| Fiorente | Roadrunner | 10 | 1 |
+
 ## Repairing, Refuelling, and Road Types
 
 ### Repairing

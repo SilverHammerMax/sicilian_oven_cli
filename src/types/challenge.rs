@@ -25,7 +25,10 @@ pub struct Challenge {
 
 impl Display for Challenge {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{} {}", self.name, self.medal)
+        match self.medal {
+            medal::Medal::None => write!(f, "{}", self.name),
+            _ => write!(f, "{} {}", self.name, self.medal),
+        }
     }
 }
 

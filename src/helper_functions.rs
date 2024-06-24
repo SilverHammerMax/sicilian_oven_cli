@@ -1,7 +1,8 @@
 use crate::types::*;
 use crate::*;
 
-pub fn choose_car(cars: &mut Vec<car_parts::car::Car>) -> car_parts::car::Car {
+pub fn choose_car() -> car_parts::car::Car {
+    let cars = car_parts::car::initialize_cars();
     let car_names = cars.iter().map(|car| car.name()).collect::<Vec<_>>();
     let selection = dialoguer::Select::new()
         .with_prompt("Pick your car")

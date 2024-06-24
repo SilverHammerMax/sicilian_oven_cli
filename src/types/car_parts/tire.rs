@@ -14,11 +14,11 @@ pub enum Tire {
 impl Display for Tire {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         match self {
-            Tire::One => write!(f, "Stellare Volpe"),
-            Tire::Two => write!(f, "Veloce Orso"),
-            Tire::Three => write!(f, "Ardente Lupo"),
-            Tire::Four => write!(f, "Solare Cavallo"),
-            Tire::Five => write!(f, "Fiorente Roadrunner"),
+            Tire::One => write!(f, "Stellare Volpe ({} AGC, {} GGC)", self.agc(), self.ggc()),
+            Tire::Two => write!(f, "Veloce Orso ({} AGC, {} GGC)", self.agc(), self.ggc()),
+            Tire::Three => write!(f, "Ardente Lupo ({} AGC, {} GGC)", self.agc(), self.ggc()),
+            Tire::Four => write!(f, "Solare Cavallo ({} AGC, {} GGC)", self.agc(), self.ggc()),
+            Tire::Five => write!(f, "Fiorente Roadrunner ({} AGC, {} GGC)", self.agc(), self.ggc()),
         }
     }
 }

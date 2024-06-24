@@ -27,7 +27,9 @@ fn challenge_engine(challenge: &mut challenge::Challenge, cars: &mut Vec<car_par
         false => return,
         true => (),
     }
-    let mut car = challenge.car().unwrap_or_else(|| helper_functions::choose_car(cars));
+    let mut car = challenge
+        .car()
+        .unwrap_or_else(|| helper_functions::choose_car(cars));
     let mut missing_cities = challenge.cities().to_vec();
     let mut city_code = match challenge.start_city() {
         challenge::Location::City(code) => code,

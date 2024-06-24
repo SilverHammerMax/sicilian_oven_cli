@@ -14,11 +14,11 @@ pub enum Gearbox {
 impl Display for Gearbox {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         match self {
-            Gearbox::One => write!(f, "Stellare Provolone"),
-            Gearbox::Two => write!(f, "Veloce Mozzarella"),
-            Gearbox::Three => write!(f, "Ardente Gorgonzola"),
-            Gearbox::Four => write!(f, "Solare Cheddar"),
-            Gearbox::Five => write!(f, "Fiorente Parmesan"),
+            Gearbox::One => write!(f, "Stellare Provolone (+{} BHP, {}% Deterioration)", self.brake_horsepower(), self.deterioration() * 100.0),
+            Gearbox::Two => write!(f, "Veloce Mozzarella (+{} BHP, {}% Deterioration)", self.brake_horsepower(), self.deterioration() * 100.0),
+            Gearbox::Three => write!(f, "Ardente Gorgonzola (+{} BHP, {}% Deterioration)", self.brake_horsepower(), self.deterioration() * 100.0),
+            Gearbox::Four => write!(f, "Solare Cheddar (+{} BHP, {}% Deterioration)", self.brake_horsepower(), self.deterioration() * 100.0),
+            Gearbox::Five => write!(f, "Fiorente Parmesan (+{} BHP, {}% Deterioration)", self.brake_horsepower(), self.deterioration() * 100.0),
         }
     }
 }

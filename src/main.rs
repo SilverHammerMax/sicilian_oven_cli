@@ -9,14 +9,15 @@ mod helper_functions;
 mod types;
 
 fn main() {
+    let mut cars = car_parts::car::Car::initialize();
     loop {
         println!("Welcome to the game!");
-        let mut challenge = helper_functions::selection_prompt();
-        challenge_engine(&mut challenge);
+        let mut challenge = helper_functions::selection_prompt(&mut cars);
+        challenge_engine(&mut challenge, &mut cars);
     }
 }
 
-fn challenge_engine(challenge: &mut challenge::Challenge) {
+fn challenge_engine(challenge: &mut challenge::Challenge, cars: &mut Vec<car_parts::car::Car>) {
     helper_functions::challenge_prompt(challenge);
     match dialoguer::Confirm::new()
         .with_prompt("Do you accept this challenge?")
@@ -26,7 +27,9 @@ fn challenge_engine(challenge: &mut challenge::Challenge) {
         false => return,
         true => (),
     }
-    let mut car = challenge.car().unwrap_or_else(helper_functions::choose_car);
+    let mut car = challenge
+        .car()
+        .unwrap_or_else(|| helper_functions::choose_car(cars));
     let mut missing_cities = challenge.cities().to_vec();
     let mut city_code = match challenge.start_city() {
         challenge::Location::City(code) => code,

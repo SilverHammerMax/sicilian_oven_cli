@@ -57,7 +57,7 @@ impl Challenge {
     }
 
     pub fn car(&self) -> Option<car_parts::car::Car> {
-        self.car
+        self.car.clone()
     }
 
     pub fn cities(&self) -> &[&str] {
@@ -86,11 +86,11 @@ impl Challenge {
 }
 
 pub fn initialize_challenges() -> Vec<Challenge> {
-    let cars = car_parts::car::initialize_cars();
+    let cars = car_parts::car::Car::initialize();
     vec![
         Challenge::new(
             "Ragusan Ride",
-            Some(cars[3]),
+            Some(cars[3].clone()),
             vec![
                 "RAG", "COM", "VIT", "MDR", "MOD", "POZ", "CAP", "NTO", "SIR", "GIA", "PAL", "FLO",
                 "AUG", "LEN",
@@ -101,7 +101,7 @@ pub fn initialize_challenges() -> Vec<Challenge> {
         ),
         Challenge::new(
             "Big Car, Big Cities",
-            Some(cars[0]),
+            Some(cars[0].clone()),
             vec![
                 "RAG", "SIR", "CAT", "ENN", "CTN", "PMO", "TRA", "MES", "AGR",
             ],
@@ -111,7 +111,7 @@ pub fn initialize_challenges() -> Vec<Challenge> {
         ),
         Challenge::new(
             "A Ride Around Mt. Etna",
-            Some(cars[2]),
+            Some(cars[2].clone()),
             vec![
                 "CAT", "GER", "PAT", "ADR", "RAN", "CRL", "PTI", "BAR", "MIL", "MES", "RIP", "TAM",
                 "ACI", "LEN", "NIC", "ENN",
@@ -122,7 +122,7 @@ pub fn initialize_challenges() -> Vec<Challenge> {
         ),
         Challenge::new(
             "The Godfather",
-            Some(cars[3]),
+            Some(cars[3].clone()),
             vec![
                 "COR", "SEL", "MAR", "CST", "PAR", "MEN", "SCI", "POR", "AGR", "RIB", "CAN", "LIC",
             ],
@@ -140,7 +140,7 @@ pub fn initialize_challenges() -> Vec<Challenge> {
         ),
         Challenge::new(
             "A Calabrian Rally",
-            Some(cars[1]),
+            Some(cars[1].clone()),
             vec!["ACR", "CTE", "ORI", "DIN", "DNV"],
             Location::City("CNZ"),
             Location::Any,

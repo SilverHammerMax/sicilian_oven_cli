@@ -1,10 +1,10 @@
-use crate::types::city::RoadTypes;
 use crate::types::*;
 use std::fmt::{Display, Formatter};
+use strum::IntoEnumIterator;
 
-#[derive(Clone, Copy)]
+#[derive(Clone)]
 pub struct Car {
-    name: &'static str,
+    name: String,
     tires: car_parts::tire::Tire,
     engine: car_parts::engine::Engine,
     gearbox: car_parts::gearbox::Gearbox,
@@ -20,26 +20,8 @@ impl Display for Car {
 }
 
 impl Car {
-    pub fn new(
-        name: &'static str,
-        tires: car_parts::tire::Tire,
-        engine: car_parts::engine::Engine,
-        gearbox: car_parts::gearbox::Gearbox,
-        chassis: car_parts::chassis::Chassis,
-    ) -> Car {
-        Car {
-            name,
-            tires,
-            engine,
-            gearbox,
-            chassis,
-            fuel: chassis.tank_size(),
-            reliability: 1.0,
-        }
-    }
-
     pub fn name(&self) -> &str {
-        self.name
+        &self.name
     }
 
     pub fn tires(&self) -> &car_parts::tire::Tire {
@@ -98,51 +80,186 @@ impl Car {
 
     pub fn calculate_travel_time(&self, road: &city::RoadTypes, distance: i32) -> f64 {
         match road {
-            RoadTypes::Ferry => 15.0 + 2.5 * distance as f64,
+            city::RoadTypes::Ferry => 15.0 + 2.5 * distance as f64,
             _ => distance as f64 / self.calculate_speed(road),
         }
     }
 
-    pub fn travel(&mut self, road: &RoadTypes) {
+    pub fn travel(&mut self, road: &city::RoadTypes) {
         match road {
-            &RoadTypes::Ferry => (),
+            &city::RoadTypes::Ferry => (),
             _ => {
                 self.fuel -= self.engine.fuel_usage();
                 self.reliability -= self.gearbox().deterioration();
             }
         }
     }
+
+    pub fn initialize() -> Vec<Car> {
+        vec![
+            CarBuilder::new()
+                .name("Il Comandante".to_string())
+                .tires(car_parts::tire::Tire::Four)
+                .engine(car_parts::engine::Engine::One)
+                .gearbox(car_parts::gearbox::Gearbox::Three)
+                .chassis(car_parts::chassis::Chassis::Three)
+                .build(),
+            CarBuilder::new()
+                .name("Il Grande".to_string())
+                .tires(car_parts::tire::Tire::Three)
+                .engine(car_parts::engine::Engine::Five)
+                .gearbox(car_parts::gearbox::Gearbox::Four)
+                .chassis(car_parts::chassis::Chassis::Five)
+                .build(),
+            CarBuilder::new()
+                .name("Il Capo".to_string())
+                .tires(car_parts::tire::Tire::Two)
+                .engine(car_parts::engine::Engine::Two)
+                .gearbox(car_parts::gearbox::Gearbox::Two)
+                .chassis(car_parts::chassis::Chassis::One)
+                .build(),
+            CarBuilder::new()
+                .name("Il Generalissimo".to_string())
+                .tires(car_parts::tire::Tire::Four)
+                .engine(car_parts::engine::Engine::Three)
+                .gearbox(car_parts::gearbox::Gearbox::One)
+                .chassis(car_parts::chassis::Chassis::Four)
+                .build(),
+        ]
+    }
 }
 
-pub fn initialize_cars() -> Vec<Car> {
-    vec![
-        Car::new(
-            "Il Commandante",
-            car_parts::tire::Tire::Four,
-            car_parts::engine::Engine::One,
-            car_parts::gearbox::Gearbox::Three,
-            car_parts::chassis::Chassis::Three,
-        ),
-        Car::new(
-            "Il Grande",
-            car_parts::tire::Tire::Three,
-            car_parts::engine::Engine::Five,
-            car_parts::gearbox::Gearbox::Four,
-            car_parts::chassis::Chassis::Five,
-        ),
-        Car::new(
-            "Il Capo",
-            car_parts::tire::Tire::Two,
-            car_parts::engine::Engine::Two,
-            car_parts::gearbox::Gearbox::Two,
-            car_parts::chassis::Chassis::One,
-        ),
-        Car::new(
-            "Il Generalissimo",
-            car_parts::tire::Tire::Four,
-            car_parts::engine::Engine::Three,
-            car_parts::gearbox::Gearbox::One,
-            car_parts::chassis::Chassis::Two,
-        ),
-    ]
+pub struct CarBuilder {
+    name: Option<String>,
+    tires: Option<car_parts::tire::Tire>,
+    engine: Option<car_parts::engine::Engine>,
+    gearbox: Option<car_parts::gearbox::Gearbox>,
+    chassis: Option<car_parts::chassis::Chassis>,
+}
+
+impl CarBuilder {
+    pub fn new() -> Self {
+        Self {
+            name: None,
+            tires: None,
+            engine: None,
+            gearbox: None,
+            chassis: None,
+        }
+    }
+
+    pub fn name(mut self, name: String) -> Self {
+        self.name = Some(name);
+        self
+    }
+
+    pub fn tires(mut self, tires: car_parts::tire::Tire) -> Self {
+        self.tires = Some(tires);
+        self
+    }
+
+    pub fn engine(mut self, engine: car_parts::engine::Engine) -> Self {
+        self.engine = Some(engine);
+        self
+    }
+
+    pub fn gearbox(mut self, gearbox: car_parts::gearbox::Gearbox) -> Self {
+        self.gearbox = Some(gearbox);
+        self
+    }
+
+    pub fn chassis(mut self, chassis: car_parts::chassis::Chassis) -> Self {
+        self.chassis = Some(chassis);
+        self
+    }
+
+    pub fn build(self) -> Car {
+        Car {
+            name: self.name.unwrap_or_default(),
+            tires: self.tires.unwrap_or_default(),
+            engine: self.engine.unwrap_or_default(),
+            gearbox: self.gearbox.unwrap_or_default(),
+            chassis: self.chassis.unwrap_or_default(),
+            fuel: self.chassis.unwrap_or_default().tank_size(),
+            reliability: 1.0,
+        }
+    }
+}
+
+pub fn car_build_prompt() -> Car {
+    let mut car = CarBuilder::new();
+    let mut main_options = vec![
+        "Name".to_string(),
+        "Tires".to_string(),
+        "Engine".to_string(),
+        "Gearbox".to_string(),
+        "Chassis".to_string(),
+        "Build!".to_string(),
+    ];
+    loop {
+        let selection = dialoguer::Select::new()
+            .with_prompt("What would you like to modify?")
+            .items(&main_options)
+            .interact()
+            .expect("Prompt Failed");
+
+        match selection {
+            0 => {
+                let name: String = dialoguer::Input::new()
+                    .with_prompt("Enter the Car's Name")
+                    .with_initial_text("Car")
+                    .interact_text()
+                    .expect("Prompt Failed");
+                main_options[0] = format!("Name ({})", name);
+                car = car.name(name);
+            }
+            1 => {
+                let options: Vec<car_parts::tire::Tire> = car_parts::tire::Tire::iter().collect();
+                let selection = dialoguer::Select::new()
+                    .with_prompt("Please Select your Tires")
+                    .items(&options)
+                    .interact()
+                    .expect("Prompt Failed");
+                main_options[1] = format!("Tires ({})", options[selection]);
+                car = car.tires(options[selection]);
+            }
+            2 => {
+                let options: Vec<car_parts::engine::Engine> =
+                    car_parts::engine::Engine::iter().collect();
+                let selection = dialoguer::Select::new()
+                    .with_prompt("Please Select your Engine")
+                    .items(&options)
+                    .interact()
+                    .expect("Prompt Failed");
+                main_options[2] = format!("Engine ({})", options[selection]);
+                car = car.engine(options[selection]);
+            }
+            3 => {
+                let options: Vec<car_parts::gearbox::Gearbox> =
+                    car_parts::gearbox::Gearbox::iter().collect();
+                let selection = dialoguer::Select::new()
+                    .with_prompt("Please Select your Gearbox")
+                    .items(&options)
+                    .interact()
+                    .expect("Prompt Failed");
+                main_options[3] = format!("Gearbox ({})", options[selection]);
+                car = car.gearbox(options[selection]);
+            }
+            4 => {
+                let options: Vec<car_parts::chassis::Chassis> =
+                    car_parts::chassis::Chassis::iter().collect();
+                let selection = dialoguer::Select::new()
+                    .with_prompt("Please Select your Chassis")
+                    .items(&options)
+                    .interact()
+                    .expect("Prompt Failed");
+                main_options[4] = format!("Chassis ({})", options[selection]);
+                car = car.chassis(options[selection]);
+            }
+            5 => {
+                return car.build();
+            }
+            _ => panic!("Not Yet Implemented!"),
+        }
+    }
 }

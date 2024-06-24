@@ -10,13 +10,13 @@ pub fn choose_car() -> car_parts::car::Car {
         .interact()
         .expect("Prompt Failed");
 
-    car_parts::car::initialize_cars()[selection]
+    cars[selection].clone()
 }
 
 pub fn choose_challenge() -> challenge::Challenge {
     let mut challenge_names = Vec::new();
     for challenge in challenge::initialize_challenges() {
-        challenge_names.push(format!("{}", challenge));
+        challenge_names.push(format!("{} {}", challenge, challenge.get_medal()));
     }
     let selection = dialoguer::Select::new()
         .with_prompt("Please Select a Challenge")
@@ -54,18 +54,23 @@ pub fn choose_major_city(region: Option<&city::Region>) -> &'static str {
     city::major_cities(region)[selection]
 }
 
-pub fn selection_prompt() -> challenge::Challenge {
-    let options = vec!["Challenges", "Random Cities"];
-    let selection = dialoguer::Select::new()
-        .with_prompt("What would you like to play?")
-        .items(&options)
-        .interact()
-        .expect("Prompt Failed");
-    match selection {
-        0 => choose_challenge(),
-        1 => challenge::random_challenge(),
-        _ => panic!("Fix New Options!"),
+pub fn selection_prompt(mut cars: &mut Vec<car_parts::car::Car>) -> challenge::Challenge {
+    let mut challenge = None;
+    while challenge.is_none() {
+        let options = vec!["Challenges", "Random Cities", "Build Car"];
+        let selection = dialoguer::Select::new()
+            .with_prompt("What would you like to play?")
+            .items(&options)
+            .interact()
+            .expect("Prompt Failed");
+        match selection {
+            0 => challenge = Some(choose_challenge()),
+            1 => challenge = Some(challenge::random_challenge()),
+            2 => cars.push(car_parts::car::car_build_prompt()),
+            _ => panic!("Fix New Options!"),
+        }
     }
+    challenge.unwrap()
 }
 
 pub fn challenge_prompt(challenge: &challenge::Challenge) {

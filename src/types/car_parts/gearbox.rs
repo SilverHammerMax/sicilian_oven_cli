@@ -1,4 +1,7 @@
-#[derive(Default, Clone, Copy)]
+use std::fmt::{Display, Formatter};
+use strum;
+
+#[derive(Default, Clone, Copy, strum::EnumIter)]
 pub enum Gearbox {
     #[default]
     One,
@@ -6,6 +9,43 @@ pub enum Gearbox {
     Three,
     Four,
     Five,
+}
+
+impl Display for Gearbox {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Gearbox::One => write!(
+                f,
+                "Stellare Provolone (+{} BHP, {:.1}% Deterioration)",
+                self.brake_horsepower(),
+                self.deterioration() * 100.0
+            ),
+            Gearbox::Two => write!(
+                f,
+                "Veloce Mozzarella (+{} BHP, {:.1}% Deterioration)",
+                self.brake_horsepower(),
+                self.deterioration() * 100.0
+            ),
+            Gearbox::Three => write!(
+                f,
+                "Ardente Gorgonzola (+{} BHP, {:.1}% Deterioration)",
+                self.brake_horsepower(),
+                self.deterioration() * 100.0
+            ),
+            Gearbox::Four => write!(
+                f,
+                "Solare Cheddar (+{} BHP, {:.1}% Deterioration)",
+                self.brake_horsepower(),
+                self.deterioration() * 100.0
+            ),
+            Gearbox::Five => write!(
+                f,
+                "Fiorente Parmesan (+{} BHP, {:.1}% Deterioration)",
+                self.brake_horsepower(),
+                self.deterioration() * 100.0
+            ),
+        }
+    }
 }
 
 impl Gearbox {

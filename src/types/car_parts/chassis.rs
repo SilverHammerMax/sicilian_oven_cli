@@ -1,4 +1,7 @@
-#[derive(Default, Clone, Copy)]
+use std::fmt::{Display, Formatter};
+use strum;
+
+#[derive(Default, Clone, Copy, strum::EnumIter)]
 pub enum Chassis {
     #[default]
     One,
@@ -6,6 +9,43 @@ pub enum Chassis {
     Three,
     Four,
     Five,
+}
+
+impl Display for Chassis {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Chassis::One => write!(
+                f,
+                "Stellare Ciabatta ({} kg, {} L)",
+                self.weight(),
+                self.tank_size()
+            ),
+            Chassis::Two => write!(
+                f,
+                "Veloce Panettone ({} kg, {} L)",
+                self.weight(),
+                self.tank_size()
+            ),
+            Chassis::Three => write!(
+                f,
+                "Ardente Rosetta ({} kg, {} L)",
+                self.weight(),
+                self.tank_size()
+            ),
+            Chassis::Four => write!(
+                f,
+                "Solare Focaccia ({} kg, {} L)",
+                self.weight(),
+                self.tank_size()
+            ),
+            Chassis::Five => write!(
+                f,
+                "Fiorente Filone ({} kg, {} L)",
+                self.weight(),
+                self.tank_size()
+            ),
+        }
+    }
 }
 
 impl Chassis {

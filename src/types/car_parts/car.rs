@@ -188,23 +188,22 @@ impl CarBuilder {
 
 pub fn car_build_prompt() -> Car {
     let mut car = CarBuilder::new();
+    let mut main_options = vec!["Name".to_string(), "Tires".to_string(), "Engine".to_string(), "Gearbox".to_string(), "Chassis".to_string(), "Build!".to_string()];
     loop {
-        let options = vec!["Name", "Tires", "Engine", "Gearbox", "Chassis", "Build!"];
-
         let selection = dialoguer::Select::new()
             .with_prompt("What would you like to modify?")
-            .items(&options)
+            .items(&main_options)
             .interact()
             .expect("Prompt Failed");
 
         match selection {
             0 => {
-                car = car.name(
-                    dialoguer::Input::new()
-                        .with_prompt("Enter the Car's Name")
-                        .interact_text()
-                        .expect("Prompt Failed"),
-                );
+                let name: String = dialoguer::Input::new()
+                    .with_prompt("Enter the Car's Name")
+                    .interact_text()
+                    .expect("Prompt Failed");
+                main_options[0] = format!("Name ({})", name);
+                car = car.name(name);
             }
             1 => {
                 let options: Vec<car_parts::tire::Tire> = car_parts::tire::Tire::iter().collect();
@@ -213,6 +212,7 @@ pub fn car_build_prompt() -> Car {
                     .items(&options)
                     .interact()
                     .expect("Prompt Failed");
+                main_options[1] = format!("Tires ({})", options[selection]);
                 car = car.tires(options[selection]);
             }
             2 => {
@@ -223,6 +223,7 @@ pub fn car_build_prompt() -> Car {
                     .items(&options)
                     .interact()
                     .expect("Prompt Failed");
+                main_options[2] = format!("Engine ({})", options[selection]);
                 car = car.engine(options[selection]);
             }
             3 => {
@@ -233,6 +234,7 @@ pub fn car_build_prompt() -> Car {
                     .items(&options)
                     .interact()
                     .expect("Prompt Failed");
+                main_options[3] = format!("Gearbox ({})", options[selection]);
                 car = car.gearbox(options[selection]);
             }
             4 => {
@@ -243,6 +245,7 @@ pub fn car_build_prompt() -> Car {
                     .items(&options)
                     .interact()
                     .expect("Prompt Failed");
+                main_options[4] = format!("Chassis ({})", options[selection]);
                 car = car.chassis(options[selection]);
             }
             5 => {

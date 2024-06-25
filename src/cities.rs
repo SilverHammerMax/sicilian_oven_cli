@@ -78,6 +78,7 @@ pub fn create_cities() -> CityGraph {
     graph.add_city(City::new("Marina di Ragusa", Region::Sicily, false));
     graph.add_city(City::new("Pozzallo", Region::Sicily, false));
     graph.add_city(City::new("Modica", Region::Sicily, false));
+    graph.add_city(City::new("Capo Passero", Region::Sicily, false));
 
     graph.add_connection(CityConnection::new(
         ("Ragusa", "Comiso"),
@@ -107,6 +108,16 @@ pub fn create_cities() -> CityGraph {
     graph.add_connection(CityConnection::new(
         ("Pozzallo", "Modica"),
         30,
+        RoadTypes::Asphalt,
+    ));
+    graph.add_connection(CityConnection::new(
+        ("Capo Passero", "Pozzallo"),
+        40,
+        RoadTypes::Asphalt,
+    ));
+    graph.add_connection(CityConnection::new(
+        ("Capo Passero", "Modica"),
+        40,
         RoadTypes::Asphalt,
     ));
 

@@ -17,7 +17,11 @@ fn main() {
     }
 }
 
-fn challenge_engine(challenge: &mut challenge::Challenge, cars: &mut Vec<car_parts::car::Car>, cities: &cities::CityGraph) {
+fn challenge_engine(
+    challenge: &mut challenge::Challenge,
+    cars: &mut Vec<car_parts::car::Car>,
+    cities: &cities::CityGraph,
+) {
     helper_functions::challenge_prompt(cities, challenge);
     match dialoguer::Confirm::new()
         .with_prompt("Do you accept this challenge?")
@@ -114,13 +118,17 @@ fn challenge_engine(challenge: &mut challenge::Challenge, cars: &mut Vec<car_par
                 .clone();
             car.travel(&next_city.2);
             time += car.calculate_travel_time(&next_city.2, next_city.1);
-            city_code .clone_from(&next_city.0);
+            city_code.clone_from(&next_city.0);
         } else if selection == cities.get_neighbors(&city_code).len() {
             break;
-        } else if city_reference.is_major() && selection == cities.get_neighbors(&city_code).len() + 1 {
+        } else if city_reference.is_major()
+            && selection == cities.get_neighbors(&city_code).len() + 1
+        {
             car.refuel(&mut time);
             path.pop();
-        } else if city_reference.is_major() && selection == cities.get_neighbors(&city_code).len() + 2 {
+        } else if city_reference.is_major()
+            && selection == cities.get_neighbors(&city_code).len() + 2
+        {
             car.repair(&mut time);
             path.pop();
         }

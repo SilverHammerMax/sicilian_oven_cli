@@ -9,9 +9,9 @@ pub struct CityConnection {
 }
 
 impl CityConnection {
-    fn new(cities: (String, String), distance: i32, road: RoadTypes) -> CityConnection {
+    fn new(cities: (&str, &str), distance: i32, road: RoadTypes) -> CityConnection {
         CityConnection {
-            cities,
+            cities: (cities.0.to_string(), cities.1.to_string()),
             distance,
             road,
         }
@@ -23,16 +23,30 @@ pub struct CityGraph {
     connections: Vec<CityConnection>,
 }
 
-
 impl CityGraph {
     pub fn get_neighbors(&self, city_name: &str) -> Vec<(String, i32, RoadTypes)> {
-        let neighbors = self.connections.iter().filter(|connection| connection.cities.0 == city_name || connection.cities.1 == city_name).map(|connection| {
-            if connection.cities.0 == city_name {
-                (connection.cities.1.clone(), connection.distance, connection.road)
-            } else {
-                (connection.cities.0.clone(), connection.distance, connection.road)
-            }
-        }).collect();
+        let neighbors = self
+            .connections
+            .iter()
+            .filter(|connection| {
+                connection.cities.0 == city_name || connection.cities.1 == city_name
+            })
+            .map(|connection| {
+                if connection.cities.0 == city_name {
+                    (
+                        connection.cities.1.clone(),
+                        connection.distance,
+                        connection.road,
+                    )
+                } else {
+                    (
+                        connection.cities.0.clone(),
+                        connection.distance,
+                        connection.road,
+                    )
+                }
+            })
+            .collect();
         neighbors
     }
 
@@ -63,11 +77,38 @@ pub fn create_cities() -> CityGraph {
     graph.add_city(City::new("Vittoria", Region::Sicily, false));
     graph.add_city(City::new("Marina di Ragusa", Region::Sicily, false));
     graph.add_city(City::new("Pozzallo", Region::Sicily, false));
+    graph.add_city(City::new("Modica", Region::Sicily, false));
 
-    graph.add_connection(CityConnection::new(("Ragusa".to_string(), "Comiso".to_string()), 8, RoadTypes::Cobblestone));
-    graph.add_connection(CityConnection::new(("Comiso".to_string(), "Vittoria".to_string()), 8, RoadTypes::Cobblestone));
-    graph.add_connection(CityConnection::new(("Ragusa".to_string(), "Marina di Ragusa".to_string()), 33, RoadTypes::Asphalt));
-    graph.add_connection(CityConnection::new(("Marina di Ragusa".to_string(), "Pozzallo".to_string()), 31, RoadTypes::Unpaved));
+    graph.add_connection(CityConnection::new(
+        ("Ragusa", "Comiso"),
+        8,
+        RoadTypes::Cobblestone,
+    ));
+    graph.add_connection(CityConnection::new(
+        ("Comiso", "Vittoria"),
+        8,
+        RoadTypes::Cobblestone,
+    ));
+    graph.add_connection(CityConnection::new(
+        ("Ragusa", "Marina di Ragusa"),
+        33,
+        RoadTypes::Asphalt,
+    ));
+    graph.add_connection(CityConnection::new(
+        ("Marina di Ragusa", "Pozzallo"),
+        31,
+        RoadTypes::Unpaved,
+    ));
+    graph.add_connection(CityConnection::new(
+        ("Ragusa", "Modica"),
+        11,
+        RoadTypes::Asphalt,
+    ));
+    graph.add_connection(CityConnection::new(
+        ("Pozzallo", "Modica"),
+        30,
+        RoadTypes::Asphalt,
+    ));
 
     graph
 }

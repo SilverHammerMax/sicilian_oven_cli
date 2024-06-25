@@ -201,7 +201,7 @@ pub fn initialize_challenges() -> Vec<Challenge> {
                 "Dinami".to_string(),
                 "Delianuova".to_string(),
             ],
-            Location::City("CNZ".to_string()),
+            Location::City("Catanzaro".to_string()),
             Location::Any,
             Some([0, 0, 0, 0]),
         ),

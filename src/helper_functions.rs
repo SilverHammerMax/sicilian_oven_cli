@@ -65,7 +65,7 @@ pub fn challenge_prompt(cities: &cities::CityGraph, challenge: &challenge::Chall
     for city in challenge.cities() {
         println!(
             "- {}",
-            cities.cities
+            cities
                 .get(city)
                 .expect("Invalid City Name")
         );

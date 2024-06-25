@@ -165,7 +165,7 @@ pub fn random_challenge(cities: &crate::cities::CityGraph) -> Challenge {
             if *input <= 0 {
                 return Err("Too Few Cities");
             }
-            if *input > cities.cities.len() as i32 {
+            if *input > cities.cities().len() as i32 {
                 return Err("Too Many Cities");
             }
             Ok(())
@@ -189,7 +189,7 @@ pub fn random_challenge(cities: &crate::cities::CityGraph) -> Challenge {
     };
 
     let mut rng: Pcg64 = Seeder::from(seed.to_owned() + &count.to_string()).make_rng();
-    let challenge_cities = cities.cities
+    let challenge_cities = cities.cities()
         .iter()
         .map(|city| city.get_name().to_string())
         .choose_multiple(&mut rng, count);

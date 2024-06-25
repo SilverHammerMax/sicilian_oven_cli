@@ -70,13 +70,13 @@ impl Display for City {
 }
 
 impl City {
-    pub const fn new(
-        city_name: String,
+    pub fn new(
+        city_name: &str,
         region: Region,
         refuel: bool,
     ) -> City {
         City {
-            city_name,
+            city_name: city_name.to_string(),
             region,
             refuel,
         }
@@ -96,7 +96,7 @@ impl City {
 }
 
 pub fn major_cities(region: Option<&Region>) -> Vec<String> {
-    crate::cities::create_cities().cities
+    crate::cities::create_cities().cities()
         .iter()
         .filter(|city| {
             city.is_major() && (region.is_none() || Some(city.get_region()) == region)

@@ -1,7 +1,7 @@
 use crate::types::*;
 use crate::*;
 
-pub fn choose_car(cars: &mut Vec<car_parts::car::Car>) -> car_parts::car::Car {
+pub fn choose_car(cars: &mut [car_parts::car::Car]) -> car_parts::car::Car {
     let car_names = cars.iter().map(|car| car.name()).collect::<Vec<_>>();
     let selection = dialoguer::Select::new()
         .with_prompt("Pick your car")
@@ -38,7 +38,7 @@ pub fn choose_major_city(region: Option<&city::Region>) -> String {
     city::major_cities(region)[selection].clone()
 }
 
-pub fn selection_prompt(mut cars: &mut Vec<car_parts::car::Car>, cities: &cities::CityGraph) -> challenge::Challenge {
+pub fn selection_prompt(cars: &mut Vec<car_parts::car::Car>, cities: &cities::CityGraph) -> challenge::Challenge {
     let mut challenge = None;
     while challenge.is_none() {
         let options = vec!["Challenges", "Random Cities", "Build Car"];

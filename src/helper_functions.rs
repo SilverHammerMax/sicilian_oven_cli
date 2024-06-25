@@ -26,23 +26,8 @@ pub fn choose_challenge() -> challenge::Challenge {
     challenge::initialize_challenges()[selection].clone()
 }
 
-pub fn choose_major_city(region: Option<&city::Region>) -> &'static str {
-    let major_cities: Vec<String> = city::major_cities(region)
-        .iter()
-        .map(|code| {
-            format!(
-                "{} ({})",
-                cities::CITIES
-                    .get(code)
-                    .expect("Invalid City Code")
-                    .get_name(),
-                cities::CITIES
-                    .get(code)
-                    .expect("Invalid City Code")
-                    .get_region()
-            )
-        })
-        .collect();
+pub fn choose_major_city(region: Option<&city::Region>) -> String {
+    let major_cities: Vec<String> = city::major_cities(region);
 
     let selection = dialoguer::Select::new()
         .with_prompt("What major city would you like to start in?")
@@ -50,10 +35,10 @@ pub fn choose_major_city(region: Option<&city::Region>) -> &'static str {
         .interact()
         .expect("Prompt Failed");
 
-    city::major_cities(region)[selection]
+    city::major_cities(region)[selection].clone()
 }
 
-pub fn selection_prompt(mut cars: &mut Vec<car_parts::car::Car>) -> challenge::Challenge {
+pub fn selection_prompt(mut cars: &mut Vec<car_parts::car::Car>, cities: &cities::CityGraph) -> challenge::Challenge {
     let mut challenge = None;
     while challenge.is_none() {
         let options = vec!["Challenges", "Random Cities", "Build Car"];
@@ -64,7 +49,7 @@ pub fn selection_prompt(mut cars: &mut Vec<car_parts::car::Car>) -> challenge::C
             .expect("Prompt Failed");
         match selection {
             0 => challenge = Some(choose_challenge()),
-            1 => challenge = Some(challenge::random_challenge()),
+            1 => challenge = Some(challenge::random_challenge(cities)),
             2 => cars.push(car_parts::car::car_build_prompt()),
             _ => panic!("Fix New Options!"),
         }
@@ -72,22 +57,17 @@ pub fn selection_prompt(mut cars: &mut Vec<car_parts::car::Car>) -> challenge::C
     challenge.unwrap()
 }
 
-pub fn challenge_prompt(challenge: &challenge::Challenge) {
+pub fn challenge_prompt(cities: &cities::CityGraph, challenge: &challenge::Challenge) {
     println!(
         "\nWelcome to {}! In this challenge, you will attempt to reach the cities of:\n",
         challenge.name()
     );
     for city in challenge.cities() {
         println!(
-            "- {} ({})",
-            cities::CITIES
+            "- {}",
+            cities.cities
                 .get(city)
-                .expect("Invalid City Code")
-                .get_name(),
-            cities::CITIES
-                .get(city)
-                .expect("Invalid City Code")
-                .get_region()
+                .expect("Invalid City Name")
         );
     }
     println!();
@@ -96,12 +76,9 @@ pub fn challenge_prompt(challenge: &challenge::Challenge) {
     let end_city = challenge.get_end_city();
 
     match start_city {
-        challenge::Location::City(code) => println!(
+        challenge::Location::City(city) => println!(
             "You will start in {}.",
-            cities::CITIES
-                .get(code)
-                .expect("Invalid City Code")
-                .get_name()
+            city
         ),
         challenge::Location::Region(region) => {
             println!("You may start in any major city in {}.", region)
@@ -110,12 +87,9 @@ pub fn challenge_prompt(challenge: &challenge::Challenge) {
     }
 
     match end_city {
-        challenge::Location::City(code) => println!(
+        challenge::Location::City(city) => println!(
             "You will end in {}.",
-            cities::CITIES
-                .get(code)
-                .expect("Invalid City Code")
-                .get_name()
+            city
         ),
         challenge::Location::Region(region) => {
             println!("You may start in any major city in {}.", region)

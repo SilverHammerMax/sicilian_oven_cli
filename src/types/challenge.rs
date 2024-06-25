@@ -7,7 +7,7 @@ use std::fmt::{Display, Formatter};
 
 #[derive(PartialEq, Eq, Clone)]
 pub enum Location {
-    City(&'static str),
+    City(String),
     Region(city::Region),
     Any,
 }
@@ -16,7 +16,7 @@ pub enum Location {
 pub struct Challenge {
     name: &'static str,
     car: Option<car_parts::car::Car>,
-    cities: Vec<&'static str>,
+    cities: Vec<String>,
     start_city: Location,
     end_city: Location,
     medal_cutoffs: Option<[i32; 4]>,
@@ -36,7 +36,7 @@ impl Challenge {
     pub fn new(
         name: &'static str,
         car: Option<car_parts::car::Car>,
-        cities: Vec<&'static str>,
+        cities: Vec<String>,
         start_city: Location,
         end_city: Location,
         medal_cutoffs: Option<[i32; 4]>,
@@ -60,7 +60,7 @@ impl Challenge {
         self.car.clone()
     }
 
-    pub fn cities(&self) -> &[&str] {
+    pub fn cities(&self) -> &[String] {
         self.cities.as_slice()
     }
 
@@ -92,18 +92,18 @@ pub fn initialize_challenges() -> Vec<Challenge> {
             "Ragusan Ride",
             Some(cars[3].clone()),
             vec![
-                "RAG", "COM", "VIT", "MDR", "MOD", "POZ", "CAP", "NTO", "SIR", "GIA", "PAL", "FLO",
-                "AUG", "LEN",
+                "RAG".to_string(), "COM".to_string(), "VIT".to_string(), "MDR".to_string(), "MOD".to_string(), "POZ".to_string(), "CAP".to_string(), "NTO".to_string(), "SIR".to_string(), "GIA".to_string(), "PAL".to_string(), "FLO".to_string(),
+                "AUG".to_string(), "LEN".to_string(),
             ],
-            Location::City("RAG"),
-            Location::City("RAG"),
+            Location::City("RAG".to_string()),
+            Location::City("RAG".to_string()),
             Some([205, 220, 270, 330]),
         ),
         Challenge::new(
             "Big Car, Big Cities",
             Some(cars[0].clone()),
             vec![
-                "RAG", "SIR", "CAT", "ENN", "CTN", "PMO", "TRA", "MES", "AGR",
+                "RAG".to_string(), "SIR".to_string(), "CAT".to_string(), "ENN".to_string(), "CTN".to_string(), "PMO".to_string(), "TRA".to_string(), "MES".to_string(), "AGR".to_string(),
             ],
             Location::Region(city::Region::Sicily),
             Location::Region(city::Region::Sicily),
@@ -113,27 +113,27 @@ pub fn initialize_challenges() -> Vec<Challenge> {
             "A Ride Around Mt. Etna",
             Some(cars[2].clone()),
             vec![
-                "CAT", "GER", "PAT", "ADR", "RAN", "CRL", "PTI", "BAR", "MIL", "MES", "RIP", "TAM",
-                "ACI", "LEN", "NIC", "ENN",
+                "CAT".to_string(), "GER".to_string(), "PAT".to_string(), "ADR".to_string(), "RAN".to_string(), "CRL".to_string(), "PTI".to_string(), "BAR".to_string(), "MIL".to_string(), "MES".to_string(), "RIP".to_string(), "TAM".to_string(),
+                "ACI".to_string(), "LEN".to_string(), "NIC".to_string(), "ENN".to_string(),
             ],
-            Location::City("CAT"),
-            Location::City("CAT"),
+            Location::City("CAT".to_string()),
+            Location::City("CAT".to_string()),
             Some([290, 310, 335, 395]),
         ),
         Challenge::new(
             "The Godfather",
             Some(cars[3].clone()),
             vec![
-                "COR", "SEL", "MAR", "CST", "PAR", "MEN", "SCI", "POR", "AGR", "RIB", "CAN", "LIC",
+                "COR".to_string(), "SEL".to_string(), "MAR".to_string(), "CST".to_string(), "PAR".to_string(), "MEN".to_string(), "SCI".to_string(), "POR".to_string(), "AGR".to_string(), "RIB".to_string(), "CAN".to_string(), "LIC".to_string(),
             ],
-            Location::City("COR"),
-            Location::City("COR"),
+            Location::City("COR".to_string()),
+            Location::City("COR".to_string()),
             Some([305, 325, 370, 395]),
         ),
         Challenge::new(
             "Harbormaster",
             None,
-            vec!["ISC", "STR", "LIP", "MAL", "FAV", "PAN", "TRC"],
+            vec!["ISC".to_string(), "STR".to_string(), "LIP".to_string(), "MAL".to_string(), "FAV".to_string(), "PAN".to_string(), "TRC".to_string()],
             Location::Any,
             Location::Any,
             Some([0, 0, 0, 0]),
@@ -141,8 +141,8 @@ pub fn initialize_challenges() -> Vec<Challenge> {
         Challenge::new(
             "A Calabrian Rally",
             Some(cars[1].clone()),
-            vec!["ACR", "CTE", "ORI", "DIN", "DNV"],
-            Location::City("CNZ"),
+            vec!["ACR".to_string(), "CTE".to_string(), "ORI".to_string(), "DIN".to_string(), "DNV".to_string()],
+            Location::City("CNZ".to_string()),
             Location::Any,
             Some([0, 0, 0, 0]),
         ),
@@ -157,7 +157,7 @@ pub fn initialize_challenges() -> Vec<Challenge> {
     ]
 }
 
-pub fn random_challenge() -> Challenge {
+pub fn random_challenge(cities: &crate::cities::CityGraph) -> Challenge {
     let count = dialoguer::Input::new()
         .with_prompt("How many cities would you like to go to?")
         .with_initial_text("5")
@@ -165,7 +165,7 @@ pub fn random_challenge() -> Challenge {
             if *input <= 0 {
                 return Err("Too Few Cities");
             }
-            if *input > crate::cities::CITIES.len() as i32 {
+            if *input > cities.cities.len() as i32 {
                 return Err("Too Many Cities");
             }
             Ok(())
@@ -189,14 +189,14 @@ pub fn random_challenge() -> Challenge {
     };
 
     let mut rng: Pcg64 = Seeder::from(seed.to_owned() + &count.to_string()).make_rng();
-    let cities = crate::cities::CITIES
-        .keys()
-        .cloned()
+    let challenge_cities = cities.cities
+        .iter()
+        .map(|city| city.get_name().to_string())
         .choose_multiple(&mut rng, count);
     Challenge::new(
         "Random Cities",
         None,
-        cities,
+        challenge_cities,
         Location::Any,
         Location::Any,
         None,

@@ -26,8 +26,8 @@ pub fn choose_challenge() -> challenge::Challenge {
     challenge::initialize_challenges()[selection].clone()
 }
 
-pub fn choose_major_city(region: Option<&city::Region>) -> String {
-    let major_cities: Vec<String> = city::major_cities(region);
+pub fn choose_major_city(region: Option<&city::Region>, cities: &cities::CityGraph) -> String {
+    let major_cities: Vec<String> = city::major_cities(region, cities);
 
     let selection = dialoguer::Select::new()
         .with_prompt("What major city would you like to start in?")
@@ -35,7 +35,7 @@ pub fn choose_major_city(region: Option<&city::Region>) -> String {
         .interact()
         .expect("Prompt Failed");
 
-    city::major_cities(region)[selection].clone()
+    city::major_cities(region, cities)[selection].clone()
 }
 
 pub fn selection_prompt(

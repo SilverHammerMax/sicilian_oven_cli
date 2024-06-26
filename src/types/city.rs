@@ -91,8 +91,8 @@ impl City {
     }
 }
 
-pub fn major_cities(region: Option<&Region>) -> Vec<String> {
-    crate::cities::create_cities()
+pub fn major_cities(region: Option<&Region>, cities: &crate::cities::CityGraph) -> Vec<String> {
+    cities
         .cities()
         .iter()
         .filter(|city| city.is_major() && (region.is_none() || Some(city.get_region()) == region))

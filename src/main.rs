@@ -35,17 +35,17 @@ fn challenge_engine(
         .car()
         .unwrap_or_else(|| helper_functions::choose_car(cars));
     let mut missing_cities = challenge.cities().to_vec();
-    let mut city_code = match challenge.start_city() {
-        challenge::Location::City(code) => code.to_string(),
-        challenge::Location::Region(region) => helper_functions::choose_major_city(Some(region)),
-        challenge::Location::Any => helper_functions::choose_major_city(None),
+    let mut city_name = match challenge.start_city() {
+        challenge::Location::City(name) => name.to_string(),
+        challenge::Location::Region(region) => helper_functions::choose_major_city(Some(region), cities),
+        challenge::Location::Any => helper_functions::choose_major_city(None, cities),
     };
     let mut path = vec![];
     let mut time = 0.0;
     loop {
-        let city_reference = cities.get(&city_code).expect("Invalid City Code");
-        path.push(city_code.clone());
-        missing_cities.retain(|code| *code != city_code);
+        let city_reference = cities.get(&city_name).expect("Invalid City Name");
+        path.push(city_name.clone());
+        missing_cities.retain(|code| *code != city_name);
 
         println!();
         println!("Welcome to {}!", city_reference);
@@ -61,9 +61,7 @@ fn challenge_engine(
         println!();
         println!(
             "Your path has been: {:?}",
-            path.iter()
-                .map(|code| cities.get(code).expect("Invalid City Code").get_name())
-                .collect::<Vec<_>>()
+            path
         );
         println!();
 
@@ -71,9 +69,6 @@ fn challenge_engine(
             println!(
                 "Your current list of missing cities is: {:?}",
                 missing_cities
-                    .iter()
-                    .map(|code| cities.get(code).expect("Invalid City Code").get_name())
-                    .collect::<Vec<_>>()
             );
         } else {
             println!("Your challenge is complete!");
@@ -89,10 +84,11 @@ fn challenge_engine(
         }
         println!();
         let mut options: Vec<String> = Vec::new();
-        for (code, distance, _) in cities.get_neighbors(city_code.as_str()) {
+        let neighbors = cities.get_neighbors(city_name.as_str());
+        for (name, distance, _) in &neighbors {
             let option = format!(
                 "Go to {}, {} km",
-                cities.get(&code).expect("Invalid City Code"),
+                cities.get(&name).expect("Invalid City Name"),
                 distance
             );
             options.push(option);
@@ -109,25 +105,22 @@ fn challenge_engine(
             .interact()
             .expect("Prompt Failed");
 
-        let next_city;
-        if selection < cities.get_neighbors(city_code.as_str()).len() {
-            next_city = cities
-                .get_neighbors(&city_code)
+        if selection < neighbors.len() {
+            let (next_city_name, distance, road) = neighbors
                 .get(selection)
-                .expect("Out of Range")
-                .clone();
-            car.travel(&next_city.2);
-            time += car.calculate_travel_time(&next_city.2, next_city.1);
-            city_code.clone_from(&next_city.0);
-        } else if selection == cities.get_neighbors(&city_code).len() {
+                .expect("Out of Range");
+            car.travel(&road);
+            time += car.calculate_travel_time(&road, *distance);
+            city_name.clone_from(next_city_name);
+        } else if selection == neighbors.len() {
             break;
         } else if city_reference.is_major()
-            && selection == cities.get_neighbors(&city_code).len() + 1
+            && selection == neighbors.len() + 1
         {
             car.refuel(&mut time);
             path.pop();
         } else if city_reference.is_major()
-            && selection == cities.get_neighbors(&city_code).len() + 2
+            && selection == neighbors.len() + 2
         {
             car.repair(&mut time);
             path.pop();
@@ -144,10 +137,10 @@ fn challenge_engine(
 
     println!();
     if missing_cities.is_empty()
-        && (&challenge::Location::City(city_code.clone()) == challenge.get_end_city()
+        && (&challenge::Location::City(city_name.clone()) == challenge.get_end_city()
             || &challenge::Location::Region(
                 cities
-                    .get(&city_code)
+                    .get(&city_name)
                     .expect("Invalid City Code")
                     .get_region()
                     .clone(),

@@ -18,7 +18,15 @@ The goal of the game is to travel to all the cities indicated by the game mode y
 you can use, and you can also build your own car. Each car has a set of attributes which will determine its speed, fuel usage, and reliability. There are also different kinds of roads where certain cars
 will perform better. Essentially, the entire game is an exercise in managing the fuel and condition of your car while plotting the fastest route between a given set of cities.
 
+The "challenge" mode gives you a set amount of cities and a target time to hit. Each challenge might have different conditions: some might ask you to start or end here, some might not ask you to start or
+end anywhere in specific. The "random cities" mode is a Player vs. Player mode. It's essentially a challenge mode that is randomized every time, where you can play against your friends. You can select
+the amount of cities you want to go to and the seed for these cities. A seed is essentially a word or a number which will generate the same random cities across all games on all devices.
 
+The final important "mode" is the Car Builder. Here, you can build your own custom car. You select the engine, gearbox, chassis, and tires that this car will use. Each part has a tradeoff between two
+attributes, making each choice important. Every part has five different choices, each manufactured by the same five companies: Stellare, Veloce, Ardente, Solare, and Fiorente. Stellare cars will typically
+be on the lower and safer end of the spectrum while Fiorente cars will typically be the biggest and riskier choices.
+
+Overall, the objective of this game is to go as fast as possible. Whether that's with friends or by yourself, speed is the name of the game. Good luck!
 
 ## The Map
 
@@ -171,6 +179,17 @@ following are the chassis options:
 | Ardente | Wolf | 6 | 6 |
 | Solare | Horse | 8 | 4 |
 | Fiorente | Roadrunner | 10 | 1 |
+
+### Generic Cars
+
+There are 4 generic cars which are constructed using in-game parts. For simplicity, I've listed all the important attributes for all the generic cars below:
+
+|    Car Name    | AGC | GGC | Horsepower | Fuel Usage | Fuel Tank | Weight | Reliability |
+|:--------------:| :---: | :---: | :---: |:----------:|:---------:| :---: | :---: |
+| Il Commandante | 8 | 4 | 192 |    2.4     |   37.0    | 1013 | -2% |
+| Il Grande | 6 | 6 | 440 | 5.2 |   47.4    | 1328 | -2.5% |
+| Il Capo | 4 | 8 | 240 | 3.2 | 33.6 | 1062 | -1.5% |
+| Il Generalissimo | 8 | 4 | 220 | 3.8 | 37.0 | 1150 | -1% |
 
 ## Repairing, Refuelling, and Road Types
 

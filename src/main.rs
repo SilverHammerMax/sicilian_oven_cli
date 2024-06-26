@@ -19,7 +19,7 @@ fn main() {
 
 fn challenge_engine(
     challenge: &mut challenge::Challenge,
-    cars: &mut Vec<car_parts::car::Car>,
+    cars: &mut [car_parts::car::Car],
     cities: &cities::CityGraph,
 ) {
     helper_functions::challenge_prompt(cities, challenge);
@@ -88,7 +88,7 @@ fn challenge_engine(
         for (name, distance, _) in &neighbors {
             let option = format!(
                 "Go to {}, {} km",
-                cities.get(&name).expect("Invalid City Name"),
+                cities.get(name).expect("Invalid City Name"),
                 distance
             );
             options.push(option);
@@ -109,8 +109,8 @@ fn challenge_engine(
             let (next_city_name, distance, road) = neighbors
                 .get(selection)
                 .expect("Out of Range");
-            car.travel(&road);
-            time += car.calculate_travel_time(&road, *distance);
+            car.travel(road);
+            time += car.calculate_travel_time(road, *distance);
             city_name.clone_from(next_city_name);
         } else if selection == neighbors.len() {
             break;

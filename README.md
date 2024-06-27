@@ -1,6 +1,6 @@
 # Italy: The Game
 
-Welcome to Italy: The Game. This game is an extension of the traveling salesman's problem: you will be given a set numer of cities, and you will have to find the quickest path through them. You 
+Welcome to Italy: The Game. This game is an extension of the traveling salesman's problem: you will be given a set numer of cities, and you will have to find the quickest path through them. You
 can play against your friends or preset challenges, as well as just playing against yourself. This game takes place in the South of Italy, and a map is attached to guide you around.
 
 In this guide, we will cover the following 6 chapters:
@@ -14,11 +14,23 @@ In this guide, we will cover the following 6 chapters:
 
 ## Basic Overview
 
-The goal of the game is to travel to all the cities indicated by the game mode you're playing as quickly as possible. The smaller the time, the better. There are multiple different game-provided cars
-you can use, and you can also build your own car. Each car has a set of attributes which will determine its speed, fuel usage, and reliability. There are also different kinds of roads where certain cars
+The goal of the game is to travel to all the cities indicated by the game mode you're playing as quickly as possible. The smaller the time, the better. There are multiple different [game-provided cars](#generic-cars)
+you can use, and you can also build your own car. Each car has a set of [attributes](#car-building) which will determine its speed, fuel usage, and reliability. There are also different [kinds of roads](#road-types) where certain cars
 will perform better. Essentially, the entire game is an exercise in managing the fuel and condition of your car while plotting the fastest route between a given set of cities.
 
+The ["challenge" mode](#challenges) gives you a set amount of cities and a target time to hit. Each challenge might have different conditions: some might ask you to start or end here, some might not ask you to start or
+end anywhere in specific. The "random cities" mode is a [Player vs. Player mode](#player-vs-player). It's essentially a challenge mode that is randomized every time, where you can play against your friends. You can select
+the amount of cities you want to go to and the seed for these cities. A seed is essentially a word or a number which will generate the same random cities across all games on all devices.
 
+The final important "mode" is the Car Builder. Here, you can [build your own custom car](#car-building). You select the [engine](#engine), [gearbox](#gearbox), [chassis](#chassis), and [tires](#tires) that this car will use. Each part has a tradeoff between two
+attributes, making each choice important. Every part has five different choices, each manufactured by the same five companies: Stellare, Veloce, Ardente, Solare, and Fiorente. Stellare cars will typically
+be on the lower and safer end of the spectrum while Fiorente cars will typically be the biggest and riskier choices. You can control attributes of the car which will, in turn, control the speed of the car.
+
+In terms of the map, there are five different kinds of [roads](#road-types): Highway, Asphalt, Stone, Unpaved, and Ferry. Ferries take the same time for all cars. Meanwhile, certain cars might go faster than others on
+different roads, especially due to their [tires](#tires). You should plot out your path with your car's abilities on certain roads in mind. On the map, major cities are also designated. These are the only cities
+where you can refuel or repair your car. This takes significant time, so you should plan to try and do this as sparingly as possible. You can only refuel or repair your car to the maximum.
+
+Overall, the objective of this game is to go as fast as possible. Whether that's with friends or by yourself, speed is the name of the game. Good luck!
 
 ## The Map
 
@@ -45,9 +57,9 @@ Welcome to Italy: The Game! You can use the arrow keys to navigate this and all 
 Some might ask you to select an input with your Y or N keys to signify yes or no respectively. The menu system itself should be fairly intuitive.
 Once you start the game, you should be presented with three basic options:
 
-> 1. Would you like to start a challenge?
-> 2. Would you like to build a car?
-> 3. Would you like to play against another player?
+> 1. [Challenges](#challenges)
+> 2. [Random Cities](#player-vs-player)
+> 3. [Build Car](#car-building)
 
 We'll cover all of these options in the further chapters, but for now let's assume you want to drive around, free of expectations of requirements. Select "1. Would you like to start a challenge?" and
 select the "Free Play" mode. There, you can select a car and a major city to begin from. If you've not already built a car, you can simply select a pre-built one. This mode will enable you to drive around.
@@ -64,7 +76,7 @@ Below is an example of a dialogue option.
 > Your current list of missing cities is: []
 >
 > Where would you like to go?:
-> 
+>
 >  - Go to Marina di Ragusa, 33 km
 >  - Go to Modica, 11 km
 >  - Go to Comiso, 8 km
@@ -76,8 +88,8 @@ Below is an example of a dialogue option.
 The menu has 5 main parts. The first part welcomes you to whatever city you are in. The second part tells you how long you've spent driving. The third part tells you how many liters of fuel you have
 left in your car. For every turn you take, your fuel will drop by a fixed amount proportional to how large the engine you selected is. For example, if you select a 1.6 Liter engine, you will lose 1.6
 liters of fuel. So your fuel would go from 26 to 24.4. If the amount of fuel you have in your car drops below 0, you must restart.
-   
-The fourth part of the menu lists your path up until that point. It will include all the cities you've travelled to and any refuelling/repair stops you may have made. The fifth part of the menu tells
+
+The fourth part of the menu lists your path up until that point. It will include all the cities you've travelled to and any [refuelling/repair stops](#repairing-refuelling-and-road-types) you may have made. The fifth part of the menu tells
 you your list of missing cities. During [challenges](#challenges) or [Player vs. Player](#player-vs-player), you'll have a set amount of cities you have to travel to, and the "missing cities" list will make sure you stay informed of what
 cities you need to travel to.
 
@@ -172,6 +184,17 @@ following are the chassis options:
 | Solare | Horse | 8 | 4 |
 | Fiorente | Roadrunner | 10 | 1 |
 
+### Generic Cars
+
+There are 4 generic cars which are constructed using in-game parts. For simplicity, I've listed all the important attributes for all the generic cars below:
+
+|    Car Name    | AGC | GGC | Horsepower | Fuel Usage | Fuel Tank | Weight | Reliability |
+|:--------------:| :---: | :---: | :---: |:----------:|:---------:| :---: | :---: |
+| Il Commandante | 8 | 4 | 192 |    2.4     |   37.0    | 1013 | -2% |
+| Il Grande | 6 | 6 | 440 | 5.2 |   47.4    | 1328 | -2.5% |
+| Il Capo | 4 | 8 | 240 | 3.2 | 33.6 | 1062 | -1.5% |
+| Il Generalissimo | 8 | 4 | 220 | 3.8 | 37.0 | 1150 | -1% |
+
 ## Repairing, Refuelling, and Road Types
 
 ### Repairing
@@ -187,7 +210,7 @@ This formula's output should be considered in terms of minutes. For example, let
 it would take to be repaired is:
 
 > 145 - 70
-> 
+>
 > 75 minutes
 
 Effectively, this guarantees a minimum of 45 minutes on a repair stop along with 1 minute for every percent under 100 your condition is.
@@ -207,7 +230,7 @@ The time it would take to be refuelled is:
 > 10 + (1.5 * 20)
 > 10 + 30
 > 40 minutes
- 
+
 Effectively, this guarantees a minimum of 10 minutes on a refuel stop along with 1.5 minutes for every liter of fuel missing from the tank.
 
 ### Road Types
@@ -220,42 +243,42 @@ on the road type. Highways and Asphalt roads use AGC and Stone and Unpaved roads
 the cars in terms of kilometers per hour. Each formula will be applied when on the given road type
 
 > Highway:
-> 
+>
 > 2 * (Horsepower * Condition * AGC) / Weight
 
 > Asphalt:
-> 
+>
 > (Horsepower * Condition * AGC) / Weight
 
 > Stone:
-> 
+>
 > (3/4) * (Horsepower * Condition * GGC) / Weight
 
 > Unpaved:
-> 
+>
 > (1/2) * (Horsepower * Condition * GGC) / Weight
- 
+
 Each of these formulas will be used in the implied conditions to calculate whatever the speed is. Let's say, for example, that your car
 has 300 Horsepower, 80% Condition, 6 AGC, weighs 1000 kilograms, and is traveling on an Asphalt road. Your speed would be:
 
 > (300 * 80 * 6) / 1000
-> 
+>
 > 144000 / 1000
-> 
+>
 > 144 kilometers per hour
 
-Assuming that the road you're traveling on is 20 kilometers wrong, the amount of time to drive the road would be:
+Assuming that the road you're traveling on is 20 kilometers long, the amount of time to drive the road would be:
 
 > 20 km / 144 kph
-> 
+>
 > ~0.1388 hours
-> 
+>
 > ~8.3 minutes!
 
 Ferries are the only example where none of these factors matter. The ferry formula is:
 
 > Ferry:
-> 
+>
 > 15 minutes + (2.5 * distance)
 
 This formula provides a 15-minute onboarding/offboarding time while the ferry takes 2.5 minutes to travel every kilometer.
@@ -269,8 +292,9 @@ play against a friend. Each person will be prompted two questions, and should re
 2. What seed would you like to use (Leave blank for a random seed)
 
 The first option will give a certain amount of cities that both you and your opponent have to reach, while the second option will ensure that both
-you and your opponent are given the same randomly selected cities (provided you submit the same seed). Each player can then select either a
-generic car or a custom-built car and begin racing. The winner is judged by whoever sets the faster time.
+you and your opponent are given the same randomly selected cities (provided you submit the same seed). A seed can be anything: a word, a number, a phrase.
+As long as it is identical between both players, they will receive identical cities. Each player can then select either a generic car or a custom-built
+car and begin racing. The winner is judged by whoever sets the faster time.
 
 Unless if both players set a rule against it, you can both start and end at any city. When you begin, you will be given a list of all the major cities
 to cycle through and select the city you think will help you the most.

@@ -1,5 +1,8 @@
+use std::borrow::Borrow;
 use std::fmt::{Display, Formatter};
+use std::hash::{Hash, Hasher};
 
+#[derive(Copy, Clone)]
 pub enum RoadTypes {
     Highway,
     Asphalt,
@@ -8,7 +11,7 @@ pub enum RoadTypes {
     Ferry,
 }
 
-#[derive(PartialEq, Eq, Clone)]
+#[derive(PartialEq, Eq, Clone, Ord, PartialOrd)]
 pub enum Region {
     Sicily,
     Calabria,
@@ -35,11 +38,29 @@ impl Display for Region {
     }
 }
 
+#[derive(Ord, Eq, PartialOrd, Clone)]
 pub struct City {
-    city_name: &'static str,
+    city_name: String,
     region: Region,
-    connected_cities: &'static [(&'static str, i32, RoadTypes)],
     refuel: bool,
+}
+
+impl PartialEq for City {
+    fn eq(&self, other: &Self) -> bool {
+        self.city_name == other.city_name
+    }
+}
+
+impl Hash for City {
+    fn hash<H: Hasher>(&self, state: &mut H) {
+        self.city_name.hash(state);
+    }
+}
+
+impl Borrow<String> for City {
+    fn borrow(&self) -> &String {
+        &self.city_name
+    }
 }
 
 impl Display for City {
@@ -49,30 +70,20 @@ impl Display for City {
 }
 
 impl City {
-    pub const fn new(
-        city_name: &'static str,
-        region: Region,
-        connected_cities: &'static [(&'static str, i32, RoadTypes)],
-        refuel: bool,
-    ) -> City {
+    pub fn new(city_name: &str, region: Region, refuel: bool) -> City {
         City {
-            city_name,
+            city_name: city_name.to_string(),
             region,
-            connected_cities,
             refuel,
         }
     }
 
     pub fn get_name(&self) -> &str {
-        self.city_name
+        self.city_name.as_str()
     }
 
     pub fn get_region(&self) -> &Region {
         &self.region
-    }
-
-    pub fn get_cities(&self) -> &'static [(&'static str, i32, RoadTypes)] {
-        self.connected_cities
     }
 
     pub fn is_major(&self) -> bool {
@@ -80,12 +91,11 @@ impl City {
     }
 }
 
-pub fn major_cities(region: Option<&Region>) -> Vec<&'static str> {
-    crate::cities::CITIES
+pub fn major_cities(region: Option<&Region>, cities: &crate::cities::CityGraph) -> Vec<String> {
+    cities
+        .cities()
         .iter()
-        .filter(|(_, city)| {
-            city.is_major() && (region.is_none() || Some(city.get_region()) == region)
-        })
-        .map(|(code, _)| *code)
+        .filter(|city| city.is_major() && (region.is_none() || Some(city.get_region()) == region))
+        .map(|city| city.get_name().to_string())
         .collect()
 }

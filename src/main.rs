@@ -1,19 +1,35 @@
 #![deny(clippy::unwrap_used)]
 #![allow(clippy::match_overlapping_arm)]
 
+use crate::helper_functions::choose_challenge;
 use crate::types::*;
+use crate::types::car_parts::car;
 
 mod cities;
 mod helper_functions;
 mod types;
 
 fn main() {
+    let mut challenges = challenge::initialize_challenges();
     let mut cars = car_parts::car::Car::initialize();
     let cities = cities::create_cities();
     loop {
         println!("Welcome to the game!");
-        let mut challenge = helper_functions::selection_prompt(&mut cars, &cities);
-        challenge_engine(&mut challenge, &mut cars, &cities);
+        let selection = dialoguer::Select::new()
+            .with_prompt("What would you like to do?")
+            .items(&["Challenges", "Random Cities", "Build a Car"])
+            .interact()
+            .expect("Prompt Failed");
+
+        match selection {
+            0 => challenge_engine(choose_challenge(challenges.as_mut_slice()), &mut cars, &cities),
+            1 => {
+                let mut challenge = challenge::random_challenge(&cities);
+                challenge_engine(&mut challenge, &mut cars, &cities);
+            },
+            2 => cars.push(car::car_build_prompt()),
+            _ => panic!("Fix New Options!")
+        }
     }
 }
 

@@ -12,18 +12,14 @@ pub fn choose_car(cars: &mut [car_parts::car::Car]) -> car_parts::car::Car {
     cars[selection].clone()
 }
 
-pub fn choose_challenge() -> challenge::Challenge {
-    let mut challenge_names = Vec::new();
-    for challenge in challenge::initialize_challenges() {
-        challenge_names.push(format!("{} {}", challenge, challenge.get_medal()));
-    }
+pub fn choose_challenge(challenges: &mut [challenge::Challenge]) -> &mut challenge::Challenge {
     let selection = dialoguer::Select::new()
         .with_prompt("Please Select a Challenge")
-        .items(&challenge_names)
+        .items(challenges)
         .interact()
         .expect("Prompt Failed");
 
-    challenge::initialize_challenges()[selection].clone()
+    &mut challenges[selection]
 }
 
 pub fn choose_major_city(region: Option<&city::Region>, cities: &cities::CityGraph) -> String {
@@ -36,28 +32,6 @@ pub fn choose_major_city(region: Option<&city::Region>, cities: &cities::CityGra
         .expect("Prompt Failed");
 
     city::major_cities(region, cities)[selection].clone()
-}
-
-pub fn selection_prompt(
-    cars: &mut Vec<car_parts::car::Car>,
-    cities: &cities::CityGraph,
-) -> challenge::Challenge {
-    let mut challenge = None;
-    while challenge.is_none() {
-        let options = vec!["Challenges", "Random Cities", "Build Car"];
-        let selection = dialoguer::Select::new()
-            .with_prompt("What would you like to play?")
-            .items(&options)
-            .interact()
-            .expect("Prompt Failed");
-        match selection {
-            0 => challenge = Some(choose_challenge()),
-            1 => challenge = Some(challenge::random_challenge(cities)),
-            2 => cars.push(car_parts::car::car_build_prompt()),
-            _ => panic!("Fix New Options!"),
-        }
-    }
-    challenge.unwrap()
 }
 
 pub fn challenge_prompt(cities: &cities::CityGraph, challenge: &challenge::Challenge) {
@@ -84,9 +58,9 @@ pub fn challenge_prompt(cities: &cities::CityGraph, challenge: &challenge::Chall
     match end_city {
         challenge::Location::City(city) => println!("You will end in {}.", city),
         challenge::Location::Region(region) => {
-            println!("You may start in any major city in {}.", region)
+            println!("You may end in any major city in {}.", region)
         }
-        challenge::Location::Any => println!("You can start in whatever major city you prefer."),
+        challenge::Location::Any => println!("You can end in whatever major city you prefer."),
     }
 
     println!();

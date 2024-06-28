@@ -175,7 +175,7 @@ impl CarBuilder {
 
     pub fn build(self) -> Car {
         Car {
-            name: self.name.unwrap_or_default(),
+            name: self.name.unwrap_or("New Car".to_string()),
             tires: self.tires.unwrap_or_default(),
             engine: self.engine.unwrap_or_default(),
             gearbox: self.gearbox.unwrap_or_default(),
@@ -207,7 +207,11 @@ pub fn car_build_prompt() -> Car {
             0 => {
                 let name: String = dialoguer::Input::new()
                     .with_prompt("Enter the Car's Name")
-                    .with_initial_text("Car")
+                    .with_initial_text("New Car")
+                    .validate_with(|name: &String| match name.as_str() {
+                        "" => Err("Name Cannot Be Empty"),
+                        _ => Ok(()),
+                    })
                     .interact_text()
                     .expect("Prompt Failed");
                 main_options[0] = format!("Name ({})", name);

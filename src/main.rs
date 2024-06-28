@@ -141,14 +141,19 @@ fn challenge_engine(
             car.repair(&mut time);
             path.pop();
         }
-        if car.fuel() <= 0.0 {
-            println!("Ran out of fuel! Sorry, game over :(");
+        if car.fuel() <= 0.0 || car.reliability() <= 0.0 {
             break;
         }
-        if car.reliability() <= 0.0 {
-            println!("Car too deteriorated! Sorry, game over :(");
-            break;
-        }
+    }
+
+    if car.fuel() <= 0.0 {
+        println!("Ran out of fuel! Sorry, game over :(");
+        return
+    }
+
+    if car.reliability() <= 0.0 {
+        println!("Car too deteriorated! Sorry, game over :(");
+        return
     }
 
     println!();

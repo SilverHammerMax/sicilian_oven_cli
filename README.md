@@ -135,12 +135,12 @@ and therefore how much fuel it will use per turn. A 5.2L engine will use 5.2 lit
 factor in how fast a car can go. Each engine also has a weight figure, but the Horsepower-to-Weight ratio continually increases the stronger the engine gets. The following are the engine options:
 
 | Manufacturer | Name | Engine Size | Horsepower | Weight |
-| :---: | :---: | :---: | :---: |:------:|
-| Stellare | Rigatoni | 2.4L | 112HP | 235KG  |
-| Veloce | Penne | 3.2L | 200HP | 357KG  |
-| Ardente | Bowtie | 3.8L | 220HP | 372KG |
-| Solare | Bucatini | 4.6L | 276HP | 406KG |
-| Fiorente | Lasagna | 5.2L | 320HP | 432KG |
+| :---: | :---: |:-----------:|:----------:|:------:|
+| Stellare | Rigatoni |    2.4L     |   142HP    | 235KG  |
+| Veloce | Penne |    3.2L     |   200HP    | 357KG  |
+| Ardente | Bowtie |    3.6L     |   220HP    | 372KG |
+| Solare | Bucatini |    4.6L     |   276HP    | 406KG |
+| Fiorente | Lasagna |    5.2L     |   320HP    | 432KG |
 
 ### Gearbox
 
@@ -189,11 +189,11 @@ following are the chassis options:
 There are 4 generic cars which are constructed using in-game parts. For simplicity, I've listed all the important attributes for all the generic cars below:
 
 |    Car Name    | AGC | GGC | Horsepower | Fuel Usage | Fuel Tank | Weight | Reliability |
-|:--------------:| :---: | :---: | :---: |:----------:|:---------:| :---: | :---: |
-| Il Commandante | 8 | 4 | 192 |    2.4     |   37.0    | 1013 | -2% |
-| Il Grande | 6 | 6 | 440 | 5.2 |   47.4    | 1328 | -2.5% |
-| Il Capo | 4 | 8 | 240 | 3.2 | 33.6 | 1062 | -1.5% |
-| Il Generalissimo | 8 | 4 | 220 | 3.8 | 37.0 | 1150 | -1% |
+|:--------------:| :---: | :---: |:----------:|:----------:|:---------:| :---: | :---: |
+| Il Commandante | 8 | 4 |    222     |    2.4     |   37.0    | 1013 | -2% |
+| Il Grande | 6 | 6 |    440     |    5.2     |   47.4    | 1328 | -2.5% |
+| Il Capo | 4 | 8 |    240     |    3.2     | 33.6 | 1062 | -1.5% |
+| Il Generalissimo | 8 | 4 |    220     |    3.6     | 37.0 | 1150 | -1% |
 
 ## Repairing, Refuelling, and Road Types
 

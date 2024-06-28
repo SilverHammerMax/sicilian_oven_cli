@@ -56,7 +56,7 @@ impl Display for Engine {
 impl Engine {
     pub fn brake_horsepower(&self) -> f64 {
         match self {
-            Engine::One => 112.0,
+            Engine::One => 142.0,
             Engine::Two => 200.0,
             Engine::Three => 220.0,
             Engine::Four => 276.0,
@@ -78,7 +78,7 @@ impl Engine {
         match self {
             Engine::One => 2.4,
             Engine::Two => 3.2,
-            Engine::Three => 3.8,
+            Engine::Three => 3.6,
             Engine::Four => 4.6,
             Engine::Five => 5.2,
         }

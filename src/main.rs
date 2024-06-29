@@ -100,9 +100,10 @@ fn challenge_engine(
         let neighbors = cities.get_neighbors(city_name.as_str());
         for (name, distance, _) in &neighbors {
             let option = format!(
-                "Go to {}, {} km",
+                "Go to {}, {} km ({:.1}L)",
                 cities.get(name).expect("Invalid City Name"),
-                distance
+                distance,
+                *distance as f64 / 25.0 * car.engine().fuel_usage()
             );
             options.push(option);
         }
@@ -122,7 +123,7 @@ fn challenge_engine(
             let (next_city_name, distance, road) = neighbors
                 .get(selection)
                 .expect("Out of Range");
-            car.travel(road);
+            car.travel(*distance as f64, road);
             time += car.calculate_travel_time(road, *distance);
             city_name.clone_from(next_city_name);
         } else if selection == neighbors.len() {

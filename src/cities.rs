@@ -1863,7 +1863,5 @@ pub fn create_cities() -> CityGraph {
         RoadTypes::Cobblestone,
     ));
 
-
-
     graph
 }

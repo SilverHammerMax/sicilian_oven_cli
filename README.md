@@ -131,7 +131,7 @@ weakest (but most reliable!) gearbox, and tires that significantly prefer unpave
 ### Engine
 
 The engine is, naturally, an important part of the car. The main tradeoff in picking an engine is between fuel mileage and horsepower. The amount of liters next to the engine name is its capacity,
-and therefore how much fuel it will use per turn. A 5.2L engine will use 5.2 liters of fuel per turn while a 2.4L engine will only use 2.4 liters. Meanwhile, the horsepower is a big deciding
+and therefore how much fuel it will use per turn. A 5.2L engine will use 5.2 liters of fuel per 25 km while a 2.4L engine will only use 2.4 liters. Meanwhile, the horsepower is a big deciding
 factor in how fast a car can go. Each engine also has a weight figure, but the Horsepower-to-Weight ratio continually increases the stronger the engine gets. The following are the engine options:
 
 | Manufacturer | Name | Engine Size | Horsepower | Weight |

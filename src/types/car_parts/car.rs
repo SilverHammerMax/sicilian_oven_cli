@@ -95,11 +95,11 @@ impl Car {
         }
     }
 
-    pub fn travel(&mut self, road: &city::RoadTypes) {
+    pub fn travel(&mut self, distance: f64, road: &city::RoadTypes) {
         match road {
             &city::RoadTypes::Ferry => (),
             _ => {
-                self.fuel -= self.engine.fuel_usage();
+                self.fuel -= self.engine.fuel_usage() * distance / 25.0;
                 self.reliability -= self.gearbox().deterioration();
             }
         }

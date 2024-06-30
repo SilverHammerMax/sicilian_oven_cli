@@ -35,9 +35,14 @@ pub fn choose_major_city(region: Option<&city::Region>, cities: &cities::CityGra
 }
 
 pub fn challenge_prompt(cities: &cities::CityGraph, challenge: &challenge::Challenge) {
+
     println!(
-        "\nWelcome to {}! In this challenge, you will attempt to reach the cities of:\n",
-        challenge.name()
+        "\nWelcome to {}! {}.\n",
+        challenge.name(),
+        challenge.description()
+    );
+    println!(
+        "You will attempt to reach the cities of:\n"
     );
     for city in challenge.cities() {
         println!("- {}", cities.get(city).expect("Invalid City Name"));

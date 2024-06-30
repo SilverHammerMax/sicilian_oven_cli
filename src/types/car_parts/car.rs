@@ -98,7 +98,7 @@ impl Car {
     pub fn initialize() -> Vec<Car> {
         vec![
             CarBuilder::new()
-                .name("Il Comandante".to_string())
+                .name("Il Commandante".to_string())
                 .tires(car_parts::tire::Tire::Four)
                 .engine(car_parts::engine::Engine::One)
                 .gearbox(car_parts::gearbox::Gearbox::Three)

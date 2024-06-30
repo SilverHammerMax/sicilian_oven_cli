@@ -15,6 +15,7 @@ pub enum Location {
 #[derive(Clone)]
 pub struct Challenge {
     name: String,
+    description: String,
     car: Option<car_parts::car::Car>,
     cities: Vec<String>,
     start_city: Location,
@@ -35,6 +36,7 @@ impl Display for Challenge {
 impl Challenge {
     pub fn new(
         name: &str,
+        description: &str,
         car: Option<car_parts::car::Car>,
         cities: Vec<&str>,
         start_city: Location,
@@ -43,6 +45,7 @@ impl Challenge {
     ) -> Challenge {
         Challenge {
             name: name.to_string(),
+            description: description.to_string(),
             car,
             cities: cities.iter().map(|city| city.to_string()).collect(),
             start_city,
@@ -54,6 +57,10 @@ impl Challenge {
 
     pub fn name(&self) -> &str {
         self.name.as_str()
+    }
+
+    pub fn description(&self) -> &str{
+        self.description.as_str()
     }
 
     pub fn car(&self) -> Option<car_parts::car::Car> {
@@ -90,6 +97,7 @@ pub fn initialize_challenges() -> Vec<Challenge> {
     vec![
         Challenge::new(
             "Ragusan Ride",
+            "Go on a ride through the Sicilian southeast",
             Some(cars[3].clone()),
             vec![
                 "Ragusa",
@@ -113,6 +121,7 @@ pub fn initialize_challenges() -> Vec<Challenge> {
         ),
         Challenge::new(
             "Big Car, Big Cities",
+            "Reach all the major cities in Sicily",
             Some(cars[0].clone()),
             vec![
                 "Ragusa",
@@ -131,6 +140,7 @@ pub fn initialize_challenges() -> Vec<Challenge> {
         ),
         Challenge::new(
             "A Ride Around Mt. Etna",
+            "delete",
             Some(cars[2].clone()),
             vec![
                 "Catania",
@@ -156,6 +166,7 @@ pub fn initialize_challenges() -> Vec<Challenge> {
         ),
         Challenge::new(
             "The Godfather",
+            "delete",
             Some(cars[3].clone()),
             vec![
                 "Corleone",
@@ -177,16 +188,20 @@ pub fn initialize_challenges() -> Vec<Challenge> {
         ),
         Challenge::new(
             "Harbormaster",
+            "Reach all cities that have a ferry connection",
             None,
             vec![
                 "Ischia",
-                "Strongoli",
+                "Stromboli",
                 "Lipari",
                 "Malfa",
                 "Ustica",
                 "Favignana",
                 "Pantelleria",
-                "Tricase",
+                "Messina",
+                "Reggio Calabria",
+                "Crotone",
+                "Santa Maria di Leuca"
             ],
             Location::Any,
             Location::Any,
@@ -194,6 +209,7 @@ pub fn initialize_challenges() -> Vec<Challenge> {
         ),
         Challenge::new(
             "A Calabrian Rally",
+            "Take a scenic trip through the spine of Calabria",
             Some(cars[1].clone()),
             vec![
                 "Acri",
@@ -208,6 +224,7 @@ pub fn initialize_challenges() -> Vec<Challenge> {
         ),
         Challenge::new(
             "Free Play",
+            "Do whatever you want!",
             None,
             vec![],
             Location::Any,
@@ -256,6 +273,7 @@ pub fn random_challenge(cities: &crate::cities::CityGraph) -> Challenge {
         .choose_multiple(&mut rng, count);
     Challenge::new(
         "Random Cities",
+        "Travel to this random list of cities",
         None,
         challenge_cities,
         Location::Any,

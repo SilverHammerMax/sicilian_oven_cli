@@ -2,10 +2,9 @@ use crate::types::*;
 use crate::*;
 
 pub fn choose_car(cars: &mut [car_parts::car::Car]) -> car_parts::car::Car {
-    let car_names = cars.iter().map(|car| car.name()).collect::<Vec<_>>();
     let selection = dialoguer::Select::new()
         .with_prompt("Pick your car")
-        .items(&car_names)
+        .items(cars)
         .interact()
         .expect("Prompt Failed");
 
@@ -31,7 +30,7 @@ pub fn choose_major_city(region: Option<&city::Region>, cities: &cities::CityGra
         .interact()
         .expect("Prompt Failed");
 
-    city::major_cities(region, cities)[selection].clone()
+    major_cities[selection].clone()
 }
 
 pub fn challenge_prompt(cities: &cities::CityGraph, challenge: &challenge::Challenge) {
@@ -42,7 +41,7 @@ pub fn challenge_prompt(cities: &cities::CityGraph, challenge: &challenge::Chall
         challenge.description()
     );
     println!(
-        "You will attempt to reach the cities of:\n"
+        "In this challenge, you will attempt to reach the cities of:\n"
     );
     for city in challenge.cities() {
         println!("- {}", cities.get(city).expect("Invalid City Name"));
@@ -82,11 +81,11 @@ pub fn challenge_prompt(cities: &cities::CityGraph, challenge: &challenge::Chall
     }
 
     println!();
-    if challenge.medal_cutoffs().is_some() {
-        let author_medal = challenge.medal_cutoffs().unwrap()[0];
-        let gold_medal = challenge.medal_cutoffs().unwrap()[1];
-        let silver_medal = challenge.medal_cutoffs().unwrap()[2];
-        let bronze_medal = challenge.medal_cutoffs().unwrap()[3];
+    if let Some(cutoffs) = challenge.medal_cutoffs() {
+        let author_medal = cutoffs[0];
+        let gold_medal = cutoffs[1];
+        let silver_medal = cutoffs[2];
+        let bronze_medal = cutoffs[3];
 
         println!(
             "Author: {} hours, {} minutes",

@@ -3,14 +3,13 @@
 
 use crate::helper_functions::choose_challenge;
 use crate::types::*;
-use crate::types::car_parts::car;
 
 mod cities;
 mod helper_functions;
 mod types;
 
 fn main() {
-    let mut challenges = challenge::initialize_challenges();
+    let mut challenges = challenge::Challenge::initialize();
     let mut cars = car_parts::car::Car::initialize();
     let cities = cities::create_cities();
     loop {
@@ -24,10 +23,10 @@ fn main() {
         match selection {
             0 => challenge_engine(choose_challenge(challenges.as_mut_slice()), &mut cars, &cities),
             1 => {
-                let mut challenge = challenge::random_challenge(&cities);
+                let mut challenge = challenge::Challenge::random(&cities);
                 challenge_engine(&mut challenge, &mut cars, &cities);
             },
-            2 => cars.push(car::car_build_prompt()),
+            2 => cars.push(car_parts::car::car_build_prompt()),
             _ => panic!("Fix New Options!")
         }
     }

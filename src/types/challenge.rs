@@ -75,7 +75,7 @@ impl Challenge {
         &self.start_city
     }
 
-    pub fn get_end_city(&self) -> &Location {
+    pub fn end_city(&self) -> &Location {
         &self.end_city
     }
 
@@ -83,7 +83,7 @@ impl Challenge {
         self.medal_cutoffs
     }
 
-    pub fn get_medal(&self) -> &medal::Medal {
+    pub fn medal(&self) -> &medal::Medal {
         &self.medal
     }
 

@@ -49,7 +49,7 @@ pub fn challenge_prompt(cities: &cities::CityGraph, challenge: &challenge::Chall
     println!();
 
     let start_city = challenge.start_city();
-    let end_city = challenge.get_end_city();
+    let end_city = challenge.end_city();
 
     match start_city {
         challenge::Location::City(city) => println!("You will start in {}.", city),

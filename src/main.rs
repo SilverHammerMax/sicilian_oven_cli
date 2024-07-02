@@ -157,15 +157,15 @@ fn challenge_engine(
 
     println!();
     if missing_cities.is_empty()
-        && (&challenge::Location::City(city_name.clone()) == challenge.get_end_city()
+        && (&challenge::Location::City(city_name.clone()) == challenge.end_city()
             || &challenge::Location::Region(
                 cities
                     .get(&city_name)
                     .expect("Invalid City Code")
                     .get_region()
                     .clone(),
-            ) == challenge.get_end_city()
-            || challenge.get_end_city() == &challenge::Location::Any)
+            ) == challenge.end_city()
+            || challenge.end_city() == &challenge::Location::Any)
     {
         println!(
             "Congratulations! You've completed the {} challenge!",
@@ -194,7 +194,7 @@ fn challenge_engine(
                 challenge.set_medal(medal::Medal::Bronze);
             }
 
-            match challenge.get_medal() {
+            match challenge.medal() {
                 medal::Medal::Author => println!("This is an incredible time! You've won the author medal!"),
                 medal::Medal::Gold => println!("This is an amazing time! You've won the gold medal!"),
                 medal::Medal::Silver => println!("This is a great time! You've won the silver medal!"),

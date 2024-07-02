@@ -78,11 +78,11 @@ impl City {
         }
     }
 
-    pub fn get_name(&self) -> &str {
+    pub fn name(&self) -> &str {
         self.city_name.as_str()
     }
 
-    pub fn get_region(&self) -> &Region {
+    pub fn region(&self) -> &Region {
         &self.region
     }
 
@@ -95,7 +95,7 @@ pub fn major_cities(region: Option<&Region>, cities: &crate::cities::CityGraph) 
     cities
         .cities()
         .iter()
-        .filter(|city| city.is_major() && (region.is_none() || Some(city.get_region()) == region))
-        .map(|city| city.get_name().to_string())
+        .filter(|city| city.is_major() && (region.is_none() || Some(city.region()) == region))
+        .map(|city| city.name().to_string())
         .collect()
 }

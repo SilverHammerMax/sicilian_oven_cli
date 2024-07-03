@@ -112,17 +112,17 @@ pub fn challenge_prompt(cities: &cities::CityGraph, challenge: &challenge::Chall
 }
 
 pub fn test_city_connections(city_graph: &cities::CityGraph) {
-    let mut city_names = vec![];
+    let mut cities = vec![];
     for city in city_graph.cities() {
-        city_names.push(city.name());
+        cities.push(city);
     }
     loop {
         let selection = dialoguer::Select::new()
             .with_prompt("Please Select a City")
-            .items(&city_names)
+            .items(&cities)
             .interact()
             .expect("Prompt Failed");
-        for connection in city_graph.get_neighbors(city_names[selection]) {
+        for connection in city_graph.get_neighbors(cities[selection].name()) {
             println!("{:?}", connection)
         }
     }

@@ -129,7 +129,7 @@ pub fn create_cities() -> CityGraph {
     graph.add_city(City::new("Segesta", Region::Sicily, false));
     graph.add_city(City::new("Trapani", Region::Sicily, true));
     graph.add_city(City::new("Erice", Region::Sicily, false));
-    graph.add_city(City::new("Capo San  Vito", Region::Sicily, false));
+    graph.add_city(City::new("Capo San Vito", Region::Sicily, false));
     graph.add_city(City::new("Castellammare", Region::Sicily, false));
     graph.add_city(City::new("Marsala", Region::Sicily, false));
     graph.add_city(City::new("Castelvetrano", Region::Sicily, false));
@@ -159,7 +159,7 @@ pub fn create_cities() -> CityGraph {
     graph.add_city(City::new("Pizzo", Region::Calabria, false));
     graph.add_city(City::new("Dinami", Region::Calabria, false));
     graph.add_city(City::new("Caulonia", Region::Calabria, false));
-    graph.add_city(City::new("Soveranto", Region::Calabria, false));
+    graph.add_city(City::new("Soverato", Region::Calabria, false));
     graph.add_city(City::new("Curinga", Region::Calabria, false));
     graph.add_city(City::new("Catanzaro", Region::Calabria, true));
     graph.add_city(City::new("Botricello", Region::Calabria, false));
@@ -175,7 +175,7 @@ pub fn create_cities() -> CityGraph {
     graph.add_city(City::new("Cosenza", Region::Calabria, true));
     graph.add_city(City::new("Grimaldi", Region::Calabria, false));
     graph.add_city(City::new("Falerna", Region::Calabria, false));
-    graph.add_city(City::new("Paolo", Region::Calabria, false));
+    graph.add_city(City::new("Paola", Region::Calabria, false));
     graph.add_city(City::new("Scalea", Region::Calabria, false));
     graph.add_city(City::new("Castrovillari", Region::Calabria, false));
     graph.add_city(City::new("Oriolo", Region::Calabria, false));
@@ -183,7 +183,7 @@ pub fn create_cities() -> CityGraph {
     graph.add_city(City::new("Sibari", Region::Calabria, false));
     graph.add_city(City::new("Altomonte", Region::Calabria, false));
     graph.add_city(City::new("Maratea", Region::Basilicata, false));
-    graph.add_city(City::new("Lauri", Region::Basilicata, false));
+    graph.add_city(City::new("Lauria", Region::Basilicata, false));
     graph.add_city(City::new("Aliano", Region::Basilicata, false));
     graph.add_city(City::new("Fernandina", Region::Basilicata, false));
     graph.add_city(City::new("Matera", Region::Basilicata, true));
@@ -202,7 +202,7 @@ pub fn create_cities() -> CityGraph {
     graph.add_city(City::new("Padula", Region::Campania, false));
     graph.add_city(City::new("Polla", Region::Campania, false));
     graph.add_city(City::new("Battipaglia", Region::Campania, false));
-    graph.add_city(City::new("Agropolis", Region::Campania, false));
+    graph.add_city(City::new("Agropoli", Region::Campania, false));
     graph.add_city(City::new("Sorrento", Region::Campania, false));
     graph.add_city(City::new("Salerno", Region::Campania, true));
     graph.add_city(City::new("Contursi", Region::Campania, false));
@@ -228,7 +228,7 @@ pub fn create_cities() -> CityGraph {
     graph.add_city(City::new("Zapponeta", Region::Apulia, false));
     graph.add_city(City::new("Arpinova", Region::Apulia, false));
     graph.add_city(City::new("Manfredonia", Region::Apulia, false));
-    graph.add_city(City::new("Mattina", Region::Apulia, false));
+    graph.add_city(City::new("Mattinata", Region::Apulia, false));
     graph.add_city(City::new("Vieste", Region::Apulia, false));
     graph.add_city(City::new("Peschici", Region::Apulia, false));
     graph.add_city(City::new("Carpino", Region::Apulia, false));
@@ -245,7 +245,7 @@ pub fn create_cities() -> CityGraph {
     graph.add_city(City::new("Bari", Region::Apulia, true));
     graph.add_city(City::new("Triggiano", Region::Apulia, false));
     graph.add_city(City::new("Monopoli", Region::Apulia, false));
-    graph.add_city(City::new("Ostundi", Region::Apulia, false));
+    graph.add_city(City::new("Ostuni", Region::Apulia, false));
     graph.add_city(City::new("Fasano", Region::Apulia, false));
     graph.add_city(City::new("Ginosa", Region::Apulia, false));
     graph.add_city(City::new("Chiatona", Region::Apulia, false));
@@ -523,11 +523,6 @@ pub fn create_cities() -> CityGraph {
         RoadTypes::Asphalt,
     ));
     graph.add_connection(CityConnection::new(
-        ("Patti", "Bari"),
-        17,
-        RoadTypes::Asphalt,
-    ));
-    graph.add_connection(CityConnection::new(
         ("Barcelona Pozo di Goto", "Milazzo"),
         19,
         RoadTypes::Asphalt,
@@ -543,11 +538,6 @@ pub fn create_cities() -> CityGraph {
         RoadTypes::Asphalt,
     ));
     graph.add_connection(CityConnection::new(
-        ("Milazzo", "Bari"),
-        19,
-        RoadTypes::Asphalt,
-    ));
-    graph.add_connection(CityConnection::new(
         ("Milazzo", "Lipari"),
         44,
         RoadTypes::Ferry,
@@ -556,11 +546,6 @@ pub fn create_cities() -> CityGraph {
         ("Castoreale", "Randanzzo"),
         33,
         RoadTypes::Unpaved,
-    ));
-    graph.add_connection(CityConnection::new(
-        ("Castoreale", "Bari"),
-        14,
-        RoadTypes::Asphalt,
     ));
     graph.add_connection(CityConnection::new(
         ("Randanzzo", "Adrano"),
@@ -953,7 +938,7 @@ pub fn create_cities() -> CityGraph {
         RoadTypes::Unpaved,
     ));
     graph.add_connection(CityConnection::new(
-        ("Vibo Valentia", "Soveranto"),
+        ("Vibo Valentia", "Soverato"),
         38,
         RoadTypes::Cobblestone,
     ));
@@ -963,17 +948,17 @@ pub fn create_cities() -> CityGraph {
         RoadTypes::Asphalt,
     ));
     graph.add_connection(CityConnection::new(
-        ("Caulonia", "Soveranto"),
+        ("Caulonia", "Soverato"),
         35,
         RoadTypes::Asphalt,
     ));
     graph.add_connection(CityConnection::new(
-        ("Soveranto", "Curinga"),
+        ("Soverato", "Curinga"),
         17,
         RoadTypes::Asphalt,
     ));
     graph.add_connection(CityConnection::new(
-        ("Soveranto", "Catanzaro"),
+        ("Soverato", "Catanzaro"),
         21,
         RoadTypes::Asphalt,
     ));
@@ -1083,7 +1068,7 @@ pub fn create_cities() -> CityGraph {
         RoadTypes::Asphalt,
     ));
     graph.add_connection(CityConnection::new(
-        ("Cosenza", "Paolo"),
+        ("Cosenza", "Paola"),
         17,
         RoadTypes::Unpaved,
     ));
@@ -1098,12 +1083,12 @@ pub fn create_cities() -> CityGraph {
         RoadTypes::Asphalt,
     ));
     graph.add_connection(CityConnection::new(
-        ("Falerna", "Paolo"),
+        ("Falerna", "Paola"),
         47,
         RoadTypes::Highway,
     ));
     graph.add_connection(CityConnection::new(
-        ("Paolo", "Scalea"),
+        ("Paola", "Scalea"),
         46,
         RoadTypes::Highway,
     ));
@@ -1133,7 +1118,7 @@ pub fn create_cities() -> CityGraph {
         RoadTypes::Cobblestone,
     ));
     graph.add_connection(CityConnection::new(
-        ("Oriolo", "Lauri"),
+        ("Oriolo", "Lauria"),
         30,
         RoadTypes::Cobblestone,
     ));
@@ -1158,22 +1143,22 @@ pub fn create_cities() -> CityGraph {
         RoadTypes::Unpaved,
     ));
     graph.add_connection(CityConnection::new(
-        ("Maratea", "Lauri"),
+        ("Maratea", "Lauria"),
         17,
         RoadTypes::Asphalt,
     ));
     graph.add_connection(CityConnection::new(
-        ("Lauri", "Tursi"),
+        ("Lauria", "Tursi"),
         30,
         RoadTypes::Cobblestone,
     ));
     graph.add_connection(CityConnection::new(
-        ("Lauri", "Aliano"),
+        ("Lauria", "Aliano"),
         26,
         RoadTypes::Cobblestone,
     ));
     graph.add_connection(CityConnection::new(
-        ("Lauri", "Brienza"),
+        ("Lauria", "Brienza"),
         54,
         RoadTypes::Unpaved,
     ));
@@ -1323,12 +1308,12 @@ pub fn create_cities() -> CityGraph {
         RoadTypes::Asphalt,
     ));
     graph.add_connection(CityConnection::new(
-        ("Ascea", "Agropolis"),
+        ("Ascea", "Agropoli"),
         20,
         RoadTypes::Asphalt,
     ));
     graph.add_connection(CityConnection::new(
-        ("Padula", "Agropolis"),
+        ("Padula", "Agropoli"),
         26,
         RoadTypes::Unpaved,
     ));
@@ -1353,14 +1338,9 @@ pub fn create_cities() -> CityGraph {
         RoadTypes::Asphalt,
     ));
     graph.add_connection(CityConnection::new(
-        ("Battipaglia", "Agropolis"),
+        ("Battipaglia", "Agropoli"),
         21,
         RoadTypes::Asphalt,
-    ));
-    graph.add_connection(CityConnection::new(
-        ("Battipaglia", "Policoro"),
-        24,
-        RoadTypes::Unpaved,
     ));
     graph.add_connection(CityConnection::new(
         ("Sorrento", "Salerno"),
@@ -1376,11 +1356,6 @@ pub fn create_cities() -> CityGraph {
         ("Salerno", "Contursi"),
         23,
         RoadTypes::Asphalt,
-    ));
-    graph.add_connection(CityConnection::new(
-        ("Contursi", "Policoro"),
-        12,
-        RoadTypes::Cobblestone,
     ));
     graph.add_connection(CityConnection::new(
         ("Contursi", "Lioni"),
@@ -1455,7 +1430,7 @@ pub fn create_cities() -> CityGraph {
     graph.add_connection(CityConnection::new(
         ("Lioni", "Calaggoi"),
         10,
-        RoadTypes::Unpaved,
+        RoadTypes::Cobblestone,
     ));
     graph.add_connection(CityConnection::new(
         ("Benevento", "Circello"),
@@ -1573,7 +1548,7 @@ pub fn create_cities() -> CityGraph {
         RoadTypes::Cobblestone,
     ));
     graph.add_connection(CityConnection::new(
-        ("Manfredonia", "Mattina"),
+        ("Manfredonia", "Mattinata"),
         14,
         RoadTypes::Asphalt,
     ));
@@ -1588,7 +1563,7 @@ pub fn create_cities() -> CityGraph {
         RoadTypes::Cobblestone,
     ));
     graph.add_connection(CityConnection::new(
-        ("Mattina", "Vieste"),
+        ("Mattinata", "Vieste"),
         12,
         RoadTypes::Asphalt,
     ));
@@ -1713,22 +1688,22 @@ pub fn create_cities() -> CityGraph {
         RoadTypes::Asphalt,
     ));
     graph.add_connection(CityConnection::new(
-        ("Monopoli", "Ostundi"),
+        ("Monopoli", "Ostuni"),
         18,
         RoadTypes::Asphalt,
     ));
     graph.add_connection(CityConnection::new(
-        ("Ostundi", "Brindisi"),
+        ("Ostuni", "Brindisi"),
         20,
         RoadTypes::Asphalt,
     ));
     graph.add_connection(CityConnection::new(
-        ("Ostundi", "Fasano"),
+        ("Ostuni", "Fasano"),
         18,
         RoadTypes::Cobblestone,
     ));
     graph.add_connection(CityConnection::new(
-        ("Ostundi", "Mesagne"),
+        ("Ostuni", "Mesagne"),
         21,
         RoadTypes::Cobblestone,
     ));
@@ -1881,16 +1856,6 @@ pub fn create_cities() -> CityGraph {
         ("Larino", "Palata"),
         11,
         RoadTypes::Cobblestone,
-    ));
-    graph.add_connection(CityConnection::new(
-        ("Larino", "Chiatona"),
-        15,
-        RoadTypes::Asphalt,
-    ));
-    graph.add_connection(CityConnection::new(
-        ("Termoli", "Chiatona"),
-        23,
-        RoadTypes::Asphalt,
     ));
     graph.add_connection(CityConnection::new(
         ("Termoli", "Palata"),

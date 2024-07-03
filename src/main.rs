@@ -133,12 +133,12 @@ fn challenge_engine(
             && selection == neighbors.len() + 1
         {
             car.refuel(&mut time);
-            path.pop();
+            path.push("Refuel".to_string());
         } else if city_reference.is_major()
             && selection == neighbors.len() + 2
         {
             car.repair(&mut time);
-            path.pop();
+            path.push("Repair".to_string());
         }
         if car.fuel() <= 0.0 || car.reliability() <= 0.0 {
             break;
@@ -162,7 +162,7 @@ fn challenge_engine(
                 cities
                     .get(&city_name)
                     .expect("Invalid City Code")
-                    .get_region()
+                    .region()
                     .clone(),
             ) == challenge.end_city()
             || challenge.end_city() == &challenge::Location::Any)

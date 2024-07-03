@@ -16,7 +16,7 @@ fn main() {
         println!("Welcome to the game!");
         let selection = dialoguer::Select::new()
             .with_prompt("What would you like to do?")
-            .items(&["Challenges", "Random Cities", "Build a Car"])
+            .items(&["Challenges", "Random Cities", "Build a Car", "Test City Connections"])
             .interact()
             .expect("Prompt Failed");
 
@@ -27,6 +27,7 @@ fn main() {
                 challenge_engine(&mut challenge, &mut cars, &cities);
             },
             2 => cars.push(car_parts::car::car_build_prompt()),
+            3 => helper_functions::test_city_connections(&cities),
             _ => panic!("Fix New Options!")
         }
     }

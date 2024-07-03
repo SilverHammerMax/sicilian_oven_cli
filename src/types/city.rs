@@ -2,7 +2,7 @@ use std::borrow::Borrow;
 use std::fmt::{Display, Formatter};
 use std::hash::{Hash, Hasher};
 
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Debug)]
 pub enum RoadTypes {
     Highway,
     Asphalt,

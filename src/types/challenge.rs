@@ -220,7 +220,7 @@ impl Challenge {
         let challenge_cities = cities
             .cities()
             .iter()
-            .map(|city| city.get_name())
+            .map(|city| city.name())
             .choose_multiple(&mut rng, count);
         Self::new(
             "Random Cities",

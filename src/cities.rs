@@ -768,7 +768,7 @@ pub fn create_cities() -> CityGraph {
         RoadTypes::Ferry,
     ));
     graph.add_connection(CityConnection::new(
-        ("Erice", "Capo San  Vito"),
+        ("Erice", "Capo San Vito"),
         23,
         RoadTypes::Asphalt,
     ));
@@ -778,12 +778,12 @@ pub fn create_cities() -> CityGraph {
         RoadTypes::Asphalt,
     ));
     graph.add_connection(CityConnection::new(
-        ("Capo San  Vito", "Castellammare"),
+        ("Capo San Vito", "Castellammare"),
         19,
         RoadTypes::Asphalt,
     ));
     graph.add_connection(CityConnection::new(
-        ("Capo San  Vito", "Ustica"),
+        ("Capo San Vito", "Ustica"),
         63,
         RoadTypes::Ferry,
     ));

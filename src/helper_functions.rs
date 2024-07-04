@@ -123,7 +123,7 @@ pub fn test_city_connections(city_graph: &cities::CityGraph) {
             .interact()
             .expect("Prompt Failed");
         for connection in city_graph.get_neighbors(cities[selection].name()) {
-            println!("{:?}", connection)
+            println!("{:?}", connection);
         }
     }
 }

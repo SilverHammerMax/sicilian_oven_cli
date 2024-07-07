@@ -11,7 +11,9 @@ pub struct Car {
     engine: car_parts::engine::Engine,
     gearbox: car_parts::gearbox::Gearbox,
     chassis: car_parts::chassis::Chassis,
+    #[serde(skip)]
     fuel: f64,
+    #[serde(skip)]
     reliability: f64,
 }
 
@@ -97,6 +99,12 @@ impl Car {
         }
     }
 
+    pub fn save(&self) {
+        std::fs::create_dir_all("cars").expect("Failed to Create Directory");
+        let mut file = File::create(format!("cars/{}.json", self.name())).expect("Failed to Create File");
+        file.write_all(serde_json::to_string(&self).expect("Failed to Serialize").into_bytes().as_slice()).expect("Failed to Write to File");
+    }
+
     pub fn initialize() -> Vec<Car> {
         vec![
             CarBuilder::new()
@@ -176,7 +184,7 @@ impl CarBuilder {
     }
 
     pub fn build(self) -> Car {
-        let car = Car {
+        Car {
             name: self.name.unwrap_or("New Car".to_string()),
             tires: self.tires.unwrap_or_default(),
             engine: self.engine.unwrap_or_default(),
@@ -184,11 +192,7 @@ impl CarBuilder {
             chassis: self.chassis.unwrap_or_default(),
             fuel: self.chassis.unwrap_or_default().tank_size(),
             reliability: 1.0,
-        };
-        std::fs::create_dir_all("cars").expect("Failed to Create Directory");
-        let mut file = File::create(format!("cars/{}.json", car.name())).expect("Failed to Create File");
-        file.write_all(serde_json::to_string(&car).expect("Failed to Serialize").into_bytes().as_slice()).expect("Failed to Write to File");
-        car
+        }
     }
 }
 
@@ -267,7 +271,9 @@ pub fn car_build_prompt() -> Car {
                 car = car.chassis(options[selection]);
             }
             5 => {
-                return car.build();
+                let built_car = car.build();
+                Car::save(&built_car);
+                return built_car;
             }
             _ => panic!("Not Yet Implemented!"),
         }

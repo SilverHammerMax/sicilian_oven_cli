@@ -1,5 +1,6 @@
 use crate::types::*;
 use std::fmt::{Display, Formatter};
+use std::fs;
 use std::fs::File;
 use std::io::Write;
 use strum::IntoEnumIterator;
@@ -100,13 +101,13 @@ impl Car {
     }
 
     pub fn save(&self) {
-        std::fs::create_dir_all("cars").expect("Failed to Create Directory");
+        fs::create_dir_all("cars").expect("Failed to Create Directory");
         let mut file = File::create(format!("cars/{}.json", self.name())).expect("Failed to Create File");
         file.write_all(serde_json::to_string(&self).expect("Failed to Serialize").into_bytes().as_slice()).expect("Failed to Write to File");
     }
 
     pub fn initialize() -> Vec<Car> {
-        vec![
+        let mut cars = vec![
             CarBuilder::new()
                 .name("Il Commandante".to_string())
                 .tires(car_parts::tire::Tire::Four)
@@ -135,7 +136,18 @@ impl Car {
                 .gearbox(car_parts::gearbox::Gearbox::One)
                 .chassis(car_parts::chassis::Chassis::Four)
                 .build(),
-        ]
+        ];
+
+        let cars_directory = fs::read_dir("cars");
+        if let Ok(directory) = cars_directory {
+            for path in directory {
+                let file = File::open(path.expect("File Does Not Exist").path()).expect("File Does Not Exist");
+                let file_reader = std::io::BufReader::new(file);
+                cars.push(serde_json::from_reader(file_reader).expect("Failed to Deserialize"));
+            }
+        }
+
+        cars
     }
 }
 

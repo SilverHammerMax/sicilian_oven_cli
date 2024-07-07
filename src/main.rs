@@ -1,7 +1,6 @@
 #![deny(clippy::unwrap_used)]
 #![allow(clippy::match_overlapping_arm)]
 
-use crate::helper_functions::choose_challenge;
 use crate::types::*;
 
 mod cities;
@@ -21,7 +20,7 @@ fn main() {
             .expect("Prompt Failed");
 
         match selection {
-            0 => challenge_engine(choose_challenge(challenges.as_mut_slice()), &mut cars, &cities),
+            0 => challenge_engine(helper_functions::choose_challenge(challenges.as_mut_slice()), &mut cars, &cities),
             1 => {
                 let mut challenge = challenge::Challenge::random(&cities);
                 challenge_engine(&mut challenge, &mut cars, &cities);
@@ -73,7 +72,7 @@ fn challenge_engine(
         );
         println!();
         println!("Your fuel is {:.1}L.", car.fuel());
-        println!("Your reliability is {:.1}%.", (car.reliability() * 100.0));
+        println!("Your reliability is {:.1}%.", car.reliability() * 100.0);
         println!();
         println!(
             "Your path has been: {:?}",

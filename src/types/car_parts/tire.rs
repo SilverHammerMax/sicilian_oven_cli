@@ -1,7 +1,7 @@
 use std::fmt::{Display, Formatter};
 use strum;
 
-#[derive(Default, Clone, Copy, strum::EnumIter)]
+#[derive(Default, Clone, Copy, strum::EnumIter, serde::Serialize, serde::Deserialize)]
 pub enum Tire {
     #[default]
     One,

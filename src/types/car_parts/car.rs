@@ -2,7 +2,7 @@ use crate::types::*;
 use std::fmt::{Display, Formatter};
 use strum::IntoEnumIterator;
 
-#[derive(Clone)]
+#[derive(Clone, serde::Serialize, serde::Deserialize)]
 pub struct Car {
     name: String,
     tires: car_parts::tire::Tire,

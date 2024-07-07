@@ -1,5 +1,7 @@
 use crate::types::*;
 use std::fmt::{Display, Formatter};
+use std::fs::File;
+use std::io::Write;
 use strum::IntoEnumIterator;
 
 #[derive(Clone, serde::Serialize, serde::Deserialize)]
@@ -174,7 +176,7 @@ impl CarBuilder {
     }
 
     pub fn build(self) -> Car {
-        Car {
+        let car = Car {
             name: self.name.unwrap_or("New Car".to_string()),
             tires: self.tires.unwrap_or_default(),
             engine: self.engine.unwrap_or_default(),
@@ -182,7 +184,11 @@ impl CarBuilder {
             chassis: self.chassis.unwrap_or_default(),
             fuel: self.chassis.unwrap_or_default().tank_size(),
             reliability: 1.0,
-        }
+        };
+        std::fs::create_dir_all("cars").expect("Failed to Create Directory");
+        let mut file = File::create(format!("cars/{}.json", car.name())).expect("Failed to Create File");
+        file.write_all(serde_json::to_string(&car).expect("Failed to Serialize").into_bytes().as_slice()).expect("Failed to Write to File");
+        car
     }
 }
 

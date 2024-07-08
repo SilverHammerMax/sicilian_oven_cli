@@ -1,15 +1,19 @@
 use crate::types::*;
 use std::fmt::{Display, Formatter};
+use std::fs;
+use std::io::Write;
 use strum::IntoEnumIterator;
 
-#[derive(Clone)]
+#[derive(Clone, serde::Serialize, serde::Deserialize)]
 pub struct Car {
     name: String,
     tires: car_parts::tire::Tire,
     engine: car_parts::engine::Engine,
     gearbox: car_parts::gearbox::Gearbox,
     chassis: car_parts::chassis::Chassis,
+    #[serde(skip)]
     fuel: f64,
+    #[serde(skip)]
     reliability: f64,
 }
 
@@ -95,8 +99,15 @@ impl Car {
         }
     }
 
+    pub fn save(&self) -> Result<(), std::io::Error> {
+        fs::create_dir_all("cars")?;
+        let mut file = fs::File::create(format!("cars/{}.json", self.name().to_lowercase().replace(" ", "_")))?;
+        file.write_all(serde_json::to_string(&self)?.into_bytes().as_slice())?;
+        Ok(())
+    }
+
     pub fn initialize() -> Vec<Car> {
-        vec![
+        let mut cars = vec![
             CarBuilder::new()
                 .name("Il Commandante".to_string())
                 .tires(car_parts::tire::Tire::Four)
@@ -125,7 +136,24 @@ impl Car {
                 .gearbox(car_parts::gearbox::Gearbox::One)
                 .chassis(car_parts::chassis::Chassis::Four)
                 .build(),
-        ]
+        ];
+
+        let cars_directory = fs::read_dir("cars");
+        if let Ok(directory) = cars_directory {
+            for path in directory {
+                if let Ok(path) = path {
+                    if let Ok(file) = fs::File::open(path.path()) {
+                        let file_reader = std::io::BufReader::new(file);
+                        match serde_json::from_reader(file_reader) {
+                            Ok(car) => cars.push(car),
+                            Err(e) => println!("Failed to Deserialize Car: {}", e),
+                        }
+                    }
+                }
+            }
+        }
+
+        cars
     }
 }
 
@@ -261,7 +289,13 @@ pub fn car_build_prompt() -> Car {
                 car = car.chassis(options[selection]);
             }
             5 => {
-                return car.build();
+                let built_car = car.build();
+                let save_status = Car::save(&built_car);
+                match save_status {
+                    Ok(_) => (),
+                    Err(e) => println!("Failed to Save Car: {}", e),
+                }
+                return built_car;
             }
             _ => panic!("Not Yet Implemented!"),
         }

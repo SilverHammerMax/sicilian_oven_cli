@@ -99,10 +99,11 @@ impl Car {
         }
     }
 
-    pub fn save(&self) {
-        fs::create_dir_all("cars").expect("Failed to Create Directory");
-        let mut file = fs::File::create(format!("cars/{}.json", self.name().to_lowercase().replace(" ", "_"))).expect("Failed to Create File");
-        file.write_all(serde_json::to_string(&self).expect("Failed to Serialize").into_bytes().as_slice()).expect("Failed to Write to File");
+    pub fn save(&self) -> Result<(), std::io::Error> {
+        fs::create_dir_all("cars")?;
+        let mut file = fs::File::create(format!("cars/{}.json", self.name().to_lowercase().replace(" ", "_")))?;
+        file.write_all(serde_json::to_string(&self)?.into_bytes().as_slice())?;
+        Ok(())
     }
 
     pub fn initialize() -> Vec<Car> {
@@ -140,9 +141,15 @@ impl Car {
         let cars_directory = fs::read_dir("cars");
         if let Ok(directory) = cars_directory {
             for path in directory {
-                let file = fs::File::open(path.expect("File Does Not Exist").path()).expect("File Does Not Exist");
-                let file_reader = std::io::BufReader::new(file);
-                cars.push(serde_json::from_reader(file_reader).expect("Failed to Deserialize"));
+                if let Ok(path) = path {
+                    if let Ok(file) = fs::File::open(path.path()) {
+                        let file_reader = std::io::BufReader::new(file);
+                        match serde_json::from_reader(file_reader) {
+                            Ok(car) => cars.push(car),
+                            Err(e) => println!("Failed to Deserialize Car: {}", e),
+                        }
+                    }
+                }
             }
         }
 
@@ -283,7 +290,11 @@ pub fn car_build_prompt() -> Car {
             }
             5 => {
                 let built_car = car.build();
-                Car::save(&built_car);
+                let save_status = Car::save(&built_car);
+                match save_status {
+                    Ok(_) => (),
+                    Err(e) => println!("Failed to Save Car: {}", e),
+                }
                 return built_car;
             }
             _ => panic!("Not Yet Implemented!"),

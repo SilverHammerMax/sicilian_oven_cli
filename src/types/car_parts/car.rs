@@ -155,6 +155,94 @@ impl Car {
 
         cars
     }
+
+    pub fn build_prompt() -> Car {
+        let mut car = CarBuilder::new();
+        let mut main_options = vec![
+            "Name".to_string(),
+            "Tires".to_string(),
+            "Engine".to_string(),
+            "Gearbox".to_string(),
+            "Chassis".to_string(),
+            "Build!".to_string(),
+        ];
+        loop {
+            let selection = dialoguer::Select::new()
+                .with_prompt("What would you like to modify?")
+                .items(&main_options)
+                .interact()
+                .expect("Prompt Failed");
+
+            match selection {
+                0 => {
+                    let name: String = dialoguer::Input::new()
+                        .with_prompt("Enter the Car's Name")
+                        .with_initial_text("New Car")
+                        .validate_with(|name: &String| match name.as_str() {
+                            "" => Err("Name Cannot Be Empty"),
+                            _ => Ok(()),
+                        })
+                        .interact_text()
+                        .expect("Prompt Failed");
+                    main_options[0] = format!("Name ({})", name);
+                    car = car.name(name);
+                }
+                1 => {
+                    let options: Vec<car_parts::tire::Tire> = car_parts::tire::Tire::iter().collect();
+                    let selection = dialoguer::Select::new()
+                        .with_prompt("Please Select your Tires")
+                        .items(&options)
+                        .interact()
+                        .expect("Prompt Failed");
+                    main_options[1] = format!("Tires ({})", options[selection]);
+                    car = car.tires(options[selection]);
+                }
+                2 => {
+                    let options: Vec<car_parts::engine::Engine> =
+                        car_parts::engine::Engine::iter().collect();
+                    let selection = dialoguer::Select::new()
+                        .with_prompt("Please Select your Engine")
+                        .items(&options)
+                        .interact()
+                        .expect("Prompt Failed");
+                    main_options[2] = format!("Engine ({})", options[selection]);
+                    car = car.engine(options[selection]);
+                }
+                3 => {
+                    let options: Vec<car_parts::gearbox::Gearbox> =
+                        car_parts::gearbox::Gearbox::iter().collect();
+                    let selection = dialoguer::Select::new()
+                        .with_prompt("Please Select your Gearbox")
+                        .items(&options)
+                        .interact()
+                        .expect("Prompt Failed");
+                    main_options[3] = format!("Gearbox ({})", options[selection]);
+                    car = car.gearbox(options[selection]);
+                }
+                4 => {
+                    let options: Vec<car_parts::chassis::Chassis> =
+                        car_parts::chassis::Chassis::iter().collect();
+                    let selection = dialoguer::Select::new()
+                        .with_prompt("Please Select your Chassis")
+                        .items(&options)
+                        .interact()
+                        .expect("Prompt Failed");
+                    main_options[4] = format!("Chassis ({})", options[selection]);
+                    car = car.chassis(options[selection]);
+                }
+                5 => {
+                    let built_car = car.build();
+                    let save_status = Car::save(&built_car);
+                    match save_status {
+                        Ok(_) => (),
+                        Err(e) => println!("Failed to Save Car: {}", e),
+                    }
+                    return built_car;
+                }
+                _ => panic!("Not Yet Implemented!"),
+            }
+        }
+    }
 }
 
 pub struct CarBuilder {
@@ -210,94 +298,6 @@ impl CarBuilder {
             chassis: self.chassis.unwrap_or_default(),
             fuel: self.chassis.unwrap_or_default().tank_size(),
             reliability: 1.0,
-        }
-    }
-}
-
-pub fn car_build_prompt() -> Car {
-    let mut car = CarBuilder::new();
-    let mut main_options = vec![
-        "Name".to_string(),
-        "Tires".to_string(),
-        "Engine".to_string(),
-        "Gearbox".to_string(),
-        "Chassis".to_string(),
-        "Build!".to_string(),
-    ];
-    loop {
-        let selection = dialoguer::Select::new()
-            .with_prompt("What would you like to modify?")
-            .items(&main_options)
-            .interact()
-            .expect("Prompt Failed");
-
-        match selection {
-            0 => {
-                let name: String = dialoguer::Input::new()
-                    .with_prompt("Enter the Car's Name")
-                    .with_initial_text("New Car")
-                    .validate_with(|name: &String| match name.as_str() {
-                        "" => Err("Name Cannot Be Empty"),
-                        _ => Ok(()),
-                    })
-                    .interact_text()
-                    .expect("Prompt Failed");
-                main_options[0] = format!("Name ({})", name);
-                car = car.name(name);
-            }
-            1 => {
-                let options: Vec<car_parts::tire::Tire> = car_parts::tire::Tire::iter().collect();
-                let selection = dialoguer::Select::new()
-                    .with_prompt("Please Select your Tires")
-                    .items(&options)
-                    .interact()
-                    .expect("Prompt Failed");
-                main_options[1] = format!("Tires ({})", options[selection]);
-                car = car.tires(options[selection]);
-            }
-            2 => {
-                let options: Vec<car_parts::engine::Engine> =
-                    car_parts::engine::Engine::iter().collect();
-                let selection = dialoguer::Select::new()
-                    .with_prompt("Please Select your Engine")
-                    .items(&options)
-                    .interact()
-                    .expect("Prompt Failed");
-                main_options[2] = format!("Engine ({})", options[selection]);
-                car = car.engine(options[selection]);
-            }
-            3 => {
-                let options: Vec<car_parts::gearbox::Gearbox> =
-                    car_parts::gearbox::Gearbox::iter().collect();
-                let selection = dialoguer::Select::new()
-                    .with_prompt("Please Select your Gearbox")
-                    .items(&options)
-                    .interact()
-                    .expect("Prompt Failed");
-                main_options[3] = format!("Gearbox ({})", options[selection]);
-                car = car.gearbox(options[selection]);
-            }
-            4 => {
-                let options: Vec<car_parts::chassis::Chassis> =
-                    car_parts::chassis::Chassis::iter().collect();
-                let selection = dialoguer::Select::new()
-                    .with_prompt("Please Select your Chassis")
-                    .items(&options)
-                    .interact()
-                    .expect("Prompt Failed");
-                main_options[4] = format!("Chassis ({})", options[selection]);
-                car = car.chassis(options[selection]);
-            }
-            5 => {
-                let built_car = car.build();
-                let save_status = Car::save(&built_car);
-                match save_status {
-                    Ok(_) => (),
-                    Err(e) => println!("Failed to Save Car: {}", e),
-                }
-                return built_car;
-            }
-            _ => panic!("Not Yet Implemented!"),
         }
     }
 }

@@ -25,7 +25,7 @@ fn main() {
                 let mut challenge = challenge::Challenge::random(&cities);
                 challenge_engine(&mut challenge, &mut cars, &cities);
             },
-            2 => cars.push(car_parts::car::car_build_prompt()),
+            2 => cars.push(car_parts::car::Car::build_prompt()),
             3 => helper_functions::test_city_connections(&cities),
             _ => panic!("Fix New Options!")
         }
@@ -38,13 +38,11 @@ fn challenge_engine(
     cities: &cities::CityGraph,
 ) {
     helper_functions::challenge_prompt(cities, challenge);
-    match dialoguer::Confirm::new()
+    if !dialoguer::Confirm::new()
         .with_prompt("Do you accept this challenge?")
         .interact()
-        .expect("Prompt Failed")
-    {
-        false => return,
-        true => (),
+        .expect("Prompt Failed") {
+        return;
     }
     let mut car = challenge
         .car()
@@ -80,21 +78,21 @@ fn challenge_engine(
         );
         println!();
 
-        if !path.is_empty() {
+        if missing_cities.is_empty() {
+            println!("Your challenge is complete!");
+        } else {
             println!(
                 "Your current list of missing cities is: {:?}",
                 missing_cities
             );
-        } else {
-            println!("Your challenge is complete!");
         }
 
         println!();
 
-        if car.fuel() - 3.0 * car.engine().fuel_usage() <= 0.0 {
+        if car.fuel() <= 3.0 * car.engine().fuel_usage() {
             println!("WARNING: LOW FUEL");
         }
-        if car.reliability() < 0.2 {
+        if car.reliability() <= 3.0 * car.gearbox().deterioration() {
             println!("WARNING: CAR NEARLY DETERIORATED");
         }
         println!();

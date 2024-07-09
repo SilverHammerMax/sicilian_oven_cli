@@ -9,9 +9,9 @@ pub struct CityConnection {
 }
 
 impl CityConnection {
-    fn new(cities: (&str, &str), distance: i32, road: RoadTypes) -> CityConnection {
+    fn new<T: Into<String>>(cities: (T, T), distance: i32, road: RoadTypes) -> CityConnection {
         CityConnection {
-            cities: (cities.0.to_string(), cities.1.to_string()),
+            cities,
             distance,
             road,
         }
@@ -58,7 +58,7 @@ impl CityGraph {
         self.connections.push(connection);
     }
 
-    pub fn get(&self, city_name: &String) -> Option<&City> {
+    pub fn get<T: Into<String>>(&self, city_name: &T) -> Option<&City> {
         self.cities.get(city_name)
     }
 

@@ -70,9 +70,9 @@ impl Display for City {
 }
 
 impl City {
-    pub fn new(city_name: &str, region: Region, refuel: bool) -> City {
+    pub fn new<T: Into<String>>(city_name: T, region: Region, refuel: bool) -> City {
         City {
-            city_name: city_name.to_string(),
+            city_name,
             region,
             refuel,
         }

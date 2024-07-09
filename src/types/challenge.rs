@@ -34,20 +34,20 @@ impl Display for Challenge {
 }
 
 impl Challenge {
-    pub fn new(
-        name: &str,
-        description: &str,
+    pub fn new<T: Into<String>>(
+        name: T,
+        description: T,
         car: Option<car_parts::car::Car>,
-        cities: Vec<&str>,
+        cities: Vec<T>,
         start_city: Location,
         end_city: Location,
         medal_cutoffs: Option<[i32; 4]>,
     ) -> Challenge {
         Challenge {
-            name: name.to_string(),
-            description: description.to_string(),
+            name,
+            description,
             car,
-            cities: cities.iter().map(|city| city.to_string()).collect(),
+            cities,
             start_city,
             end_city,
             medal_cutoffs,
@@ -114,8 +114,8 @@ impl Challenge {
                     "Augusta",
                     "Lentini",
                 ],
-                Location::City("Ragusa".to_string()),
-                Location::City("Ragusa".to_string()),
+                Location::City("Ragusa".into()),
+                Location::City("Ragusa".into()),
                 Some([205, 220, 270, 330]),
             ),
             Self::new(
@@ -169,7 +169,7 @@ impl Challenge {
                     "Dinami",
                     "Delianuova",
                 ],
-                Location::City("Catanzaro".to_string()),
+                Location::City("Catanzaro".into()),
                 Location::Any,
                 Some([0, 0, 0, 0]),
             ),

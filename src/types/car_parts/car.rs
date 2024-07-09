@@ -109,28 +109,28 @@ impl Car {
     pub fn initialize() -> Vec<Car> {
         let mut cars = vec![
             CarBuilder::new()
-                .name("Il Commandante".to_string())
+                .name("Il Commandante")
                 .tires(car_parts::tire::Tire::Four)
                 .engine(car_parts::engine::Engine::One)
                 .gearbox(car_parts::gearbox::Gearbox::Three)
                 .chassis(car_parts::chassis::Chassis::Three)
                 .build(),
             CarBuilder::new()
-                .name("Il Grande".to_string())
+                .name("Il Grande")
                 .tires(car_parts::tire::Tire::Three)
                 .engine(car_parts::engine::Engine::Five)
                 .gearbox(car_parts::gearbox::Gearbox::Four)
                 .chassis(car_parts::chassis::Chassis::Five)
                 .build(),
             CarBuilder::new()
-                .name("Il Capo".to_string())
+                .name("Il Capo")
                 .tires(car_parts::tire::Tire::Two)
                 .engine(car_parts::engine::Engine::Two)
                 .gearbox(car_parts::gearbox::Gearbox::Two)
                 .chassis(car_parts::chassis::Chassis::One)
                 .build(),
             CarBuilder::new()
-                .name("Il Generalissimo".to_string())
+                .name("Il Generalissimo")
                 .tires(car_parts::tire::Tire::Four)
                 .engine(car_parts::engine::Engine::Three)
                 .gearbox(car_parts::gearbox::Gearbox::One)
@@ -264,8 +264,8 @@ impl CarBuilder {
         }
     }
 
-    pub fn name(mut self, name: String) -> Self {
-        self.name = Some(name);
+    pub fn name<T: Into<String>>(mut self, name: T) -> Self {
+        self.name = Some(name.into());
         self
     }
 

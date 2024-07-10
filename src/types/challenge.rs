@@ -34,7 +34,7 @@ impl Display for Challenge {
 }
 
 impl Challenge {
-    pub fn new<T: Into<String>>(
+    pub fn new<T: Into<String>> (
         name: T,
         description: T,
         car: Option<car_parts::car::Car>,
@@ -44,10 +44,10 @@ impl Challenge {
         medal_cutoffs: Option<[i32; 4]>,
     ) -> Challenge {
         Challenge {
-            name,
-            description,
+            name: name.into(),
+            description: description.into(),
             car,
-            cities,
+            cities: cities.into_iter().map(Into::into).collect(),
             start_city,
             end_city,
             medal_cutoffs,

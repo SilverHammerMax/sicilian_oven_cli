@@ -72,7 +72,7 @@ impl Display for City {
 impl City {
     pub fn new<T: Into<String>>(city_name: T, region: Region, refuel: bool) -> City {
         City {
-            city_name,
+            city_name: city_name.into(),
             region,
             refuel,
         }

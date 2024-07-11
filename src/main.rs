@@ -14,6 +14,7 @@ enum GameStates {
     #[default]
     MainMenu,
     CarBuilding,
+    ConnectionTester,
 }
 
 fn main() {
@@ -26,6 +27,7 @@ fn main() {
             OnEnter(GameStates::CarBuilding),
             car_parts::car::Car::build_prompt,
         )
+        .add_systems(OnEnter(GameStates::ConnectionTester), helper_functions::test_city_connections)
         .run();
 }
 
@@ -77,7 +79,10 @@ fn menu(
                 next_state.set(GameStates::CarBuilding);
                 break;
             }
-            3 => helper_functions::test_city_connections(&cities),
+            3 => {
+                next_state.set(GameStates::ConnectionTester);
+                break;
+            },
             _ => panic!("Fix New Options!"),
         }
     }

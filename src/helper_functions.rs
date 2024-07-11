@@ -108,7 +108,7 @@ pub fn challenge_prompt(cities: &cities::CityGraph, challenge: &challenge::Chall
     println!();
 }
 
-pub fn test_city_connections(city_graph: &cities::CityGraph) {
+pub fn test_city_connections(city_graph: Res<cities::CityGraph>) {
     let mut cities = vec![];
     for city in city_graph.cities() {
         cities.push(city);

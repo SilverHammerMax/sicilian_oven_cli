@@ -19,12 +19,14 @@ fn main() {
 
 fn setup(mut commands: Commands) {
     let cities = cities::create_cities();
-    commands.insert_resource(cities)
+    let cars = car_parts::car::CarsResource { cars: car_parts::car::Car::initialize() };
+    commands.insert_resource(cities);
+    commands.insert_resource(cars);
 }
 
-fn menu(cities: Res<cities::CityGraph>) {
+fn menu(cities: Res<cities::CityGraph>, cars: Res<car_parts::car::CarsResource>) {
     let mut challenges = challenge::Challenge::initialize();
-    let mut cars = car_parts::car::Car::initialize();
+    let mut cars = cars.cars.clone();
     loop {
         println!("Welcome to the game!");
         let selection = dialoguer::Select::new()

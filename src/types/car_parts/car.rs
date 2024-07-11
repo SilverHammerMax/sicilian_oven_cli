@@ -2,7 +2,13 @@ use crate::types::*;
 use std::fmt::{Display, Formatter};
 use std::fs;
 use std::io::Write;
+use bevy::prelude::Resource;
 use strum::IntoEnumIterator;
+
+#[derive(Resource)]
+pub struct CarsResource {
+    pub(crate) cars: Vec<Car>
+}
 
 #[derive(Clone, serde::Serialize, serde::Deserialize)]
 pub struct Car {

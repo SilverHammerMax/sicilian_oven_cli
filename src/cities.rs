@@ -1,6 +1,7 @@
 use crate::types::city::Region;
 use crate::types::city::{City, RoadTypes};
 use std::collections::BTreeSet;
+use bevy::prelude::Resource;
 
 pub struct CityConnection {
     cities: (String, String),
@@ -18,6 +19,7 @@ impl CityConnection {
     }
 }
 
+#[derive(Resource)]
 pub struct CityGraph {
     cities: BTreeSet<City>,
     connections: Vec<CityConnection>,

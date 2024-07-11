@@ -1,6 +1,8 @@
 #![deny(clippy::unwrap_used)]
 #![allow(clippy::match_overlapping_arm)]
 
+use bevy::prelude::*;
+use bevy::state::app::StatesPlugin;
 use crate::types::*;
 
 mod cities;
@@ -8,9 +10,21 @@ mod helper_functions;
 mod types;
 
 fn main() {
+    App::new()
+        .add_plugins((MinimalPlugins, StatesPlugin))
+        .add_systems(Startup, setup)
+        .add_systems(PostStartup, menu)
+        .run();
+}
+
+fn setup(mut commands: Commands) {
+    let cities = cities::create_cities();
+    commands.insert_resource(cities)
+}
+
+fn menu(cities: Res<cities::CityGraph>) {
     let mut challenges = challenge::Challenge::initialize();
     let mut cars = car_parts::car::Car::initialize();
-    let cities = cities::create_cities();
     loop {
         println!("Welcome to the game!");
         let selection = dialoguer::Select::new()

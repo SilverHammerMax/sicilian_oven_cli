@@ -13,6 +13,7 @@ mod types;
 enum GameStates {
     #[default]
     MainMenu,
+    CarBuilding,
 }
 
 fn main() {
@@ -21,18 +22,21 @@ fn main() {
         .init_state::<GameStates>()
         .add_systems(PreStartup, setup)
         .add_systems(OnEnter(GameStates::MainMenu), menu)
+        .add_systems(OnEnter(GameStates::CarBuilding), car_parts::car::Car::build_prompt)
         .run();
 }
 
 fn setup(mut commands: Commands) {
     let cities = cities::create_cities();
     let cars = car_parts::car::CarsResource { cars: car_parts::car::Car::initialize() };
+    let challenges = challenge::ChallengesResource { challenges: challenge::Challenge::initialize() };
     commands.insert_resource(cities);
     commands.insert_resource(cars);
+    commands.insert_resource(challenges);
 }
 
-fn menu(cities: Res<cities::CityGraph>, cars: Res<car_parts::car::CarsResource>) {
-    let mut challenges = challenge::Challenge::initialize();
+fn menu(mut next_state: ResMut<NextState<GameStates>>, cities: Res<cities::CityGraph>, cars: Res<car_parts::car::CarsResource>, challenges: Res<challenge::ChallengesResource>) {
+    let mut challenges = challenges.challenges.clone();
     let mut cars = cars.cars.clone();
     loop {
         println!("Welcome to the game!");
@@ -48,7 +52,10 @@ fn menu(cities: Res<cities::CityGraph>, cars: Res<car_parts::car::CarsResource>)
                 let mut challenge = challenge::Challenge::random(&cities);
                 challenge_engine(&mut challenge, &mut cars, &cities);
             },
-            2 => cars.push(car_parts::car::Car::build_prompt()),
+            2 => {
+                next_state.set(GameStates::CarBuilding);
+                break;
+            },
             3 => helper_functions::test_city_connections(&cities),
             _ => panic!("Fix New Options!")
         }

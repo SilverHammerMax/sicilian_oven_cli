@@ -2,7 +2,7 @@ use crate::types::*;
 use std::fmt::{Display, Formatter};
 use std::fs;
 use std::io::Write;
-use bevy::prelude::Resource;
+use bevy::prelude::{NextState, ResMut, Resource};
 use strum::IntoEnumIterator;
 
 #[derive(Resource)]
@@ -162,7 +162,7 @@ impl Car {
         cars
     }
 
-    pub fn build_prompt() -> Car {
+    pub fn build_prompt(mut next_state: ResMut<NextState<crate::GameStates>>, mut cars: ResMut<CarsResource>) {
         let mut car = CarBuilder::new();
         let mut main_options = vec![
             "Name".to_string(),
@@ -243,7 +243,9 @@ impl Car {
                         Ok(_) => (),
                         Err(e) => println!("Failed to Save Car: {}", e),
                     }
-                    return built_car;
+                    cars.cars.push(built_car);
+                    next_state.set(crate::GameStates::MainMenu);
+                    break;
                 }
                 _ => panic!("Not Yet Implemented!"),
             }

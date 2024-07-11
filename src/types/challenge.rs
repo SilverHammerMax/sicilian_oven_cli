@@ -4,12 +4,18 @@ use rand::prelude::*;
 use rand_pcg::Pcg64;
 use rand_seeder::Seeder;
 use std::fmt::{Display, Formatter};
+use bevy::prelude::Resource;
 
 #[derive(PartialEq, Eq, Clone)]
 pub enum Location {
     City(String),
     Region(city::Region),
     Any,
+}
+
+#[derive(Resource)]
+pub struct ChallengesResource {
+    pub(crate) challenges: Vec<Challenge>,
 }
 
 #[derive(Clone)]

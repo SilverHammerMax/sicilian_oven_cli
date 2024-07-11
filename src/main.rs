@@ -9,11 +9,18 @@ mod cities;
 mod helper_functions;
 mod types;
 
+#[derive(States, Default, Debug, Hash, Eq, PartialEq, Clone)]
+enum GameStates {
+    #[default]
+    MainMenu,
+}
+
 fn main() {
     App::new()
         .add_plugins((MinimalPlugins, StatesPlugin))
-        .add_systems(Startup, setup)
-        .add_systems(PostStartup, menu)
+        .init_state::<GameStates>()
+        .add_systems(PreStartup, setup)
+        .add_systems(OnEnter(GameStates::MainMenu), menu)
         .run();
 }
 

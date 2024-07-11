@@ -1,9 +1,9 @@
 #![deny(clippy::unwrap_used)]
 #![allow(clippy::match_overlapping_arm)]
 
+use crate::types::*;
 use bevy::prelude::*;
 use bevy::state::app::StatesPlugin;
-use crate::types::*;
 
 mod cities;
 mod helper_functions;
@@ -22,42 +22,63 @@ fn main() {
         .init_state::<GameStates>()
         .add_systems(PreStartup, setup)
         .add_systems(OnEnter(GameStates::MainMenu), menu)
-        .add_systems(OnEnter(GameStates::CarBuilding), car_parts::car::Car::build_prompt)
+        .add_systems(
+            OnEnter(GameStates::CarBuilding),
+            car_parts::car::Car::build_prompt,
+        )
         .run();
 }
 
 fn setup(mut commands: Commands) {
     let cities = cities::create_cities();
-    let cars = car_parts::car::CarsResource { cars: car_parts::car::Car::initialize() };
-    let challenges = challenge::ChallengesResource { challenges: challenge::Challenge::initialize() };
+    let cars = car_parts::car::CarsResource {
+        cars: car_parts::car::Car::initialize(),
+    };
+    let challenges = challenge::ChallengesResource {
+        challenges: challenge::Challenge::initialize(),
+    };
     commands.insert_resource(cities);
     commands.insert_resource(cars);
     commands.insert_resource(challenges);
 }
 
-fn menu(mut next_state: ResMut<NextState<GameStates>>, cities: Res<cities::CityGraph>, cars: Res<car_parts::car::CarsResource>, challenges: Res<challenge::ChallengesResource>) {
+fn menu(
+    mut next_state: ResMut<NextState<GameStates>>,
+    cities: Res<cities::CityGraph>,
+    cars: Res<car_parts::car::CarsResource>,
+    challenges: Res<challenge::ChallengesResource>,
+) {
     let mut challenges = challenges.challenges.clone();
     let mut cars = cars.cars.clone();
     loop {
         println!("Welcome to the game!");
         let selection = dialoguer::Select::new()
             .with_prompt("What would you like to do?")
-            .items(&["Challenges", "Random Cities", "Build a Car", "Test City Connections"])
+            .items(&[
+                "Challenges",
+                "Random Cities",
+                "Build a Car",
+                "Test City Connections",
+            ])
             .interact()
             .expect("Prompt Failed");
 
         match selection {
-            0 => challenge_engine(helper_functions::choose_challenge(challenges.as_mut_slice()), &mut cars, &cities),
+            0 => challenge_engine(
+                helper_functions::choose_challenge(challenges.as_mut_slice()),
+                &mut cars,
+                &cities,
+            ),
             1 => {
                 let mut challenge = challenge::Challenge::random(&cities);
                 challenge_engine(&mut challenge, &mut cars, &cities);
-            },
+            }
             2 => {
                 next_state.set(GameStates::CarBuilding);
                 break;
-            },
+            }
             3 => helper_functions::test_city_connections(&cities),
-            _ => panic!("Fix New Options!")
+            _ => panic!("Fix New Options!"),
         }
     }
 }
@@ -71,7 +92,8 @@ fn challenge_engine(
     if !dialoguer::Confirm::new()
         .with_prompt("Do you accept this challenge?")
         .interact()
-        .expect("Prompt Failed") {
+        .expect("Prompt Failed")
+    {
         return;
     }
     let mut car = challenge
@@ -80,7 +102,9 @@ fn challenge_engine(
     let mut missing_cities = challenge.cities().to_vec();
     let mut city_name = match challenge.start_city() {
         challenge::Location::City(name) => name.to_string(),
-        challenge::Location::Region(region) => helper_functions::choose_major_city(Some(region), cities),
+        challenge::Location::Region(region) => {
+            helper_functions::choose_major_city(Some(region), cities)
+        }
         challenge::Location::Any => helper_functions::choose_major_city(None, cities),
     };
     let mut path = vec![];
@@ -102,10 +126,7 @@ fn challenge_engine(
         println!("Your fuel is {:.1}L.", car.fuel());
         println!("Your reliability is {:.1}%.", car.reliability() * 100.0);
         println!();
-        println!(
-            "Your path has been: {:?}",
-            path
-        );
+        println!("Your path has been: {:?}", path);
         println!();
 
         if missing_cities.is_empty() {
@@ -149,22 +170,16 @@ fn challenge_engine(
             .expect("Prompt Failed");
 
         if selection < neighbors.len() {
-            let (next_city_name, distance, road) = neighbors
-                .get(selection)
-                .expect("Out of Range");
+            let (next_city_name, distance, road) = neighbors.get(selection).expect("Out of Range");
             car.travel(road);
             time += car.calculate_travel_time(road, *distance);
             city_name.clone_from(next_city_name);
         } else if selection == neighbors.len() {
             break;
-        } else if city_reference.is_major()
-            && selection == neighbors.len() + 1
-        {
+        } else if city_reference.is_major() && selection == neighbors.len() + 1 {
             car.refuel(&mut time);
             path.push("Refuel".to_string());
-        } else if city_reference.is_major()
-            && selection == neighbors.len() + 2
-        {
+        } else if city_reference.is_major() && selection == neighbors.len() + 2 {
             car.repair(&mut time);
             path.push("Repair".to_string());
         }
@@ -175,12 +190,12 @@ fn challenge_engine(
 
     if car.fuel() <= 0.0 {
         println!("Ran out of fuel! Sorry, game over :(");
-        return
+        return;
     }
 
     if car.reliability() <= 0.0 {
         println!("Car too deteriorated! Sorry, game over :(");
-        return
+        return;
     }
 
     println!();

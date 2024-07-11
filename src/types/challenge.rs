@@ -1,10 +1,10 @@
 use crate::types::*;
+use bevy::prelude::Resource;
 use rand;
 use rand::prelude::*;
 use rand_pcg::Pcg64;
 use rand_seeder::Seeder;
 use std::fmt::{Display, Formatter};
-use bevy::prelude::Resource;
 
 #[derive(PartialEq, Eq, Clone)]
 pub enum Location {
@@ -40,7 +40,7 @@ impl Display for Challenge {
 }
 
 impl Challenge {
-    pub fn new<T: Into<String>> (
+    pub fn new<T: Into<String>>(
         name: T,
         description: T,
         car: Option<car_parts::car::Car>,
@@ -65,7 +65,7 @@ impl Challenge {
         self.name.as_str()
     }
 
-    pub fn description(&self) -> &str{
+    pub fn description(&self) -> &str {
         self.description.as_str()
     }
 
@@ -158,7 +158,7 @@ impl Challenge {
                     "Messina",
                     "Reggio Calabria",
                     "Crotone",
-                    "Santa Maria di Leuca"
+                    "Santa Maria di Leuca",
                 ],
                 Location::Any,
                 Location::Any,
@@ -168,13 +168,7 @@ impl Challenge {
                 "A Calabrian Rally",
                 "Take a scenic trip through the spine of Calabria",
                 Some(cars[1].clone()),
-                vec![
-                    "Acri",
-                    "Cotronei",
-                    "Oriolo",
-                    "Dinami",
-                    "Delianuova",
-                ],
+                vec!["Acri", "Cotronei", "Oriolo", "Dinami", "Delianuova"],
                 Location::City("Catanzaro".into()),
                 Location::Any,
                 Some([0, 0, 0, 0]),

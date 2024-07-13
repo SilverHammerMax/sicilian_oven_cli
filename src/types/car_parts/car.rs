@@ -101,7 +101,7 @@ impl Car {
 
     pub fn save(&self) -> Result<(), std::io::Error> {
         fs::create_dir_all("cars")?;
-        let mut file = fs::File::create(format!("cars/{}.json", self.name().to_lowercase().replace(" ", "_")))?;
+        let mut file = fs::File::create(format!("cars/{}.json", self.name().to_lowercase().replace(' ', "_")))?;
         file.write_all(serde_json::to_string(&self)?.into_bytes().as_slice())?;
         Ok(())
     }
@@ -140,18 +140,16 @@ impl Car {
 
         let cars_directory = fs::read_dir("cars");
         if let Ok(directory) = cars_directory {
-            for path in directory {
-                if let Ok(path) = path {
-                    if let Ok(file) = fs::File::open(path.path()) {
-                        let file_reader = BufReader::new(file);
-                        match serde_json::from_reader::<BufReader<fs::File>, Car>(file_reader) {
-                            Ok(mut car) => {
-                                car.fuel = car.chassis().tank_size();
-                                car.reliability = 1.0;
-                                cars.push(car)
-                            },
-                            Err(e) => println!("Failed to Deserialize Car: {}", e),
-                        }
+            for path in directory.flatten() {
+                if let Ok(file) = fs::File::open(path.path()) {
+                    let file_reader = BufReader::new(file);
+                    match serde_json::from_reader::<BufReader<fs::File>, Car>(file_reader) {
+                        Ok(mut car) => {
+                            car.fuel = car.chassis().tank_size();
+                            car.reliability = 1.0;
+                            cars.push(car)
+                        },
+                        Err(e) => println!("Failed to Deserialize Car: {}", e),
                     }
                 }
             }

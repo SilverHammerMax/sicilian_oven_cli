@@ -11,14 +11,14 @@ pub fn choose_car(cars: &mut [car_parts::car::Car]) -> car_parts::car::Car {
     cars[selection].clone()
 }
 
-pub fn choose_challenge(challenges: &mut [challenge::Challenge]) -> &mut challenge::Challenge {
+pub fn choose_challenge(mut challenges: ResMut<challenge::ChallengesResource>, mut commands: Commands, mut next_state: ResMut<NextState<GameStates>>) {
     let selection = dialoguer::Select::new()
         .with_prompt("Please Select a Challenge")
-        .items(challenges)
+        .items(challenges.challenges.as_slice())
         .interact()
         .expect("Prompt Failed");
-
-    &mut challenges[selection]
+    commands.insert_resource(challenges.challenges[selection].clone());
+    next_state.set(GameStates::RunChallenge);
 }
 
 pub fn choose_major_city(region: Option<&city::Region>, cities: &cities::CityGraph) -> String {

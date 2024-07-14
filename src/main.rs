@@ -15,6 +15,9 @@ enum GameStates {
     MainMenu,
     CarBuilding,
     ConnectionTester,
+    ChooseChallenge,
+    RunChallenge,
+    RandomChallenge,
 }
 
 fn main() {
@@ -28,6 +31,9 @@ fn main() {
             car_parts::car::Car::build_prompt,
         )
         .add_systems(OnEnter(GameStates::ConnectionTester), helper_functions::test_city_connections)
+        .add_systems(OnEnter(GameStates::ChooseChallenge), helper_functions::choose_challenge)
+        .add_systems(OnEnter(GameStates::RunChallenge), challenge_engine)
+        .add_systems(OnEnter(GameStates::RandomChallenge), challenge::Challenge::random)
         .run();
 }
 
@@ -44,56 +50,36 @@ fn setup(mut commands: Commands) {
     commands.insert_resource(challenges);
 }
 
-fn menu(
-    mut next_state: ResMut<NextState<GameStates>>,
-    cities: Res<cities::CityGraph>,
-    cars: Res<car_parts::car::CarsResource>,
-    challenges: Res<challenge::ChallengesResource>,
-) {
-    let mut challenges = challenges.challenges.clone();
-    let mut cars = cars.cars.clone();
-    loop {
-        println!("Welcome to the game!");
-        let selection = dialoguer::Select::new()
-            .with_prompt("What would you like to do?")
-            .items(&[
-                "Challenges",
-                "Random Cities",
-                "Build a Car",
-                "Test City Connections",
-            ])
-            .interact()
-            .expect("Prompt Failed");
+fn menu(mut next_state: ResMut<NextState<GameStates>>) {
+    println!("Welcome to the game!");
+    let selection = dialoguer::Select::new()
+        .with_prompt("What would you like to do?")
+        .items(&[
+            "Challenges",
+            "Random Cities",
+            "Build a Car",
+            "Test City Connections",
+        ])
+        .interact()
+        .expect("Prompt Failed");
 
-        match selection {
-            0 => challenge_engine(
-                helper_functions::choose_challenge(challenges.as_mut_slice()),
-                &mut cars,
-                &cities,
-            ),
-            1 => {
-                let mut challenge = challenge::Challenge::random(&cities);
-                challenge_engine(&mut challenge, &mut cars, &cities);
-            }
-            2 => {
-                next_state.set(GameStates::CarBuilding);
-                break;
-            }
-            3 => {
-                next_state.set(GameStates::ConnectionTester);
-                break;
-            },
-            _ => panic!("Fix New Options!"),
-        }
+    match selection {
+        0 => next_state.set(GameStates::ChooseChallenge),
+        1 => next_state.set(GameStates::RandomChallenge),
+        2 => next_state.set(GameStates::CarBuilding),
+        3 => next_state.set(GameStates::ConnectionTester),
+        _ => panic!("Fix New Options!"),
     }
 }
 
 fn challenge_engine(
-    challenge: &mut challenge::Challenge,
-    cars: &mut [car_parts::car::Car],
-    cities: &cities::CityGraph,
+    challenge: Res<challenge::Challenge>,
+    mut cars: ResMut<car_parts::car::CarsResource>,
+    cities: Res<cities::CityGraph>,
+    mut next_state: ResMut<NextState<GameStates>>
 ) {
-    helper_functions::challenge_prompt(cities, challenge);
+    let mut challenge = challenge.to_owned();
+    helper_functions::challenge_prompt(&cities, &challenge);
     if !dialoguer::Confirm::new()
         .with_prompt("Do you accept this challenge?")
         .interact()
@@ -103,14 +89,14 @@ fn challenge_engine(
     }
     let mut car = challenge
         .car()
-        .unwrap_or_else(|| helper_functions::choose_car(cars));
+        .unwrap_or_else(|| helper_functions::choose_car(cars.cars.as_mut_slice()));
     let mut missing_cities = challenge.cities().to_vec();
     let mut city_name = match challenge.start_city() {
         challenge::Location::City(name) => name.to_string(),
         challenge::Location::Region(region) => {
-            helper_functions::choose_major_city(Some(region), cities)
+            helper_functions::choose_major_city(Some(region), &cities)
         }
-        challenge::Location::Any => helper_functions::choose_major_city(None, cities),
+        challenge::Location::Any => helper_functions::choose_major_city(None, &cities),
     };
     let mut path = vec![];
     let mut time = 0.0;
@@ -253,4 +239,5 @@ fn challenge_engine(
     } else {
         println!("Sorry, you were unsuccessful. Better luck next time!");
     }
+    next_state.set(GameStates::MainMenu)
 }

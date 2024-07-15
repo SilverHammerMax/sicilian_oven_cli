@@ -1,3 +1,4 @@
+use crate::cities;
 use crate::types::*;
 use bevy::prelude::*;
 use rand;
@@ -5,7 +6,6 @@ use rand::prelude::*;
 use rand_pcg::Pcg64;
 use rand_seeder::Seeder;
 use std::fmt::{Display, Formatter};
-use crate::cities;
 
 #[derive(PartialEq, Eq, Clone)]
 pub enum Location {
@@ -186,7 +186,11 @@ impl Challenge {
         ]
     }
 
-    pub fn random(cities: Res<cities::CityGraph>, mut next_state: ResMut<NextState<crate::GameStates>>, mut commands: Commands) {
+    pub fn random(
+        cities: Res<cities::CityGraph>,
+        mut next_state: ResMut<NextState<crate::GameStates>>,
+        mut commands: Commands,
+    ) {
         let count = dialoguer::Input::new()
             .with_prompt("How many cities would you like to go to?")
             .with_initial_text("5")
@@ -223,7 +227,7 @@ impl Challenge {
             .iter()
             .map(|city| city.name())
             .choose_multiple(&mut rng, count);
-       commands.insert_resource(Self::new(
+        commands.insert_resource(Self::new(
             "Random Cities",
             "Travel to this random list of cities",
             None,

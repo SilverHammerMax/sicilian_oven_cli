@@ -31,12 +31,27 @@ fn main() {
             OnEnter(GameStates::CarBuilding),
             car_parts::car::Car::build_prompt,
         )
-        .add_systems(OnEnter(GameStates::ConnectionTester), helper_functions::test_city_connections)
-        .add_systems(OnEnter(GameStates::ChooseChallenge), helper_functions::choose_challenge)
-        .add_systems(OnEnter(GameStates::SetupChallenge), helper_functions::setup_challenge)
-        .add_systems(Update, challenge_engine.run_if(in_state(GameStates::RunChallenge)))
+        .add_systems(
+            OnEnter(GameStates::ConnectionTester),
+            helper_functions::test_city_connections,
+        )
+        .add_systems(
+            OnEnter(GameStates::ChooseChallenge),
+            helper_functions::choose_challenge,
+        )
+        .add_systems(
+            OnEnter(GameStates::SetupChallenge),
+            helper_functions::setup_challenge,
+        )
+        .add_systems(
+            Update,
+            challenge_engine.run_if(in_state(GameStates::RunChallenge)),
+        )
         .add_systems(OnExit(GameStates::RunChallenge), challenge_finish)
-        .add_systems(OnEnter(GameStates::RandomChallenge), challenge::Challenge::random)
+        .add_systems(
+            OnEnter(GameStates::RandomChallenge),
+            challenge::Challenge::random,
+        )
         .run();
 }
 
@@ -91,11 +106,13 @@ fn challenge_engine(
     mut missing_cities: ResMut<MissingCities>,
     mut current_city: ResMut<CurrentCity>,
     cities: Res<cities::CityGraph>,
-    mut next_state: ResMut<NextState<GameStates>>
+    mut next_state: ResMut<NextState<GameStates>>,
 ) {
     let city_reference = cities.get(&current_city.0).expect("Invalid City Name");
     path.0.push(current_city.0.clone());
-    missing_cities.0.retain(|city_name| *city_name != current_city.0);
+    missing_cities
+        .0
+        .retain(|city_name| *city_name != current_city.0);
 
     println!();
     println!("Welcome to {}!", city_reference);
@@ -171,7 +188,14 @@ fn challenge_engine(
     }
 }
 
-fn challenge_finish(car: Res<car_parts::car::Car>, mut challenge: ResMut<challenge::Challenge>, cities: Res<cities::CityGraph>, time: Res<ChallengeTime>, missing_cities: Res<MissingCities>, current_city: Res<CurrentCity>) {
+fn challenge_finish(
+    car: Res<car_parts::car::Car>,
+    mut challenge: ResMut<challenge::Challenge>,
+    cities: Res<cities::CityGraph>,
+    time: Res<ChallengeTime>,
+    missing_cities: Res<MissingCities>,
+    current_city: Res<CurrentCity>,
+) {
     if car.fuel() <= 0.0 {
         println!("Ran out of fuel! Sorry, game over :(");
         return;
@@ -185,14 +209,14 @@ fn challenge_finish(car: Res<car_parts::car::Car>, mut challenge: ResMut<challen
     println!();
     if missing_cities.0.is_empty()
         && (&challenge::Location::City(current_city.0.clone()) == challenge.end_city()
-        || &challenge::Location::Region(
-        cities
-            .get(&current_city.0)
-            .expect("Invalid City Code")
-            .region()
-            .clone(),
-    ) == challenge.end_city()
-        || challenge.end_city() == &challenge::Location::Any)
+            || &challenge::Location::Region(
+                cities
+                    .get(&current_city.0)
+                    .expect("Invalid City Code")
+                    .region()
+                    .clone(),
+            ) == challenge.end_city()
+            || challenge.end_city() == &challenge::Location::Any)
     {
         println!(
             "Congratulations! You've completed the {} challenge!",

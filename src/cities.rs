@@ -1,6 +1,6 @@
 use crate::types::city::Region;
 use crate::types::city::{City, RoadTypes};
-use bevy::prelude::Resource;
+use bevy::prelude::*;
 use std::collections::BTreeSet;
 
 pub struct CityConnection {

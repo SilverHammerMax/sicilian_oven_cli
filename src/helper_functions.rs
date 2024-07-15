@@ -11,7 +11,11 @@ pub fn choose_car(cars: &mut [car_parts::car::Car]) -> car_parts::car::Car {
     cars[selection].clone()
 }
 
-pub fn choose_challenge(challenges: Res<challenge::ChallengesResource>, mut commands: Commands, mut next_state: ResMut<NextState<GameStates>>) {
+pub fn choose_challenge(
+    challenges: Res<challenge::ChallengesResource>,
+    mut commands: Commands,
+    mut next_state: ResMut<NextState<GameStates>>,
+) {
     let selection = dialoguer::Select::new()
         .with_prompt("Please Select a Challenge")
         .items(challenges.challenges.as_slice())
@@ -33,7 +37,13 @@ pub fn choose_major_city(region: Option<&city::Region>, cities: &cities::CityGra
     major_cities[selection].clone()
 }
 
-pub fn setup_challenge(mut commands: Commands, mut next_state: ResMut<NextState<GameStates>>, cities: Res<cities::CityGraph>, mut cars: ResMut<car_parts::car::CarsResource>, challenge: Res<challenge::Challenge>) {
+pub fn setup_challenge(
+    mut commands: Commands,
+    mut next_state: ResMut<NextState<GameStates>>,
+    cities: Res<cities::CityGraph>,
+    mut cars: ResMut<car_parts::car::CarsResource>,
+    challenge: Res<challenge::Challenge>,
+) {
     println!(
         "\nWelcome to {}! {}.\n",
         challenge.name(),
@@ -120,9 +130,7 @@ pub fn setup_challenge(mut commands: Commands, mut next_state: ResMut<NextState<
         let missing_cities = challenge.cities().to_vec();
         let city_name = match challenge.start_city() {
             challenge::Location::City(name) => name.to_string(),
-            challenge::Location::Region(region) => {
-                choose_major_city(Some(region), &cities)
-            }
+            challenge::Location::Region(region) => choose_major_city(Some(region), &cities),
             challenge::Location::Any => choose_major_city(None, &cities),
         };
         commands.insert_resource(ChallengeTime(0.0));

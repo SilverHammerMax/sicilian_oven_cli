@@ -90,7 +90,7 @@ impl Car {
 
     pub fn calculate_travel_time(&self, road: &city::RoadTypes, distance: i32) -> f64 {
         match road {
-            city::RoadTypes::Ferry => 15.0 + 2.5 * distance as f64,
+            city::RoadTypes::Ferry => 15.0 + 0.4 * distance as f64,
             _ => distance as f64 / self.calculate_speed(road),
         }
     }

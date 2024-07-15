@@ -10,7 +10,7 @@ pub struct CarsResource {
     pub(crate) cars: Vec<Car>,
 }
 
-#[derive(Clone, serde::Serialize, serde::Deserialize)]
+#[derive(Resource, Clone, serde::Serialize, serde::Deserialize)]
 pub struct Car {
     name: String,
     tires: car_parts::tire::Tire,

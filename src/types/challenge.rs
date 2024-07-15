@@ -232,6 +232,6 @@ impl Challenge {
             Location::Any,
             None,
         ));
-        next_state.set(crate::GameStates::RunChallenge)
+        next_state.set(crate::GameStates::SetupChallenge)
     }
 }

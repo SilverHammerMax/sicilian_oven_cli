@@ -171,7 +171,7 @@ fn challenge_engine(
 
     if selection < neighbors.len() {
         let (next_city_name, distance, road) = neighbors.get(selection).expect("Out of Range");
-        car.travel(road);
+        car.travel(*distance, road);
         time.0 += car.calculate_travel_time(road, *distance);
         current_city.0.clone_from(next_city_name);
     } else if selection == neighbors.len() {

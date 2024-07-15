@@ -1,5 +1,6 @@
 use crate::types::city::Region;
 use crate::types::city::{City, RoadTypes};
+use bevy::prelude::*;
 use std::collections::BTreeSet;
 
 pub struct CityConnection {
@@ -18,6 +19,7 @@ impl CityConnection {
     }
 }
 
+#[derive(Resource)]
 pub struct CityGraph {
     cities: BTreeSet<City>,
     connections: Vec<CityConnection>,
@@ -272,7 +274,6 @@ pub fn create_cities() -> CityGraph {
     graph.add_city(City::new("Larino", Region::Molise, false));
     graph.add_city(City::new("Termoli", Region::Molise, false));
     graph.add_city(City::new("Palata", Region::Molise, false));
-
 
     // Adding connections to the graph
     //God bless the Queen
@@ -1862,8 +1863,6 @@ pub fn create_cities() -> CityGraph {
         11,
         RoadTypes::Cobblestone,
     ));
-
-
 
     graph
 }

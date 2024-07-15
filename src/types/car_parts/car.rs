@@ -1,10 +1,16 @@
 use crate::types::*;
+use bevy::prelude::*;
 use std::fmt::{Display, Formatter};
 use std::fs;
 use std::io::{BufReader, Write};
 use strum::IntoEnumIterator;
 
-#[derive(Clone, serde::Serialize, serde::Deserialize)]
+#[derive(Resource)]
+pub struct CarsResource {
+    pub(crate) cars: Vec<Car>,
+}
+
+#[derive(Resource, Clone, serde::Serialize, serde::Deserialize)]
 pub struct Car {
     name: String,
     tires: car_parts::tire::Tire,
@@ -101,7 +107,10 @@ impl Car {
 
     pub fn save(&self) -> Result<(), std::io::Error> {
         fs::create_dir_all("cars")?;
-        let mut file = fs::File::create(format!("cars/{}.json", self.name().to_lowercase().replace(' ', "_")))?;
+        let mut file = fs::File::create(format!(
+            "cars/{}.json",
+            self.name().to_lowercase().replace(" ", "_")
+        ))?;
         file.write_all(serde_json::to_string(&self)?.into_bytes().as_slice())?;
         Ok(())
     }
@@ -158,7 +167,10 @@ impl Car {
         cars
     }
 
-    pub fn build_prompt() -> Car {
+    pub fn build_prompt(
+        mut next_state: ResMut<NextState<crate::GameStates>>,
+        mut cars: ResMut<CarsResource>,
+    ) {
         let mut car = CarBuilder::new();
         let mut main_options = vec![
             "Name".to_string(),
@@ -190,7 +202,8 @@ impl Car {
                     car = car.name(name);
                 }
                 1 => {
-                    let options: Vec<car_parts::tire::Tire> = car_parts::tire::Tire::iter().collect();
+                    let options: Vec<car_parts::tire::Tire> =
+                        car_parts::tire::Tire::iter().collect();
                     let selection = dialoguer::Select::new()
                         .with_prompt("Please Select your Tires")
                         .items(&options)
@@ -239,7 +252,9 @@ impl Car {
                         Ok(_) => (),
                         Err(e) => println!("Failed to Save Car: {}", e),
                     }
-                    return built_car;
+                    cars.cars.push(built_car);
+                    next_state.set(crate::GameStates::MainMenu);
+                    break;
                 }
                 _ => panic!("Not Yet Implemented!"),
             }

@@ -1,4 +1,6 @@
+use crate::cities;
 use crate::types::*;
+use bevy::prelude::*;
 use rand;
 use rand::prelude::*;
 use rand_pcg::Pcg64;
@@ -12,7 +14,12 @@ pub enum Location {
     Any,
 }
 
-#[derive(Clone)]
+#[derive(Resource)]
+pub struct ChallengesResource {
+    pub(crate) challenges: Vec<Challenge>,
+}
+
+#[derive(Clone, Resource)]
 pub struct Challenge {
     name: String,
     description: String,
@@ -34,7 +41,7 @@ impl Display for Challenge {
 }
 
 impl Challenge {
-    pub fn new<T: Into<String>> (
+    pub fn new<T: Into<String>>(
         name: T,
         description: T,
         car: Option<car_parts::car::Car>,
@@ -59,7 +66,7 @@ impl Challenge {
         self.name.as_str()
     }
 
-    pub fn description(&self) -> &str{
+    pub fn description(&self) -> &str {
         self.description.as_str()
     }
 
@@ -152,7 +159,7 @@ impl Challenge {
                     "Messina",
                     "Reggio Calabria",
                     "Crotone",
-                    "Santa Maria di Leuca"
+                    "Santa Maria di Leuca",
                 ],
                 Location::Any,
                 Location::Any,
@@ -162,13 +169,7 @@ impl Challenge {
                 "A Calabrian Rally",
                 "Take a scenic trip through the spine of Calabria",
                 Some(cars[1].clone()),
-                vec![
-                    "Acri",
-                    "Cotronei",
-                    "Oriolo",
-                    "Dinami",
-                    "Delianuova",
-                ],
+                vec!["Acri", "Cotronei", "Oriolo", "Dinami", "Delianuova"],
                 Location::City("Catanzaro".into()),
                 Location::Any,
                 Some([0, 0, 0, 0]),
@@ -185,7 +186,11 @@ impl Challenge {
         ]
     }
 
-    pub fn random(cities: &crate::cities::CityGraph) -> Self {
+    pub fn random(
+        cities: Res<cities::CityGraph>,
+        mut next_state: ResMut<NextState<crate::GameStates>>,
+        mut commands: Commands,
+    ) {
         let count = dialoguer::Input::new()
             .with_prompt("How many cities would you like to go to?")
             .with_initial_text("5")
@@ -222,7 +227,7 @@ impl Challenge {
             .iter()
             .map(|city| city.name())
             .choose_multiple(&mut rng, count);
-        Self::new(
+        commands.insert_resource(Self::new(
             "Random Cities",
             "Travel to this random list of cities",
             None,
@@ -230,6 +235,7 @@ impl Challenge {
             Location::Any,
             Location::Any,
             None,
-        )
+        ));
+        next_state.set(crate::GameStates::SetupChallenge)
     }
 }

@@ -14,6 +14,7 @@ enum GameStates {
     #[default]
     MainMenu,
     CarBuilding,
+    DeleteCar,
     ConnectionTester,
     ChooseChallenge,
     RunChallenge,
@@ -30,6 +31,10 @@ fn main() {
         .add_systems(
             OnEnter(GameStates::CarBuilding),
             car_parts::car::Car::build_prompt,
+        )
+        .add_systems(
+            OnEnter(GameStates::DeleteCar),
+            car_parts::car::Car::deletion_prompt,
         )
         .add_systems(
             OnEnter(GameStates::ConnectionTester),
@@ -76,6 +81,7 @@ fn menu(mut next_state: ResMut<NextState<GameStates>>) {
             "Challenges",
             "Random Cities",
             "Build a Car",
+            "Delete a Car",
             "Test City Connections",
         ])
         .interact()
@@ -85,7 +91,8 @@ fn menu(mut next_state: ResMut<NextState<GameStates>>) {
         0 => next_state.set(GameStates::ChooseChallenge),
         1 => next_state.set(GameStates::RandomChallenge),
         2 => next_state.set(GameStates::CarBuilding),
-        3 => next_state.set(GameStates::ConnectionTester),
+        3 => next_state.set(GameStates::DeleteCar),
+        4 => next_state.set(GameStates::ConnectionTester),
         _ => panic!("Fix New Options!"),
     }
 }

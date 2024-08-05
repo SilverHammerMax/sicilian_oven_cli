@@ -1,4 +1,5 @@
 use crate::types::*;
+use crate::GameStates;
 use bevy::prelude::*;
 use std::fmt::{Display, Formatter};
 use std::fs;
@@ -157,7 +158,7 @@ impl Car {
                             car.fuel = car.chassis().tank_size();
                             car.reliability = 1.0;
                             cars.push(car)
-                        },
+                        }
                         Err(e) => println!("Failed to Deserialize Car: {}", e),
                     }
                 }
@@ -259,6 +260,40 @@ impl Car {
                 _ => panic!("Not Yet Implemented!"),
             }
         }
+    }
+
+    pub fn deletion_prompt(
+        mut cars: ResMut<CarsResource>,
+        mut next_state: ResMut<NextState<GameStates>>,
+    ) {
+        loop {
+            if cars.cars.len() == 4 {
+                println!("No cars left to delete!");
+                break;
+            }
+            let choice = dialoguer::Select::new()
+                .items(&cars.cars[4..])
+                .with_prompt("Which car would you like to delete")
+                .interact()
+                .expect("Prompt Failed") + 4;
+            let confirmation = dialoguer::Confirm::new()
+                .with_prompt(format!(
+                    "Are you sure you would like to delete {}?",
+                    cars.cars[choice]
+                ))
+                .interact()
+                .expect("Prompt Failed");
+            if confirmation {
+                let file_deletion = fs::remove_file(format!("cars/{}.json", cars.cars[choice].name.to_lowercase().replace(' ', "_")));
+                match file_deletion {
+                    Ok(_) => (),
+                    Err(e) => println!("Failed to delete file: {}", e)
+                }
+                cars.cars.remove(choice);
+                break;
+            }
+        }
+        next_state.set(GameStates::MainMenu);
     }
 }
 
